@@ -138,6 +138,16 @@ exports.Prisma.TenantScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ProviderCallbackRouteScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  channel: 'channel',
+  resourceType: 'resourceType',
+  externalNo: 'externalNo',
+  resourceId: 'resourceId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.CustomerScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -487,6 +497,22 @@ exports.Prisma.PaymentWebhookEventScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.RefundWebhookEventScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  channel: 'channel',
+  eventId: 'eventId',
+  payloadFingerprint: 'payloadFingerprint',
+  payload: 'payload',
+  status: 'status',
+  attempts: 'attempts',
+  nextAttemptAt: 'nextAttemptAt',
+  lastError: 'lastError',
+  processedAt: 'processedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -520,6 +546,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
+  ProviderCallbackRoute: 'ProviderCallbackRoute',
   Customer: 'Customer',
   CustomerRefreshSession: 'CustomerRefreshSession',
   AdminUser: 'AdminUser',
@@ -547,7 +574,8 @@ exports.Prisma.ModelName = {
   RefundItem: 'RefundItem',
   RefundTransaction: 'RefundTransaction',
   InventoryTransaction: 'InventoryTransaction',
-  PaymentWebhookEvent: 'PaymentWebhookEvent'
+  PaymentWebhookEvent: 'PaymentWebhookEvent',
+  RefundWebhookEvent: 'RefundWebhookEvent'
 };
 
 /**

@@ -212,6 +212,23 @@ export class RefundService {
             amount: refund.amount,
           },
         });
+        await tx.providerCallbackRoute.upsert({
+          where: {
+            channel_resourceType_externalNo: {
+              channel: payment.channel,
+              resourceType: 'refund',
+              externalNo: refund.refundNo,
+            },
+          },
+          create: {
+            tenantId,
+            channel: payment.channel,
+            resourceType: 'refund',
+            externalNo: refund.refundNo,
+            resourceId: refund.id,
+          },
+          update: { tenantId, resourceId: refund.id },
+        });
         await this.recordAudit(tx, tenantId, actorId, 'execute', refund);
         return { refund, transaction, payment };
       },

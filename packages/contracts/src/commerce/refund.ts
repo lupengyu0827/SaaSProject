@@ -1,3 +1,5 @@
+import type { PaymentChannel } from './payment.js';
+
 /** 退款状态。 */
 export type RefundStatus = 'pending_review' | 'approved' | 'rejected' | 'succeeded' | 'failed';
 
@@ -32,7 +34,7 @@ export interface ConfirmRefundRequest {
 /** 退款渠道流水响应。 */
 export interface RefundTransactionResponse {
   id: string;
-  channel: import('./payment.js').PaymentChannel;
+  channel: PaymentChannel;
   status: 'pending' | 'succeeded' | 'failed';
   amount: string;
   providerRefundNo: string | null;

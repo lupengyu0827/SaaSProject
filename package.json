@@ -21,8 +21,8 @@
     "infra:down": "docker compose down",
     "db:generate": "pnpm --filter @saas/core db:generate",
     "db:deploy": "prisma migrate deploy --schema db/schema.prisma",
-    "db:seed": "pnpm --filter @saas/core db:seed",
-    "test:e2e": "pnpm --filter @saas/core test:e2e",
+    "db:seed": "NODE_PATH=./apps/core/node_modules node --env-file=.env ./apps/core/node_modules/tsx/dist/cli.mjs db/seeds/seed.ts",
+    "test:e2e": "RUN_DATABASE_E2E=true node --env-file=.env ./node_modules/vitest/vitest.mjs run --root apps/core test/commerce-flow.e2e.spec.ts",
     "prepare": "husky"
   },
   "devDependencies": {

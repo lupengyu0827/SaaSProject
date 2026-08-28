@@ -10,31 +10,49 @@ datasource db {
 }
 
 model Tenant {
-  id                  String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name                String         @db.VarChar(100)
-  subdomain           String         @unique @db.VarChar(50)
-  customDomain        String?        @unique @map("custom_domain") @db.VarChar(100)
-  isolationLevel      String         @default("logical") @map("isolation_level") @db.VarChar(20)
-  schemaName          String?        @unique @map("schema_name") @db.VarChar(50)
-  dbConnectionEnc     String?        @map("db_connection_enc")
-  status              String         @default("active") @db.VarChar(20)
-  planId              String?        @map("plan_id") @db.Uuid
-  subscriptionId      String?        @unique @map("subscription_id") @db.Uuid
-  expiredAt           DateTime?      @map("expired_at") @db.Timestamptz(6)
-  settings            Json           @default("{}")
-  createdAt           DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt           DateTime       @updatedAt @map("updated_at") @db.Timestamptz(6)
-  plan                Plan?          @relation(fields: [planId], references: [id])
-  currentSubscription Subscription?  @relation("CurrentSubscription", fields: [subscriptionId], references: [id])
-  subscriptions       Subscription[] @relation("TenantSubscriptions")
-  usageMetrics        UsageMetric[]
-  invoices            Invoice[]
-  adminUsers          AdminUser[]
-  customers           Customer[]
-  roles               Role[]
+  id                     String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                   String                  @db.VarChar(100)
+  subdomain              String                  @unique @db.VarChar(50)
+  customDomain           String?                 @unique @map("custom_domain") @db.VarChar(100)
+  isolationLevel         String                  @default("logical") @map("isolation_level") @db.VarChar(20)
+  schemaName             String?                 @unique @map("schema_name") @db.VarChar(50)
+  dbConnectionEnc        String?                 @map("db_connection_enc")
+  status                 String                  @default("active") @db.VarChar(20)
+  planId                 String?                 @map("plan_id") @db.Uuid
+  subscriptionId         String?                 @unique @map("subscription_id") @db.Uuid
+  expiredAt              DateTime?               @map("expired_at") @db.Timestamptz(6)
+  settings               Json                    @default("{}")
+  createdAt              DateTime                @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt              DateTime                @updatedAt @map("updated_at") @db.Timestamptz(6)
+  plan                   Plan?                   @relation(fields: [planId], references: [id])
+  currentSubscription    Subscription?           @relation("CurrentSubscription", fields: [subscriptionId], references: [id])
+  subscriptions          Subscription[]          @relation("TenantSubscriptions")
+  usageMetrics           UsageMetric[]
+  invoices               Invoice[]
+  adminUsers             AdminUser[]
+  customers              Customer[]
+  roles                  Role[]
+  providerCallbackRoutes ProviderCallbackRoute[]
 
   @@index([status])
   @@map("tenants")
+  @@schema("platform")
+}
+
+/// 平台级支付渠道回调路由；在设置租户 RLS 上下文前安全解析资源归属。
+model ProviderCallbackRoute {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId     String   @map("tenant_id") @db.Uuid
+  channel      String   @db.VarChar(30)
+  resourceType String   @map("resource_type") @db.VarChar(30)
+  externalNo   String   @map("external_no") @db.VarChar(100)
+  resourceId   String   @map("resource_id") @db.Uuid
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  tenant       Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([channel, resourceType, externalNo])
+  @@index([tenantId, resourceType, resourceId])
+  @@map("provider_callback_routes")
   @@schema("platform")
 }
 
@@ -568,5 +586,26 @@ model PaymentWebhookEvent {
   @@unique([tenantId, channel, eventId])
   @@index([tenantId, status, nextAttemptAt])
   @@map("payment_webhook_events")
+  @@schema("commerce")
+}
+
+model RefundWebhookEvent {
+  id                 BigInt    @id @default(autoincrement())
+  tenantId           String    @map("tenant_id") @db.Uuid
+  channel            String    @db.VarChar(30)
+  eventId            String    @map("event_id") @db.VarChar(100)
+  payloadFingerprint String    @map("payload_fingerprint") @db.VarChar(64)
+  payload            Json
+  status             String    @default("pending") @db.VarChar(20)
+  attempts           Int       @default(0)
+  nextAttemptAt      DateTime  @default(now()) @map("next_attempt_at") @db.Timestamptz(6)
+  lastError          String?   @map("last_error") @db.VarChar(1000)
+  processedAt        DateTime? @map("processed_at") @db.Timestamptz(6)
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([tenantId, channel, eventId])
+  @@index([tenantId, status, nextAttemptAt])
+  @@map("refund_webhook_events")
   @@schema("commerce")
 }

@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Tenant = $Result.DefaultSelection<Prisma.$TenantPayload>
 /**
+ * Model ProviderCallbackRoute
+ * 平台级支付渠道回调路由；在设置租户 RLS 上下文前安全解析资源归属。
+ */
+export type ProviderCallbackRoute = $Result.DefaultSelection<Prisma.$ProviderCallbackRoutePayload>
+/**
  * Model Customer
  * 
  */
@@ -158,6 +163,11 @@ export type InventoryTransaction = $Result.DefaultSelection<Prisma.$InventoryTra
  * 
  */
 export type PaymentWebhookEvent = $Result.DefaultSelection<Prisma.$PaymentWebhookEventPayload>
+/**
+ * Model RefundWebhookEvent
+ * 
+ */
+export type RefundWebhookEvent = $Result.DefaultSelection<Prisma.$RefundWebhookEventPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -286,6 +296,16 @@ export class PrismaClient<
     * ```
     */
   get tenant(): Prisma.TenantDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.providerCallbackRoute`: Exposes CRUD operations for the **ProviderCallbackRoute** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProviderCallbackRoutes
+    * const providerCallbackRoutes = await prisma.providerCallbackRoute.findMany()
+    * ```
+    */
+  get providerCallbackRoute(): Prisma.ProviderCallbackRouteDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.customer`: Exposes CRUD operations for the **Customer** model.
@@ -566,6 +586,16 @@ export class PrismaClient<
     * ```
     */
   get paymentWebhookEvent(): Prisma.PaymentWebhookEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.refundWebhookEvent`: Exposes CRUD operations for the **RefundWebhookEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RefundWebhookEvents
+    * const refundWebhookEvents = await prisma.refundWebhookEvent.findMany()
+    * ```
+    */
+  get refundWebhookEvent(): Prisma.RefundWebhookEventDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1008,6 +1038,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Tenant: 'Tenant',
+    ProviderCallbackRoute: 'ProviderCallbackRoute',
     Customer: 'Customer',
     CustomerRefreshSession: 'CustomerRefreshSession',
     AdminUser: 'AdminUser',
@@ -1035,7 +1066,8 @@ export namespace Prisma {
     RefundItem: 'RefundItem',
     RefundTransaction: 'RefundTransaction',
     InventoryTransaction: 'InventoryTransaction',
-    PaymentWebhookEvent: 'PaymentWebhookEvent'
+    PaymentWebhookEvent: 'PaymentWebhookEvent',
+    RefundWebhookEvent: 'RefundWebhookEvent'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1054,7 +1086,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "customer" | "customerRefreshSession" | "adminUser" | "refreshSession" | "role" | "permission" | "rolePermission" | "userRole" | "plan" | "subscription" | "usageMetric" | "invoice" | "auditLog" | "tenantProbe" | "category" | "brand" | "product" | "productVariant" | "order" | "payment" | "orderItem" | "shipment" | "shipmentItem" | "refund" | "refundItem" | "refundTransaction" | "inventoryTransaction" | "paymentWebhookEvent"
+      modelProps: "tenant" | "providerCallbackRoute" | "customer" | "customerRefreshSession" | "adminUser" | "refreshSession" | "role" | "permission" | "rolePermission" | "userRole" | "plan" | "subscription" | "usageMetric" | "invoice" | "auditLog" | "tenantProbe" | "category" | "brand" | "product" | "productVariant" | "order" | "payment" | "orderItem" | "shipment" | "shipmentItem" | "refund" | "refundItem" | "refundTransaction" | "inventoryTransaction" | "paymentWebhookEvent" | "refundWebhookEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1129,6 +1161,80 @@ export namespace Prisma {
           count: {
             args: Prisma.TenantCountArgs<ExtArgs>
             result: $Utils.Optional<TenantCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProviderCallbackRoute: {
+        payload: Prisma.$ProviderCallbackRoutePayload<ExtArgs>
+        fields: Prisma.ProviderCallbackRouteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProviderCallbackRouteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProviderCallbackRouteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>
+          }
+          findFirst: {
+            args: Prisma.ProviderCallbackRouteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProviderCallbackRouteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>
+          }
+          findMany: {
+            args: Prisma.ProviderCallbackRouteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>[]
+          }
+          create: {
+            args: Prisma.ProviderCallbackRouteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>
+          }
+          createMany: {
+            args: Prisma.ProviderCallbackRouteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProviderCallbackRouteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>[]
+          }
+          delete: {
+            args: Prisma.ProviderCallbackRouteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>
+          }
+          update: {
+            args: Prisma.ProviderCallbackRouteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>
+          }
+          deleteMany: {
+            args: Prisma.ProviderCallbackRouteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProviderCallbackRouteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProviderCallbackRouteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>[]
+          }
+          upsert: {
+            args: Prisma.ProviderCallbackRouteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProviderCallbackRoutePayload>
+          }
+          aggregate: {
+            args: Prisma.ProviderCallbackRouteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProviderCallbackRoute>
+          }
+          groupBy: {
+            args: Prisma.ProviderCallbackRouteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProviderCallbackRouteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProviderCallbackRouteCountArgs<ExtArgs>
+            result: $Utils.Optional<ProviderCallbackRouteCountAggregateOutputType> | number
           }
         }
       }
@@ -3204,6 +3310,80 @@ export namespace Prisma {
           }
         }
       }
+      RefundWebhookEvent: {
+        payload: Prisma.$RefundWebhookEventPayload<ExtArgs>
+        fields: Prisma.RefundWebhookEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RefundWebhookEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RefundWebhookEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>
+          }
+          findFirst: {
+            args: Prisma.RefundWebhookEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RefundWebhookEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>
+          }
+          findMany: {
+            args: Prisma.RefundWebhookEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>[]
+          }
+          create: {
+            args: Prisma.RefundWebhookEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>
+          }
+          createMany: {
+            args: Prisma.RefundWebhookEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RefundWebhookEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>[]
+          }
+          delete: {
+            args: Prisma.RefundWebhookEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>
+          }
+          update: {
+            args: Prisma.RefundWebhookEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.RefundWebhookEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RefundWebhookEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RefundWebhookEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.RefundWebhookEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundWebhookEventPayload>
+          }
+          aggregate: {
+            args: Prisma.RefundWebhookEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRefundWebhookEvent>
+          }
+          groupBy: {
+            args: Prisma.RefundWebhookEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RefundWebhookEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RefundWebhookEventCountArgs<ExtArgs>
+            result: $Utils.Optional<RefundWebhookEventCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3301,6 +3481,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     tenant?: TenantOmit
+    providerCallbackRoute?: ProviderCallbackRouteOmit
     customer?: CustomerOmit
     customerRefreshSession?: CustomerRefreshSessionOmit
     adminUser?: AdminUserOmit
@@ -3329,6 +3510,7 @@ export namespace Prisma {
     refundTransaction?: RefundTransactionOmit
     inventoryTransaction?: InventoryTransactionOmit
     paymentWebhookEvent?: PaymentWebhookEventOmit
+    refundWebhookEvent?: RefundWebhookEventOmit
   }
 
   /* Types for Logging */
@@ -3415,6 +3597,7 @@ export namespace Prisma {
     adminUsers: number
     customers: number
     roles: number
+    providerCallbackRoutes: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3424,6 +3607,7 @@ export namespace Prisma {
     adminUsers?: boolean | TenantCountOutputTypeCountAdminUsersArgs
     customers?: boolean | TenantCountOutputTypeCountCustomersArgs
     roles?: boolean | TenantCountOutputTypeCountRolesArgs
+    providerCallbackRoutes?: boolean | TenantCountOutputTypeCountProviderCallbackRoutesArgs
   }
 
   // Custom InputTypes
@@ -3477,6 +3661,13 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RoleWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountProviderCallbackRoutesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProviderCallbackRouteWhereInput
   }
 
 
@@ -4248,6 +4439,7 @@ export namespace Prisma {
     adminUsers?: boolean | Tenant$adminUsersArgs<ExtArgs>
     customers?: boolean | Tenant$customersArgs<ExtArgs>
     roles?: boolean | Tenant$rolesArgs<ExtArgs>
+    providerCallbackRoutes?: boolean | Tenant$providerCallbackRoutesArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -4316,6 +4508,7 @@ export namespace Prisma {
     adminUsers?: boolean | Tenant$adminUsersArgs<ExtArgs>
     customers?: boolean | Tenant$customersArgs<ExtArgs>
     roles?: boolean | Tenant$rolesArgs<ExtArgs>
+    providerCallbackRoutes?: boolean | Tenant$providerCallbackRoutesArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4338,6 +4531,7 @@ export namespace Prisma {
       adminUsers: Prisma.$AdminUserPayload<ExtArgs>[]
       customers: Prisma.$CustomerPayload<ExtArgs>[]
       roles: Prisma.$RolePayload<ExtArgs>[]
+      providerCallbackRoutes: Prisma.$ProviderCallbackRoutePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4756,6 +4950,7 @@ export namespace Prisma {
     adminUsers<T extends Tenant$adminUsersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$adminUsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     customers<T extends Tenant$customersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$customersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     roles<T extends Tenant$rolesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    providerCallbackRoutes<T extends Tenant$providerCallbackRoutesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$providerCallbackRoutesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5377,6 +5572,30 @@ export namespace Prisma {
   }
 
   /**
+   * Tenant.providerCallbackRoutes
+   */
+  export type Tenant$providerCallbackRoutesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    where?: ProviderCallbackRouteWhereInput
+    orderBy?: ProviderCallbackRouteOrderByWithRelationInput | ProviderCallbackRouteOrderByWithRelationInput[]
+    cursor?: ProviderCallbackRouteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProviderCallbackRouteScalarFieldEnum | ProviderCallbackRouteScalarFieldEnum[]
+  }
+
+  /**
    * Tenant without action
    */
   export type TenantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5392,6 +5611,1090 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TenantInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProviderCallbackRoute
+   */
+
+  export type AggregateProviderCallbackRoute = {
+    _count: ProviderCallbackRouteCountAggregateOutputType | null
+    _min: ProviderCallbackRouteMinAggregateOutputType | null
+    _max: ProviderCallbackRouteMaxAggregateOutputType | null
+  }
+
+  export type ProviderCallbackRouteMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    channel: string | null
+    resourceType: string | null
+    externalNo: string | null
+    resourceId: string | null
+    createdAt: Date | null
+  }
+
+  export type ProviderCallbackRouteMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    channel: string | null
+    resourceType: string | null
+    externalNo: string | null
+    resourceId: string | null
+    createdAt: Date | null
+  }
+
+  export type ProviderCallbackRouteCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    channel: number
+    resourceType: number
+    externalNo: number
+    resourceId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ProviderCallbackRouteMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    resourceType?: true
+    externalNo?: true
+    resourceId?: true
+    createdAt?: true
+  }
+
+  export type ProviderCallbackRouteMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    resourceType?: true
+    externalNo?: true
+    resourceId?: true
+    createdAt?: true
+  }
+
+  export type ProviderCallbackRouteCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    resourceType?: true
+    externalNo?: true
+    resourceId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ProviderCallbackRouteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProviderCallbackRoute to aggregate.
+     */
+    where?: ProviderCallbackRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProviderCallbackRoutes to fetch.
+     */
+    orderBy?: ProviderCallbackRouteOrderByWithRelationInput | ProviderCallbackRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProviderCallbackRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProviderCallbackRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProviderCallbackRoutes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProviderCallbackRoutes
+    **/
+    _count?: true | ProviderCallbackRouteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProviderCallbackRouteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProviderCallbackRouteMaxAggregateInputType
+  }
+
+  export type GetProviderCallbackRouteAggregateType<T extends ProviderCallbackRouteAggregateArgs> = {
+        [P in keyof T & keyof AggregateProviderCallbackRoute]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProviderCallbackRoute[P]>
+      : GetScalarType<T[P], AggregateProviderCallbackRoute[P]>
+  }
+
+
+
+
+  export type ProviderCallbackRouteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProviderCallbackRouteWhereInput
+    orderBy?: ProviderCallbackRouteOrderByWithAggregationInput | ProviderCallbackRouteOrderByWithAggregationInput[]
+    by: ProviderCallbackRouteScalarFieldEnum[] | ProviderCallbackRouteScalarFieldEnum
+    having?: ProviderCallbackRouteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProviderCallbackRouteCountAggregateInputType | true
+    _min?: ProviderCallbackRouteMinAggregateInputType
+    _max?: ProviderCallbackRouteMaxAggregateInputType
+  }
+
+  export type ProviderCallbackRouteGroupByOutputType = {
+    id: string
+    tenantId: string
+    channel: string
+    resourceType: string
+    externalNo: string
+    resourceId: string
+    createdAt: Date
+    _count: ProviderCallbackRouteCountAggregateOutputType | null
+    _min: ProviderCallbackRouteMinAggregateOutputType | null
+    _max: ProviderCallbackRouteMaxAggregateOutputType | null
+  }
+
+  type GetProviderCallbackRouteGroupByPayload<T extends ProviderCallbackRouteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProviderCallbackRouteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProviderCallbackRouteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProviderCallbackRouteGroupByOutputType[P]>
+            : GetScalarType<T[P], ProviderCallbackRouteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProviderCallbackRouteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    resourceType?: boolean
+    externalNo?: boolean
+    resourceId?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["providerCallbackRoute"]>
+
+  export type ProviderCallbackRouteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    resourceType?: boolean
+    externalNo?: boolean
+    resourceId?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["providerCallbackRoute"]>
+
+  export type ProviderCallbackRouteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    resourceType?: boolean
+    externalNo?: boolean
+    resourceId?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["providerCallbackRoute"]>
+
+  export type ProviderCallbackRouteSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    resourceType?: boolean
+    externalNo?: boolean
+    resourceId?: boolean
+    createdAt?: boolean
+  }
+
+  export type ProviderCallbackRouteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "channel" | "resourceType" | "externalNo" | "resourceId" | "createdAt", ExtArgs["result"]["providerCallbackRoute"]>
+  export type ProviderCallbackRouteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type ProviderCallbackRouteIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type ProviderCallbackRouteIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $ProviderCallbackRoutePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProviderCallbackRoute"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      channel: string
+      resourceType: string
+      externalNo: string
+      resourceId: string
+      createdAt: Date
+    }, ExtArgs["result"]["providerCallbackRoute"]>
+    composites: {}
+  }
+
+  type ProviderCallbackRouteGetPayload<S extends boolean | null | undefined | ProviderCallbackRouteDefaultArgs> = $Result.GetResult<Prisma.$ProviderCallbackRoutePayload, S>
+
+  type ProviderCallbackRouteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProviderCallbackRouteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProviderCallbackRouteCountAggregateInputType | true
+    }
+
+  export interface ProviderCallbackRouteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProviderCallbackRoute'], meta: { name: 'ProviderCallbackRoute' } }
+    /**
+     * Find zero or one ProviderCallbackRoute that matches the filter.
+     * @param {ProviderCallbackRouteFindUniqueArgs} args - Arguments to find a ProviderCallbackRoute
+     * @example
+     * // Get one ProviderCallbackRoute
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProviderCallbackRouteFindUniqueArgs>(args: SelectSubset<T, ProviderCallbackRouteFindUniqueArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProviderCallbackRoute that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProviderCallbackRouteFindUniqueOrThrowArgs} args - Arguments to find a ProviderCallbackRoute
+     * @example
+     * // Get one ProviderCallbackRoute
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProviderCallbackRouteFindUniqueOrThrowArgs>(args: SelectSubset<T, ProviderCallbackRouteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProviderCallbackRoute that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProviderCallbackRouteFindFirstArgs} args - Arguments to find a ProviderCallbackRoute
+     * @example
+     * // Get one ProviderCallbackRoute
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProviderCallbackRouteFindFirstArgs>(args?: SelectSubset<T, ProviderCallbackRouteFindFirstArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProviderCallbackRoute that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProviderCallbackRouteFindFirstOrThrowArgs} args - Arguments to find a ProviderCallbackRoute
+     * @example
+     * // Get one ProviderCallbackRoute
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProviderCallbackRouteFindFirstOrThrowArgs>(args?: SelectSubset<T, ProviderCallbackRouteFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProviderCallbackRoutes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProviderCallbackRouteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProviderCallbackRoutes
+     * const providerCallbackRoutes = await prisma.providerCallbackRoute.findMany()
+     * 
+     * // Get first 10 ProviderCallbackRoutes
+     * const providerCallbackRoutes = await prisma.providerCallbackRoute.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const providerCallbackRouteWithIdOnly = await prisma.providerCallbackRoute.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProviderCallbackRouteFindManyArgs>(args?: SelectSubset<T, ProviderCallbackRouteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProviderCallbackRoute.
+     * @param {ProviderCallbackRouteCreateArgs} args - Arguments to create a ProviderCallbackRoute.
+     * @example
+     * // Create one ProviderCallbackRoute
+     * const ProviderCallbackRoute = await prisma.providerCallbackRoute.create({
+     *   data: {
+     *     // ... data to create a ProviderCallbackRoute
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProviderCallbackRouteCreateArgs>(args: SelectSubset<T, ProviderCallbackRouteCreateArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProviderCallbackRoutes.
+     * @param {ProviderCallbackRouteCreateManyArgs} args - Arguments to create many ProviderCallbackRoutes.
+     * @example
+     * // Create many ProviderCallbackRoutes
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProviderCallbackRouteCreateManyArgs>(args?: SelectSubset<T, ProviderCallbackRouteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProviderCallbackRoutes and returns the data saved in the database.
+     * @param {ProviderCallbackRouteCreateManyAndReturnArgs} args - Arguments to create many ProviderCallbackRoutes.
+     * @example
+     * // Create many ProviderCallbackRoutes
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProviderCallbackRoutes and only return the `id`
+     * const providerCallbackRouteWithIdOnly = await prisma.providerCallbackRoute.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProviderCallbackRouteCreateManyAndReturnArgs>(args?: SelectSubset<T, ProviderCallbackRouteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProviderCallbackRoute.
+     * @param {ProviderCallbackRouteDeleteArgs} args - Arguments to delete one ProviderCallbackRoute.
+     * @example
+     * // Delete one ProviderCallbackRoute
+     * const ProviderCallbackRoute = await prisma.providerCallbackRoute.delete({
+     *   where: {
+     *     // ... filter to delete one ProviderCallbackRoute
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProviderCallbackRouteDeleteArgs>(args: SelectSubset<T, ProviderCallbackRouteDeleteArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProviderCallbackRoute.
+     * @param {ProviderCallbackRouteUpdateArgs} args - Arguments to update one ProviderCallbackRoute.
+     * @example
+     * // Update one ProviderCallbackRoute
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProviderCallbackRouteUpdateArgs>(args: SelectSubset<T, ProviderCallbackRouteUpdateArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProviderCallbackRoutes.
+     * @param {ProviderCallbackRouteDeleteManyArgs} args - Arguments to filter ProviderCallbackRoutes to delete.
+     * @example
+     * // Delete a few ProviderCallbackRoutes
+     * const { count } = await prisma.providerCallbackRoute.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProviderCallbackRouteDeleteManyArgs>(args?: SelectSubset<T, ProviderCallbackRouteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProviderCallbackRoutes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProviderCallbackRouteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProviderCallbackRoutes
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProviderCallbackRouteUpdateManyArgs>(args: SelectSubset<T, ProviderCallbackRouteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProviderCallbackRoutes and returns the data updated in the database.
+     * @param {ProviderCallbackRouteUpdateManyAndReturnArgs} args - Arguments to update many ProviderCallbackRoutes.
+     * @example
+     * // Update many ProviderCallbackRoutes
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProviderCallbackRoutes and only return the `id`
+     * const providerCallbackRouteWithIdOnly = await prisma.providerCallbackRoute.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProviderCallbackRouteUpdateManyAndReturnArgs>(args: SelectSubset<T, ProviderCallbackRouteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProviderCallbackRoute.
+     * @param {ProviderCallbackRouteUpsertArgs} args - Arguments to update or create a ProviderCallbackRoute.
+     * @example
+     * // Update or create a ProviderCallbackRoute
+     * const providerCallbackRoute = await prisma.providerCallbackRoute.upsert({
+     *   create: {
+     *     // ... data to create a ProviderCallbackRoute
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProviderCallbackRoute we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProviderCallbackRouteUpsertArgs>(args: SelectSubset<T, ProviderCallbackRouteUpsertArgs<ExtArgs>>): Prisma__ProviderCallbackRouteClient<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProviderCallbackRoutes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProviderCallbackRouteCountArgs} args - Arguments to filter ProviderCallbackRoutes to count.
+     * @example
+     * // Count the number of ProviderCallbackRoutes
+     * const count = await prisma.providerCallbackRoute.count({
+     *   where: {
+     *     // ... the filter for the ProviderCallbackRoutes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProviderCallbackRouteCountArgs>(
+      args?: Subset<T, ProviderCallbackRouteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProviderCallbackRouteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProviderCallbackRoute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProviderCallbackRouteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProviderCallbackRouteAggregateArgs>(args: Subset<T, ProviderCallbackRouteAggregateArgs>): Prisma.PrismaPromise<GetProviderCallbackRouteAggregateType<T>>
+
+    /**
+     * Group by ProviderCallbackRoute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProviderCallbackRouteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProviderCallbackRouteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProviderCallbackRouteGroupByArgs['orderBy'] }
+        : { orderBy?: ProviderCallbackRouteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProviderCallbackRouteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProviderCallbackRouteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProviderCallbackRoute model
+   */
+  readonly fields: ProviderCallbackRouteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProviderCallbackRoute.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProviderCallbackRouteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProviderCallbackRoute model
+   */
+  interface ProviderCallbackRouteFieldRefs {
+    readonly id: FieldRef<"ProviderCallbackRoute", 'String'>
+    readonly tenantId: FieldRef<"ProviderCallbackRoute", 'String'>
+    readonly channel: FieldRef<"ProviderCallbackRoute", 'String'>
+    readonly resourceType: FieldRef<"ProviderCallbackRoute", 'String'>
+    readonly externalNo: FieldRef<"ProviderCallbackRoute", 'String'>
+    readonly resourceId: FieldRef<"ProviderCallbackRoute", 'String'>
+    readonly createdAt: FieldRef<"ProviderCallbackRoute", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProviderCallbackRoute findUnique
+   */
+  export type ProviderCallbackRouteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which ProviderCallbackRoute to fetch.
+     */
+    where: ProviderCallbackRouteWhereUniqueInput
+  }
+
+  /**
+   * ProviderCallbackRoute findUniqueOrThrow
+   */
+  export type ProviderCallbackRouteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which ProviderCallbackRoute to fetch.
+     */
+    where: ProviderCallbackRouteWhereUniqueInput
+  }
+
+  /**
+   * ProviderCallbackRoute findFirst
+   */
+  export type ProviderCallbackRouteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which ProviderCallbackRoute to fetch.
+     */
+    where?: ProviderCallbackRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProviderCallbackRoutes to fetch.
+     */
+    orderBy?: ProviderCallbackRouteOrderByWithRelationInput | ProviderCallbackRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProviderCallbackRoutes.
+     */
+    cursor?: ProviderCallbackRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProviderCallbackRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProviderCallbackRoutes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProviderCallbackRoutes.
+     */
+    distinct?: ProviderCallbackRouteScalarFieldEnum | ProviderCallbackRouteScalarFieldEnum[]
+  }
+
+  /**
+   * ProviderCallbackRoute findFirstOrThrow
+   */
+  export type ProviderCallbackRouteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which ProviderCallbackRoute to fetch.
+     */
+    where?: ProviderCallbackRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProviderCallbackRoutes to fetch.
+     */
+    orderBy?: ProviderCallbackRouteOrderByWithRelationInput | ProviderCallbackRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProviderCallbackRoutes.
+     */
+    cursor?: ProviderCallbackRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProviderCallbackRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProviderCallbackRoutes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProviderCallbackRoutes.
+     */
+    distinct?: ProviderCallbackRouteScalarFieldEnum | ProviderCallbackRouteScalarFieldEnum[]
+  }
+
+  /**
+   * ProviderCallbackRoute findMany
+   */
+  export type ProviderCallbackRouteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * Filter, which ProviderCallbackRoutes to fetch.
+     */
+    where?: ProviderCallbackRouteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProviderCallbackRoutes to fetch.
+     */
+    orderBy?: ProviderCallbackRouteOrderByWithRelationInput | ProviderCallbackRouteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProviderCallbackRoutes.
+     */
+    cursor?: ProviderCallbackRouteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProviderCallbackRoutes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProviderCallbackRoutes.
+     */
+    skip?: number
+    distinct?: ProviderCallbackRouteScalarFieldEnum | ProviderCallbackRouteScalarFieldEnum[]
+  }
+
+  /**
+   * ProviderCallbackRoute create
+   */
+  export type ProviderCallbackRouteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProviderCallbackRoute.
+     */
+    data: XOR<ProviderCallbackRouteCreateInput, ProviderCallbackRouteUncheckedCreateInput>
+  }
+
+  /**
+   * ProviderCallbackRoute createMany
+   */
+  export type ProviderCallbackRouteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProviderCallbackRoutes.
+     */
+    data: ProviderCallbackRouteCreateManyInput | ProviderCallbackRouteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProviderCallbackRoute createManyAndReturn
+   */
+  export type ProviderCallbackRouteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProviderCallbackRoutes.
+     */
+    data: ProviderCallbackRouteCreateManyInput | ProviderCallbackRouteCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProviderCallbackRoute update
+   */
+  export type ProviderCallbackRouteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProviderCallbackRoute.
+     */
+    data: XOR<ProviderCallbackRouteUpdateInput, ProviderCallbackRouteUncheckedUpdateInput>
+    /**
+     * Choose, which ProviderCallbackRoute to update.
+     */
+    where: ProviderCallbackRouteWhereUniqueInput
+  }
+
+  /**
+   * ProviderCallbackRoute updateMany
+   */
+  export type ProviderCallbackRouteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProviderCallbackRoutes.
+     */
+    data: XOR<ProviderCallbackRouteUpdateManyMutationInput, ProviderCallbackRouteUncheckedUpdateManyInput>
+    /**
+     * Filter which ProviderCallbackRoutes to update
+     */
+    where?: ProviderCallbackRouteWhereInput
+    /**
+     * Limit how many ProviderCallbackRoutes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProviderCallbackRoute updateManyAndReturn
+   */
+  export type ProviderCallbackRouteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * The data used to update ProviderCallbackRoutes.
+     */
+    data: XOR<ProviderCallbackRouteUpdateManyMutationInput, ProviderCallbackRouteUncheckedUpdateManyInput>
+    /**
+     * Filter which ProviderCallbackRoutes to update
+     */
+    where?: ProviderCallbackRouteWhereInput
+    /**
+     * Limit how many ProviderCallbackRoutes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProviderCallbackRoute upsert
+   */
+  export type ProviderCallbackRouteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProviderCallbackRoute to update in case it exists.
+     */
+    where: ProviderCallbackRouteWhereUniqueInput
+    /**
+     * In case the ProviderCallbackRoute found by the `where` argument doesn't exist, create a new ProviderCallbackRoute with this data.
+     */
+    create: XOR<ProviderCallbackRouteCreateInput, ProviderCallbackRouteUncheckedCreateInput>
+    /**
+     * In case the ProviderCallbackRoute was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProviderCallbackRouteUpdateInput, ProviderCallbackRouteUncheckedUpdateInput>
+  }
+
+  /**
+   * ProviderCallbackRoute delete
+   */
+  export type ProviderCallbackRouteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
+    /**
+     * Filter which ProviderCallbackRoute to delete.
+     */
+    where: ProviderCallbackRouteWhereUniqueInput
+  }
+
+  /**
+   * ProviderCallbackRoute deleteMany
+   */
+  export type ProviderCallbackRouteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProviderCallbackRoutes to delete
+     */
+    where?: ProviderCallbackRouteWhereInput
+    /**
+     * Limit how many ProviderCallbackRoutes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProviderCallbackRoute without action
+   */
+  export type ProviderCallbackRouteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProviderCallbackRoute
+     */
+    select?: ProviderCallbackRouteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProviderCallbackRoute
+     */
+    omit?: ProviderCallbackRouteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProviderCallbackRouteInclude<ExtArgs> | null
   }
 
 
@@ -37857,6 +39160,1139 @@ export namespace Prisma {
 
 
   /**
+   * Model RefundWebhookEvent
+   */
+
+  export type AggregateRefundWebhookEvent = {
+    _count: RefundWebhookEventCountAggregateOutputType | null
+    _avg: RefundWebhookEventAvgAggregateOutputType | null
+    _sum: RefundWebhookEventSumAggregateOutputType | null
+    _min: RefundWebhookEventMinAggregateOutputType | null
+    _max: RefundWebhookEventMaxAggregateOutputType | null
+  }
+
+  export type RefundWebhookEventAvgAggregateOutputType = {
+    id: number | null
+    attempts: number | null
+  }
+
+  export type RefundWebhookEventSumAggregateOutputType = {
+    id: bigint | null
+    attempts: number | null
+  }
+
+  export type RefundWebhookEventMinAggregateOutputType = {
+    id: bigint | null
+    tenantId: string | null
+    channel: string | null
+    eventId: string | null
+    payloadFingerprint: string | null
+    status: string | null
+    attempts: number | null
+    nextAttemptAt: Date | null
+    lastError: string | null
+    processedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RefundWebhookEventMaxAggregateOutputType = {
+    id: bigint | null
+    tenantId: string | null
+    channel: string | null
+    eventId: string | null
+    payloadFingerprint: string | null
+    status: string | null
+    attempts: number | null
+    nextAttemptAt: Date | null
+    lastError: string | null
+    processedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RefundWebhookEventCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    channel: number
+    eventId: number
+    payloadFingerprint: number
+    payload: number
+    status: number
+    attempts: number
+    nextAttemptAt: number
+    lastError: number
+    processedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RefundWebhookEventAvgAggregateInputType = {
+    id?: true
+    attempts?: true
+  }
+
+  export type RefundWebhookEventSumAggregateInputType = {
+    id?: true
+    attempts?: true
+  }
+
+  export type RefundWebhookEventMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    eventId?: true
+    payloadFingerprint?: true
+    status?: true
+    attempts?: true
+    nextAttemptAt?: true
+    lastError?: true
+    processedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RefundWebhookEventMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    eventId?: true
+    payloadFingerprint?: true
+    status?: true
+    attempts?: true
+    nextAttemptAt?: true
+    lastError?: true
+    processedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RefundWebhookEventCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    eventId?: true
+    payloadFingerprint?: true
+    payload?: true
+    status?: true
+    attempts?: true
+    nextAttemptAt?: true
+    lastError?: true
+    processedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RefundWebhookEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefundWebhookEvent to aggregate.
+     */
+    where?: RefundWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundWebhookEvents to fetch.
+     */
+    orderBy?: RefundWebhookEventOrderByWithRelationInput | RefundWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RefundWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RefundWebhookEvents
+    **/
+    _count?: true | RefundWebhookEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RefundWebhookEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RefundWebhookEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RefundWebhookEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RefundWebhookEventMaxAggregateInputType
+  }
+
+  export type GetRefundWebhookEventAggregateType<T extends RefundWebhookEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateRefundWebhookEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRefundWebhookEvent[P]>
+      : GetScalarType<T[P], AggregateRefundWebhookEvent[P]>
+  }
+
+
+
+
+  export type RefundWebhookEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefundWebhookEventWhereInput
+    orderBy?: RefundWebhookEventOrderByWithAggregationInput | RefundWebhookEventOrderByWithAggregationInput[]
+    by: RefundWebhookEventScalarFieldEnum[] | RefundWebhookEventScalarFieldEnum
+    having?: RefundWebhookEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RefundWebhookEventCountAggregateInputType | true
+    _avg?: RefundWebhookEventAvgAggregateInputType
+    _sum?: RefundWebhookEventSumAggregateInputType
+    _min?: RefundWebhookEventMinAggregateInputType
+    _max?: RefundWebhookEventMaxAggregateInputType
+  }
+
+  export type RefundWebhookEventGroupByOutputType = {
+    id: bigint
+    tenantId: string
+    channel: string
+    eventId: string
+    payloadFingerprint: string
+    payload: JsonValue
+    status: string
+    attempts: number
+    nextAttemptAt: Date
+    lastError: string | null
+    processedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: RefundWebhookEventCountAggregateOutputType | null
+    _avg: RefundWebhookEventAvgAggregateOutputType | null
+    _sum: RefundWebhookEventSumAggregateOutputType | null
+    _min: RefundWebhookEventMinAggregateOutputType | null
+    _max: RefundWebhookEventMaxAggregateOutputType | null
+  }
+
+  type GetRefundWebhookEventGroupByPayload<T extends RefundWebhookEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RefundWebhookEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RefundWebhookEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RefundWebhookEventGroupByOutputType[P]>
+            : GetScalarType<T[P], RefundWebhookEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RefundWebhookEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    eventId?: boolean
+    payloadFingerprint?: boolean
+    payload?: boolean
+    status?: boolean
+    attempts?: boolean
+    nextAttemptAt?: boolean
+    lastError?: boolean
+    processedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["refundWebhookEvent"]>
+
+  export type RefundWebhookEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    eventId?: boolean
+    payloadFingerprint?: boolean
+    payload?: boolean
+    status?: boolean
+    attempts?: boolean
+    nextAttemptAt?: boolean
+    lastError?: boolean
+    processedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["refundWebhookEvent"]>
+
+  export type RefundWebhookEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    eventId?: boolean
+    payloadFingerprint?: boolean
+    payload?: boolean
+    status?: boolean
+    attempts?: boolean
+    nextAttemptAt?: boolean
+    lastError?: boolean
+    processedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["refundWebhookEvent"]>
+
+  export type RefundWebhookEventSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    eventId?: boolean
+    payloadFingerprint?: boolean
+    payload?: boolean
+    status?: boolean
+    attempts?: boolean
+    nextAttemptAt?: boolean
+    lastError?: boolean
+    processedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RefundWebhookEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "channel" | "eventId" | "payloadFingerprint" | "payload" | "status" | "attempts" | "nextAttemptAt" | "lastError" | "processedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["refundWebhookEvent"]>
+
+  export type $RefundWebhookEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RefundWebhookEvent"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      tenantId: string
+      channel: string
+      eventId: string
+      payloadFingerprint: string
+      payload: Prisma.JsonValue
+      status: string
+      attempts: number
+      nextAttemptAt: Date
+      lastError: string | null
+      processedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["refundWebhookEvent"]>
+    composites: {}
+  }
+
+  type RefundWebhookEventGetPayload<S extends boolean | null | undefined | RefundWebhookEventDefaultArgs> = $Result.GetResult<Prisma.$RefundWebhookEventPayload, S>
+
+  type RefundWebhookEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RefundWebhookEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RefundWebhookEventCountAggregateInputType | true
+    }
+
+  export interface RefundWebhookEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefundWebhookEvent'], meta: { name: 'RefundWebhookEvent' } }
+    /**
+     * Find zero or one RefundWebhookEvent that matches the filter.
+     * @param {RefundWebhookEventFindUniqueArgs} args - Arguments to find a RefundWebhookEvent
+     * @example
+     * // Get one RefundWebhookEvent
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RefundWebhookEventFindUniqueArgs>(args: SelectSubset<T, RefundWebhookEventFindUniqueArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RefundWebhookEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RefundWebhookEventFindUniqueOrThrowArgs} args - Arguments to find a RefundWebhookEvent
+     * @example
+     * // Get one RefundWebhookEvent
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RefundWebhookEventFindUniqueOrThrowArgs>(args: SelectSubset<T, RefundWebhookEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefundWebhookEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundWebhookEventFindFirstArgs} args - Arguments to find a RefundWebhookEvent
+     * @example
+     * // Get one RefundWebhookEvent
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RefundWebhookEventFindFirstArgs>(args?: SelectSubset<T, RefundWebhookEventFindFirstArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefundWebhookEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundWebhookEventFindFirstOrThrowArgs} args - Arguments to find a RefundWebhookEvent
+     * @example
+     * // Get one RefundWebhookEvent
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RefundWebhookEventFindFirstOrThrowArgs>(args?: SelectSubset<T, RefundWebhookEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RefundWebhookEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundWebhookEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RefundWebhookEvents
+     * const refundWebhookEvents = await prisma.refundWebhookEvent.findMany()
+     * 
+     * // Get first 10 RefundWebhookEvents
+     * const refundWebhookEvents = await prisma.refundWebhookEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const refundWebhookEventWithIdOnly = await prisma.refundWebhookEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RefundWebhookEventFindManyArgs>(args?: SelectSubset<T, RefundWebhookEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RefundWebhookEvent.
+     * @param {RefundWebhookEventCreateArgs} args - Arguments to create a RefundWebhookEvent.
+     * @example
+     * // Create one RefundWebhookEvent
+     * const RefundWebhookEvent = await prisma.refundWebhookEvent.create({
+     *   data: {
+     *     // ... data to create a RefundWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends RefundWebhookEventCreateArgs>(args: SelectSubset<T, RefundWebhookEventCreateArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RefundWebhookEvents.
+     * @param {RefundWebhookEventCreateManyArgs} args - Arguments to create many RefundWebhookEvents.
+     * @example
+     * // Create many RefundWebhookEvents
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RefundWebhookEventCreateManyArgs>(args?: SelectSubset<T, RefundWebhookEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RefundWebhookEvents and returns the data saved in the database.
+     * @param {RefundWebhookEventCreateManyAndReturnArgs} args - Arguments to create many RefundWebhookEvents.
+     * @example
+     * // Create many RefundWebhookEvents
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RefundWebhookEvents and only return the `id`
+     * const refundWebhookEventWithIdOnly = await prisma.refundWebhookEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RefundWebhookEventCreateManyAndReturnArgs>(args?: SelectSubset<T, RefundWebhookEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RefundWebhookEvent.
+     * @param {RefundWebhookEventDeleteArgs} args - Arguments to delete one RefundWebhookEvent.
+     * @example
+     * // Delete one RefundWebhookEvent
+     * const RefundWebhookEvent = await prisma.refundWebhookEvent.delete({
+     *   where: {
+     *     // ... filter to delete one RefundWebhookEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RefundWebhookEventDeleteArgs>(args: SelectSubset<T, RefundWebhookEventDeleteArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RefundWebhookEvent.
+     * @param {RefundWebhookEventUpdateArgs} args - Arguments to update one RefundWebhookEvent.
+     * @example
+     * // Update one RefundWebhookEvent
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RefundWebhookEventUpdateArgs>(args: SelectSubset<T, RefundWebhookEventUpdateArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RefundWebhookEvents.
+     * @param {RefundWebhookEventDeleteManyArgs} args - Arguments to filter RefundWebhookEvents to delete.
+     * @example
+     * // Delete a few RefundWebhookEvents
+     * const { count } = await prisma.refundWebhookEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RefundWebhookEventDeleteManyArgs>(args?: SelectSubset<T, RefundWebhookEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefundWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundWebhookEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RefundWebhookEvents
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RefundWebhookEventUpdateManyArgs>(args: SelectSubset<T, RefundWebhookEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefundWebhookEvents and returns the data updated in the database.
+     * @param {RefundWebhookEventUpdateManyAndReturnArgs} args - Arguments to update many RefundWebhookEvents.
+     * @example
+     * // Update many RefundWebhookEvents
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RefundWebhookEvents and only return the `id`
+     * const refundWebhookEventWithIdOnly = await prisma.refundWebhookEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RefundWebhookEventUpdateManyAndReturnArgs>(args: SelectSubset<T, RefundWebhookEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RefundWebhookEvent.
+     * @param {RefundWebhookEventUpsertArgs} args - Arguments to update or create a RefundWebhookEvent.
+     * @example
+     * // Update or create a RefundWebhookEvent
+     * const refundWebhookEvent = await prisma.refundWebhookEvent.upsert({
+     *   create: {
+     *     // ... data to create a RefundWebhookEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RefundWebhookEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RefundWebhookEventUpsertArgs>(args: SelectSubset<T, RefundWebhookEventUpsertArgs<ExtArgs>>): Prisma__RefundWebhookEventClient<$Result.GetResult<Prisma.$RefundWebhookEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RefundWebhookEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundWebhookEventCountArgs} args - Arguments to filter RefundWebhookEvents to count.
+     * @example
+     * // Count the number of RefundWebhookEvents
+     * const count = await prisma.refundWebhookEvent.count({
+     *   where: {
+     *     // ... the filter for the RefundWebhookEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends RefundWebhookEventCountArgs>(
+      args?: Subset<T, RefundWebhookEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RefundWebhookEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RefundWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundWebhookEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RefundWebhookEventAggregateArgs>(args: Subset<T, RefundWebhookEventAggregateArgs>): Prisma.PrismaPromise<GetRefundWebhookEventAggregateType<T>>
+
+    /**
+     * Group by RefundWebhookEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundWebhookEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RefundWebhookEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RefundWebhookEventGroupByArgs['orderBy'] }
+        : { orderBy?: RefundWebhookEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RefundWebhookEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefundWebhookEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RefundWebhookEvent model
+   */
+  readonly fields: RefundWebhookEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RefundWebhookEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RefundWebhookEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RefundWebhookEvent model
+   */
+  interface RefundWebhookEventFieldRefs {
+    readonly id: FieldRef<"RefundWebhookEvent", 'BigInt'>
+    readonly tenantId: FieldRef<"RefundWebhookEvent", 'String'>
+    readonly channel: FieldRef<"RefundWebhookEvent", 'String'>
+    readonly eventId: FieldRef<"RefundWebhookEvent", 'String'>
+    readonly payloadFingerprint: FieldRef<"RefundWebhookEvent", 'String'>
+    readonly payload: FieldRef<"RefundWebhookEvent", 'Json'>
+    readonly status: FieldRef<"RefundWebhookEvent", 'String'>
+    readonly attempts: FieldRef<"RefundWebhookEvent", 'Int'>
+    readonly nextAttemptAt: FieldRef<"RefundWebhookEvent", 'DateTime'>
+    readonly lastError: FieldRef<"RefundWebhookEvent", 'String'>
+    readonly processedAt: FieldRef<"RefundWebhookEvent", 'DateTime'>
+    readonly createdAt: FieldRef<"RefundWebhookEvent", 'DateTime'>
+    readonly updatedAt: FieldRef<"RefundWebhookEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RefundWebhookEvent findUnique
+   */
+  export type RefundWebhookEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which RefundWebhookEvent to fetch.
+     */
+    where: RefundWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * RefundWebhookEvent findUniqueOrThrow
+   */
+  export type RefundWebhookEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which RefundWebhookEvent to fetch.
+     */
+    where: RefundWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * RefundWebhookEvent findFirst
+   */
+  export type RefundWebhookEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which RefundWebhookEvent to fetch.
+     */
+    where?: RefundWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundWebhookEvents to fetch.
+     */
+    orderBy?: RefundWebhookEventOrderByWithRelationInput | RefundWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefundWebhookEvents.
+     */
+    cursor?: RefundWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefundWebhookEvents.
+     */
+    distinct?: RefundWebhookEventScalarFieldEnum | RefundWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * RefundWebhookEvent findFirstOrThrow
+   */
+  export type RefundWebhookEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which RefundWebhookEvent to fetch.
+     */
+    where?: RefundWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundWebhookEvents to fetch.
+     */
+    orderBy?: RefundWebhookEventOrderByWithRelationInput | RefundWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefundWebhookEvents.
+     */
+    cursor?: RefundWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundWebhookEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefundWebhookEvents.
+     */
+    distinct?: RefundWebhookEventScalarFieldEnum | RefundWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * RefundWebhookEvent findMany
+   */
+  export type RefundWebhookEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter, which RefundWebhookEvents to fetch.
+     */
+    where?: RefundWebhookEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundWebhookEvents to fetch.
+     */
+    orderBy?: RefundWebhookEventOrderByWithRelationInput | RefundWebhookEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RefundWebhookEvents.
+     */
+    cursor?: RefundWebhookEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundWebhookEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundWebhookEvents.
+     */
+    skip?: number
+    distinct?: RefundWebhookEventScalarFieldEnum | RefundWebhookEventScalarFieldEnum[]
+  }
+
+  /**
+   * RefundWebhookEvent create
+   */
+  export type RefundWebhookEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data needed to create a RefundWebhookEvent.
+     */
+    data: XOR<RefundWebhookEventCreateInput, RefundWebhookEventUncheckedCreateInput>
+  }
+
+  /**
+   * RefundWebhookEvent createMany
+   */
+  export type RefundWebhookEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RefundWebhookEvents.
+     */
+    data: RefundWebhookEventCreateManyInput | RefundWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RefundWebhookEvent createManyAndReturn
+   */
+  export type RefundWebhookEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many RefundWebhookEvents.
+     */
+    data: RefundWebhookEventCreateManyInput | RefundWebhookEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RefundWebhookEvent update
+   */
+  export type RefundWebhookEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data needed to update a RefundWebhookEvent.
+     */
+    data: XOR<RefundWebhookEventUpdateInput, RefundWebhookEventUncheckedUpdateInput>
+    /**
+     * Choose, which RefundWebhookEvent to update.
+     */
+    where: RefundWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * RefundWebhookEvent updateMany
+   */
+  export type RefundWebhookEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RefundWebhookEvents.
+     */
+    data: XOR<RefundWebhookEventUpdateManyMutationInput, RefundWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which RefundWebhookEvents to update
+     */
+    where?: RefundWebhookEventWhereInput
+    /**
+     * Limit how many RefundWebhookEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefundWebhookEvent updateManyAndReturn
+   */
+  export type RefundWebhookEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * The data used to update RefundWebhookEvents.
+     */
+    data: XOR<RefundWebhookEventUpdateManyMutationInput, RefundWebhookEventUncheckedUpdateManyInput>
+    /**
+     * Filter which RefundWebhookEvents to update
+     */
+    where?: RefundWebhookEventWhereInput
+    /**
+     * Limit how many RefundWebhookEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefundWebhookEvent upsert
+   */
+  export type RefundWebhookEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * The filter to search for the RefundWebhookEvent to update in case it exists.
+     */
+    where: RefundWebhookEventWhereUniqueInput
+    /**
+     * In case the RefundWebhookEvent found by the `where` argument doesn't exist, create a new RefundWebhookEvent with this data.
+     */
+    create: XOR<RefundWebhookEventCreateInput, RefundWebhookEventUncheckedCreateInput>
+    /**
+     * In case the RefundWebhookEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RefundWebhookEventUpdateInput, RefundWebhookEventUncheckedUpdateInput>
+  }
+
+  /**
+   * RefundWebhookEvent delete
+   */
+  export type RefundWebhookEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+    /**
+     * Filter which RefundWebhookEvent to delete.
+     */
+    where: RefundWebhookEventWhereUniqueInput
+  }
+
+  /**
+   * RefundWebhookEvent deleteMany
+   */
+  export type RefundWebhookEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefundWebhookEvents to delete
+     */
+    where?: RefundWebhookEventWhereInput
+    /**
+     * Limit how many RefundWebhookEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefundWebhookEvent without action
+   */
+  export type RefundWebhookEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundWebhookEvent
+     */
+    select?: RefundWebhookEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundWebhookEvent
+     */
+    omit?: RefundWebhookEventOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -37888,6 +40324,19 @@ export namespace Prisma {
   };
 
   export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+  export const ProviderCallbackRouteScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    channel: 'channel',
+    resourceType: 'resourceType',
+    externalNo: 'externalNo',
+    resourceId: 'resourceId',
+    createdAt: 'createdAt'
+  };
+
+  export type ProviderCallbackRouteScalarFieldEnum = (typeof ProviderCallbackRouteScalarFieldEnum)[keyof typeof ProviderCallbackRouteScalarFieldEnum]
 
 
   export const CustomerScalarFieldEnum: {
@@ -38323,6 +40772,25 @@ export namespace Prisma {
   export type PaymentWebhookEventScalarFieldEnum = (typeof PaymentWebhookEventScalarFieldEnum)[keyof typeof PaymentWebhookEventScalarFieldEnum]
 
 
+  export const RefundWebhookEventScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    channel: 'channel',
+    eventId: 'eventId',
+    payloadFingerprint: 'payloadFingerprint',
+    payload: 'payload',
+    status: 'status',
+    attempts: 'attempts',
+    nextAttemptAt: 'nextAttemptAt',
+    lastError: 'lastError',
+    processedAt: 'processedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RefundWebhookEventScalarFieldEnum = (typeof RefundWebhookEventScalarFieldEnum)[keyof typeof RefundWebhookEventScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -38510,6 +40978,7 @@ export namespace Prisma {
     adminUsers?: AdminUserListRelationFilter
     customers?: CustomerListRelationFilter
     roles?: RoleListRelationFilter
+    providerCallbackRoutes?: ProviderCallbackRouteListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -38535,6 +41004,7 @@ export namespace Prisma {
     adminUsers?: AdminUserOrderByRelationAggregateInput
     customers?: CustomerOrderByRelationAggregateInput
     roles?: RoleOrderByRelationAggregateInput
+    providerCallbackRoutes?: ProviderCallbackRouteOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -38563,6 +41033,7 @@ export namespace Prisma {
     adminUsers?: AdminUserListRelationFilter
     customers?: CustomerListRelationFilter
     roles?: RoleListRelationFilter
+    providerCallbackRoutes?: ProviderCallbackRouteListRelationFilter
   }, "id" | "subdomain" | "customDomain" | "schemaName" | "subscriptionId">
 
   export type TenantOrderByWithAggregationInput = {
@@ -38603,6 +41074,72 @@ export namespace Prisma {
     settings?: JsonWithAggregatesFilter<"Tenant">
     createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+  }
+
+  export type ProviderCallbackRouteWhereInput = {
+    AND?: ProviderCallbackRouteWhereInput | ProviderCallbackRouteWhereInput[]
+    OR?: ProviderCallbackRouteWhereInput[]
+    NOT?: ProviderCallbackRouteWhereInput | ProviderCallbackRouteWhereInput[]
+    id?: UuidFilter<"ProviderCallbackRoute"> | string
+    tenantId?: UuidFilter<"ProviderCallbackRoute"> | string
+    channel?: StringFilter<"ProviderCallbackRoute"> | string
+    resourceType?: StringFilter<"ProviderCallbackRoute"> | string
+    externalNo?: StringFilter<"ProviderCallbackRoute"> | string
+    resourceId?: UuidFilter<"ProviderCallbackRoute"> | string
+    createdAt?: DateTimeFilter<"ProviderCallbackRoute"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }
+
+  export type ProviderCallbackRouteOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    resourceType?: SortOrder
+    externalNo?: SortOrder
+    resourceId?: SortOrder
+    createdAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+  }
+
+  export type ProviderCallbackRouteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    channel_resourceType_externalNo?: ProviderCallbackRouteChannelResourceTypeExternalNoCompoundUniqueInput
+    AND?: ProviderCallbackRouteWhereInput | ProviderCallbackRouteWhereInput[]
+    OR?: ProviderCallbackRouteWhereInput[]
+    NOT?: ProviderCallbackRouteWhereInput | ProviderCallbackRouteWhereInput[]
+    tenantId?: UuidFilter<"ProviderCallbackRoute"> | string
+    channel?: StringFilter<"ProviderCallbackRoute"> | string
+    resourceType?: StringFilter<"ProviderCallbackRoute"> | string
+    externalNo?: StringFilter<"ProviderCallbackRoute"> | string
+    resourceId?: UuidFilter<"ProviderCallbackRoute"> | string
+    createdAt?: DateTimeFilter<"ProviderCallbackRoute"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }, "id" | "channel_resourceType_externalNo">
+
+  export type ProviderCallbackRouteOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    resourceType?: SortOrder
+    externalNo?: SortOrder
+    resourceId?: SortOrder
+    createdAt?: SortOrder
+    _count?: ProviderCallbackRouteCountOrderByAggregateInput
+    _max?: ProviderCallbackRouteMaxOrderByAggregateInput
+    _min?: ProviderCallbackRouteMinOrderByAggregateInput
+  }
+
+  export type ProviderCallbackRouteScalarWhereWithAggregatesInput = {
+    AND?: ProviderCallbackRouteScalarWhereWithAggregatesInput | ProviderCallbackRouteScalarWhereWithAggregatesInput[]
+    OR?: ProviderCallbackRouteScalarWhereWithAggregatesInput[]
+    NOT?: ProviderCallbackRouteScalarWhereWithAggregatesInput | ProviderCallbackRouteScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ProviderCallbackRoute"> | string
+    tenantId?: UuidWithAggregatesFilter<"ProviderCallbackRoute"> | string
+    channel?: StringWithAggregatesFilter<"ProviderCallbackRoute"> | string
+    resourceType?: StringWithAggregatesFilter<"ProviderCallbackRoute"> | string
+    externalNo?: StringWithAggregatesFilter<"ProviderCallbackRoute"> | string
+    resourceId?: UuidWithAggregatesFilter<"ProviderCallbackRoute"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ProviderCallbackRoute"> | Date | string
   }
 
   export type CustomerWhereInput = {
@@ -40908,6 +43445,101 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentWebhookEvent"> | Date | string
   }
 
+  export type RefundWebhookEventWhereInput = {
+    AND?: RefundWebhookEventWhereInput | RefundWebhookEventWhereInput[]
+    OR?: RefundWebhookEventWhereInput[]
+    NOT?: RefundWebhookEventWhereInput | RefundWebhookEventWhereInput[]
+    id?: BigIntFilter<"RefundWebhookEvent"> | bigint | number
+    tenantId?: UuidFilter<"RefundWebhookEvent"> | string
+    channel?: StringFilter<"RefundWebhookEvent"> | string
+    eventId?: StringFilter<"RefundWebhookEvent"> | string
+    payloadFingerprint?: StringFilter<"RefundWebhookEvent"> | string
+    payload?: JsonFilter<"RefundWebhookEvent">
+    status?: StringFilter<"RefundWebhookEvent"> | string
+    attempts?: IntFilter<"RefundWebhookEvent"> | number
+    nextAttemptAt?: DateTimeFilter<"RefundWebhookEvent"> | Date | string
+    lastError?: StringNullableFilter<"RefundWebhookEvent"> | string | null
+    processedAt?: DateTimeNullableFilter<"RefundWebhookEvent"> | Date | string | null
+    createdAt?: DateTimeFilter<"RefundWebhookEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"RefundWebhookEvent"> | Date | string
+  }
+
+  export type RefundWebhookEventOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    eventId?: SortOrder
+    payloadFingerprint?: SortOrder
+    payload?: SortOrder
+    status?: SortOrder
+    attempts?: SortOrder
+    nextAttemptAt?: SortOrder
+    lastError?: SortOrderInput | SortOrder
+    processedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundWebhookEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    tenantId_channel_eventId?: RefundWebhookEventTenantIdChannelEventIdCompoundUniqueInput
+    AND?: RefundWebhookEventWhereInput | RefundWebhookEventWhereInput[]
+    OR?: RefundWebhookEventWhereInput[]
+    NOT?: RefundWebhookEventWhereInput | RefundWebhookEventWhereInput[]
+    tenantId?: UuidFilter<"RefundWebhookEvent"> | string
+    channel?: StringFilter<"RefundWebhookEvent"> | string
+    eventId?: StringFilter<"RefundWebhookEvent"> | string
+    payloadFingerprint?: StringFilter<"RefundWebhookEvent"> | string
+    payload?: JsonFilter<"RefundWebhookEvent">
+    status?: StringFilter<"RefundWebhookEvent"> | string
+    attempts?: IntFilter<"RefundWebhookEvent"> | number
+    nextAttemptAt?: DateTimeFilter<"RefundWebhookEvent"> | Date | string
+    lastError?: StringNullableFilter<"RefundWebhookEvent"> | string | null
+    processedAt?: DateTimeNullableFilter<"RefundWebhookEvent"> | Date | string | null
+    createdAt?: DateTimeFilter<"RefundWebhookEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"RefundWebhookEvent"> | Date | string
+  }, "id" | "tenantId_channel_eventId">
+
+  export type RefundWebhookEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    eventId?: SortOrder
+    payloadFingerprint?: SortOrder
+    payload?: SortOrder
+    status?: SortOrder
+    attempts?: SortOrder
+    nextAttemptAt?: SortOrder
+    lastError?: SortOrderInput | SortOrder
+    processedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RefundWebhookEventCountOrderByAggregateInput
+    _avg?: RefundWebhookEventAvgOrderByAggregateInput
+    _max?: RefundWebhookEventMaxOrderByAggregateInput
+    _min?: RefundWebhookEventMinOrderByAggregateInput
+    _sum?: RefundWebhookEventSumOrderByAggregateInput
+  }
+
+  export type RefundWebhookEventScalarWhereWithAggregatesInput = {
+    AND?: RefundWebhookEventScalarWhereWithAggregatesInput | RefundWebhookEventScalarWhereWithAggregatesInput[]
+    OR?: RefundWebhookEventScalarWhereWithAggregatesInput[]
+    NOT?: RefundWebhookEventScalarWhereWithAggregatesInput | RefundWebhookEventScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"RefundWebhookEvent"> | bigint | number
+    tenantId?: UuidWithAggregatesFilter<"RefundWebhookEvent"> | string
+    channel?: StringWithAggregatesFilter<"RefundWebhookEvent"> | string
+    eventId?: StringWithAggregatesFilter<"RefundWebhookEvent"> | string
+    payloadFingerprint?: StringWithAggregatesFilter<"RefundWebhookEvent"> | string
+    payload?: JsonWithAggregatesFilter<"RefundWebhookEvent">
+    status?: StringWithAggregatesFilter<"RefundWebhookEvent"> | string
+    attempts?: IntWithAggregatesFilter<"RefundWebhookEvent"> | number
+    nextAttemptAt?: DateTimeWithAggregatesFilter<"RefundWebhookEvent"> | Date | string
+    lastError?: StringNullableWithAggregatesFilter<"RefundWebhookEvent"> | string | null
+    processedAt?: DateTimeNullableWithAggregatesFilter<"RefundWebhookEvent"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"RefundWebhookEvent"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"RefundWebhookEvent"> | Date | string
+  }
+
   export type TenantCreateInput = {
     id?: string
     name: string
@@ -40929,6 +43561,7 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -40952,6 +43585,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -40975,6 +43609,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -40998,6 +43633,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -41047,6 +43683,75 @@ export namespace Prisma {
     settings?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProviderCallbackRouteCreateInput = {
+    id?: string
+    channel: string
+    resourceType: string
+    externalNo: string
+    resourceId: string
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProviderCallbackRoutesInput
+  }
+
+  export type ProviderCallbackRouteUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    channel: string
+    resourceType: string
+    externalNo: string
+    resourceId: string
+    createdAt?: Date | string
+  }
+
+  export type ProviderCallbackRouteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    resourceType?: StringFieldUpdateOperationsInput | string
+    externalNo?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProviderCallbackRoutesNestedInput
+  }
+
+  export type ProviderCallbackRouteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    resourceType?: StringFieldUpdateOperationsInput | string
+    externalNo?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProviderCallbackRouteCreateManyInput = {
+    id?: string
+    tenantId: string
+    channel: string
+    resourceType: string
+    externalNo: string
+    resourceId: string
+    createdAt?: Date | string
+  }
+
+  export type ProviderCallbackRouteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    resourceType?: StringFieldUpdateOperationsInput | string
+    externalNo?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProviderCallbackRouteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    resourceType?: StringFieldUpdateOperationsInput | string
+    externalNo?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CustomerCreateInput = {
@@ -43565,6 +46270,118 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type RefundWebhookEventCreateInput = {
+    id?: bigint | number
+    tenantId: string
+    channel: string
+    eventId: string
+    payloadFingerprint: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    attempts?: number
+    nextAttemptAt?: Date | string
+    lastError?: string | null
+    processedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RefundWebhookEventUncheckedCreateInput = {
+    id?: bigint | number
+    tenantId: string
+    channel: string
+    eventId: string
+    payloadFingerprint: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    attempts?: number
+    nextAttemptAt?: Date | string
+    lastError?: string | null
+    processedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RefundWebhookEventUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    payloadFingerprint?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    attempts?: IntFieldUpdateOperationsInput | number
+    nextAttemptAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastError?: NullableStringFieldUpdateOperationsInput | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundWebhookEventUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    payloadFingerprint?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    attempts?: IntFieldUpdateOperationsInput | number
+    nextAttemptAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastError?: NullableStringFieldUpdateOperationsInput | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundWebhookEventCreateManyInput = {
+    id?: bigint | number
+    tenantId: string
+    channel: string
+    eventId: string
+    payloadFingerprint: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    attempts?: number
+    nextAttemptAt?: Date | string
+    lastError?: string | null
+    processedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RefundWebhookEventUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    payloadFingerprint?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    attempts?: IntFieldUpdateOperationsInput | number
+    nextAttemptAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastError?: NullableStringFieldUpdateOperationsInput | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundWebhookEventUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    eventId?: StringFieldUpdateOperationsInput | string
+    payloadFingerprint?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    attempts?: IntFieldUpdateOperationsInput | number
+    nextAttemptAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastError?: NullableStringFieldUpdateOperationsInput | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UuidFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -43710,6 +46527,12 @@ export namespace Prisma {
     none?: RoleWhereInput
   }
 
+  export type ProviderCallbackRouteListRelationFilter = {
+    every?: ProviderCallbackRouteWhereInput
+    some?: ProviderCallbackRouteWhereInput
+    none?: ProviderCallbackRouteWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -43736,6 +46559,10 @@ export namespace Prisma {
   }
 
   export type RoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProviderCallbackRouteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -43911,6 +46738,42 @@ export namespace Prisma {
   export type TenantScalarRelationFilter = {
     is?: TenantWhereInput
     isNot?: TenantWhereInput
+  }
+
+  export type ProviderCallbackRouteChannelResourceTypeExternalNoCompoundUniqueInput = {
+    channel: string
+    resourceType: string
+    externalNo: string
+  }
+
+  export type ProviderCallbackRouteCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    resourceType?: SortOrder
+    externalNo?: SortOrder
+    resourceId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProviderCallbackRouteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    resourceType?: SortOrder
+    externalNo?: SortOrder
+    resourceId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProviderCallbackRouteMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    resourceType?: SortOrder
+    externalNo?: SortOrder
+    resourceId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type CustomerRefreshSessionListRelationFilter = {
@@ -45652,6 +48515,68 @@ export namespace Prisma {
     attempts?: SortOrder
   }
 
+  export type RefundWebhookEventTenantIdChannelEventIdCompoundUniqueInput = {
+    tenantId: string
+    channel: string
+    eventId: string
+  }
+
+  export type RefundWebhookEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    eventId?: SortOrder
+    payloadFingerprint?: SortOrder
+    payload?: SortOrder
+    status?: SortOrder
+    attempts?: SortOrder
+    nextAttemptAt?: SortOrder
+    lastError?: SortOrder
+    processedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundWebhookEventAvgOrderByAggregateInput = {
+    id?: SortOrder
+    attempts?: SortOrder
+  }
+
+  export type RefundWebhookEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    eventId?: SortOrder
+    payloadFingerprint?: SortOrder
+    status?: SortOrder
+    attempts?: SortOrder
+    nextAttemptAt?: SortOrder
+    lastError?: SortOrder
+    processedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundWebhookEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    eventId?: SortOrder
+    payloadFingerprint?: SortOrder
+    status?: SortOrder
+    attempts?: SortOrder
+    nextAttemptAt?: SortOrder
+    lastError?: SortOrder
+    processedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RefundWebhookEventSumOrderByAggregateInput = {
+    id?: SortOrder
+    attempts?: SortOrder
+  }
+
   export type PlanCreateNestedOneWithoutTenantsInput = {
     create?: XOR<PlanCreateWithoutTenantsInput, PlanUncheckedCreateWithoutTenantsInput>
     connectOrCreate?: PlanCreateOrConnectWithoutTenantsInput
@@ -45706,6 +48631,13 @@ export namespace Prisma {
     connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
   }
 
+  export type ProviderCallbackRouteCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ProviderCallbackRouteCreateWithoutTenantInput, ProviderCallbackRouteUncheckedCreateWithoutTenantInput> | ProviderCallbackRouteCreateWithoutTenantInput[] | ProviderCallbackRouteUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProviderCallbackRouteCreateOrConnectWithoutTenantInput | ProviderCallbackRouteCreateOrConnectWithoutTenantInput[]
+    createMany?: ProviderCallbackRouteCreateManyTenantInputEnvelope
+    connect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+  }
+
   export type SubscriptionUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<SubscriptionCreateWithoutTenantInput, SubscriptionUncheckedCreateWithoutTenantInput> | SubscriptionCreateWithoutTenantInput[] | SubscriptionUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: SubscriptionCreateOrConnectWithoutTenantInput | SubscriptionCreateOrConnectWithoutTenantInput[]
@@ -45746,6 +48678,13 @@ export namespace Prisma {
     connectOrCreate?: RoleCreateOrConnectWithoutTenantInput | RoleCreateOrConnectWithoutTenantInput[]
     createMany?: RoleCreateManyTenantInputEnvelope
     connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+  }
+
+  export type ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ProviderCallbackRouteCreateWithoutTenantInput, ProviderCallbackRouteUncheckedCreateWithoutTenantInput> | ProviderCallbackRouteCreateWithoutTenantInput[] | ProviderCallbackRouteUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProviderCallbackRouteCreateOrConnectWithoutTenantInput | ProviderCallbackRouteCreateOrConnectWithoutTenantInput[]
+    createMany?: ProviderCallbackRouteCreateManyTenantInputEnvelope
+    connect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -45868,6 +48807,20 @@ export namespace Prisma {
     deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
   }
 
+  export type ProviderCallbackRouteUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ProviderCallbackRouteCreateWithoutTenantInput, ProviderCallbackRouteUncheckedCreateWithoutTenantInput> | ProviderCallbackRouteCreateWithoutTenantInput[] | ProviderCallbackRouteUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProviderCallbackRouteCreateOrConnectWithoutTenantInput | ProviderCallbackRouteCreateOrConnectWithoutTenantInput[]
+    upsert?: ProviderCallbackRouteUpsertWithWhereUniqueWithoutTenantInput | ProviderCallbackRouteUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ProviderCallbackRouteCreateManyTenantInputEnvelope
+    set?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    disconnect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    delete?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    connect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    update?: ProviderCallbackRouteUpdateWithWhereUniqueWithoutTenantInput | ProviderCallbackRouteUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ProviderCallbackRouteUpdateManyWithWhereWithoutTenantInput | ProviderCallbackRouteUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ProviderCallbackRouteScalarWhereInput | ProviderCallbackRouteScalarWhereInput[]
+  }
+
   export type SubscriptionUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<SubscriptionCreateWithoutTenantInput, SubscriptionUncheckedCreateWithoutTenantInput> | SubscriptionCreateWithoutTenantInput[] | SubscriptionUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: SubscriptionCreateOrConnectWithoutTenantInput | SubscriptionCreateOrConnectWithoutTenantInput[]
@@ -45950,6 +48903,34 @@ export namespace Prisma {
     update?: RoleUpdateWithWhereUniqueWithoutTenantInput | RoleUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: RoleUpdateManyWithWhereWithoutTenantInput | RoleUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
+  }
+
+  export type ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ProviderCallbackRouteCreateWithoutTenantInput, ProviderCallbackRouteUncheckedCreateWithoutTenantInput> | ProviderCallbackRouteCreateWithoutTenantInput[] | ProviderCallbackRouteUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProviderCallbackRouteCreateOrConnectWithoutTenantInput | ProviderCallbackRouteCreateOrConnectWithoutTenantInput[]
+    upsert?: ProviderCallbackRouteUpsertWithWhereUniqueWithoutTenantInput | ProviderCallbackRouteUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ProviderCallbackRouteCreateManyTenantInputEnvelope
+    set?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    disconnect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    delete?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    connect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+    update?: ProviderCallbackRouteUpdateWithWhereUniqueWithoutTenantInput | ProviderCallbackRouteUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ProviderCallbackRouteUpdateManyWithWhereWithoutTenantInput | ProviderCallbackRouteUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ProviderCallbackRouteScalarWhereInput | ProviderCallbackRouteScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutProviderCallbackRoutesInput = {
+    create?: XOR<TenantCreateWithoutProviderCallbackRoutesInput, TenantUncheckedCreateWithoutProviderCallbackRoutesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutProviderCallbackRoutesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutProviderCallbackRoutesNestedInput = {
+    create?: XOR<TenantCreateWithoutProviderCallbackRoutesInput, TenantUncheckedCreateWithoutProviderCallbackRoutesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutProviderCallbackRoutesInput
+    upsert?: TenantUpsertWithoutProviderCallbackRoutesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutProviderCallbackRoutesInput, TenantUpdateWithoutProviderCallbackRoutesInput>, TenantUncheckedUpdateWithoutProviderCallbackRoutesInput>
   }
 
   export type TenantCreateNestedOneWithoutCustomersInput = {
@@ -48085,6 +51066,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProviderCallbackRouteCreateWithoutTenantInput = {
+    id?: string
+    channel: string
+    resourceType: string
+    externalNo: string
+    resourceId: string
+    createdAt?: Date | string
+  }
+
+  export type ProviderCallbackRouteUncheckedCreateWithoutTenantInput = {
+    id?: string
+    channel: string
+    resourceType: string
+    externalNo: string
+    resourceId: string
+    createdAt?: Date | string
+  }
+
+  export type ProviderCallbackRouteCreateOrConnectWithoutTenantInput = {
+    where: ProviderCallbackRouteWhereUniqueInput
+    create: XOR<ProviderCallbackRouteCreateWithoutTenantInput, ProviderCallbackRouteUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ProviderCallbackRouteCreateManyTenantInputEnvelope = {
+    data: ProviderCallbackRouteCreateManyTenantInput | ProviderCallbackRouteCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PlanUpsertWithoutTenantsInput = {
     update: XOR<PlanUpdateWithoutTenantsInput, PlanUncheckedUpdateWithoutTenantsInput>
     create: XOR<PlanCreateWithoutTenantsInput, PlanUncheckedCreateWithoutTenantsInput>
@@ -48365,6 +51374,143 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Role"> | Date | string
   }
 
+  export type ProviderCallbackRouteUpsertWithWhereUniqueWithoutTenantInput = {
+    where: ProviderCallbackRouteWhereUniqueInput
+    update: XOR<ProviderCallbackRouteUpdateWithoutTenantInput, ProviderCallbackRouteUncheckedUpdateWithoutTenantInput>
+    create: XOR<ProviderCallbackRouteCreateWithoutTenantInput, ProviderCallbackRouteUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ProviderCallbackRouteUpdateWithWhereUniqueWithoutTenantInput = {
+    where: ProviderCallbackRouteWhereUniqueInput
+    data: XOR<ProviderCallbackRouteUpdateWithoutTenantInput, ProviderCallbackRouteUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type ProviderCallbackRouteUpdateManyWithWhereWithoutTenantInput = {
+    where: ProviderCallbackRouteScalarWhereInput
+    data: XOR<ProviderCallbackRouteUpdateManyMutationInput, ProviderCallbackRouteUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type ProviderCallbackRouteScalarWhereInput = {
+    AND?: ProviderCallbackRouteScalarWhereInput | ProviderCallbackRouteScalarWhereInput[]
+    OR?: ProviderCallbackRouteScalarWhereInput[]
+    NOT?: ProviderCallbackRouteScalarWhereInput | ProviderCallbackRouteScalarWhereInput[]
+    id?: UuidFilter<"ProviderCallbackRoute"> | string
+    tenantId?: UuidFilter<"ProviderCallbackRoute"> | string
+    channel?: StringFilter<"ProviderCallbackRoute"> | string
+    resourceType?: StringFilter<"ProviderCallbackRoute"> | string
+    externalNo?: StringFilter<"ProviderCallbackRoute"> | string
+    resourceId?: UuidFilter<"ProviderCallbackRoute"> | string
+    createdAt?: DateTimeFilter<"ProviderCallbackRoute"> | Date | string
+  }
+
+  export type TenantCreateWithoutProviderCallbackRoutesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutProviderCallbackRoutesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutProviderCallbackRoutesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutProviderCallbackRoutesInput, TenantUncheckedCreateWithoutProviderCallbackRoutesInput>
+  }
+
+  export type TenantUpsertWithoutProviderCallbackRoutesInput = {
+    update: XOR<TenantUpdateWithoutProviderCallbackRoutesInput, TenantUncheckedUpdateWithoutProviderCallbackRoutesInput>
+    create: XOR<TenantCreateWithoutProviderCallbackRoutesInput, TenantUncheckedCreateWithoutProviderCallbackRoutesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutProviderCallbackRoutesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutProviderCallbackRoutesInput, TenantUncheckedUpdateWithoutProviderCallbackRoutesInput>
+  }
+
+  export type TenantUpdateWithoutProviderCallbackRoutesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutProviderCallbackRoutesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
   export type TenantCreateWithoutCustomersInput = {
     id?: string
     name: string
@@ -48385,6 +51531,7 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutCustomersInput = {
@@ -48407,6 +51554,7 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutCustomersInput = {
@@ -48471,6 +51619,7 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutCustomersInput = {
@@ -48493,6 +51642,7 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type CustomerRefreshSessionUpsertWithWhereUniqueWithoutCustomerInput = {
@@ -48607,6 +51757,7 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutAdminUsersInput = {
@@ -48629,6 +51780,7 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutAdminUsersInput = {
@@ -48711,6 +51863,7 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutAdminUsersInput = {
@@ -48733,6 +51886,7 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
@@ -48871,6 +52025,7 @@ export namespace Prisma {
     invoices?: InvoiceCreateNestedManyWithoutTenantInput
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutRolesInput = {
@@ -48893,6 +52048,7 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutRolesInput = {
@@ -48967,6 +52123,7 @@ export namespace Prisma {
     invoices?: InvoiceUpdateManyWithoutTenantNestedInput
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutRolesInput = {
@@ -48989,6 +52146,7 @@ export namespace Prisma {
     invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type RolePermissionUpsertWithWhereUniqueWithoutRoleInput = {
@@ -49305,6 +52463,7 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPlanInput = {
@@ -49327,6 +52486,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPlanInput = {
@@ -49455,6 +52615,7 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutSubscriptionsInput = {
@@ -49477,6 +52638,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutSubscriptionsInput = {
@@ -49543,6 +52705,7 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutCurrentSubscriptionInput = {
@@ -49565,6 +52728,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutCurrentSubscriptionInput = {
@@ -49647,6 +52811,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
@@ -49669,6 +52834,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type PlanUpsertWithoutSubscriptionsInput = {
@@ -49747,6 +52913,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutCurrentSubscriptionInput = {
@@ -49769,6 +52936,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type InvoiceUpsertWithWhereUniqueWithoutSubscriptionInput = {
@@ -49807,6 +52975,7 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutUsageMetricsInput = {
@@ -49829,6 +52998,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutUsageMetricsInput = {
@@ -49867,6 +53037,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutUsageMetricsInput = {
@@ -49889,6 +53060,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutInvoicesInput = {
@@ -49911,6 +53083,7 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutInvoicesInput = {
@@ -49933,6 +53106,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutInvoicesInput = {
@@ -50010,6 +53184,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutInvoicesInput = {
@@ -50032,6 +53207,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type SubscriptionUpsertWithoutInvoicesInput = {
@@ -52434,6 +55610,15 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ProviderCallbackRouteCreateManyTenantInput = {
+    id?: string
+    channel: string
+    resourceType: string
+    externalNo: string
+    resourceId: string
+    createdAt?: Date | string
+  }
+
   export type SubscriptionUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -52658,6 +55843,33 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProviderCallbackRouteUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    resourceType?: StringFieldUpdateOperationsInput | string
+    externalNo?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProviderCallbackRouteUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    resourceType?: StringFieldUpdateOperationsInput | string
+    externalNo?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProviderCallbackRouteUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    resourceType?: StringFieldUpdateOperationsInput | string
+    externalNo?: StringFieldUpdateOperationsInput | string
+    resourceId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CustomerRefreshSessionCreateManyCustomerInput = {
     id?: string
     tokenHash: string
@@ -52837,6 +56049,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPlanInput = {
@@ -52859,6 +56072,7 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateManyWithoutPlanInput = {

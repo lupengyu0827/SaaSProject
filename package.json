@@ -1,0 +1,46 @@
+{
+  "name": "saas-platform",
+  "version": "0.1.0",
+  "private": true,
+  "description": "通用型多租户电商 SaaS 平台",
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=10.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "node --env-file=.env ./node_modules/turbo/bin/turbo run dev --env-mode=loose",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "infra:up": "docker compose up -d --wait",
+    "infra:down": "docker compose down",
+    "db:generate": "pnpm --filter @saas/core db:generate",
+    "db:deploy": "prisma migrate deploy --schema db/schema.prisma",
+    "db:seed": "pnpm --filter @saas/core db:seed",
+    "test:e2e": "pnpm --filter @saas/core test:e2e",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.19.3",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^22.18.0",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.5.1",
+    "globals": "^16.3.0",
+    "husky": "^9.1.7",
+    "prettier": "^3.6.2",
+    "prisma": "^6.19.3",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0",
+    "vitest": "^3.2.4"
+  }
+}

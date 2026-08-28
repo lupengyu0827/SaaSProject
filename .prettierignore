@@ -1,0 +1,8 @@
+dist
+coverage
+node_modules
+**/src/generated
+pnpm-lock.yaml
+.kiro
+.trae
+docs/多租户电商SaaS平台架构设计.md

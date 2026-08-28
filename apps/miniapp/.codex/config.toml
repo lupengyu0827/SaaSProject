@@ -1,0 +1,7 @@
+# Codex project-scoped configuration.
+# Codex reads AGENTS.md by default; this raises the size limit for the full uni-app x rule set.
+project_doc_max_bytes = 131072
+
+[mcp_servers.uni-app-x]
+command = "npx"
+args = ["-y", "@dcloudio/uni-app-x-mcp"]

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --color-bg-base: #f8f9fa;
+  --color-bg-surface: #ffffff;
+  --color-accent-primary: #b45309;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-border-subtle: #e2e8f0;
+  --shadow-luxury: 0 8px 24px -4px rgba(15, 23, 42, 0.06);
+  font-family: Inter, 'PingFang SC', system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-bg-base);
+}

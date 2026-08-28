@@ -1,0 +1,20 @@
+packages:
+  - apps/*
+  - packages/*
+  - industry-packages/*
+
+allowBuilds:
+  '@parcel/watcher': true
+  '@prisma/client': true
+  '@prisma/engines': true
+  core-js: true
+  esbuild: true
+  prisma: true
+  vue-demi: true
+
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@parcel/watcher'
+  - core-js
+  - esbuild
+  - vue-demi

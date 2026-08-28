@@ -1,0 +1,17 @@
+{
+  "name": "SaaS Miniapp",
+  "appid": "__UNI__SAAS_MINIAPP",
+  "description": "多租户电商 SaaS 小程序客户端",
+  "versionName": "0.1.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "mp-weixin": {
+    "appid": "wxd081057645c80fe1",
+    "setting": {
+      "urlCheck": false,
+      "es6": true,
+      "minified": true
+    },
+    "usingComponents": true
+  }
+}

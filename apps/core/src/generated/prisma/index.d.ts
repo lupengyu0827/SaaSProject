@@ -89,6 +89,21 @@ export type Invoice = $Result.DefaultSelection<Prisma.$InvoicePayload>
  */
 export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>
 /**
+ * Model DomainEventOutbox
+ * 
+ */
+export type DomainEventOutbox = $Result.DefaultSelection<Prisma.$DomainEventOutboxPayload>
+/**
+ * Model MediaUploadSession
+ * 
+ */
+export type MediaUploadSession = $Result.DefaultSelection<Prisma.$MediaUploadSessionPayload>
+/**
+ * Model MediaAsset
+ * 
+ */
+export type MediaAsset = $Result.DefaultSelection<Prisma.$MediaAssetPayload>
+/**
  * Model TenantProbe
  * 
  */
@@ -114,6 +129,11 @@ export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
  */
 export type ProductVariant = $Result.DefaultSelection<Prisma.$ProductVariantPayload>
 /**
+ * Model ProductImage
+ * 
+ */
+export type ProductImage = $Result.DefaultSelection<Prisma.$ProductImagePayload>
+/**
  * Model Order
  * 
  */
@@ -123,6 +143,16 @@ export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>
  * 
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
+/**
+ * Model PaymentReconciliationRun
+ * 
+ */
+export type PaymentReconciliationRun = $Result.DefaultSelection<Prisma.$PaymentReconciliationRunPayload>
+/**
+ * Model PaymentReconciliationDiscrepancy
+ * 
+ */
+export type PaymentReconciliationDiscrepancy = $Result.DefaultSelection<Prisma.$PaymentReconciliationDiscrepancyPayload>
 /**
  * Model OrderItem
  * 
@@ -438,6 +468,36 @@ export class PrismaClient<
   get auditLog(): Prisma.AuditLogDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.domainEventOutbox`: Exposes CRUD operations for the **DomainEventOutbox** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DomainEventOutboxes
+    * const domainEventOutboxes = await prisma.domainEventOutbox.findMany()
+    * ```
+    */
+  get domainEventOutbox(): Prisma.DomainEventOutboxDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mediaUploadSession`: Exposes CRUD operations for the **MediaUploadSession** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MediaUploadSessions
+    * const mediaUploadSessions = await prisma.mediaUploadSession.findMany()
+    * ```
+    */
+  get mediaUploadSession(): Prisma.MediaUploadSessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.mediaAsset`: Exposes CRUD operations for the **MediaAsset** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MediaAssets
+    * const mediaAssets = await prisma.mediaAsset.findMany()
+    * ```
+    */
+  get mediaAsset(): Prisma.MediaAssetDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.tenantProbe`: Exposes CRUD operations for the **TenantProbe** model.
     * Example usage:
     * ```ts
@@ -488,6 +548,16 @@ export class PrismaClient<
   get productVariant(): Prisma.ProductVariantDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.productImage`: Exposes CRUD operations for the **ProductImage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductImages
+    * const productImages = await prisma.productImage.findMany()
+    * ```
+    */
+  get productImage(): Prisma.ProductImageDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.order`: Exposes CRUD operations for the **Order** model.
     * Example usage:
     * ```ts
@@ -506,6 +576,26 @@ export class PrismaClient<
     * ```
     */
   get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paymentReconciliationRun`: Exposes CRUD operations for the **PaymentReconciliationRun** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PaymentReconciliationRuns
+    * const paymentReconciliationRuns = await prisma.paymentReconciliationRun.findMany()
+    * ```
+    */
+  get paymentReconciliationRun(): Prisma.PaymentReconciliationRunDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paymentReconciliationDiscrepancy`: Exposes CRUD operations for the **PaymentReconciliationDiscrepancy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PaymentReconciliationDiscrepancies
+    * const paymentReconciliationDiscrepancies = await prisma.paymentReconciliationDiscrepancy.findMany()
+    * ```
+    */
+  get paymentReconciliationDiscrepancy(): Prisma.PaymentReconciliationDiscrepancyDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.orderItem`: Exposes CRUD operations for the **OrderItem** model.
@@ -1052,13 +1142,19 @@ export namespace Prisma {
     UsageMetric: 'UsageMetric',
     Invoice: 'Invoice',
     AuditLog: 'AuditLog',
+    DomainEventOutbox: 'DomainEventOutbox',
+    MediaUploadSession: 'MediaUploadSession',
+    MediaAsset: 'MediaAsset',
     TenantProbe: 'TenantProbe',
     Category: 'Category',
     Brand: 'Brand',
     Product: 'Product',
     ProductVariant: 'ProductVariant',
+    ProductImage: 'ProductImage',
     Order: 'Order',
     Payment: 'Payment',
+    PaymentReconciliationRun: 'PaymentReconciliationRun',
+    PaymentReconciliationDiscrepancy: 'PaymentReconciliationDiscrepancy',
     OrderItem: 'OrderItem',
     Shipment: 'Shipment',
     ShipmentItem: 'ShipmentItem',
@@ -1086,7 +1182,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "providerCallbackRoute" | "customer" | "customerRefreshSession" | "adminUser" | "refreshSession" | "role" | "permission" | "rolePermission" | "userRole" | "plan" | "subscription" | "usageMetric" | "invoice" | "auditLog" | "tenantProbe" | "category" | "brand" | "product" | "productVariant" | "order" | "payment" | "orderItem" | "shipment" | "shipmentItem" | "refund" | "refundItem" | "refundTransaction" | "inventoryTransaction" | "paymentWebhookEvent" | "refundWebhookEvent"
+      modelProps: "tenant" | "providerCallbackRoute" | "customer" | "customerRefreshSession" | "adminUser" | "refreshSession" | "role" | "permission" | "rolePermission" | "userRole" | "plan" | "subscription" | "usageMetric" | "invoice" | "auditLog" | "domainEventOutbox" | "mediaUploadSession" | "mediaAsset" | "tenantProbe" | "category" | "brand" | "product" | "productVariant" | "productImage" | "order" | "payment" | "paymentReconciliationRun" | "paymentReconciliationDiscrepancy" | "orderItem" | "shipment" | "shipmentItem" | "refund" | "refundItem" | "refundTransaction" | "inventoryTransaction" | "paymentWebhookEvent" | "refundWebhookEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2200,6 +2296,228 @@ export namespace Prisma {
           }
         }
       }
+      DomainEventOutbox: {
+        payload: Prisma.$DomainEventOutboxPayload<ExtArgs>
+        fields: Prisma.DomainEventOutboxFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DomainEventOutboxFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DomainEventOutboxFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>
+          }
+          findFirst: {
+            args: Prisma.DomainEventOutboxFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DomainEventOutboxFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>
+          }
+          findMany: {
+            args: Prisma.DomainEventOutboxFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>[]
+          }
+          create: {
+            args: Prisma.DomainEventOutboxCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>
+          }
+          createMany: {
+            args: Prisma.DomainEventOutboxCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DomainEventOutboxCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>[]
+          }
+          delete: {
+            args: Prisma.DomainEventOutboxDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>
+          }
+          update: {
+            args: Prisma.DomainEventOutboxUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>
+          }
+          deleteMany: {
+            args: Prisma.DomainEventOutboxDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DomainEventOutboxUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DomainEventOutboxUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>[]
+          }
+          upsert: {
+            args: Prisma.DomainEventOutboxUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DomainEventOutboxPayload>
+          }
+          aggregate: {
+            args: Prisma.DomainEventOutboxAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDomainEventOutbox>
+          }
+          groupBy: {
+            args: Prisma.DomainEventOutboxGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DomainEventOutboxGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DomainEventOutboxCountArgs<ExtArgs>
+            result: $Utils.Optional<DomainEventOutboxCountAggregateOutputType> | number
+          }
+        }
+      }
+      MediaUploadSession: {
+        payload: Prisma.$MediaUploadSessionPayload<ExtArgs>
+        fields: Prisma.MediaUploadSessionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MediaUploadSessionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MediaUploadSessionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>
+          }
+          findFirst: {
+            args: Prisma.MediaUploadSessionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MediaUploadSessionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>
+          }
+          findMany: {
+            args: Prisma.MediaUploadSessionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>[]
+          }
+          create: {
+            args: Prisma.MediaUploadSessionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>
+          }
+          createMany: {
+            args: Prisma.MediaUploadSessionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MediaUploadSessionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>[]
+          }
+          delete: {
+            args: Prisma.MediaUploadSessionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>
+          }
+          update: {
+            args: Prisma.MediaUploadSessionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>
+          }
+          deleteMany: {
+            args: Prisma.MediaUploadSessionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MediaUploadSessionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MediaUploadSessionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>[]
+          }
+          upsert: {
+            args: Prisma.MediaUploadSessionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaUploadSessionPayload>
+          }
+          aggregate: {
+            args: Prisma.MediaUploadSessionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMediaUploadSession>
+          }
+          groupBy: {
+            args: Prisma.MediaUploadSessionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MediaUploadSessionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MediaUploadSessionCountArgs<ExtArgs>
+            result: $Utils.Optional<MediaUploadSessionCountAggregateOutputType> | number
+          }
+        }
+      }
+      MediaAsset: {
+        payload: Prisma.$MediaAssetPayload<ExtArgs>
+        fields: Prisma.MediaAssetFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MediaAssetFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MediaAssetFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>
+          }
+          findFirst: {
+            args: Prisma.MediaAssetFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MediaAssetFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>
+          }
+          findMany: {
+            args: Prisma.MediaAssetFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>[]
+          }
+          create: {
+            args: Prisma.MediaAssetCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>
+          }
+          createMany: {
+            args: Prisma.MediaAssetCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MediaAssetCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>[]
+          }
+          delete: {
+            args: Prisma.MediaAssetDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>
+          }
+          update: {
+            args: Prisma.MediaAssetUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>
+          }
+          deleteMany: {
+            args: Prisma.MediaAssetDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MediaAssetUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MediaAssetUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>[]
+          }
+          upsert: {
+            args: Prisma.MediaAssetUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MediaAssetPayload>
+          }
+          aggregate: {
+            args: Prisma.MediaAssetAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMediaAsset>
+          }
+          groupBy: {
+            args: Prisma.MediaAssetGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MediaAssetGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MediaAssetCountArgs<ExtArgs>
+            result: $Utils.Optional<MediaAssetCountAggregateOutputType> | number
+          }
+        }
+      }
       TenantProbe: {
         payload: Prisma.$TenantProbePayload<ExtArgs>
         fields: Prisma.TenantProbeFieldRefs
@@ -2570,6 +2888,80 @@ export namespace Prisma {
           }
         }
       }
+      ProductImage: {
+        payload: Prisma.$ProductImagePayload<ExtArgs>
+        fields: Prisma.ProductImageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductImageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductImageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          findFirst: {
+            args: Prisma.ProductImageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductImageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          findMany: {
+            args: Prisma.ProductImageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>[]
+          }
+          create: {
+            args: Prisma.ProductImageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          createMany: {
+            args: Prisma.ProductImageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductImageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>[]
+          }
+          delete: {
+            args: Prisma.ProductImageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          update: {
+            args: Prisma.ProductImageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductImageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductImageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductImageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductImageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          aggregate: {
+            args: Prisma.ProductImageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductImage>
+          }
+          groupBy: {
+            args: Prisma.ProductImageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductImageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductImageCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductImageCountAggregateOutputType> | number
+          }
+        }
+      }
       Order: {
         payload: Prisma.$OrderPayload<ExtArgs>
         fields: Prisma.OrderFieldRefs
@@ -2715,6 +3107,154 @@ export namespace Prisma {
           count: {
             args: Prisma.PaymentCountArgs<ExtArgs>
             result: $Utils.Optional<PaymentCountAggregateOutputType> | number
+          }
+        }
+      }
+      PaymentReconciliationRun: {
+        payload: Prisma.$PaymentReconciliationRunPayload<ExtArgs>
+        fields: Prisma.PaymentReconciliationRunFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaymentReconciliationRunFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaymentReconciliationRunFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>
+          }
+          findFirst: {
+            args: Prisma.PaymentReconciliationRunFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaymentReconciliationRunFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>
+          }
+          findMany: {
+            args: Prisma.PaymentReconciliationRunFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>[]
+          }
+          create: {
+            args: Prisma.PaymentReconciliationRunCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>
+          }
+          createMany: {
+            args: Prisma.PaymentReconciliationRunCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaymentReconciliationRunCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>[]
+          }
+          delete: {
+            args: Prisma.PaymentReconciliationRunDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>
+          }
+          update: {
+            args: Prisma.PaymentReconciliationRunUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaymentReconciliationRunDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaymentReconciliationRunUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaymentReconciliationRunUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaymentReconciliationRunUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationRunPayload>
+          }
+          aggregate: {
+            args: Prisma.PaymentReconciliationRunAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaymentReconciliationRun>
+          }
+          groupBy: {
+            args: Prisma.PaymentReconciliationRunGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaymentReconciliationRunGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaymentReconciliationRunCountArgs<ExtArgs>
+            result: $Utils.Optional<PaymentReconciliationRunCountAggregateOutputType> | number
+          }
+        }
+      }
+      PaymentReconciliationDiscrepancy: {
+        payload: Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>
+        fields: Prisma.PaymentReconciliationDiscrepancyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaymentReconciliationDiscrepancyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaymentReconciliationDiscrepancyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>
+          }
+          findFirst: {
+            args: Prisma.PaymentReconciliationDiscrepancyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaymentReconciliationDiscrepancyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>
+          }
+          findMany: {
+            args: Prisma.PaymentReconciliationDiscrepancyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>[]
+          }
+          create: {
+            args: Prisma.PaymentReconciliationDiscrepancyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>
+          }
+          createMany: {
+            args: Prisma.PaymentReconciliationDiscrepancyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaymentReconciliationDiscrepancyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>[]
+          }
+          delete: {
+            args: Prisma.PaymentReconciliationDiscrepancyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>
+          }
+          update: {
+            args: Prisma.PaymentReconciliationDiscrepancyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaymentReconciliationDiscrepancyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaymentReconciliationDiscrepancyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaymentReconciliationDiscrepancyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaymentReconciliationDiscrepancyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentReconciliationDiscrepancyPayload>
+          }
+          aggregate: {
+            args: Prisma.PaymentReconciliationDiscrepancyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaymentReconciliationDiscrepancy>
+          }
+          groupBy: {
+            args: Prisma.PaymentReconciliationDiscrepancyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaymentReconciliationDiscrepancyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaymentReconciliationDiscrepancyCountArgs<ExtArgs>
+            result: $Utils.Optional<PaymentReconciliationDiscrepancyCountAggregateOutputType> | number
           }
         }
       }
@@ -3495,13 +4035,19 @@ export namespace Prisma {
     usageMetric?: UsageMetricOmit
     invoice?: InvoiceOmit
     auditLog?: AuditLogOmit
+    domainEventOutbox?: DomainEventOutboxOmit
+    mediaUploadSession?: MediaUploadSessionOmit
+    mediaAsset?: MediaAssetOmit
     tenantProbe?: TenantProbeOmit
     category?: CategoryOmit
     brand?: BrandOmit
     product?: ProductOmit
     productVariant?: ProductVariantOmit
+    productImage?: ProductImageOmit
     order?: OrderOmit
     payment?: PaymentOmit
+    paymentReconciliationRun?: PaymentReconciliationRunOmit
+    paymentReconciliationDiscrepancy?: PaymentReconciliationDiscrepancyOmit
     orderItem?: OrderItemOmit
     shipment?: ShipmentOmit
     shipmentItem?: ShipmentItemOmit
@@ -3598,6 +4144,8 @@ export namespace Prisma {
     customers: number
     roles: number
     providerCallbackRoutes: number
+    mediaUploadSessions: number
+    mediaAssets: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3608,6 +4156,8 @@ export namespace Prisma {
     customers?: boolean | TenantCountOutputTypeCountCustomersArgs
     roles?: boolean | TenantCountOutputTypeCountRolesArgs
     providerCallbackRoutes?: boolean | TenantCountOutputTypeCountProviderCallbackRoutesArgs
+    mediaUploadSessions?: boolean | TenantCountOutputTypeCountMediaUploadSessionsArgs
+    mediaAssets?: boolean | TenantCountOutputTypeCountMediaAssetsArgs
   }
 
   // Custom InputTypes
@@ -3668,6 +4218,20 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountProviderCallbackRoutesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProviderCallbackRouteWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountMediaUploadSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaUploadSessionWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountMediaAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaAssetWhereInput
   }
 
 
@@ -3961,10 +4525,12 @@ export namespace Prisma {
 
   export type ProductCountOutputType = {
     variants: number
+    images: number
   }
 
   export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     variants?: boolean | ProductCountOutputTypeCountVariantsArgs
+    images?: boolean | ProductCountOutputTypeCountImagesArgs
   }
 
   // Custom InputTypes
@@ -3983,6 +4549,13 @@ export namespace Prisma {
    */
   export type ProductCountOutputTypeCountVariantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductVariantWhereInput
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductImageWhereInput
   }
 
 
@@ -4081,6 +4654,37 @@ export namespace Prisma {
    */
   export type OrderCountOutputTypeCountRefundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RefundWhereInput
+  }
+
+
+  /**
+   * Count Type PaymentReconciliationRunCountOutputType
+   */
+
+  export type PaymentReconciliationRunCountOutputType = {
+    discrepancies: number
+  }
+
+  export type PaymentReconciliationRunCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    discrepancies?: boolean | PaymentReconciliationRunCountOutputTypeCountDiscrepanciesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PaymentReconciliationRunCountOutputType without action
+   */
+  export type PaymentReconciliationRunCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRunCountOutputType
+     */
+    select?: PaymentReconciliationRunCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PaymentReconciliationRunCountOutputType without action
+   */
+  export type PaymentReconciliationRunCountOutputTypeCountDiscrepanciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentReconciliationDiscrepancyWhereInput
   }
 
 
@@ -4440,6 +5044,8 @@ export namespace Prisma {
     customers?: boolean | Tenant$customersArgs<ExtArgs>
     roles?: boolean | Tenant$rolesArgs<ExtArgs>
     providerCallbackRoutes?: boolean | Tenant$providerCallbackRoutesArgs<ExtArgs>
+    mediaUploadSessions?: boolean | Tenant$mediaUploadSessionsArgs<ExtArgs>
+    mediaAssets?: boolean | Tenant$mediaAssetsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -4509,6 +5115,8 @@ export namespace Prisma {
     customers?: boolean | Tenant$customersArgs<ExtArgs>
     roles?: boolean | Tenant$rolesArgs<ExtArgs>
     providerCallbackRoutes?: boolean | Tenant$providerCallbackRoutesArgs<ExtArgs>
+    mediaUploadSessions?: boolean | Tenant$mediaUploadSessionsArgs<ExtArgs>
+    mediaAssets?: boolean | Tenant$mediaAssetsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4532,6 +5140,8 @@ export namespace Prisma {
       customers: Prisma.$CustomerPayload<ExtArgs>[]
       roles: Prisma.$RolePayload<ExtArgs>[]
       providerCallbackRoutes: Prisma.$ProviderCallbackRoutePayload<ExtArgs>[]
+      mediaUploadSessions: Prisma.$MediaUploadSessionPayload<ExtArgs>[]
+      mediaAssets: Prisma.$MediaAssetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4951,6 +5561,8 @@ export namespace Prisma {
     customers<T extends Tenant$customersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$customersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     roles<T extends Tenant$rolesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     providerCallbackRoutes<T extends Tenant$providerCallbackRoutesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$providerCallbackRoutesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mediaUploadSessions<T extends Tenant$mediaUploadSessionsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$mediaUploadSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    mediaAssets<T extends Tenant$mediaAssetsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$mediaAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5593,6 +6205,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProviderCallbackRouteScalarFieldEnum | ProviderCallbackRouteScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.mediaUploadSessions
+   */
+  export type Tenant$mediaUploadSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    where?: MediaUploadSessionWhereInput
+    orderBy?: MediaUploadSessionOrderByWithRelationInput | MediaUploadSessionOrderByWithRelationInput[]
+    cursor?: MediaUploadSessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MediaUploadSessionScalarFieldEnum | MediaUploadSessionScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.mediaAssets
+   */
+  export type Tenant$mediaAssetsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    where?: MediaAssetWhereInput
+    orderBy?: MediaAssetOrderByWithRelationInput | MediaAssetOrderByWithRelationInput[]
+    cursor?: MediaAssetWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MediaAssetScalarFieldEnum | MediaAssetScalarFieldEnum[]
   }
 
   /**
@@ -10078,6 +10738,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     tokenHash: string | null
+    actorType: string | null
     expiresAt: Date | null
     revokedAt: Date | null
     createdAt: Date | null
@@ -10087,6 +10748,7 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     tokenHash: string | null
+    actorType: string | null
     expiresAt: Date | null
     revokedAt: Date | null
     createdAt: Date | null
@@ -10096,6 +10758,7 @@ export namespace Prisma {
     id: number
     userId: number
     tokenHash: number
+    actorType: number
     expiresAt: number
     revokedAt: number
     createdAt: number
@@ -10107,6 +10770,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     tokenHash?: true
+    actorType?: true
     expiresAt?: true
     revokedAt?: true
     createdAt?: true
@@ -10116,6 +10780,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     tokenHash?: true
+    actorType?: true
     expiresAt?: true
     revokedAt?: true
     createdAt?: true
@@ -10125,6 +10790,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     tokenHash?: true
+    actorType?: true
     expiresAt?: true
     revokedAt?: true
     createdAt?: true
@@ -10207,6 +10873,7 @@ export namespace Prisma {
     id: string
     userId: string
     tokenHash: string
+    actorType: string
     expiresAt: Date
     revokedAt: Date | null
     createdAt: Date
@@ -10233,6 +10900,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     tokenHash?: boolean
+    actorType?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     createdAt?: boolean
@@ -10243,6 +10911,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     tokenHash?: boolean
+    actorType?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     createdAt?: boolean
@@ -10253,6 +10922,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     tokenHash?: boolean
+    actorType?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     createdAt?: boolean
@@ -10263,12 +10933,13 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     tokenHash?: boolean
+    actorType?: boolean
     expiresAt?: boolean
     revokedAt?: boolean
     createdAt?: boolean
   }
 
-  export type RefreshSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "tokenHash" | "expiresAt" | "revokedAt" | "createdAt", ExtArgs["result"]["refreshSession"]>
+  export type RefreshSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "tokenHash" | "actorType" | "expiresAt" | "revokedAt" | "createdAt", ExtArgs["result"]["refreshSession"]>
   export type RefreshSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | AdminUserDefaultArgs<ExtArgs>
   }
@@ -10288,6 +10959,7 @@ export namespace Prisma {
       id: string
       userId: string
       tokenHash: string
+      actorType: string
       expiresAt: Date
       revokedAt: Date | null
       createdAt: Date
@@ -10718,6 +11390,7 @@ export namespace Prisma {
     readonly id: FieldRef<"RefreshSession", 'String'>
     readonly userId: FieldRef<"RefreshSession", 'String'>
     readonly tokenHash: FieldRef<"RefreshSession", 'String'>
+    readonly actorType: FieldRef<"RefreshSession", 'String'>
     readonly expiresAt: FieldRef<"RefreshSession", 'DateTime'>
     readonly revokedAt: FieldRef<"RefreshSession", 'DateTime'>
     readonly createdAt: FieldRef<"RefreshSession", 'DateTime'>
@@ -21334,6 +22007,3482 @@ export namespace Prisma {
 
 
   /**
+   * Model DomainEventOutbox
+   */
+
+  export type AggregateDomainEventOutbox = {
+    _count: DomainEventOutboxCountAggregateOutputType | null
+    _min: DomainEventOutboxMinAggregateOutputType | null
+    _max: DomainEventOutboxMaxAggregateOutputType | null
+  }
+
+  export type DomainEventOutboxMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    aggregateType: string | null
+    aggregateId: string | null
+    eventType: string | null
+    occurredAt: Date | null
+    publishedAt: Date | null
+  }
+
+  export type DomainEventOutboxMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    aggregateType: string | null
+    aggregateId: string | null
+    eventType: string | null
+    occurredAt: Date | null
+    publishedAt: Date | null
+  }
+
+  export type DomainEventOutboxCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    aggregateType: number
+    aggregateId: number
+    eventType: number
+    payload: number
+    occurredAt: number
+    publishedAt: number
+    _all: number
+  }
+
+
+  export type DomainEventOutboxMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    aggregateType?: true
+    aggregateId?: true
+    eventType?: true
+    occurredAt?: true
+    publishedAt?: true
+  }
+
+  export type DomainEventOutboxMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    aggregateType?: true
+    aggregateId?: true
+    eventType?: true
+    occurredAt?: true
+    publishedAt?: true
+  }
+
+  export type DomainEventOutboxCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    aggregateType?: true
+    aggregateId?: true
+    eventType?: true
+    payload?: true
+    occurredAt?: true
+    publishedAt?: true
+    _all?: true
+  }
+
+  export type DomainEventOutboxAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DomainEventOutbox to aggregate.
+     */
+    where?: DomainEventOutboxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DomainEventOutboxes to fetch.
+     */
+    orderBy?: DomainEventOutboxOrderByWithRelationInput | DomainEventOutboxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DomainEventOutboxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DomainEventOutboxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DomainEventOutboxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DomainEventOutboxes
+    **/
+    _count?: true | DomainEventOutboxCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DomainEventOutboxMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DomainEventOutboxMaxAggregateInputType
+  }
+
+  export type GetDomainEventOutboxAggregateType<T extends DomainEventOutboxAggregateArgs> = {
+        [P in keyof T & keyof AggregateDomainEventOutbox]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDomainEventOutbox[P]>
+      : GetScalarType<T[P], AggregateDomainEventOutbox[P]>
+  }
+
+
+
+
+  export type DomainEventOutboxGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DomainEventOutboxWhereInput
+    orderBy?: DomainEventOutboxOrderByWithAggregationInput | DomainEventOutboxOrderByWithAggregationInput[]
+    by: DomainEventOutboxScalarFieldEnum[] | DomainEventOutboxScalarFieldEnum
+    having?: DomainEventOutboxScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DomainEventOutboxCountAggregateInputType | true
+    _min?: DomainEventOutboxMinAggregateInputType
+    _max?: DomainEventOutboxMaxAggregateInputType
+  }
+
+  export type DomainEventOutboxGroupByOutputType = {
+    id: string
+    tenantId: string
+    aggregateType: string
+    aggregateId: string
+    eventType: string
+    payload: JsonValue
+    occurredAt: Date
+    publishedAt: Date | null
+    _count: DomainEventOutboxCountAggregateOutputType | null
+    _min: DomainEventOutboxMinAggregateOutputType | null
+    _max: DomainEventOutboxMaxAggregateOutputType | null
+  }
+
+  type GetDomainEventOutboxGroupByPayload<T extends DomainEventOutboxGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DomainEventOutboxGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DomainEventOutboxGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DomainEventOutboxGroupByOutputType[P]>
+            : GetScalarType<T[P], DomainEventOutboxGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DomainEventOutboxSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    aggregateType?: boolean
+    aggregateId?: boolean
+    eventType?: boolean
+    payload?: boolean
+    occurredAt?: boolean
+    publishedAt?: boolean
+  }, ExtArgs["result"]["domainEventOutbox"]>
+
+  export type DomainEventOutboxSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    aggregateType?: boolean
+    aggregateId?: boolean
+    eventType?: boolean
+    payload?: boolean
+    occurredAt?: boolean
+    publishedAt?: boolean
+  }, ExtArgs["result"]["domainEventOutbox"]>
+
+  export type DomainEventOutboxSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    aggregateType?: boolean
+    aggregateId?: boolean
+    eventType?: boolean
+    payload?: boolean
+    occurredAt?: boolean
+    publishedAt?: boolean
+  }, ExtArgs["result"]["domainEventOutbox"]>
+
+  export type DomainEventOutboxSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    aggregateType?: boolean
+    aggregateId?: boolean
+    eventType?: boolean
+    payload?: boolean
+    occurredAt?: boolean
+    publishedAt?: boolean
+  }
+
+  export type DomainEventOutboxOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "aggregateType" | "aggregateId" | "eventType" | "payload" | "occurredAt" | "publishedAt", ExtArgs["result"]["domainEventOutbox"]>
+
+  export type $DomainEventOutboxPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DomainEventOutbox"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      aggregateType: string
+      aggregateId: string
+      eventType: string
+      payload: Prisma.JsonValue
+      occurredAt: Date
+      publishedAt: Date | null
+    }, ExtArgs["result"]["domainEventOutbox"]>
+    composites: {}
+  }
+
+  type DomainEventOutboxGetPayload<S extends boolean | null | undefined | DomainEventOutboxDefaultArgs> = $Result.GetResult<Prisma.$DomainEventOutboxPayload, S>
+
+  type DomainEventOutboxCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DomainEventOutboxFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DomainEventOutboxCountAggregateInputType | true
+    }
+
+  export interface DomainEventOutboxDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DomainEventOutbox'], meta: { name: 'DomainEventOutbox' } }
+    /**
+     * Find zero or one DomainEventOutbox that matches the filter.
+     * @param {DomainEventOutboxFindUniqueArgs} args - Arguments to find a DomainEventOutbox
+     * @example
+     * // Get one DomainEventOutbox
+     * const domainEventOutbox = await prisma.domainEventOutbox.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DomainEventOutboxFindUniqueArgs>(args: SelectSubset<T, DomainEventOutboxFindUniqueArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one DomainEventOutbox that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DomainEventOutboxFindUniqueOrThrowArgs} args - Arguments to find a DomainEventOutbox
+     * @example
+     * // Get one DomainEventOutbox
+     * const domainEventOutbox = await prisma.domainEventOutbox.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DomainEventOutboxFindUniqueOrThrowArgs>(args: SelectSubset<T, DomainEventOutboxFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DomainEventOutbox that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DomainEventOutboxFindFirstArgs} args - Arguments to find a DomainEventOutbox
+     * @example
+     * // Get one DomainEventOutbox
+     * const domainEventOutbox = await prisma.domainEventOutbox.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DomainEventOutboxFindFirstArgs>(args?: SelectSubset<T, DomainEventOutboxFindFirstArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first DomainEventOutbox that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DomainEventOutboxFindFirstOrThrowArgs} args - Arguments to find a DomainEventOutbox
+     * @example
+     * // Get one DomainEventOutbox
+     * const domainEventOutbox = await prisma.domainEventOutbox.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DomainEventOutboxFindFirstOrThrowArgs>(args?: SelectSubset<T, DomainEventOutboxFindFirstOrThrowArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more DomainEventOutboxes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DomainEventOutboxFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DomainEventOutboxes
+     * const domainEventOutboxes = await prisma.domainEventOutbox.findMany()
+     * 
+     * // Get first 10 DomainEventOutboxes
+     * const domainEventOutboxes = await prisma.domainEventOutbox.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const domainEventOutboxWithIdOnly = await prisma.domainEventOutbox.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DomainEventOutboxFindManyArgs>(args?: SelectSubset<T, DomainEventOutboxFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a DomainEventOutbox.
+     * @param {DomainEventOutboxCreateArgs} args - Arguments to create a DomainEventOutbox.
+     * @example
+     * // Create one DomainEventOutbox
+     * const DomainEventOutbox = await prisma.domainEventOutbox.create({
+     *   data: {
+     *     // ... data to create a DomainEventOutbox
+     *   }
+     * })
+     * 
+     */
+    create<T extends DomainEventOutboxCreateArgs>(args: SelectSubset<T, DomainEventOutboxCreateArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many DomainEventOutboxes.
+     * @param {DomainEventOutboxCreateManyArgs} args - Arguments to create many DomainEventOutboxes.
+     * @example
+     * // Create many DomainEventOutboxes
+     * const domainEventOutbox = await prisma.domainEventOutbox.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DomainEventOutboxCreateManyArgs>(args?: SelectSubset<T, DomainEventOutboxCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many DomainEventOutboxes and returns the data saved in the database.
+     * @param {DomainEventOutboxCreateManyAndReturnArgs} args - Arguments to create many DomainEventOutboxes.
+     * @example
+     * // Create many DomainEventOutboxes
+     * const domainEventOutbox = await prisma.domainEventOutbox.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many DomainEventOutboxes and only return the `id`
+     * const domainEventOutboxWithIdOnly = await prisma.domainEventOutbox.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DomainEventOutboxCreateManyAndReturnArgs>(args?: SelectSubset<T, DomainEventOutboxCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a DomainEventOutbox.
+     * @param {DomainEventOutboxDeleteArgs} args - Arguments to delete one DomainEventOutbox.
+     * @example
+     * // Delete one DomainEventOutbox
+     * const DomainEventOutbox = await prisma.domainEventOutbox.delete({
+     *   where: {
+     *     // ... filter to delete one DomainEventOutbox
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DomainEventOutboxDeleteArgs>(args: SelectSubset<T, DomainEventOutboxDeleteArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one DomainEventOutbox.
+     * @param {DomainEventOutboxUpdateArgs} args - Arguments to update one DomainEventOutbox.
+     * @example
+     * // Update one DomainEventOutbox
+     * const domainEventOutbox = await prisma.domainEventOutbox.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DomainEventOutboxUpdateArgs>(args: SelectSubset<T, DomainEventOutboxUpdateArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more DomainEventOutboxes.
+     * @param {DomainEventOutboxDeleteManyArgs} args - Arguments to filter DomainEventOutboxes to delete.
+     * @example
+     * // Delete a few DomainEventOutboxes
+     * const { count } = await prisma.domainEventOutbox.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DomainEventOutboxDeleteManyArgs>(args?: SelectSubset<T, DomainEventOutboxDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DomainEventOutboxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DomainEventOutboxUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DomainEventOutboxes
+     * const domainEventOutbox = await prisma.domainEventOutbox.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DomainEventOutboxUpdateManyArgs>(args: SelectSubset<T, DomainEventOutboxUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DomainEventOutboxes and returns the data updated in the database.
+     * @param {DomainEventOutboxUpdateManyAndReturnArgs} args - Arguments to update many DomainEventOutboxes.
+     * @example
+     * // Update many DomainEventOutboxes
+     * const domainEventOutbox = await prisma.domainEventOutbox.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more DomainEventOutboxes and only return the `id`
+     * const domainEventOutboxWithIdOnly = await prisma.domainEventOutbox.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DomainEventOutboxUpdateManyAndReturnArgs>(args: SelectSubset<T, DomainEventOutboxUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one DomainEventOutbox.
+     * @param {DomainEventOutboxUpsertArgs} args - Arguments to update or create a DomainEventOutbox.
+     * @example
+     * // Update or create a DomainEventOutbox
+     * const domainEventOutbox = await prisma.domainEventOutbox.upsert({
+     *   create: {
+     *     // ... data to create a DomainEventOutbox
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DomainEventOutbox we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DomainEventOutboxUpsertArgs>(args: SelectSubset<T, DomainEventOutboxUpsertArgs<ExtArgs>>): Prisma__DomainEventOutboxClient<$Result.GetResult<Prisma.$DomainEventOutboxPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of DomainEventOutboxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DomainEventOutboxCountArgs} args - Arguments to filter DomainEventOutboxes to count.
+     * @example
+     * // Count the number of DomainEventOutboxes
+     * const count = await prisma.domainEventOutbox.count({
+     *   where: {
+     *     // ... the filter for the DomainEventOutboxes we want to count
+     *   }
+     * })
+    **/
+    count<T extends DomainEventOutboxCountArgs>(
+      args?: Subset<T, DomainEventOutboxCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DomainEventOutboxCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DomainEventOutbox.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DomainEventOutboxAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DomainEventOutboxAggregateArgs>(args: Subset<T, DomainEventOutboxAggregateArgs>): Prisma.PrismaPromise<GetDomainEventOutboxAggregateType<T>>
+
+    /**
+     * Group by DomainEventOutbox.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DomainEventOutboxGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DomainEventOutboxGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DomainEventOutboxGroupByArgs['orderBy'] }
+        : { orderBy?: DomainEventOutboxGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DomainEventOutboxGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDomainEventOutboxGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DomainEventOutbox model
+   */
+  readonly fields: DomainEventOutboxFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DomainEventOutbox.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DomainEventOutboxClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DomainEventOutbox model
+   */
+  interface DomainEventOutboxFieldRefs {
+    readonly id: FieldRef<"DomainEventOutbox", 'String'>
+    readonly tenantId: FieldRef<"DomainEventOutbox", 'String'>
+    readonly aggregateType: FieldRef<"DomainEventOutbox", 'String'>
+    readonly aggregateId: FieldRef<"DomainEventOutbox", 'String'>
+    readonly eventType: FieldRef<"DomainEventOutbox", 'String'>
+    readonly payload: FieldRef<"DomainEventOutbox", 'Json'>
+    readonly occurredAt: FieldRef<"DomainEventOutbox", 'DateTime'>
+    readonly publishedAt: FieldRef<"DomainEventOutbox", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DomainEventOutbox findUnique
+   */
+  export type DomainEventOutboxFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * Filter, which DomainEventOutbox to fetch.
+     */
+    where: DomainEventOutboxWhereUniqueInput
+  }
+
+  /**
+   * DomainEventOutbox findUniqueOrThrow
+   */
+  export type DomainEventOutboxFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * Filter, which DomainEventOutbox to fetch.
+     */
+    where: DomainEventOutboxWhereUniqueInput
+  }
+
+  /**
+   * DomainEventOutbox findFirst
+   */
+  export type DomainEventOutboxFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * Filter, which DomainEventOutbox to fetch.
+     */
+    where?: DomainEventOutboxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DomainEventOutboxes to fetch.
+     */
+    orderBy?: DomainEventOutboxOrderByWithRelationInput | DomainEventOutboxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DomainEventOutboxes.
+     */
+    cursor?: DomainEventOutboxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DomainEventOutboxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DomainEventOutboxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DomainEventOutboxes.
+     */
+    distinct?: DomainEventOutboxScalarFieldEnum | DomainEventOutboxScalarFieldEnum[]
+  }
+
+  /**
+   * DomainEventOutbox findFirstOrThrow
+   */
+  export type DomainEventOutboxFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * Filter, which DomainEventOutbox to fetch.
+     */
+    where?: DomainEventOutboxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DomainEventOutboxes to fetch.
+     */
+    orderBy?: DomainEventOutboxOrderByWithRelationInput | DomainEventOutboxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DomainEventOutboxes.
+     */
+    cursor?: DomainEventOutboxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DomainEventOutboxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DomainEventOutboxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DomainEventOutboxes.
+     */
+    distinct?: DomainEventOutboxScalarFieldEnum | DomainEventOutboxScalarFieldEnum[]
+  }
+
+  /**
+   * DomainEventOutbox findMany
+   */
+  export type DomainEventOutboxFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * Filter, which DomainEventOutboxes to fetch.
+     */
+    where?: DomainEventOutboxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DomainEventOutboxes to fetch.
+     */
+    orderBy?: DomainEventOutboxOrderByWithRelationInput | DomainEventOutboxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DomainEventOutboxes.
+     */
+    cursor?: DomainEventOutboxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DomainEventOutboxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DomainEventOutboxes.
+     */
+    skip?: number
+    distinct?: DomainEventOutboxScalarFieldEnum | DomainEventOutboxScalarFieldEnum[]
+  }
+
+  /**
+   * DomainEventOutbox create
+   */
+  export type DomainEventOutboxCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * The data needed to create a DomainEventOutbox.
+     */
+    data: XOR<DomainEventOutboxCreateInput, DomainEventOutboxUncheckedCreateInput>
+  }
+
+  /**
+   * DomainEventOutbox createMany
+   */
+  export type DomainEventOutboxCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DomainEventOutboxes.
+     */
+    data: DomainEventOutboxCreateManyInput | DomainEventOutboxCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DomainEventOutbox createManyAndReturn
+   */
+  export type DomainEventOutboxCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * The data used to create many DomainEventOutboxes.
+     */
+    data: DomainEventOutboxCreateManyInput | DomainEventOutboxCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DomainEventOutbox update
+   */
+  export type DomainEventOutboxUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * The data needed to update a DomainEventOutbox.
+     */
+    data: XOR<DomainEventOutboxUpdateInput, DomainEventOutboxUncheckedUpdateInput>
+    /**
+     * Choose, which DomainEventOutbox to update.
+     */
+    where: DomainEventOutboxWhereUniqueInput
+  }
+
+  /**
+   * DomainEventOutbox updateMany
+   */
+  export type DomainEventOutboxUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DomainEventOutboxes.
+     */
+    data: XOR<DomainEventOutboxUpdateManyMutationInput, DomainEventOutboxUncheckedUpdateManyInput>
+    /**
+     * Filter which DomainEventOutboxes to update
+     */
+    where?: DomainEventOutboxWhereInput
+    /**
+     * Limit how many DomainEventOutboxes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DomainEventOutbox updateManyAndReturn
+   */
+  export type DomainEventOutboxUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * The data used to update DomainEventOutboxes.
+     */
+    data: XOR<DomainEventOutboxUpdateManyMutationInput, DomainEventOutboxUncheckedUpdateManyInput>
+    /**
+     * Filter which DomainEventOutboxes to update
+     */
+    where?: DomainEventOutboxWhereInput
+    /**
+     * Limit how many DomainEventOutboxes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * DomainEventOutbox upsert
+   */
+  export type DomainEventOutboxUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * The filter to search for the DomainEventOutbox to update in case it exists.
+     */
+    where: DomainEventOutboxWhereUniqueInput
+    /**
+     * In case the DomainEventOutbox found by the `where` argument doesn't exist, create a new DomainEventOutbox with this data.
+     */
+    create: XOR<DomainEventOutboxCreateInput, DomainEventOutboxUncheckedCreateInput>
+    /**
+     * In case the DomainEventOutbox was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DomainEventOutboxUpdateInput, DomainEventOutboxUncheckedUpdateInput>
+  }
+
+  /**
+   * DomainEventOutbox delete
+   */
+  export type DomainEventOutboxDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+    /**
+     * Filter which DomainEventOutbox to delete.
+     */
+    where: DomainEventOutboxWhereUniqueInput
+  }
+
+  /**
+   * DomainEventOutbox deleteMany
+   */
+  export type DomainEventOutboxDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DomainEventOutboxes to delete
+     */
+    where?: DomainEventOutboxWhereInput
+    /**
+     * Limit how many DomainEventOutboxes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * DomainEventOutbox without action
+   */
+  export type DomainEventOutboxDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DomainEventOutbox
+     */
+    select?: DomainEventOutboxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DomainEventOutbox
+     */
+    omit?: DomainEventOutboxOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MediaUploadSession
+   */
+
+  export type AggregateMediaUploadSession = {
+    _count: MediaUploadSessionCountAggregateOutputType | null
+    _avg: MediaUploadSessionAvgAggregateOutputType | null
+    _sum: MediaUploadSessionSumAggregateOutputType | null
+    _min: MediaUploadSessionMinAggregateOutputType | null
+    _max: MediaUploadSessionMaxAggregateOutputType | null
+  }
+
+  export type MediaUploadSessionAvgAggregateOutputType = {
+    sizeBytes: number | null
+  }
+
+  export type MediaUploadSessionSumAggregateOutputType = {
+    sizeBytes: number | null
+  }
+
+  export type MediaUploadSessionMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    actorId: string | null
+    purpose: string | null
+    objectKey: string | null
+    fileName: string | null
+    mimeType: string | null
+    sizeBytes: number | null
+    status: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MediaUploadSessionMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    actorId: string | null
+    purpose: string | null
+    objectKey: string | null
+    fileName: string | null
+    mimeType: string | null
+    sizeBytes: number | null
+    status: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MediaUploadSessionCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    actorId: number
+    purpose: number
+    objectKey: number
+    fileName: number
+    mimeType: number
+    sizeBytes: number
+    status: number
+    expiresAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MediaUploadSessionAvgAggregateInputType = {
+    sizeBytes?: true
+  }
+
+  export type MediaUploadSessionSumAggregateInputType = {
+    sizeBytes?: true
+  }
+
+  export type MediaUploadSessionMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    actorId?: true
+    purpose?: true
+    objectKey?: true
+    fileName?: true
+    mimeType?: true
+    sizeBytes?: true
+    status?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MediaUploadSessionMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    actorId?: true
+    purpose?: true
+    objectKey?: true
+    fileName?: true
+    mimeType?: true
+    sizeBytes?: true
+    status?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MediaUploadSessionCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    actorId?: true
+    purpose?: true
+    objectKey?: true
+    fileName?: true
+    mimeType?: true
+    sizeBytes?: true
+    status?: true
+    expiresAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MediaUploadSessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MediaUploadSession to aggregate.
+     */
+    where?: MediaUploadSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaUploadSessions to fetch.
+     */
+    orderBy?: MediaUploadSessionOrderByWithRelationInput | MediaUploadSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MediaUploadSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaUploadSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaUploadSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MediaUploadSessions
+    **/
+    _count?: true | MediaUploadSessionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MediaUploadSessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MediaUploadSessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MediaUploadSessionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MediaUploadSessionMaxAggregateInputType
+  }
+
+  export type GetMediaUploadSessionAggregateType<T extends MediaUploadSessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateMediaUploadSession]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMediaUploadSession[P]>
+      : GetScalarType<T[P], AggregateMediaUploadSession[P]>
+  }
+
+
+
+
+  export type MediaUploadSessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaUploadSessionWhereInput
+    orderBy?: MediaUploadSessionOrderByWithAggregationInput | MediaUploadSessionOrderByWithAggregationInput[]
+    by: MediaUploadSessionScalarFieldEnum[] | MediaUploadSessionScalarFieldEnum
+    having?: MediaUploadSessionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MediaUploadSessionCountAggregateInputType | true
+    _avg?: MediaUploadSessionAvgAggregateInputType
+    _sum?: MediaUploadSessionSumAggregateInputType
+    _min?: MediaUploadSessionMinAggregateInputType
+    _max?: MediaUploadSessionMaxAggregateInputType
+  }
+
+  export type MediaUploadSessionGroupByOutputType = {
+    id: string
+    tenantId: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status: string
+    expiresAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: MediaUploadSessionCountAggregateOutputType | null
+    _avg: MediaUploadSessionAvgAggregateOutputType | null
+    _sum: MediaUploadSessionSumAggregateOutputType | null
+    _min: MediaUploadSessionMinAggregateOutputType | null
+    _max: MediaUploadSessionMaxAggregateOutputType | null
+  }
+
+  type GetMediaUploadSessionGroupByPayload<T extends MediaUploadSessionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MediaUploadSessionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MediaUploadSessionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MediaUploadSessionGroupByOutputType[P]>
+            : GetScalarType<T[P], MediaUploadSessionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MediaUploadSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    actorId?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    fileName?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    asset?: boolean | MediaUploadSession$assetArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaUploadSession"]>
+
+  export type MediaUploadSessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    actorId?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    fileName?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaUploadSession"]>
+
+  export type MediaUploadSessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    actorId?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    fileName?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaUploadSession"]>
+
+  export type MediaUploadSessionSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    actorId?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    fileName?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    status?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MediaUploadSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "actorId" | "purpose" | "objectKey" | "fileName" | "mimeType" | "sizeBytes" | "status" | "expiresAt" | "createdAt" | "updatedAt", ExtArgs["result"]["mediaUploadSession"]>
+  export type MediaUploadSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    asset?: boolean | MediaUploadSession$assetArgs<ExtArgs>
+  }
+  export type MediaUploadSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type MediaUploadSessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $MediaUploadSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MediaUploadSession"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      asset: Prisma.$MediaAssetPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      actorId: string
+      purpose: string
+      objectKey: string
+      fileName: string
+      mimeType: string
+      sizeBytes: number
+      status: string
+      expiresAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["mediaUploadSession"]>
+    composites: {}
+  }
+
+  type MediaUploadSessionGetPayload<S extends boolean | null | undefined | MediaUploadSessionDefaultArgs> = $Result.GetResult<Prisma.$MediaUploadSessionPayload, S>
+
+  type MediaUploadSessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MediaUploadSessionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MediaUploadSessionCountAggregateInputType | true
+    }
+
+  export interface MediaUploadSessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MediaUploadSession'], meta: { name: 'MediaUploadSession' } }
+    /**
+     * Find zero or one MediaUploadSession that matches the filter.
+     * @param {MediaUploadSessionFindUniqueArgs} args - Arguments to find a MediaUploadSession
+     * @example
+     * // Get one MediaUploadSession
+     * const mediaUploadSession = await prisma.mediaUploadSession.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MediaUploadSessionFindUniqueArgs>(args: SelectSubset<T, MediaUploadSessionFindUniqueArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MediaUploadSession that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MediaUploadSessionFindUniqueOrThrowArgs} args - Arguments to find a MediaUploadSession
+     * @example
+     * // Get one MediaUploadSession
+     * const mediaUploadSession = await prisma.mediaUploadSession.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MediaUploadSessionFindUniqueOrThrowArgs>(args: SelectSubset<T, MediaUploadSessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MediaUploadSession that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUploadSessionFindFirstArgs} args - Arguments to find a MediaUploadSession
+     * @example
+     * // Get one MediaUploadSession
+     * const mediaUploadSession = await prisma.mediaUploadSession.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MediaUploadSessionFindFirstArgs>(args?: SelectSubset<T, MediaUploadSessionFindFirstArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MediaUploadSession that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUploadSessionFindFirstOrThrowArgs} args - Arguments to find a MediaUploadSession
+     * @example
+     * // Get one MediaUploadSession
+     * const mediaUploadSession = await prisma.mediaUploadSession.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MediaUploadSessionFindFirstOrThrowArgs>(args?: SelectSubset<T, MediaUploadSessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MediaUploadSessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUploadSessionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MediaUploadSessions
+     * const mediaUploadSessions = await prisma.mediaUploadSession.findMany()
+     * 
+     * // Get first 10 MediaUploadSessions
+     * const mediaUploadSessions = await prisma.mediaUploadSession.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mediaUploadSessionWithIdOnly = await prisma.mediaUploadSession.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MediaUploadSessionFindManyArgs>(args?: SelectSubset<T, MediaUploadSessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MediaUploadSession.
+     * @param {MediaUploadSessionCreateArgs} args - Arguments to create a MediaUploadSession.
+     * @example
+     * // Create one MediaUploadSession
+     * const MediaUploadSession = await prisma.mediaUploadSession.create({
+     *   data: {
+     *     // ... data to create a MediaUploadSession
+     *   }
+     * })
+     * 
+     */
+    create<T extends MediaUploadSessionCreateArgs>(args: SelectSubset<T, MediaUploadSessionCreateArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MediaUploadSessions.
+     * @param {MediaUploadSessionCreateManyArgs} args - Arguments to create many MediaUploadSessions.
+     * @example
+     * // Create many MediaUploadSessions
+     * const mediaUploadSession = await prisma.mediaUploadSession.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MediaUploadSessionCreateManyArgs>(args?: SelectSubset<T, MediaUploadSessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MediaUploadSessions and returns the data saved in the database.
+     * @param {MediaUploadSessionCreateManyAndReturnArgs} args - Arguments to create many MediaUploadSessions.
+     * @example
+     * // Create many MediaUploadSessions
+     * const mediaUploadSession = await prisma.mediaUploadSession.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MediaUploadSessions and only return the `id`
+     * const mediaUploadSessionWithIdOnly = await prisma.mediaUploadSession.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MediaUploadSessionCreateManyAndReturnArgs>(args?: SelectSubset<T, MediaUploadSessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MediaUploadSession.
+     * @param {MediaUploadSessionDeleteArgs} args - Arguments to delete one MediaUploadSession.
+     * @example
+     * // Delete one MediaUploadSession
+     * const MediaUploadSession = await prisma.mediaUploadSession.delete({
+     *   where: {
+     *     // ... filter to delete one MediaUploadSession
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MediaUploadSessionDeleteArgs>(args: SelectSubset<T, MediaUploadSessionDeleteArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MediaUploadSession.
+     * @param {MediaUploadSessionUpdateArgs} args - Arguments to update one MediaUploadSession.
+     * @example
+     * // Update one MediaUploadSession
+     * const mediaUploadSession = await prisma.mediaUploadSession.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MediaUploadSessionUpdateArgs>(args: SelectSubset<T, MediaUploadSessionUpdateArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MediaUploadSessions.
+     * @param {MediaUploadSessionDeleteManyArgs} args - Arguments to filter MediaUploadSessions to delete.
+     * @example
+     * // Delete a few MediaUploadSessions
+     * const { count } = await prisma.mediaUploadSession.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MediaUploadSessionDeleteManyArgs>(args?: SelectSubset<T, MediaUploadSessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MediaUploadSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUploadSessionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MediaUploadSessions
+     * const mediaUploadSession = await prisma.mediaUploadSession.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MediaUploadSessionUpdateManyArgs>(args: SelectSubset<T, MediaUploadSessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MediaUploadSessions and returns the data updated in the database.
+     * @param {MediaUploadSessionUpdateManyAndReturnArgs} args - Arguments to update many MediaUploadSessions.
+     * @example
+     * // Update many MediaUploadSessions
+     * const mediaUploadSession = await prisma.mediaUploadSession.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MediaUploadSessions and only return the `id`
+     * const mediaUploadSessionWithIdOnly = await prisma.mediaUploadSession.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MediaUploadSessionUpdateManyAndReturnArgs>(args: SelectSubset<T, MediaUploadSessionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MediaUploadSession.
+     * @param {MediaUploadSessionUpsertArgs} args - Arguments to update or create a MediaUploadSession.
+     * @example
+     * // Update or create a MediaUploadSession
+     * const mediaUploadSession = await prisma.mediaUploadSession.upsert({
+     *   create: {
+     *     // ... data to create a MediaUploadSession
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MediaUploadSession we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MediaUploadSessionUpsertArgs>(args: SelectSubset<T, MediaUploadSessionUpsertArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MediaUploadSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUploadSessionCountArgs} args - Arguments to filter MediaUploadSessions to count.
+     * @example
+     * // Count the number of MediaUploadSessions
+     * const count = await prisma.mediaUploadSession.count({
+     *   where: {
+     *     // ... the filter for the MediaUploadSessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends MediaUploadSessionCountArgs>(
+      args?: Subset<T, MediaUploadSessionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MediaUploadSessionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MediaUploadSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUploadSessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MediaUploadSessionAggregateArgs>(args: Subset<T, MediaUploadSessionAggregateArgs>): Prisma.PrismaPromise<GetMediaUploadSessionAggregateType<T>>
+
+    /**
+     * Group by MediaUploadSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaUploadSessionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MediaUploadSessionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MediaUploadSessionGroupByArgs['orderBy'] }
+        : { orderBy?: MediaUploadSessionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MediaUploadSessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMediaUploadSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MediaUploadSession model
+   */
+  readonly fields: MediaUploadSessionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MediaUploadSession.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MediaUploadSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    asset<T extends MediaUploadSession$assetArgs<ExtArgs> = {}>(args?: Subset<T, MediaUploadSession$assetArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MediaUploadSession model
+   */
+  interface MediaUploadSessionFieldRefs {
+    readonly id: FieldRef<"MediaUploadSession", 'String'>
+    readonly tenantId: FieldRef<"MediaUploadSession", 'String'>
+    readonly actorId: FieldRef<"MediaUploadSession", 'String'>
+    readonly purpose: FieldRef<"MediaUploadSession", 'String'>
+    readonly objectKey: FieldRef<"MediaUploadSession", 'String'>
+    readonly fileName: FieldRef<"MediaUploadSession", 'String'>
+    readonly mimeType: FieldRef<"MediaUploadSession", 'String'>
+    readonly sizeBytes: FieldRef<"MediaUploadSession", 'Int'>
+    readonly status: FieldRef<"MediaUploadSession", 'String'>
+    readonly expiresAt: FieldRef<"MediaUploadSession", 'DateTime'>
+    readonly createdAt: FieldRef<"MediaUploadSession", 'DateTime'>
+    readonly updatedAt: FieldRef<"MediaUploadSession", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MediaUploadSession findUnique
+   */
+  export type MediaUploadSessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaUploadSession to fetch.
+     */
+    where: MediaUploadSessionWhereUniqueInput
+  }
+
+  /**
+   * MediaUploadSession findUniqueOrThrow
+   */
+  export type MediaUploadSessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaUploadSession to fetch.
+     */
+    where: MediaUploadSessionWhereUniqueInput
+  }
+
+  /**
+   * MediaUploadSession findFirst
+   */
+  export type MediaUploadSessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaUploadSession to fetch.
+     */
+    where?: MediaUploadSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaUploadSessions to fetch.
+     */
+    orderBy?: MediaUploadSessionOrderByWithRelationInput | MediaUploadSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MediaUploadSessions.
+     */
+    cursor?: MediaUploadSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaUploadSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaUploadSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MediaUploadSessions.
+     */
+    distinct?: MediaUploadSessionScalarFieldEnum | MediaUploadSessionScalarFieldEnum[]
+  }
+
+  /**
+   * MediaUploadSession findFirstOrThrow
+   */
+  export type MediaUploadSessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaUploadSession to fetch.
+     */
+    where?: MediaUploadSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaUploadSessions to fetch.
+     */
+    orderBy?: MediaUploadSessionOrderByWithRelationInput | MediaUploadSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MediaUploadSessions.
+     */
+    cursor?: MediaUploadSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaUploadSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaUploadSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MediaUploadSessions.
+     */
+    distinct?: MediaUploadSessionScalarFieldEnum | MediaUploadSessionScalarFieldEnum[]
+  }
+
+  /**
+   * MediaUploadSession findMany
+   */
+  export type MediaUploadSessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaUploadSessions to fetch.
+     */
+    where?: MediaUploadSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaUploadSessions to fetch.
+     */
+    orderBy?: MediaUploadSessionOrderByWithRelationInput | MediaUploadSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MediaUploadSessions.
+     */
+    cursor?: MediaUploadSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaUploadSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaUploadSessions.
+     */
+    skip?: number
+    distinct?: MediaUploadSessionScalarFieldEnum | MediaUploadSessionScalarFieldEnum[]
+  }
+
+  /**
+   * MediaUploadSession create
+   */
+  export type MediaUploadSessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MediaUploadSession.
+     */
+    data: XOR<MediaUploadSessionCreateInput, MediaUploadSessionUncheckedCreateInput>
+  }
+
+  /**
+   * MediaUploadSession createMany
+   */
+  export type MediaUploadSessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MediaUploadSessions.
+     */
+    data: MediaUploadSessionCreateManyInput | MediaUploadSessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MediaUploadSession createManyAndReturn
+   */
+  export type MediaUploadSessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * The data used to create many MediaUploadSessions.
+     */
+    data: MediaUploadSessionCreateManyInput | MediaUploadSessionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MediaUploadSession update
+   */
+  export type MediaUploadSessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MediaUploadSession.
+     */
+    data: XOR<MediaUploadSessionUpdateInput, MediaUploadSessionUncheckedUpdateInput>
+    /**
+     * Choose, which MediaUploadSession to update.
+     */
+    where: MediaUploadSessionWhereUniqueInput
+  }
+
+  /**
+   * MediaUploadSession updateMany
+   */
+  export type MediaUploadSessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MediaUploadSessions.
+     */
+    data: XOR<MediaUploadSessionUpdateManyMutationInput, MediaUploadSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which MediaUploadSessions to update
+     */
+    where?: MediaUploadSessionWhereInput
+    /**
+     * Limit how many MediaUploadSessions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MediaUploadSession updateManyAndReturn
+   */
+  export type MediaUploadSessionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * The data used to update MediaUploadSessions.
+     */
+    data: XOR<MediaUploadSessionUpdateManyMutationInput, MediaUploadSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which MediaUploadSessions to update
+     */
+    where?: MediaUploadSessionWhereInput
+    /**
+     * Limit how many MediaUploadSessions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MediaUploadSession upsert
+   */
+  export type MediaUploadSessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MediaUploadSession to update in case it exists.
+     */
+    where: MediaUploadSessionWhereUniqueInput
+    /**
+     * In case the MediaUploadSession found by the `where` argument doesn't exist, create a new MediaUploadSession with this data.
+     */
+    create: XOR<MediaUploadSessionCreateInput, MediaUploadSessionUncheckedCreateInput>
+    /**
+     * In case the MediaUploadSession was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MediaUploadSessionUpdateInput, MediaUploadSessionUncheckedUpdateInput>
+  }
+
+  /**
+   * MediaUploadSession delete
+   */
+  export type MediaUploadSessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+    /**
+     * Filter which MediaUploadSession to delete.
+     */
+    where: MediaUploadSessionWhereUniqueInput
+  }
+
+  /**
+   * MediaUploadSession deleteMany
+   */
+  export type MediaUploadSessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MediaUploadSessions to delete
+     */
+    where?: MediaUploadSessionWhereInput
+    /**
+     * Limit how many MediaUploadSessions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MediaUploadSession.asset
+   */
+  export type MediaUploadSession$assetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    where?: MediaAssetWhereInput
+  }
+
+  /**
+   * MediaUploadSession without action
+   */
+  export type MediaUploadSessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaUploadSession
+     */
+    select?: MediaUploadSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaUploadSession
+     */
+    omit?: MediaUploadSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaUploadSessionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MediaAsset
+   */
+
+  export type AggregateMediaAsset = {
+    _count: MediaAssetCountAggregateOutputType | null
+    _avg: MediaAssetAvgAggregateOutputType | null
+    _sum: MediaAssetSumAggregateOutputType | null
+    _min: MediaAssetMinAggregateOutputType | null
+    _max: MediaAssetMaxAggregateOutputType | null
+  }
+
+  export type MediaAssetAvgAggregateOutputType = {
+    sizeBytes: number | null
+  }
+
+  export type MediaAssetSumAggregateOutputType = {
+    sizeBytes: number | null
+  }
+
+  export type MediaAssetMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    uploadSessionId: string | null
+    createdBy: string | null
+    purpose: string | null
+    objectKey: string | null
+    mimeType: string | null
+    sizeBytes: number | null
+    sha256: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    purgedAt: Date | null
+  }
+
+  export type MediaAssetMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    uploadSessionId: string | null
+    createdBy: string | null
+    purpose: string | null
+    objectKey: string | null
+    mimeType: string | null
+    sizeBytes: number | null
+    sha256: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+    purgedAt: Date | null
+  }
+
+  export type MediaAssetCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    uploadSessionId: number
+    createdBy: number
+    purpose: number
+    objectKey: number
+    mimeType: number
+    sizeBytes: number
+    sha256: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    purgedAt: number
+    _all: number
+  }
+
+
+  export type MediaAssetAvgAggregateInputType = {
+    sizeBytes?: true
+  }
+
+  export type MediaAssetSumAggregateInputType = {
+    sizeBytes?: true
+  }
+
+  export type MediaAssetMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    uploadSessionId?: true
+    createdBy?: true
+    purpose?: true
+    objectKey?: true
+    mimeType?: true
+    sizeBytes?: true
+    sha256?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    purgedAt?: true
+  }
+
+  export type MediaAssetMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    uploadSessionId?: true
+    createdBy?: true
+    purpose?: true
+    objectKey?: true
+    mimeType?: true
+    sizeBytes?: true
+    sha256?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    purgedAt?: true
+  }
+
+  export type MediaAssetCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    uploadSessionId?: true
+    createdBy?: true
+    purpose?: true
+    objectKey?: true
+    mimeType?: true
+    sizeBytes?: true
+    sha256?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    purgedAt?: true
+    _all?: true
+  }
+
+  export type MediaAssetAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MediaAsset to aggregate.
+     */
+    where?: MediaAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaAssets to fetch.
+     */
+    orderBy?: MediaAssetOrderByWithRelationInput | MediaAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MediaAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MediaAssets
+    **/
+    _count?: true | MediaAssetCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MediaAssetAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MediaAssetSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MediaAssetMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MediaAssetMaxAggregateInputType
+  }
+
+  export type GetMediaAssetAggregateType<T extends MediaAssetAggregateArgs> = {
+        [P in keyof T & keyof AggregateMediaAsset]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMediaAsset[P]>
+      : GetScalarType<T[P], AggregateMediaAsset[P]>
+  }
+
+
+
+
+  export type MediaAssetGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MediaAssetWhereInput
+    orderBy?: MediaAssetOrderByWithAggregationInput | MediaAssetOrderByWithAggregationInput[]
+    by: MediaAssetScalarFieldEnum[] | MediaAssetScalarFieldEnum
+    having?: MediaAssetScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MediaAssetCountAggregateInputType | true
+    _avg?: MediaAssetAvgAggregateInputType
+    _sum?: MediaAssetSumAggregateInputType
+    _min?: MediaAssetMinAggregateInputType
+    _max?: MediaAssetMaxAggregateInputType
+  }
+
+  export type MediaAssetGroupByOutputType = {
+    id: string
+    tenantId: string
+    uploadSessionId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    purgedAt: Date | null
+    _count: MediaAssetCountAggregateOutputType | null
+    _avg: MediaAssetAvgAggregateOutputType | null
+    _sum: MediaAssetSumAggregateOutputType | null
+    _min: MediaAssetMinAggregateOutputType | null
+    _max: MediaAssetMaxAggregateOutputType | null
+  }
+
+  type GetMediaAssetGroupByPayload<T extends MediaAssetGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MediaAssetGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MediaAssetGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MediaAssetGroupByOutputType[P]>
+            : GetScalarType<T[P], MediaAssetGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MediaAssetSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    uploadSessionId?: boolean
+    createdBy?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    sha256?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    purgedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
+    productImage?: boolean | MediaAsset$productImageArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaAsset"]>
+
+  export type MediaAssetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    uploadSessionId?: boolean
+    createdBy?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    sha256?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    purgedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaAsset"]>
+
+  export type MediaAssetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    uploadSessionId?: boolean
+    createdBy?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    sha256?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    purgedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["mediaAsset"]>
+
+  export type MediaAssetSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    uploadSessionId?: boolean
+    createdBy?: boolean
+    purpose?: boolean
+    objectKey?: boolean
+    mimeType?: boolean
+    sizeBytes?: boolean
+    sha256?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    purgedAt?: boolean
+  }
+
+  export type MediaAssetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "uploadSessionId" | "createdBy" | "purpose" | "objectKey" | "mimeType" | "sizeBytes" | "sha256" | "status" | "createdAt" | "updatedAt" | "deletedAt" | "purgedAt", ExtArgs["result"]["mediaAsset"]>
+  export type MediaAssetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
+    productImage?: boolean | MediaAsset$productImageArgs<ExtArgs>
+  }
+  export type MediaAssetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
+  }
+  export type MediaAssetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
+  }
+
+  export type $MediaAssetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MediaAsset"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      uploadSession: Prisma.$MediaUploadSessionPayload<ExtArgs>
+      productImage: Prisma.$ProductImagePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      uploadSessionId: string
+      createdBy: string
+      purpose: string
+      objectKey: string
+      mimeType: string
+      sizeBytes: number
+      sha256: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+      purgedAt: Date | null
+    }, ExtArgs["result"]["mediaAsset"]>
+    composites: {}
+  }
+
+  type MediaAssetGetPayload<S extends boolean | null | undefined | MediaAssetDefaultArgs> = $Result.GetResult<Prisma.$MediaAssetPayload, S>
+
+  type MediaAssetCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MediaAssetFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MediaAssetCountAggregateInputType | true
+    }
+
+  export interface MediaAssetDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MediaAsset'], meta: { name: 'MediaAsset' } }
+    /**
+     * Find zero or one MediaAsset that matches the filter.
+     * @param {MediaAssetFindUniqueArgs} args - Arguments to find a MediaAsset
+     * @example
+     * // Get one MediaAsset
+     * const mediaAsset = await prisma.mediaAsset.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MediaAssetFindUniqueArgs>(args: SelectSubset<T, MediaAssetFindUniqueArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MediaAsset that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MediaAssetFindUniqueOrThrowArgs} args - Arguments to find a MediaAsset
+     * @example
+     * // Get one MediaAsset
+     * const mediaAsset = await prisma.mediaAsset.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MediaAssetFindUniqueOrThrowArgs>(args: SelectSubset<T, MediaAssetFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MediaAsset that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAssetFindFirstArgs} args - Arguments to find a MediaAsset
+     * @example
+     * // Get one MediaAsset
+     * const mediaAsset = await prisma.mediaAsset.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MediaAssetFindFirstArgs>(args?: SelectSubset<T, MediaAssetFindFirstArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MediaAsset that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAssetFindFirstOrThrowArgs} args - Arguments to find a MediaAsset
+     * @example
+     * // Get one MediaAsset
+     * const mediaAsset = await prisma.mediaAsset.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MediaAssetFindFirstOrThrowArgs>(args?: SelectSubset<T, MediaAssetFindFirstOrThrowArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MediaAssets that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAssetFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MediaAssets
+     * const mediaAssets = await prisma.mediaAsset.findMany()
+     * 
+     * // Get first 10 MediaAssets
+     * const mediaAssets = await prisma.mediaAsset.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const mediaAssetWithIdOnly = await prisma.mediaAsset.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MediaAssetFindManyArgs>(args?: SelectSubset<T, MediaAssetFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MediaAsset.
+     * @param {MediaAssetCreateArgs} args - Arguments to create a MediaAsset.
+     * @example
+     * // Create one MediaAsset
+     * const MediaAsset = await prisma.mediaAsset.create({
+     *   data: {
+     *     // ... data to create a MediaAsset
+     *   }
+     * })
+     * 
+     */
+    create<T extends MediaAssetCreateArgs>(args: SelectSubset<T, MediaAssetCreateArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MediaAssets.
+     * @param {MediaAssetCreateManyArgs} args - Arguments to create many MediaAssets.
+     * @example
+     * // Create many MediaAssets
+     * const mediaAsset = await prisma.mediaAsset.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MediaAssetCreateManyArgs>(args?: SelectSubset<T, MediaAssetCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MediaAssets and returns the data saved in the database.
+     * @param {MediaAssetCreateManyAndReturnArgs} args - Arguments to create many MediaAssets.
+     * @example
+     * // Create many MediaAssets
+     * const mediaAsset = await prisma.mediaAsset.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MediaAssets and only return the `id`
+     * const mediaAssetWithIdOnly = await prisma.mediaAsset.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MediaAssetCreateManyAndReturnArgs>(args?: SelectSubset<T, MediaAssetCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MediaAsset.
+     * @param {MediaAssetDeleteArgs} args - Arguments to delete one MediaAsset.
+     * @example
+     * // Delete one MediaAsset
+     * const MediaAsset = await prisma.mediaAsset.delete({
+     *   where: {
+     *     // ... filter to delete one MediaAsset
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MediaAssetDeleteArgs>(args: SelectSubset<T, MediaAssetDeleteArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MediaAsset.
+     * @param {MediaAssetUpdateArgs} args - Arguments to update one MediaAsset.
+     * @example
+     * // Update one MediaAsset
+     * const mediaAsset = await prisma.mediaAsset.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MediaAssetUpdateArgs>(args: SelectSubset<T, MediaAssetUpdateArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MediaAssets.
+     * @param {MediaAssetDeleteManyArgs} args - Arguments to filter MediaAssets to delete.
+     * @example
+     * // Delete a few MediaAssets
+     * const { count } = await prisma.mediaAsset.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MediaAssetDeleteManyArgs>(args?: SelectSubset<T, MediaAssetDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MediaAssets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAssetUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MediaAssets
+     * const mediaAsset = await prisma.mediaAsset.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MediaAssetUpdateManyArgs>(args: SelectSubset<T, MediaAssetUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MediaAssets and returns the data updated in the database.
+     * @param {MediaAssetUpdateManyAndReturnArgs} args - Arguments to update many MediaAssets.
+     * @example
+     * // Update many MediaAssets
+     * const mediaAsset = await prisma.mediaAsset.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MediaAssets and only return the `id`
+     * const mediaAssetWithIdOnly = await prisma.mediaAsset.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MediaAssetUpdateManyAndReturnArgs>(args: SelectSubset<T, MediaAssetUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MediaAsset.
+     * @param {MediaAssetUpsertArgs} args - Arguments to update or create a MediaAsset.
+     * @example
+     * // Update or create a MediaAsset
+     * const mediaAsset = await prisma.mediaAsset.upsert({
+     *   create: {
+     *     // ... data to create a MediaAsset
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MediaAsset we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MediaAssetUpsertArgs>(args: SelectSubset<T, MediaAssetUpsertArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MediaAssets.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAssetCountArgs} args - Arguments to filter MediaAssets to count.
+     * @example
+     * // Count the number of MediaAssets
+     * const count = await prisma.mediaAsset.count({
+     *   where: {
+     *     // ... the filter for the MediaAssets we want to count
+     *   }
+     * })
+    **/
+    count<T extends MediaAssetCountArgs>(
+      args?: Subset<T, MediaAssetCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MediaAssetCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MediaAsset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAssetAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MediaAssetAggregateArgs>(args: Subset<T, MediaAssetAggregateArgs>): Prisma.PrismaPromise<GetMediaAssetAggregateType<T>>
+
+    /**
+     * Group by MediaAsset.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MediaAssetGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MediaAssetGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MediaAssetGroupByArgs['orderBy'] }
+        : { orderBy?: MediaAssetGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MediaAssetGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMediaAssetGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MediaAsset model
+   */
+  readonly fields: MediaAssetFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MediaAsset.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MediaAssetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    uploadSession<T extends MediaUploadSessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MediaUploadSessionDefaultArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    productImage<T extends MediaAsset$productImageArgs<ExtArgs> = {}>(args?: Subset<T, MediaAsset$productImageArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MediaAsset model
+   */
+  interface MediaAssetFieldRefs {
+    readonly id: FieldRef<"MediaAsset", 'String'>
+    readonly tenantId: FieldRef<"MediaAsset", 'String'>
+    readonly uploadSessionId: FieldRef<"MediaAsset", 'String'>
+    readonly createdBy: FieldRef<"MediaAsset", 'String'>
+    readonly purpose: FieldRef<"MediaAsset", 'String'>
+    readonly objectKey: FieldRef<"MediaAsset", 'String'>
+    readonly mimeType: FieldRef<"MediaAsset", 'String'>
+    readonly sizeBytes: FieldRef<"MediaAsset", 'Int'>
+    readonly sha256: FieldRef<"MediaAsset", 'String'>
+    readonly status: FieldRef<"MediaAsset", 'String'>
+    readonly createdAt: FieldRef<"MediaAsset", 'DateTime'>
+    readonly updatedAt: FieldRef<"MediaAsset", 'DateTime'>
+    readonly deletedAt: FieldRef<"MediaAsset", 'DateTime'>
+    readonly purgedAt: FieldRef<"MediaAsset", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MediaAsset findUnique
+   */
+  export type MediaAssetFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaAsset to fetch.
+     */
+    where: MediaAssetWhereUniqueInput
+  }
+
+  /**
+   * MediaAsset findUniqueOrThrow
+   */
+  export type MediaAssetFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaAsset to fetch.
+     */
+    where: MediaAssetWhereUniqueInput
+  }
+
+  /**
+   * MediaAsset findFirst
+   */
+  export type MediaAssetFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaAsset to fetch.
+     */
+    where?: MediaAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaAssets to fetch.
+     */
+    orderBy?: MediaAssetOrderByWithRelationInput | MediaAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MediaAssets.
+     */
+    cursor?: MediaAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MediaAssets.
+     */
+    distinct?: MediaAssetScalarFieldEnum | MediaAssetScalarFieldEnum[]
+  }
+
+  /**
+   * MediaAsset findFirstOrThrow
+   */
+  export type MediaAssetFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaAsset to fetch.
+     */
+    where?: MediaAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaAssets to fetch.
+     */
+    orderBy?: MediaAssetOrderByWithRelationInput | MediaAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MediaAssets.
+     */
+    cursor?: MediaAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaAssets.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MediaAssets.
+     */
+    distinct?: MediaAssetScalarFieldEnum | MediaAssetScalarFieldEnum[]
+  }
+
+  /**
+   * MediaAsset findMany
+   */
+  export type MediaAssetFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * Filter, which MediaAssets to fetch.
+     */
+    where?: MediaAssetWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MediaAssets to fetch.
+     */
+    orderBy?: MediaAssetOrderByWithRelationInput | MediaAssetOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MediaAssets.
+     */
+    cursor?: MediaAssetWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MediaAssets from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MediaAssets.
+     */
+    skip?: number
+    distinct?: MediaAssetScalarFieldEnum | MediaAssetScalarFieldEnum[]
+  }
+
+  /**
+   * MediaAsset create
+   */
+  export type MediaAssetCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MediaAsset.
+     */
+    data: XOR<MediaAssetCreateInput, MediaAssetUncheckedCreateInput>
+  }
+
+  /**
+   * MediaAsset createMany
+   */
+  export type MediaAssetCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MediaAssets.
+     */
+    data: MediaAssetCreateManyInput | MediaAssetCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MediaAsset createManyAndReturn
+   */
+  export type MediaAssetCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * The data used to create many MediaAssets.
+     */
+    data: MediaAssetCreateManyInput | MediaAssetCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MediaAsset update
+   */
+  export type MediaAssetUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MediaAsset.
+     */
+    data: XOR<MediaAssetUpdateInput, MediaAssetUncheckedUpdateInput>
+    /**
+     * Choose, which MediaAsset to update.
+     */
+    where: MediaAssetWhereUniqueInput
+  }
+
+  /**
+   * MediaAsset updateMany
+   */
+  export type MediaAssetUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MediaAssets.
+     */
+    data: XOR<MediaAssetUpdateManyMutationInput, MediaAssetUncheckedUpdateManyInput>
+    /**
+     * Filter which MediaAssets to update
+     */
+    where?: MediaAssetWhereInput
+    /**
+     * Limit how many MediaAssets to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MediaAsset updateManyAndReturn
+   */
+  export type MediaAssetUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * The data used to update MediaAssets.
+     */
+    data: XOR<MediaAssetUpdateManyMutationInput, MediaAssetUncheckedUpdateManyInput>
+    /**
+     * Filter which MediaAssets to update
+     */
+    where?: MediaAssetWhereInput
+    /**
+     * Limit how many MediaAssets to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MediaAsset upsert
+   */
+  export type MediaAssetUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MediaAsset to update in case it exists.
+     */
+    where: MediaAssetWhereUniqueInput
+    /**
+     * In case the MediaAsset found by the `where` argument doesn't exist, create a new MediaAsset with this data.
+     */
+    create: XOR<MediaAssetCreateInput, MediaAssetUncheckedCreateInput>
+    /**
+     * In case the MediaAsset was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MediaAssetUpdateInput, MediaAssetUncheckedUpdateInput>
+  }
+
+  /**
+   * MediaAsset delete
+   */
+  export type MediaAssetDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    /**
+     * Filter which MediaAsset to delete.
+     */
+    where: MediaAssetWhereUniqueInput
+  }
+
+  /**
+   * MediaAsset deleteMany
+   */
+  export type MediaAssetDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MediaAssets to delete
+     */
+    where?: MediaAssetWhereInput
+    /**
+     * Limit how many MediaAssets to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MediaAsset.productImage
+   */
+  export type MediaAsset$productImageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    where?: ProductImageWhereInput
+  }
+
+  /**
+   * MediaAsset without action
+   */
+  export type MediaAssetDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model TenantProbe
    */
 
@@ -22325,10 +26474,12 @@ export namespace Prisma {
 
   export type CategoryAvgAggregateOutputType = {
     sortOrder: number | null
+    version: number | null
   }
 
   export type CategorySumAggregateOutputType = {
     sortOrder: number | null
+    version: number | null
   }
 
   export type CategoryMinAggregateOutputType = {
@@ -22337,7 +26488,11 @@ export namespace Prisma {
     parentId: string | null
     name: string | null
     sortOrder: number | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CategoryMaxAggregateOutputType = {
@@ -22346,7 +26501,11 @@ export namespace Prisma {
     parentId: string | null
     name: string | null
     sortOrder: number | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CategoryCountAggregateOutputType = {
@@ -22355,17 +26514,23 @@ export namespace Prisma {
     parentId: number
     name: number
     sortOrder: number
+    status: number
+    version: number
+    deletedAt: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type CategoryAvgAggregateInputType = {
     sortOrder?: true
+    version?: true
   }
 
   export type CategorySumAggregateInputType = {
     sortOrder?: true
+    version?: true
   }
 
   export type CategoryMinAggregateInputType = {
@@ -22374,7 +26539,11 @@ export namespace Prisma {
     parentId?: true
     name?: true
     sortOrder?: true
+    status?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type CategoryMaxAggregateInputType = {
@@ -22383,7 +26552,11 @@ export namespace Prisma {
     parentId?: true
     name?: true
     sortOrder?: true
+    status?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type CategoryCountAggregateInputType = {
@@ -22392,7 +26565,11 @@ export namespace Prisma {
     parentId?: true
     name?: true
     sortOrder?: true
+    status?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -22488,7 +26665,11 @@ export namespace Prisma {
     parentId: string | null
     name: string
     sortOrder: number
+    status: string
+    version: number
+    deletedAt: Date | null
     createdAt: Date
+    updatedAt: Date
     _count: CategoryCountAggregateOutputType | null
     _avg: CategoryAvgAggregateOutputType | null
     _sum: CategorySumAggregateOutputType | null
@@ -22516,7 +26697,11 @@ export namespace Prisma {
     parentId?: boolean
     name?: boolean
     sortOrder?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     parent?: boolean | Category$parentArgs<ExtArgs>
     children?: boolean | Category$childrenArgs<ExtArgs>
     products?: boolean | Category$productsArgs<ExtArgs>
@@ -22529,7 +26714,11 @@ export namespace Prisma {
     parentId?: boolean
     name?: boolean
     sortOrder?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     parent?: boolean | Category$parentArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
 
@@ -22539,7 +26728,11 @@ export namespace Prisma {
     parentId?: boolean
     name?: boolean
     sortOrder?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     parent?: boolean | Category$parentArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
 
@@ -22549,10 +26742,14 @@ export namespace Prisma {
     parentId?: boolean
     name?: boolean
     sortOrder?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "parentId" | "name" | "sortOrder" | "createdAt", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "parentId" | "name" | "sortOrder" | "status" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parent?: boolean | Category$parentArgs<ExtArgs>
     children?: boolean | Category$childrenArgs<ExtArgs>
@@ -22579,7 +26776,11 @@ export namespace Prisma {
       parentId: string | null
       name: string
       sortOrder: number
+      status: string
+      version: number
+      deletedAt: Date | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["category"]>
     composites: {}
   }
@@ -23011,7 +27212,11 @@ export namespace Prisma {
     readonly parentId: FieldRef<"Category", 'String'>
     readonly name: FieldRef<"Category", 'String'>
     readonly sortOrder: FieldRef<"Category", 'Int'>
+    readonly status: FieldRef<"Category", 'String'>
+    readonly version: FieldRef<"Category", 'Int'>
+    readonly deletedAt: FieldRef<"Category", 'DateTime'>
     readonly createdAt: FieldRef<"Category", 'DateTime'>
+    readonly updatedAt: FieldRef<"Category", 'DateTime'>
   }
     
 
@@ -23499,8 +27704,18 @@ export namespace Prisma {
 
   export type AggregateBrand = {
     _count: BrandCountAggregateOutputType | null
+    _avg: BrandAvgAggregateOutputType | null
+    _sum: BrandSumAggregateOutputType | null
     _min: BrandMinAggregateOutputType | null
     _max: BrandMaxAggregateOutputType | null
+  }
+
+  export type BrandAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type BrandSumAggregateOutputType = {
+    version: number | null
   }
 
   export type BrandMinAggregateOutputType = {
@@ -23508,7 +27723,11 @@ export namespace Prisma {
     tenantId: string | null
     name: string | null
     logoUrl: string | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BrandMaxAggregateOutputType = {
@@ -23516,7 +27735,11 @@ export namespace Prisma {
     tenantId: string | null
     name: string | null
     logoUrl: string | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BrandCountAggregateOutputType = {
@@ -23524,17 +27747,33 @@ export namespace Prisma {
     tenantId: number
     name: number
     logoUrl: number
+    status: number
+    version: number
+    deletedAt: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
+
+  export type BrandAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type BrandSumAggregateInputType = {
+    version?: true
+  }
 
   export type BrandMinAggregateInputType = {
     id?: true
     tenantId?: true
     name?: true
     logoUrl?: true
+    status?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type BrandMaxAggregateInputType = {
@@ -23542,7 +27781,11 @@ export namespace Prisma {
     tenantId?: true
     name?: true
     logoUrl?: true
+    status?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type BrandCountAggregateInputType = {
@@ -23550,7 +27793,11 @@ export namespace Prisma {
     tenantId?: true
     name?: true
     logoUrl?: true
+    status?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -23592,6 +27839,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: BrandAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BrandSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: BrandMinAggregateInputType
@@ -23622,6 +27881,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: BrandCountAggregateInputType | true
+    _avg?: BrandAvgAggregateInputType
+    _sum?: BrandSumAggregateInputType
     _min?: BrandMinAggregateInputType
     _max?: BrandMaxAggregateInputType
   }
@@ -23631,8 +27892,14 @@ export namespace Prisma {
     tenantId: string
     name: string
     logoUrl: string | null
+    status: string
+    version: number
+    deletedAt: Date | null
     createdAt: Date
+    updatedAt: Date
     _count: BrandCountAggregateOutputType | null
+    _avg: BrandAvgAggregateOutputType | null
+    _sum: BrandSumAggregateOutputType | null
     _min: BrandMinAggregateOutputType | null
     _max: BrandMaxAggregateOutputType | null
   }
@@ -23656,7 +27923,11 @@ export namespace Prisma {
     tenantId?: boolean
     name?: boolean
     logoUrl?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     products?: boolean | Brand$productsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
@@ -23666,7 +27937,11 @@ export namespace Prisma {
     tenantId?: boolean
     name?: boolean
     logoUrl?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["brand"]>
 
   export type BrandSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -23674,7 +27949,11 @@ export namespace Prisma {
     tenantId?: boolean
     name?: boolean
     logoUrl?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["brand"]>
 
   export type BrandSelectScalar = {
@@ -23682,10 +27961,14 @@ export namespace Prisma {
     tenantId?: boolean
     name?: boolean
     logoUrl?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type BrandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "logoUrl" | "createdAt", ExtArgs["result"]["brand"]>
+  export type BrandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "logoUrl" | "status" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | Brand$productsArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
@@ -23703,7 +27986,11 @@ export namespace Prisma {
       tenantId: string
       name: string
       logoUrl: string | null
+      status: string
+      version: number
+      deletedAt: Date | null
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["brand"]>
     composites: {}
   }
@@ -24132,7 +28419,11 @@ export namespace Prisma {
     readonly tenantId: FieldRef<"Brand", 'String'>
     readonly name: FieldRef<"Brand", 'String'>
     readonly logoUrl: FieldRef<"Brand", 'String'>
+    readonly status: FieldRef<"Brand", 'String'>
+    readonly version: FieldRef<"Brand", 'Int'>
+    readonly deletedAt: FieldRef<"Brand", 'DateTime'>
     readonly createdAt: FieldRef<"Brand", 'DateTime'>
+    readonly updatedAt: FieldRef<"Brand", 'DateTime'>
   }
     
 
@@ -24601,6 +28892,7 @@ export namespace Prisma {
     createdBy: string | null
     updatedBy: string | null
     version: number | null
+    deletedAt: Date | null
   }
 
   export type ProductMaxAggregateOutputType = {
@@ -24619,6 +28911,7 @@ export namespace Prisma {
     createdBy: string | null
     updatedBy: string | null
     version: number | null
+    deletedAt: Date | null
   }
 
   export type ProductCountAggregateOutputType = {
@@ -24638,6 +28931,7 @@ export namespace Prisma {
     createdBy: number
     updatedBy: number
     version: number
+    deletedAt: number
     _all: number
   }
 
@@ -24668,6 +28962,7 @@ export namespace Prisma {
     createdBy?: true
     updatedBy?: true
     version?: true
+    deletedAt?: true
   }
 
   export type ProductMaxAggregateInputType = {
@@ -24686,6 +28981,7 @@ export namespace Prisma {
     createdBy?: true
     updatedBy?: true
     version?: true
+    deletedAt?: true
   }
 
   export type ProductCountAggregateInputType = {
@@ -24705,6 +29001,7 @@ export namespace Prisma {
     createdBy?: true
     updatedBy?: true
     version?: true
+    deletedAt?: true
     _all?: true
   }
 
@@ -24811,6 +29108,7 @@ export namespace Prisma {
     createdBy: string | null
     updatedBy: string | null
     version: number
+    deletedAt: Date | null
     _count: ProductCountAggregateOutputType | null
     _avg: ProductAvgAggregateOutputType | null
     _sum: ProductSumAggregateOutputType | null
@@ -24849,9 +29147,11 @@ export namespace Prisma {
     createdBy?: boolean
     updatedBy?: boolean
     version?: boolean
+    deletedAt?: boolean
     category?: boolean | Product$categoryArgs<ExtArgs>
     brand?: boolean | Product$brandArgs<ExtArgs>
     variants?: boolean | Product$variantsArgs<ExtArgs>
+    images?: boolean | Product$imagesArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -24872,6 +29172,7 @@ export namespace Prisma {
     createdBy?: boolean
     updatedBy?: boolean
     version?: boolean
+    deletedAt?: boolean
     category?: boolean | Product$categoryArgs<ExtArgs>
     brand?: boolean | Product$brandArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
@@ -24893,6 +29194,7 @@ export namespace Prisma {
     createdBy?: boolean
     updatedBy?: boolean
     version?: boolean
+    deletedAt?: boolean
     category?: boolean | Product$categoryArgs<ExtArgs>
     brand?: boolean | Product$brandArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
@@ -24914,13 +29216,15 @@ export namespace Prisma {
     createdBy?: boolean
     updatedBy?: boolean
     version?: boolean
+    deletedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "categoryId" | "brandId" | "code" | "name" | "description" | "attributes" | "seoSlug" | "status" | "sortOrder" | "createdAt" | "updatedAt" | "createdBy" | "updatedBy" | "version", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "categoryId" | "brandId" | "code" | "name" | "description" | "attributes" | "seoSlug" | "status" | "sortOrder" | "createdAt" | "updatedAt" | "createdBy" | "updatedBy" | "version" | "deletedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | Product$categoryArgs<ExtArgs>
     brand?: boolean | Product$brandArgs<ExtArgs>
     variants?: boolean | Product$variantsArgs<ExtArgs>
+    images?: boolean | Product$imagesArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -24938,6 +29242,7 @@ export namespace Prisma {
       category: Prisma.$CategoryPayload<ExtArgs> | null
       brand: Prisma.$BrandPayload<ExtArgs> | null
       variants: Prisma.$ProductVariantPayload<ExtArgs>[]
+      images: Prisma.$ProductImagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -24956,6 +29261,7 @@ export namespace Prisma {
       createdBy: string | null
       updatedBy: string | null
       version: number
+      deletedAt: Date | null
     }, ExtArgs["result"]["product"]>
     composites: {}
   }
@@ -25353,6 +29659,7 @@ export namespace Prisma {
     category<T extends Product$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Product$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     brand<T extends Product$brandArgs<ExtArgs> = {}>(args?: Subset<T, Product$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     variants<T extends Product$variantsArgs<ExtArgs> = {}>(args?: Subset<T, Product$variantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    images<T extends Product$imagesArgs<ExtArgs> = {}>(args?: Subset<T, Product$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25398,6 +29705,7 @@ export namespace Prisma {
     readonly createdBy: FieldRef<"Product", 'String'>
     readonly updatedBy: FieldRef<"Product", 'String'>
     readonly version: FieldRef<"Product", 'Int'>
+    readonly deletedAt: FieldRef<"Product", 'DateTime'>
   }
     
 
@@ -25856,6 +30164,30 @@ export namespace Prisma {
   }
 
   /**
+   * Product.images
+   */
+  export type Product$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    where?: ProductImageWhereInput
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    cursor?: ProductImageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
    * Product without action
    */
   export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -25890,12 +30222,14 @@ export namespace Prisma {
     price: Decimal | null
     costPrice: Decimal | null
     weightG: Decimal | null
+    version: number | null
   }
 
   export type ProductVariantSumAggregateOutputType = {
     price: Decimal | null
     costPrice: Decimal | null
     weightG: Decimal | null
+    version: number | null
   }
 
   export type ProductVariantMinAggregateOutputType = {
@@ -25906,6 +30240,8 @@ export namespace Prisma {
     price: Decimal | null
     costPrice: Decimal | null
     weightG: Decimal | null
+    version: number | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -25918,6 +30254,8 @@ export namespace Prisma {
     price: Decimal | null
     costPrice: Decimal | null
     weightG: Decimal | null
+    version: number | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -25931,6 +30269,8 @@ export namespace Prisma {
     price: number
     costPrice: number
     weightG: number
+    version: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -25941,12 +30281,14 @@ export namespace Prisma {
     price?: true
     costPrice?: true
     weightG?: true
+    version?: true
   }
 
   export type ProductVariantSumAggregateInputType = {
     price?: true
     costPrice?: true
     weightG?: true
+    version?: true
   }
 
   export type ProductVariantMinAggregateInputType = {
@@ -25957,6 +30299,8 @@ export namespace Prisma {
     price?: true
     costPrice?: true
     weightG?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -25969,6 +30313,8 @@ export namespace Prisma {
     price?: true
     costPrice?: true
     weightG?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -25982,6 +30328,8 @@ export namespace Prisma {
     price?: true
     costPrice?: true
     weightG?: true
+    version?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -26082,6 +30430,8 @@ export namespace Prisma {
     price: Decimal
     costPrice: Decimal
     weightG: Decimal | null
+    version: number
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: ProductVariantCountAggregateOutputType | null
@@ -26114,6 +30464,8 @@ export namespace Prisma {
     price?: boolean
     costPrice?: boolean
     weightG?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -26131,6 +30483,8 @@ export namespace Prisma {
     price?: boolean
     costPrice?: boolean
     weightG?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -26145,6 +30499,8 @@ export namespace Prisma {
     price?: boolean
     costPrice?: boolean
     weightG?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     product?: boolean | ProductDefaultArgs<ExtArgs>
@@ -26159,11 +30515,13 @@ export namespace Prisma {
     price?: boolean
     costPrice?: boolean
     weightG?: boolean
+    version?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "productId" | "sku" | "specs" | "price" | "costPrice" | "weightG" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
+  export type ProductVariantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "productId" | "sku" | "specs" | "price" | "costPrice" | "weightG" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["productVariant"]>
   export type ProductVariantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     product?: boolean | ProductDefaultArgs<ExtArgs>
     inventoryTransactions?: boolean | ProductVariant$inventoryTransactionsArgs<ExtArgs>
@@ -26193,6 +30551,8 @@ export namespace Prisma {
       price: Prisma.Decimal
       costPrice: Prisma.Decimal
       weightG: Prisma.Decimal | null
+      version: number
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productVariant"]>
@@ -26629,6 +30989,8 @@ export namespace Prisma {
     readonly price: FieldRef<"ProductVariant", 'Decimal'>
     readonly costPrice: FieldRef<"ProductVariant", 'Decimal'>
     readonly weightG: FieldRef<"ProductVariant", 'Decimal'>
+    readonly version: FieldRef<"ProductVariant", 'Int'>
+    readonly deletedAt: FieldRef<"ProductVariant", 'DateTime'>
     readonly createdAt: FieldRef<"ProductVariant", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductVariant", 'DateTime'>
   }
@@ -27090,6 +31452,1250 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProductVariantInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProductImage
+   */
+
+  export type AggregateProductImage = {
+    _count: ProductImageCountAggregateOutputType | null
+    _avg: ProductImageAvgAggregateOutputType | null
+    _sum: ProductImageSumAggregateOutputType | null
+    _min: ProductImageMinAggregateOutputType | null
+    _max: ProductImageMaxAggregateOutputType | null
+  }
+
+  export type ProductImageAvgAggregateOutputType = {
+    sortOrder: number | null
+    sizeBytes: number | null
+    version: number | null
+  }
+
+  export type ProductImageSumAggregateOutputType = {
+    sortOrder: number | null
+    sizeBytes: number | null
+    version: number | null
+  }
+
+  export type ProductImageMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    productId: string | null
+    mediaAssetId: string | null
+    url: string | null
+    altText: string | null
+    sortOrder: number | null
+    isPrimary: boolean | null
+    sizeBytes: number | null
+    mimeType: string | null
+    version: number | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductImageMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    productId: string | null
+    mediaAssetId: string | null
+    url: string | null
+    altText: string | null
+    sortOrder: number | null
+    isPrimary: boolean | null
+    sizeBytes: number | null
+    mimeType: string | null
+    version: number | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductImageCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    productId: number
+    mediaAssetId: number
+    url: number
+    altText: number
+    sortOrder: number
+    isPrimary: number
+    sizeBytes: number
+    mimeType: number
+    version: number
+    deletedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductImageAvgAggregateInputType = {
+    sortOrder?: true
+    sizeBytes?: true
+    version?: true
+  }
+
+  export type ProductImageSumAggregateInputType = {
+    sortOrder?: true
+    sizeBytes?: true
+    version?: true
+  }
+
+  export type ProductImageMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    productId?: true
+    mediaAssetId?: true
+    url?: true
+    altText?: true
+    sortOrder?: true
+    isPrimary?: true
+    sizeBytes?: true
+    mimeType?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductImageMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    productId?: true
+    mediaAssetId?: true
+    url?: true
+    altText?: true
+    sortOrder?: true
+    isPrimary?: true
+    sizeBytes?: true
+    mimeType?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductImageCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    productId?: true
+    mediaAssetId?: true
+    url?: true
+    altText?: true
+    sortOrder?: true
+    isPrimary?: true
+    sizeBytes?: true
+    mimeType?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductImage to aggregate.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductImages
+    **/
+    _count?: true | ProductImageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductImageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductImageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductImageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductImageMaxAggregateInputType
+  }
+
+  export type GetProductImageAggregateType<T extends ProductImageAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductImage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductImage[P]>
+      : GetScalarType<T[P], AggregateProductImage[P]>
+  }
+
+
+
+
+  export type ProductImageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductImageWhereInput
+    orderBy?: ProductImageOrderByWithAggregationInput | ProductImageOrderByWithAggregationInput[]
+    by: ProductImageScalarFieldEnum[] | ProductImageScalarFieldEnum
+    having?: ProductImageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductImageCountAggregateInputType | true
+    _avg?: ProductImageAvgAggregateInputType
+    _sum?: ProductImageSumAggregateInputType
+    _min?: ProductImageMinAggregateInputType
+    _max?: ProductImageMaxAggregateInputType
+  }
+
+  export type ProductImageGroupByOutputType = {
+    id: string
+    tenantId: string
+    productId: string
+    mediaAssetId: string | null
+    url: string
+    altText: string | null
+    sortOrder: number
+    isPrimary: boolean
+    sizeBytes: number
+    mimeType: string
+    version: number
+    deletedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductImageCountAggregateOutputType | null
+    _avg: ProductImageAvgAggregateOutputType | null
+    _sum: ProductImageSumAggregateOutputType | null
+    _min: ProductImageMinAggregateOutputType | null
+    _max: ProductImageMaxAggregateOutputType | null
+  }
+
+  type GetProductImageGroupByPayload<T extends ProductImageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductImageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductImageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductImageGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductImageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductImageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    mediaAssetId?: boolean
+    url?: boolean
+    altText?: boolean
+    sortOrder?: boolean
+    isPrimary?: boolean
+    sizeBytes?: boolean
+    mimeType?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | ProductImage$mediaAssetArgs<ExtArgs>
+  }, ExtArgs["result"]["productImage"]>
+
+  export type ProductImageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    mediaAssetId?: boolean
+    url?: boolean
+    altText?: boolean
+    sortOrder?: boolean
+    isPrimary?: boolean
+    sizeBytes?: boolean
+    mimeType?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | ProductImage$mediaAssetArgs<ExtArgs>
+  }, ExtArgs["result"]["productImage"]>
+
+  export type ProductImageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    mediaAssetId?: boolean
+    url?: boolean
+    altText?: boolean
+    sortOrder?: boolean
+    isPrimary?: boolean
+    sizeBytes?: boolean
+    mimeType?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | ProductImage$mediaAssetArgs<ExtArgs>
+  }, ExtArgs["result"]["productImage"]>
+
+  export type ProductImageSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    mediaAssetId?: boolean
+    url?: boolean
+    altText?: boolean
+    sortOrder?: boolean
+    isPrimary?: boolean
+    sizeBytes?: boolean
+    mimeType?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProductImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "productId" | "mediaAssetId" | "url" | "altText" | "sortOrder" | "isPrimary" | "sizeBytes" | "mimeType" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["productImage"]>
+  export type ProductImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | ProductImage$mediaAssetArgs<ExtArgs>
+  }
+  export type ProductImageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | ProductImage$mediaAssetArgs<ExtArgs>
+  }
+  export type ProductImageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | ProductImage$mediaAssetArgs<ExtArgs>
+  }
+
+  export type $ProductImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductImage"
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs>
+      mediaAsset: Prisma.$MediaAssetPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      productId: string
+      mediaAssetId: string | null
+      url: string
+      altText: string | null
+      sortOrder: number
+      isPrimary: boolean
+      sizeBytes: number
+      mimeType: string
+      version: number
+      deletedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["productImage"]>
+    composites: {}
+  }
+
+  type ProductImageGetPayload<S extends boolean | null | undefined | ProductImageDefaultArgs> = $Result.GetResult<Prisma.$ProductImagePayload, S>
+
+  type ProductImageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductImageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductImageCountAggregateInputType | true
+    }
+
+  export interface ProductImageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductImage'], meta: { name: 'ProductImage' } }
+    /**
+     * Find zero or one ProductImage that matches the filter.
+     * @param {ProductImageFindUniqueArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductImageFindUniqueArgs>(args: SelectSubset<T, ProductImageFindUniqueArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductImage that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductImageFindUniqueOrThrowArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductImageFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductImageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductImage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindFirstArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductImageFindFirstArgs>(args?: SelectSubset<T, ProductImageFindFirstArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductImage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindFirstOrThrowArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductImageFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductImageFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductImages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductImages
+     * const productImages = await prisma.productImage.findMany()
+     * 
+     * // Get first 10 ProductImages
+     * const productImages = await prisma.productImage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productImageWithIdOnly = await prisma.productImage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductImageFindManyArgs>(args?: SelectSubset<T, ProductImageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductImage.
+     * @param {ProductImageCreateArgs} args - Arguments to create a ProductImage.
+     * @example
+     * // Create one ProductImage
+     * const ProductImage = await prisma.productImage.create({
+     *   data: {
+     *     // ... data to create a ProductImage
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductImageCreateArgs>(args: SelectSubset<T, ProductImageCreateArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductImages.
+     * @param {ProductImageCreateManyArgs} args - Arguments to create many ProductImages.
+     * @example
+     * // Create many ProductImages
+     * const productImage = await prisma.productImage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductImageCreateManyArgs>(args?: SelectSubset<T, ProductImageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProductImages and returns the data saved in the database.
+     * @param {ProductImageCreateManyAndReturnArgs} args - Arguments to create many ProductImages.
+     * @example
+     * // Create many ProductImages
+     * const productImage = await prisma.productImage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProductImages and only return the `id`
+     * const productImageWithIdOnly = await prisma.productImage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductImageCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductImageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProductImage.
+     * @param {ProductImageDeleteArgs} args - Arguments to delete one ProductImage.
+     * @example
+     * // Delete one ProductImage
+     * const ProductImage = await prisma.productImage.delete({
+     *   where: {
+     *     // ... filter to delete one ProductImage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductImageDeleteArgs>(args: SelectSubset<T, ProductImageDeleteArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductImage.
+     * @param {ProductImageUpdateArgs} args - Arguments to update one ProductImage.
+     * @example
+     * // Update one ProductImage
+     * const productImage = await prisma.productImage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductImageUpdateArgs>(args: SelectSubset<T, ProductImageUpdateArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductImages.
+     * @param {ProductImageDeleteManyArgs} args - Arguments to filter ProductImages to delete.
+     * @example
+     * // Delete a few ProductImages
+     * const { count } = await prisma.productImage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductImageDeleteManyArgs>(args?: SelectSubset<T, ProductImageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductImages
+     * const productImage = await prisma.productImage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductImageUpdateManyArgs>(args: SelectSubset<T, ProductImageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductImages and returns the data updated in the database.
+     * @param {ProductImageUpdateManyAndReturnArgs} args - Arguments to update many ProductImages.
+     * @example
+     * // Update many ProductImages
+     * const productImage = await prisma.productImage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProductImages and only return the `id`
+     * const productImageWithIdOnly = await prisma.productImage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductImageUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductImageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProductImage.
+     * @param {ProductImageUpsertArgs} args - Arguments to update or create a ProductImage.
+     * @example
+     * // Update or create a ProductImage
+     * const productImage = await prisma.productImage.upsert({
+     *   create: {
+     *     // ... data to create a ProductImage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductImage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductImageUpsertArgs>(args: SelectSubset<T, ProductImageUpsertArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageCountArgs} args - Arguments to filter ProductImages to count.
+     * @example
+     * // Count the number of ProductImages
+     * const count = await prisma.productImage.count({
+     *   where: {
+     *     // ... the filter for the ProductImages we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductImageCountArgs>(
+      args?: Subset<T, ProductImageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductImageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductImageAggregateArgs>(args: Subset<T, ProductImageAggregateArgs>): Prisma.PrismaPromise<GetProductImageAggregateType<T>>
+
+    /**
+     * Group by ProductImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductImageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductImageGroupByArgs['orderBy'] }
+        : { orderBy?: ProductImageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductImageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductImage model
+   */
+  readonly fields: ProductImageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductImage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    mediaAsset<T extends ProductImage$mediaAssetArgs<ExtArgs> = {}>(args?: Subset<T, ProductImage$mediaAssetArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductImage model
+   */
+  interface ProductImageFieldRefs {
+    readonly id: FieldRef<"ProductImage", 'String'>
+    readonly tenantId: FieldRef<"ProductImage", 'String'>
+    readonly productId: FieldRef<"ProductImage", 'String'>
+    readonly mediaAssetId: FieldRef<"ProductImage", 'String'>
+    readonly url: FieldRef<"ProductImage", 'String'>
+    readonly altText: FieldRef<"ProductImage", 'String'>
+    readonly sortOrder: FieldRef<"ProductImage", 'Int'>
+    readonly isPrimary: FieldRef<"ProductImage", 'Boolean'>
+    readonly sizeBytes: FieldRef<"ProductImage", 'Int'>
+    readonly mimeType: FieldRef<"ProductImage", 'String'>
+    readonly version: FieldRef<"ProductImage", 'Int'>
+    readonly deletedAt: FieldRef<"ProductImage", 'DateTime'>
+    readonly createdAt: FieldRef<"ProductImage", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProductImage", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductImage findUnique
+   */
+  export type ProductImageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage findUniqueOrThrow
+   */
+  export type ProductImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage findFirst
+   */
+  export type ProductImageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductImages.
+     */
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
+   * ProductImage findFirstOrThrow
+   */
+  export type ProductImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductImages.
+     */
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
+   * ProductImage findMany
+   */
+  export type ProductImageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImages to fetch.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
+   * ProductImage create
+   */
+  export type ProductImageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductImage.
+     */
+    data: XOR<ProductImageCreateInput, ProductImageUncheckedCreateInput>
+  }
+
+  /**
+   * ProductImage createMany
+   */
+  export type ProductImageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductImages.
+     */
+    data: ProductImageCreateManyInput | ProductImageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductImage createManyAndReturn
+   */
+  export type ProductImageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProductImages.
+     */
+    data: ProductImageCreateManyInput | ProductImageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductImage update
+   */
+  export type ProductImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductImage.
+     */
+    data: XOR<ProductImageUpdateInput, ProductImageUncheckedUpdateInput>
+    /**
+     * Choose, which ProductImage to update.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage updateMany
+   */
+  export type ProductImageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductImages.
+     */
+    data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductImages to update
+     */
+    where?: ProductImageWhereInput
+    /**
+     * Limit how many ProductImages to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductImage updateManyAndReturn
+   */
+  export type ProductImageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * The data used to update ProductImages.
+     */
+    data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductImages to update
+     */
+    where?: ProductImageWhereInput
+    /**
+     * Limit how many ProductImages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductImage upsert
+   */
+  export type ProductImageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductImage to update in case it exists.
+     */
+    where: ProductImageWhereUniqueInput
+    /**
+     * In case the ProductImage found by the `where` argument doesn't exist, create a new ProductImage with this data.
+     */
+    create: XOR<ProductImageCreateInput, ProductImageUncheckedCreateInput>
+    /**
+     * In case the ProductImage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductImageUpdateInput, ProductImageUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductImage delete
+   */
+  export type ProductImageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter which ProductImage to delete.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage deleteMany
+   */
+  export type ProductImageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductImages to delete
+     */
+    where?: ProductImageWhereInput
+    /**
+     * Limit how many ProductImages to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductImage.mediaAsset
+   */
+  export type ProductImage$mediaAssetArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MediaAsset
+     */
+    select?: MediaAssetSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MediaAsset
+     */
+    omit?: MediaAssetOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MediaAssetInclude<ExtArgs> | null
+    where?: MediaAssetWhereInput
+  }
+
+  /**
+   * ProductImage without action
+   */
+  export type ProductImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductImage
+     */
+    omit?: ProductImageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
   }
 
 
@@ -29712,6 +35318,2370 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PaymentReconciliationRun
+   */
+
+  export type AggregatePaymentReconciliationRun = {
+    _count: PaymentReconciliationRunCountAggregateOutputType | null
+    _avg: PaymentReconciliationRunAvgAggregateOutputType | null
+    _sum: PaymentReconciliationRunSumAggregateOutputType | null
+    _min: PaymentReconciliationRunMinAggregateOutputType | null
+    _max: PaymentReconciliationRunMaxAggregateOutputType | null
+  }
+
+  export type PaymentReconciliationRunAvgAggregateOutputType = {
+    localCount: number | null
+    providerCount: number | null
+    discrepancyCount: number | null
+  }
+
+  export type PaymentReconciliationRunSumAggregateOutputType = {
+    localCount: number | null
+    providerCount: number | null
+    discrepancyCount: number | null
+  }
+
+  export type PaymentReconciliationRunMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    channel: string | null
+    billDate: Date | null
+    status: string | null
+    localCount: number | null
+    providerCount: number | null
+    discrepancyCount: number | null
+    errorMessage: string | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PaymentReconciliationRunMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    channel: string | null
+    billDate: Date | null
+    status: string | null
+    localCount: number | null
+    providerCount: number | null
+    discrepancyCount: number | null
+    errorMessage: string | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PaymentReconciliationRunCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    channel: number
+    billDate: number
+    status: number
+    localCount: number
+    providerCount: number
+    discrepancyCount: number
+    errorMessage: number
+    completedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PaymentReconciliationRunAvgAggregateInputType = {
+    localCount?: true
+    providerCount?: true
+    discrepancyCount?: true
+  }
+
+  export type PaymentReconciliationRunSumAggregateInputType = {
+    localCount?: true
+    providerCount?: true
+    discrepancyCount?: true
+  }
+
+  export type PaymentReconciliationRunMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    billDate?: true
+    status?: true
+    localCount?: true
+    providerCount?: true
+    discrepancyCount?: true
+    errorMessage?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PaymentReconciliationRunMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    billDate?: true
+    status?: true
+    localCount?: true
+    providerCount?: true
+    discrepancyCount?: true
+    errorMessage?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PaymentReconciliationRunCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    channel?: true
+    billDate?: true
+    status?: true
+    localCount?: true
+    providerCount?: true
+    discrepancyCount?: true
+    errorMessage?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PaymentReconciliationRunAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentReconciliationRun to aggregate.
+     */
+    where?: PaymentReconciliationRunWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationRuns to fetch.
+     */
+    orderBy?: PaymentReconciliationRunOrderByWithRelationInput | PaymentReconciliationRunOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaymentReconciliationRunWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationRuns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationRuns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PaymentReconciliationRuns
+    **/
+    _count?: true | PaymentReconciliationRunCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PaymentReconciliationRunAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaymentReconciliationRunSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaymentReconciliationRunMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaymentReconciliationRunMaxAggregateInputType
+  }
+
+  export type GetPaymentReconciliationRunAggregateType<T extends PaymentReconciliationRunAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaymentReconciliationRun]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaymentReconciliationRun[P]>
+      : GetScalarType<T[P], AggregatePaymentReconciliationRun[P]>
+  }
+
+
+
+
+  export type PaymentReconciliationRunGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentReconciliationRunWhereInput
+    orderBy?: PaymentReconciliationRunOrderByWithAggregationInput | PaymentReconciliationRunOrderByWithAggregationInput[]
+    by: PaymentReconciliationRunScalarFieldEnum[] | PaymentReconciliationRunScalarFieldEnum
+    having?: PaymentReconciliationRunScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaymentReconciliationRunCountAggregateInputType | true
+    _avg?: PaymentReconciliationRunAvgAggregateInputType
+    _sum?: PaymentReconciliationRunSumAggregateInputType
+    _min?: PaymentReconciliationRunMinAggregateInputType
+    _max?: PaymentReconciliationRunMaxAggregateInputType
+  }
+
+  export type PaymentReconciliationRunGroupByOutputType = {
+    id: string
+    tenantId: string
+    channel: string
+    billDate: Date
+    status: string
+    localCount: number
+    providerCount: number
+    discrepancyCount: number
+    errorMessage: string | null
+    completedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PaymentReconciliationRunCountAggregateOutputType | null
+    _avg: PaymentReconciliationRunAvgAggregateOutputType | null
+    _sum: PaymentReconciliationRunSumAggregateOutputType | null
+    _min: PaymentReconciliationRunMinAggregateOutputType | null
+    _max: PaymentReconciliationRunMaxAggregateOutputType | null
+  }
+
+  type GetPaymentReconciliationRunGroupByPayload<T extends PaymentReconciliationRunGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentReconciliationRunGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaymentReconciliationRunGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaymentReconciliationRunGroupByOutputType[P]>
+            : GetScalarType<T[P], PaymentReconciliationRunGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaymentReconciliationRunSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    billDate?: boolean
+    status?: boolean
+    localCount?: boolean
+    providerCount?: boolean
+    discrepancyCount?: boolean
+    errorMessage?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    discrepancies?: boolean | PaymentReconciliationRun$discrepanciesArgs<ExtArgs>
+    _count?: boolean | PaymentReconciliationRunCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentReconciliationRun"]>
+
+  export type PaymentReconciliationRunSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    billDate?: boolean
+    status?: boolean
+    localCount?: boolean
+    providerCount?: boolean
+    discrepancyCount?: boolean
+    errorMessage?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["paymentReconciliationRun"]>
+
+  export type PaymentReconciliationRunSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    billDate?: boolean
+    status?: boolean
+    localCount?: boolean
+    providerCount?: boolean
+    discrepancyCount?: boolean
+    errorMessage?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["paymentReconciliationRun"]>
+
+  export type PaymentReconciliationRunSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    channel?: boolean
+    billDate?: boolean
+    status?: boolean
+    localCount?: boolean
+    providerCount?: boolean
+    discrepancyCount?: boolean
+    errorMessage?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PaymentReconciliationRunOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "channel" | "billDate" | "status" | "localCount" | "providerCount" | "discrepancyCount" | "errorMessage" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["paymentReconciliationRun"]>
+  export type PaymentReconciliationRunInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    discrepancies?: boolean | PaymentReconciliationRun$discrepanciesArgs<ExtArgs>
+    _count?: boolean | PaymentReconciliationRunCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PaymentReconciliationRunIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PaymentReconciliationRunIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PaymentReconciliationRunPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PaymentReconciliationRun"
+    objects: {
+      discrepancies: Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      channel: string
+      billDate: Date
+      status: string
+      localCount: number
+      providerCount: number
+      discrepancyCount: number
+      errorMessage: string | null
+      completedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["paymentReconciliationRun"]>
+    composites: {}
+  }
+
+  type PaymentReconciliationRunGetPayload<S extends boolean | null | undefined | PaymentReconciliationRunDefaultArgs> = $Result.GetResult<Prisma.$PaymentReconciliationRunPayload, S>
+
+  type PaymentReconciliationRunCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaymentReconciliationRunFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaymentReconciliationRunCountAggregateInputType | true
+    }
+
+  export interface PaymentReconciliationRunDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaymentReconciliationRun'], meta: { name: 'PaymentReconciliationRun' } }
+    /**
+     * Find zero or one PaymentReconciliationRun that matches the filter.
+     * @param {PaymentReconciliationRunFindUniqueArgs} args - Arguments to find a PaymentReconciliationRun
+     * @example
+     * // Get one PaymentReconciliationRun
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaymentReconciliationRunFindUniqueArgs>(args: SelectSubset<T, PaymentReconciliationRunFindUniqueArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PaymentReconciliationRun that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaymentReconciliationRunFindUniqueOrThrowArgs} args - Arguments to find a PaymentReconciliationRun
+     * @example
+     * // Get one PaymentReconciliationRun
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaymentReconciliationRunFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentReconciliationRunFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentReconciliationRun that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationRunFindFirstArgs} args - Arguments to find a PaymentReconciliationRun
+     * @example
+     * // Get one PaymentReconciliationRun
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaymentReconciliationRunFindFirstArgs>(args?: SelectSubset<T, PaymentReconciliationRunFindFirstArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentReconciliationRun that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationRunFindFirstOrThrowArgs} args - Arguments to find a PaymentReconciliationRun
+     * @example
+     * // Get one PaymentReconciliationRun
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaymentReconciliationRunFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentReconciliationRunFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PaymentReconciliationRuns that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationRunFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PaymentReconciliationRuns
+     * const paymentReconciliationRuns = await prisma.paymentReconciliationRun.findMany()
+     * 
+     * // Get first 10 PaymentReconciliationRuns
+     * const paymentReconciliationRuns = await prisma.paymentReconciliationRun.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paymentReconciliationRunWithIdOnly = await prisma.paymentReconciliationRun.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaymentReconciliationRunFindManyArgs>(args?: SelectSubset<T, PaymentReconciliationRunFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PaymentReconciliationRun.
+     * @param {PaymentReconciliationRunCreateArgs} args - Arguments to create a PaymentReconciliationRun.
+     * @example
+     * // Create one PaymentReconciliationRun
+     * const PaymentReconciliationRun = await prisma.paymentReconciliationRun.create({
+     *   data: {
+     *     // ... data to create a PaymentReconciliationRun
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaymentReconciliationRunCreateArgs>(args: SelectSubset<T, PaymentReconciliationRunCreateArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PaymentReconciliationRuns.
+     * @param {PaymentReconciliationRunCreateManyArgs} args - Arguments to create many PaymentReconciliationRuns.
+     * @example
+     * // Create many PaymentReconciliationRuns
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaymentReconciliationRunCreateManyArgs>(args?: SelectSubset<T, PaymentReconciliationRunCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PaymentReconciliationRuns and returns the data saved in the database.
+     * @param {PaymentReconciliationRunCreateManyAndReturnArgs} args - Arguments to create many PaymentReconciliationRuns.
+     * @example
+     * // Create many PaymentReconciliationRuns
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PaymentReconciliationRuns and only return the `id`
+     * const paymentReconciliationRunWithIdOnly = await prisma.paymentReconciliationRun.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaymentReconciliationRunCreateManyAndReturnArgs>(args?: SelectSubset<T, PaymentReconciliationRunCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PaymentReconciliationRun.
+     * @param {PaymentReconciliationRunDeleteArgs} args - Arguments to delete one PaymentReconciliationRun.
+     * @example
+     * // Delete one PaymentReconciliationRun
+     * const PaymentReconciliationRun = await prisma.paymentReconciliationRun.delete({
+     *   where: {
+     *     // ... filter to delete one PaymentReconciliationRun
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaymentReconciliationRunDeleteArgs>(args: SelectSubset<T, PaymentReconciliationRunDeleteArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PaymentReconciliationRun.
+     * @param {PaymentReconciliationRunUpdateArgs} args - Arguments to update one PaymentReconciliationRun.
+     * @example
+     * // Update one PaymentReconciliationRun
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaymentReconciliationRunUpdateArgs>(args: SelectSubset<T, PaymentReconciliationRunUpdateArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PaymentReconciliationRuns.
+     * @param {PaymentReconciliationRunDeleteManyArgs} args - Arguments to filter PaymentReconciliationRuns to delete.
+     * @example
+     * // Delete a few PaymentReconciliationRuns
+     * const { count } = await prisma.paymentReconciliationRun.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaymentReconciliationRunDeleteManyArgs>(args?: SelectSubset<T, PaymentReconciliationRunDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentReconciliationRuns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationRunUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PaymentReconciliationRuns
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaymentReconciliationRunUpdateManyArgs>(args: SelectSubset<T, PaymentReconciliationRunUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentReconciliationRuns and returns the data updated in the database.
+     * @param {PaymentReconciliationRunUpdateManyAndReturnArgs} args - Arguments to update many PaymentReconciliationRuns.
+     * @example
+     * // Update many PaymentReconciliationRuns
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PaymentReconciliationRuns and only return the `id`
+     * const paymentReconciliationRunWithIdOnly = await prisma.paymentReconciliationRun.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaymentReconciliationRunUpdateManyAndReturnArgs>(args: SelectSubset<T, PaymentReconciliationRunUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PaymentReconciliationRun.
+     * @param {PaymentReconciliationRunUpsertArgs} args - Arguments to update or create a PaymentReconciliationRun.
+     * @example
+     * // Update or create a PaymentReconciliationRun
+     * const paymentReconciliationRun = await prisma.paymentReconciliationRun.upsert({
+     *   create: {
+     *     // ... data to create a PaymentReconciliationRun
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PaymentReconciliationRun we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaymentReconciliationRunUpsertArgs>(args: SelectSubset<T, PaymentReconciliationRunUpsertArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PaymentReconciliationRuns.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationRunCountArgs} args - Arguments to filter PaymentReconciliationRuns to count.
+     * @example
+     * // Count the number of PaymentReconciliationRuns
+     * const count = await prisma.paymentReconciliationRun.count({
+     *   where: {
+     *     // ... the filter for the PaymentReconciliationRuns we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaymentReconciliationRunCountArgs>(
+      args?: Subset<T, PaymentReconciliationRunCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaymentReconciliationRunCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PaymentReconciliationRun.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationRunAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaymentReconciliationRunAggregateArgs>(args: Subset<T, PaymentReconciliationRunAggregateArgs>): Prisma.PrismaPromise<GetPaymentReconciliationRunAggregateType<T>>
+
+    /**
+     * Group by PaymentReconciliationRun.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationRunGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaymentReconciliationRunGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaymentReconciliationRunGroupByArgs['orderBy'] }
+        : { orderBy?: PaymentReconciliationRunGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaymentReconciliationRunGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentReconciliationRunGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PaymentReconciliationRun model
+   */
+  readonly fields: PaymentReconciliationRunFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PaymentReconciliationRun.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaymentReconciliationRunClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    discrepancies<T extends PaymentReconciliationRun$discrepanciesArgs<ExtArgs> = {}>(args?: Subset<T, PaymentReconciliationRun$discrepanciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PaymentReconciliationRun model
+   */
+  interface PaymentReconciliationRunFieldRefs {
+    readonly id: FieldRef<"PaymentReconciliationRun", 'String'>
+    readonly tenantId: FieldRef<"PaymentReconciliationRun", 'String'>
+    readonly channel: FieldRef<"PaymentReconciliationRun", 'String'>
+    readonly billDate: FieldRef<"PaymentReconciliationRun", 'DateTime'>
+    readonly status: FieldRef<"PaymentReconciliationRun", 'String'>
+    readonly localCount: FieldRef<"PaymentReconciliationRun", 'Int'>
+    readonly providerCount: FieldRef<"PaymentReconciliationRun", 'Int'>
+    readonly discrepancyCount: FieldRef<"PaymentReconciliationRun", 'Int'>
+    readonly errorMessage: FieldRef<"PaymentReconciliationRun", 'String'>
+    readonly completedAt: FieldRef<"PaymentReconciliationRun", 'DateTime'>
+    readonly createdAt: FieldRef<"PaymentReconciliationRun", 'DateTime'>
+    readonly updatedAt: FieldRef<"PaymentReconciliationRun", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PaymentReconciliationRun findUnique
+   */
+  export type PaymentReconciliationRunFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationRun to fetch.
+     */
+    where: PaymentReconciliationRunWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationRun findUniqueOrThrow
+   */
+  export type PaymentReconciliationRunFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationRun to fetch.
+     */
+    where: PaymentReconciliationRunWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationRun findFirst
+   */
+  export type PaymentReconciliationRunFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationRun to fetch.
+     */
+    where?: PaymentReconciliationRunWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationRuns to fetch.
+     */
+    orderBy?: PaymentReconciliationRunOrderByWithRelationInput | PaymentReconciliationRunOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentReconciliationRuns.
+     */
+    cursor?: PaymentReconciliationRunWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationRuns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationRuns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentReconciliationRuns.
+     */
+    distinct?: PaymentReconciliationRunScalarFieldEnum | PaymentReconciliationRunScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentReconciliationRun findFirstOrThrow
+   */
+  export type PaymentReconciliationRunFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationRun to fetch.
+     */
+    where?: PaymentReconciliationRunWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationRuns to fetch.
+     */
+    orderBy?: PaymentReconciliationRunOrderByWithRelationInput | PaymentReconciliationRunOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentReconciliationRuns.
+     */
+    cursor?: PaymentReconciliationRunWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationRuns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationRuns.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentReconciliationRuns.
+     */
+    distinct?: PaymentReconciliationRunScalarFieldEnum | PaymentReconciliationRunScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentReconciliationRun findMany
+   */
+  export type PaymentReconciliationRunFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationRuns to fetch.
+     */
+    where?: PaymentReconciliationRunWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationRuns to fetch.
+     */
+    orderBy?: PaymentReconciliationRunOrderByWithRelationInput | PaymentReconciliationRunOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PaymentReconciliationRuns.
+     */
+    cursor?: PaymentReconciliationRunWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationRuns from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationRuns.
+     */
+    skip?: number
+    distinct?: PaymentReconciliationRunScalarFieldEnum | PaymentReconciliationRunScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentReconciliationRun create
+   */
+  export type PaymentReconciliationRunCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PaymentReconciliationRun.
+     */
+    data: XOR<PaymentReconciliationRunCreateInput, PaymentReconciliationRunUncheckedCreateInput>
+  }
+
+  /**
+   * PaymentReconciliationRun createMany
+   */
+  export type PaymentReconciliationRunCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PaymentReconciliationRuns.
+     */
+    data: PaymentReconciliationRunCreateManyInput | PaymentReconciliationRunCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaymentReconciliationRun createManyAndReturn
+   */
+  export type PaymentReconciliationRunCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * The data used to create many PaymentReconciliationRuns.
+     */
+    data: PaymentReconciliationRunCreateManyInput | PaymentReconciliationRunCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaymentReconciliationRun update
+   */
+  export type PaymentReconciliationRunUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PaymentReconciliationRun.
+     */
+    data: XOR<PaymentReconciliationRunUpdateInput, PaymentReconciliationRunUncheckedUpdateInput>
+    /**
+     * Choose, which PaymentReconciliationRun to update.
+     */
+    where: PaymentReconciliationRunWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationRun updateMany
+   */
+  export type PaymentReconciliationRunUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PaymentReconciliationRuns.
+     */
+    data: XOR<PaymentReconciliationRunUpdateManyMutationInput, PaymentReconciliationRunUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentReconciliationRuns to update
+     */
+    where?: PaymentReconciliationRunWhereInput
+    /**
+     * Limit how many PaymentReconciliationRuns to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentReconciliationRun updateManyAndReturn
+   */
+  export type PaymentReconciliationRunUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * The data used to update PaymentReconciliationRuns.
+     */
+    data: XOR<PaymentReconciliationRunUpdateManyMutationInput, PaymentReconciliationRunUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentReconciliationRuns to update
+     */
+    where?: PaymentReconciliationRunWhereInput
+    /**
+     * Limit how many PaymentReconciliationRuns to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentReconciliationRun upsert
+   */
+  export type PaymentReconciliationRunUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PaymentReconciliationRun to update in case it exists.
+     */
+    where: PaymentReconciliationRunWhereUniqueInput
+    /**
+     * In case the PaymentReconciliationRun found by the `where` argument doesn't exist, create a new PaymentReconciliationRun with this data.
+     */
+    create: XOR<PaymentReconciliationRunCreateInput, PaymentReconciliationRunUncheckedCreateInput>
+    /**
+     * In case the PaymentReconciliationRun was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaymentReconciliationRunUpdateInput, PaymentReconciliationRunUncheckedUpdateInput>
+  }
+
+  /**
+   * PaymentReconciliationRun delete
+   */
+  export type PaymentReconciliationRunDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+    /**
+     * Filter which PaymentReconciliationRun to delete.
+     */
+    where: PaymentReconciliationRunWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationRun deleteMany
+   */
+  export type PaymentReconciliationRunDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentReconciliationRuns to delete
+     */
+    where?: PaymentReconciliationRunWhereInput
+    /**
+     * Limit how many PaymentReconciliationRuns to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentReconciliationRun.discrepancies
+   */
+  export type PaymentReconciliationRun$discrepanciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    orderBy?: PaymentReconciliationDiscrepancyOrderByWithRelationInput | PaymentReconciliationDiscrepancyOrderByWithRelationInput[]
+    cursor?: PaymentReconciliationDiscrepancyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentReconciliationDiscrepancyScalarFieldEnum | PaymentReconciliationDiscrepancyScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentReconciliationRun without action
+   */
+  export type PaymentReconciliationRunDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationRun
+     */
+    select?: PaymentReconciliationRunSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationRun
+     */
+    omit?: PaymentReconciliationRunOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationRunInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PaymentReconciliationDiscrepancy
+   */
+
+  export type AggregatePaymentReconciliationDiscrepancy = {
+    _count: PaymentReconciliationDiscrepancyCountAggregateOutputType | null
+    _avg: PaymentReconciliationDiscrepancyAvgAggregateOutputType | null
+    _sum: PaymentReconciliationDiscrepancySumAggregateOutputType | null
+    _min: PaymentReconciliationDiscrepancyMinAggregateOutputType | null
+    _max: PaymentReconciliationDiscrepancyMaxAggregateOutputType | null
+  }
+
+  export type PaymentReconciliationDiscrepancyAvgAggregateOutputType = {
+    localAmount: Decimal | null
+    providerAmount: Decimal | null
+  }
+
+  export type PaymentReconciliationDiscrepancySumAggregateOutputType = {
+    localAmount: Decimal | null
+    providerAmount: Decimal | null
+  }
+
+  export type PaymentReconciliationDiscrepancyMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    runId: string | null
+    paymentNo: string | null
+    type: string | null
+    localAmount: Decimal | null
+    providerAmount: Decimal | null
+    providerTradeNo: string | null
+    resolvedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type PaymentReconciliationDiscrepancyMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    runId: string | null
+    paymentNo: string | null
+    type: string | null
+    localAmount: Decimal | null
+    providerAmount: Decimal | null
+    providerTradeNo: string | null
+    resolvedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type PaymentReconciliationDiscrepancyCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    runId: number
+    paymentNo: number
+    type: number
+    localAmount: number
+    providerAmount: number
+    providerTradeNo: number
+    resolvedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PaymentReconciliationDiscrepancyAvgAggregateInputType = {
+    localAmount?: true
+    providerAmount?: true
+  }
+
+  export type PaymentReconciliationDiscrepancySumAggregateInputType = {
+    localAmount?: true
+    providerAmount?: true
+  }
+
+  export type PaymentReconciliationDiscrepancyMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    runId?: true
+    paymentNo?: true
+    type?: true
+    localAmount?: true
+    providerAmount?: true
+    providerTradeNo?: true
+    resolvedAt?: true
+    createdAt?: true
+  }
+
+  export type PaymentReconciliationDiscrepancyMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    runId?: true
+    paymentNo?: true
+    type?: true
+    localAmount?: true
+    providerAmount?: true
+    providerTradeNo?: true
+    resolvedAt?: true
+    createdAt?: true
+  }
+
+  export type PaymentReconciliationDiscrepancyCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    runId?: true
+    paymentNo?: true
+    type?: true
+    localAmount?: true
+    providerAmount?: true
+    providerTradeNo?: true
+    resolvedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PaymentReconciliationDiscrepancyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentReconciliationDiscrepancy to aggregate.
+     */
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationDiscrepancies to fetch.
+     */
+    orderBy?: PaymentReconciliationDiscrepancyOrderByWithRelationInput | PaymentReconciliationDiscrepancyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaymentReconciliationDiscrepancyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationDiscrepancies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationDiscrepancies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PaymentReconciliationDiscrepancies
+    **/
+    _count?: true | PaymentReconciliationDiscrepancyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PaymentReconciliationDiscrepancyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaymentReconciliationDiscrepancySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaymentReconciliationDiscrepancyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaymentReconciliationDiscrepancyMaxAggregateInputType
+  }
+
+  export type GetPaymentReconciliationDiscrepancyAggregateType<T extends PaymentReconciliationDiscrepancyAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaymentReconciliationDiscrepancy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaymentReconciliationDiscrepancy[P]>
+      : GetScalarType<T[P], AggregatePaymentReconciliationDiscrepancy[P]>
+  }
+
+
+
+
+  export type PaymentReconciliationDiscrepancyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    orderBy?: PaymentReconciliationDiscrepancyOrderByWithAggregationInput | PaymentReconciliationDiscrepancyOrderByWithAggregationInput[]
+    by: PaymentReconciliationDiscrepancyScalarFieldEnum[] | PaymentReconciliationDiscrepancyScalarFieldEnum
+    having?: PaymentReconciliationDiscrepancyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaymentReconciliationDiscrepancyCountAggregateInputType | true
+    _avg?: PaymentReconciliationDiscrepancyAvgAggregateInputType
+    _sum?: PaymentReconciliationDiscrepancySumAggregateInputType
+    _min?: PaymentReconciliationDiscrepancyMinAggregateInputType
+    _max?: PaymentReconciliationDiscrepancyMaxAggregateInputType
+  }
+
+  export type PaymentReconciliationDiscrepancyGroupByOutputType = {
+    id: string
+    tenantId: string
+    runId: string
+    paymentNo: string
+    type: string
+    localAmount: Decimal | null
+    providerAmount: Decimal | null
+    providerTradeNo: string | null
+    resolvedAt: Date | null
+    createdAt: Date
+    _count: PaymentReconciliationDiscrepancyCountAggregateOutputType | null
+    _avg: PaymentReconciliationDiscrepancyAvgAggregateOutputType | null
+    _sum: PaymentReconciliationDiscrepancySumAggregateOutputType | null
+    _min: PaymentReconciliationDiscrepancyMinAggregateOutputType | null
+    _max: PaymentReconciliationDiscrepancyMaxAggregateOutputType | null
+  }
+
+  type GetPaymentReconciliationDiscrepancyGroupByPayload<T extends PaymentReconciliationDiscrepancyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentReconciliationDiscrepancyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaymentReconciliationDiscrepancyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaymentReconciliationDiscrepancyGroupByOutputType[P]>
+            : GetScalarType<T[P], PaymentReconciliationDiscrepancyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaymentReconciliationDiscrepancySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    runId?: boolean
+    paymentNo?: boolean
+    type?: boolean
+    localAmount?: boolean
+    providerAmount?: boolean
+    providerTradeNo?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    run?: boolean | PaymentReconciliationRunDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentReconciliationDiscrepancy"]>
+
+  export type PaymentReconciliationDiscrepancySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    runId?: boolean
+    paymentNo?: boolean
+    type?: boolean
+    localAmount?: boolean
+    providerAmount?: boolean
+    providerTradeNo?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    run?: boolean | PaymentReconciliationRunDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentReconciliationDiscrepancy"]>
+
+  export type PaymentReconciliationDiscrepancySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    runId?: boolean
+    paymentNo?: boolean
+    type?: boolean
+    localAmount?: boolean
+    providerAmount?: boolean
+    providerTradeNo?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    run?: boolean | PaymentReconciliationRunDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentReconciliationDiscrepancy"]>
+
+  export type PaymentReconciliationDiscrepancySelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    runId?: boolean
+    paymentNo?: boolean
+    type?: boolean
+    localAmount?: boolean
+    providerAmount?: boolean
+    providerTradeNo?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type PaymentReconciliationDiscrepancyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "runId" | "paymentNo" | "type" | "localAmount" | "providerAmount" | "providerTradeNo" | "resolvedAt" | "createdAt", ExtArgs["result"]["paymentReconciliationDiscrepancy"]>
+  export type PaymentReconciliationDiscrepancyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    run?: boolean | PaymentReconciliationRunDefaultArgs<ExtArgs>
+  }
+  export type PaymentReconciliationDiscrepancyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    run?: boolean | PaymentReconciliationRunDefaultArgs<ExtArgs>
+  }
+  export type PaymentReconciliationDiscrepancyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    run?: boolean | PaymentReconciliationRunDefaultArgs<ExtArgs>
+  }
+
+  export type $PaymentReconciliationDiscrepancyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PaymentReconciliationDiscrepancy"
+    objects: {
+      run: Prisma.$PaymentReconciliationRunPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      runId: string
+      paymentNo: string
+      type: string
+      localAmount: Prisma.Decimal | null
+      providerAmount: Prisma.Decimal | null
+      providerTradeNo: string | null
+      resolvedAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["paymentReconciliationDiscrepancy"]>
+    composites: {}
+  }
+
+  type PaymentReconciliationDiscrepancyGetPayload<S extends boolean | null | undefined | PaymentReconciliationDiscrepancyDefaultArgs> = $Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload, S>
+
+  type PaymentReconciliationDiscrepancyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaymentReconciliationDiscrepancyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaymentReconciliationDiscrepancyCountAggregateInputType | true
+    }
+
+  export interface PaymentReconciliationDiscrepancyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaymentReconciliationDiscrepancy'], meta: { name: 'PaymentReconciliationDiscrepancy' } }
+    /**
+     * Find zero or one PaymentReconciliationDiscrepancy that matches the filter.
+     * @param {PaymentReconciliationDiscrepancyFindUniqueArgs} args - Arguments to find a PaymentReconciliationDiscrepancy
+     * @example
+     * // Get one PaymentReconciliationDiscrepancy
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaymentReconciliationDiscrepancyFindUniqueArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyFindUniqueArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PaymentReconciliationDiscrepancy that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaymentReconciliationDiscrepancyFindUniqueOrThrowArgs} args - Arguments to find a PaymentReconciliationDiscrepancy
+     * @example
+     * // Get one PaymentReconciliationDiscrepancy
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaymentReconciliationDiscrepancyFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentReconciliationDiscrepancy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationDiscrepancyFindFirstArgs} args - Arguments to find a PaymentReconciliationDiscrepancy
+     * @example
+     * // Get one PaymentReconciliationDiscrepancy
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaymentReconciliationDiscrepancyFindFirstArgs>(args?: SelectSubset<T, PaymentReconciliationDiscrepancyFindFirstArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentReconciliationDiscrepancy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationDiscrepancyFindFirstOrThrowArgs} args - Arguments to find a PaymentReconciliationDiscrepancy
+     * @example
+     * // Get one PaymentReconciliationDiscrepancy
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaymentReconciliationDiscrepancyFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentReconciliationDiscrepancyFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PaymentReconciliationDiscrepancies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationDiscrepancyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PaymentReconciliationDiscrepancies
+     * const paymentReconciliationDiscrepancies = await prisma.paymentReconciliationDiscrepancy.findMany()
+     * 
+     * // Get first 10 PaymentReconciliationDiscrepancies
+     * const paymentReconciliationDiscrepancies = await prisma.paymentReconciliationDiscrepancy.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paymentReconciliationDiscrepancyWithIdOnly = await prisma.paymentReconciliationDiscrepancy.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaymentReconciliationDiscrepancyFindManyArgs>(args?: SelectSubset<T, PaymentReconciliationDiscrepancyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PaymentReconciliationDiscrepancy.
+     * @param {PaymentReconciliationDiscrepancyCreateArgs} args - Arguments to create a PaymentReconciliationDiscrepancy.
+     * @example
+     * // Create one PaymentReconciliationDiscrepancy
+     * const PaymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.create({
+     *   data: {
+     *     // ... data to create a PaymentReconciliationDiscrepancy
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaymentReconciliationDiscrepancyCreateArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyCreateArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PaymentReconciliationDiscrepancies.
+     * @param {PaymentReconciliationDiscrepancyCreateManyArgs} args - Arguments to create many PaymentReconciliationDiscrepancies.
+     * @example
+     * // Create many PaymentReconciliationDiscrepancies
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaymentReconciliationDiscrepancyCreateManyArgs>(args?: SelectSubset<T, PaymentReconciliationDiscrepancyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PaymentReconciliationDiscrepancies and returns the data saved in the database.
+     * @param {PaymentReconciliationDiscrepancyCreateManyAndReturnArgs} args - Arguments to create many PaymentReconciliationDiscrepancies.
+     * @example
+     * // Create many PaymentReconciliationDiscrepancies
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PaymentReconciliationDiscrepancies and only return the `id`
+     * const paymentReconciliationDiscrepancyWithIdOnly = await prisma.paymentReconciliationDiscrepancy.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaymentReconciliationDiscrepancyCreateManyAndReturnArgs>(args?: SelectSubset<T, PaymentReconciliationDiscrepancyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PaymentReconciliationDiscrepancy.
+     * @param {PaymentReconciliationDiscrepancyDeleteArgs} args - Arguments to delete one PaymentReconciliationDiscrepancy.
+     * @example
+     * // Delete one PaymentReconciliationDiscrepancy
+     * const PaymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.delete({
+     *   where: {
+     *     // ... filter to delete one PaymentReconciliationDiscrepancy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaymentReconciliationDiscrepancyDeleteArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyDeleteArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PaymentReconciliationDiscrepancy.
+     * @param {PaymentReconciliationDiscrepancyUpdateArgs} args - Arguments to update one PaymentReconciliationDiscrepancy.
+     * @example
+     * // Update one PaymentReconciliationDiscrepancy
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaymentReconciliationDiscrepancyUpdateArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyUpdateArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PaymentReconciliationDiscrepancies.
+     * @param {PaymentReconciliationDiscrepancyDeleteManyArgs} args - Arguments to filter PaymentReconciliationDiscrepancies to delete.
+     * @example
+     * // Delete a few PaymentReconciliationDiscrepancies
+     * const { count } = await prisma.paymentReconciliationDiscrepancy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaymentReconciliationDiscrepancyDeleteManyArgs>(args?: SelectSubset<T, PaymentReconciliationDiscrepancyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentReconciliationDiscrepancies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationDiscrepancyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PaymentReconciliationDiscrepancies
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaymentReconciliationDiscrepancyUpdateManyArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentReconciliationDiscrepancies and returns the data updated in the database.
+     * @param {PaymentReconciliationDiscrepancyUpdateManyAndReturnArgs} args - Arguments to update many PaymentReconciliationDiscrepancies.
+     * @example
+     * // Update many PaymentReconciliationDiscrepancies
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PaymentReconciliationDiscrepancies and only return the `id`
+     * const paymentReconciliationDiscrepancyWithIdOnly = await prisma.paymentReconciliationDiscrepancy.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaymentReconciliationDiscrepancyUpdateManyAndReturnArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PaymentReconciliationDiscrepancy.
+     * @param {PaymentReconciliationDiscrepancyUpsertArgs} args - Arguments to update or create a PaymentReconciliationDiscrepancy.
+     * @example
+     * // Update or create a PaymentReconciliationDiscrepancy
+     * const paymentReconciliationDiscrepancy = await prisma.paymentReconciliationDiscrepancy.upsert({
+     *   create: {
+     *     // ... data to create a PaymentReconciliationDiscrepancy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PaymentReconciliationDiscrepancy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaymentReconciliationDiscrepancyUpsertArgs>(args: SelectSubset<T, PaymentReconciliationDiscrepancyUpsertArgs<ExtArgs>>): Prisma__PaymentReconciliationDiscrepancyClient<$Result.GetResult<Prisma.$PaymentReconciliationDiscrepancyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PaymentReconciliationDiscrepancies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationDiscrepancyCountArgs} args - Arguments to filter PaymentReconciliationDiscrepancies to count.
+     * @example
+     * // Count the number of PaymentReconciliationDiscrepancies
+     * const count = await prisma.paymentReconciliationDiscrepancy.count({
+     *   where: {
+     *     // ... the filter for the PaymentReconciliationDiscrepancies we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaymentReconciliationDiscrepancyCountArgs>(
+      args?: Subset<T, PaymentReconciliationDiscrepancyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaymentReconciliationDiscrepancyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PaymentReconciliationDiscrepancy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationDiscrepancyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaymentReconciliationDiscrepancyAggregateArgs>(args: Subset<T, PaymentReconciliationDiscrepancyAggregateArgs>): Prisma.PrismaPromise<GetPaymentReconciliationDiscrepancyAggregateType<T>>
+
+    /**
+     * Group by PaymentReconciliationDiscrepancy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentReconciliationDiscrepancyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaymentReconciliationDiscrepancyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaymentReconciliationDiscrepancyGroupByArgs['orderBy'] }
+        : { orderBy?: PaymentReconciliationDiscrepancyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaymentReconciliationDiscrepancyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentReconciliationDiscrepancyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PaymentReconciliationDiscrepancy model
+   */
+  readonly fields: PaymentReconciliationDiscrepancyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PaymentReconciliationDiscrepancy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaymentReconciliationDiscrepancyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    run<T extends PaymentReconciliationRunDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaymentReconciliationRunDefaultArgs<ExtArgs>>): Prisma__PaymentReconciliationRunClient<$Result.GetResult<Prisma.$PaymentReconciliationRunPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PaymentReconciliationDiscrepancy model
+   */
+  interface PaymentReconciliationDiscrepancyFieldRefs {
+    readonly id: FieldRef<"PaymentReconciliationDiscrepancy", 'String'>
+    readonly tenantId: FieldRef<"PaymentReconciliationDiscrepancy", 'String'>
+    readonly runId: FieldRef<"PaymentReconciliationDiscrepancy", 'String'>
+    readonly paymentNo: FieldRef<"PaymentReconciliationDiscrepancy", 'String'>
+    readonly type: FieldRef<"PaymentReconciliationDiscrepancy", 'String'>
+    readonly localAmount: FieldRef<"PaymentReconciliationDiscrepancy", 'Decimal'>
+    readonly providerAmount: FieldRef<"PaymentReconciliationDiscrepancy", 'Decimal'>
+    readonly providerTradeNo: FieldRef<"PaymentReconciliationDiscrepancy", 'String'>
+    readonly resolvedAt: FieldRef<"PaymentReconciliationDiscrepancy", 'DateTime'>
+    readonly createdAt: FieldRef<"PaymentReconciliationDiscrepancy", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PaymentReconciliationDiscrepancy findUnique
+   */
+  export type PaymentReconciliationDiscrepancyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationDiscrepancy to fetch.
+     */
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy findUniqueOrThrow
+   */
+  export type PaymentReconciliationDiscrepancyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationDiscrepancy to fetch.
+     */
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy findFirst
+   */
+  export type PaymentReconciliationDiscrepancyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationDiscrepancy to fetch.
+     */
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationDiscrepancies to fetch.
+     */
+    orderBy?: PaymentReconciliationDiscrepancyOrderByWithRelationInput | PaymentReconciliationDiscrepancyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentReconciliationDiscrepancies.
+     */
+    cursor?: PaymentReconciliationDiscrepancyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationDiscrepancies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationDiscrepancies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentReconciliationDiscrepancies.
+     */
+    distinct?: PaymentReconciliationDiscrepancyScalarFieldEnum | PaymentReconciliationDiscrepancyScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy findFirstOrThrow
+   */
+  export type PaymentReconciliationDiscrepancyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationDiscrepancy to fetch.
+     */
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationDiscrepancies to fetch.
+     */
+    orderBy?: PaymentReconciliationDiscrepancyOrderByWithRelationInput | PaymentReconciliationDiscrepancyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentReconciliationDiscrepancies.
+     */
+    cursor?: PaymentReconciliationDiscrepancyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationDiscrepancies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationDiscrepancies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentReconciliationDiscrepancies.
+     */
+    distinct?: PaymentReconciliationDiscrepancyScalarFieldEnum | PaymentReconciliationDiscrepancyScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy findMany
+   */
+  export type PaymentReconciliationDiscrepancyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentReconciliationDiscrepancies to fetch.
+     */
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentReconciliationDiscrepancies to fetch.
+     */
+    orderBy?: PaymentReconciliationDiscrepancyOrderByWithRelationInput | PaymentReconciliationDiscrepancyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PaymentReconciliationDiscrepancies.
+     */
+    cursor?: PaymentReconciliationDiscrepancyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentReconciliationDiscrepancies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentReconciliationDiscrepancies.
+     */
+    skip?: number
+    distinct?: PaymentReconciliationDiscrepancyScalarFieldEnum | PaymentReconciliationDiscrepancyScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy create
+   */
+  export type PaymentReconciliationDiscrepancyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PaymentReconciliationDiscrepancy.
+     */
+    data: XOR<PaymentReconciliationDiscrepancyCreateInput, PaymentReconciliationDiscrepancyUncheckedCreateInput>
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy createMany
+   */
+  export type PaymentReconciliationDiscrepancyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PaymentReconciliationDiscrepancies.
+     */
+    data: PaymentReconciliationDiscrepancyCreateManyInput | PaymentReconciliationDiscrepancyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy createManyAndReturn
+   */
+  export type PaymentReconciliationDiscrepancyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * The data used to create many PaymentReconciliationDiscrepancies.
+     */
+    data: PaymentReconciliationDiscrepancyCreateManyInput | PaymentReconciliationDiscrepancyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy update
+   */
+  export type PaymentReconciliationDiscrepancyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PaymentReconciliationDiscrepancy.
+     */
+    data: XOR<PaymentReconciliationDiscrepancyUpdateInput, PaymentReconciliationDiscrepancyUncheckedUpdateInput>
+    /**
+     * Choose, which PaymentReconciliationDiscrepancy to update.
+     */
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy updateMany
+   */
+  export type PaymentReconciliationDiscrepancyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PaymentReconciliationDiscrepancies.
+     */
+    data: XOR<PaymentReconciliationDiscrepancyUpdateManyMutationInput, PaymentReconciliationDiscrepancyUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentReconciliationDiscrepancies to update
+     */
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    /**
+     * Limit how many PaymentReconciliationDiscrepancies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy updateManyAndReturn
+   */
+  export type PaymentReconciliationDiscrepancyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * The data used to update PaymentReconciliationDiscrepancies.
+     */
+    data: XOR<PaymentReconciliationDiscrepancyUpdateManyMutationInput, PaymentReconciliationDiscrepancyUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentReconciliationDiscrepancies to update
+     */
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    /**
+     * Limit how many PaymentReconciliationDiscrepancies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy upsert
+   */
+  export type PaymentReconciliationDiscrepancyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PaymentReconciliationDiscrepancy to update in case it exists.
+     */
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+    /**
+     * In case the PaymentReconciliationDiscrepancy found by the `where` argument doesn't exist, create a new PaymentReconciliationDiscrepancy with this data.
+     */
+    create: XOR<PaymentReconciliationDiscrepancyCreateInput, PaymentReconciliationDiscrepancyUncheckedCreateInput>
+    /**
+     * In case the PaymentReconciliationDiscrepancy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaymentReconciliationDiscrepancyUpdateInput, PaymentReconciliationDiscrepancyUncheckedUpdateInput>
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy delete
+   */
+  export type PaymentReconciliationDiscrepancyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
+    /**
+     * Filter which PaymentReconciliationDiscrepancy to delete.
+     */
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy deleteMany
+   */
+  export type PaymentReconciliationDiscrepancyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentReconciliationDiscrepancies to delete
+     */
+    where?: PaymentReconciliationDiscrepancyWhereInput
+    /**
+     * Limit how many PaymentReconciliationDiscrepancies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentReconciliationDiscrepancy without action
+   */
+  export type PaymentReconciliationDiscrepancyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentReconciliationDiscrepancy
+     */
+    select?: PaymentReconciliationDiscrepancySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentReconciliationDiscrepancy
+     */
+    omit?: PaymentReconciliationDiscrepancyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentReconciliationDiscrepancyInclude<ExtArgs> | null
   }
 
 
@@ -40384,6 +48354,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     tokenHash: 'tokenHash',
+    actorType: 'actorType',
     expiresAt: 'expiresAt',
     revokedAt: 'revokedAt',
     createdAt: 'createdAt'
@@ -40520,6 +48491,58 @@ export namespace Prisma {
   export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+  export const DomainEventOutboxScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    aggregateType: 'aggregateType',
+    aggregateId: 'aggregateId',
+    eventType: 'eventType',
+    payload: 'payload',
+    occurredAt: 'occurredAt',
+    publishedAt: 'publishedAt'
+  };
+
+  export type DomainEventOutboxScalarFieldEnum = (typeof DomainEventOutboxScalarFieldEnum)[keyof typeof DomainEventOutboxScalarFieldEnum]
+
+
+  export const MediaUploadSessionScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    actorId: 'actorId',
+    purpose: 'purpose',
+    objectKey: 'objectKey',
+    fileName: 'fileName',
+    mimeType: 'mimeType',
+    sizeBytes: 'sizeBytes',
+    status: 'status',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MediaUploadSessionScalarFieldEnum = (typeof MediaUploadSessionScalarFieldEnum)[keyof typeof MediaUploadSessionScalarFieldEnum]
+
+
+  export const MediaAssetScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    uploadSessionId: 'uploadSessionId',
+    createdBy: 'createdBy',
+    purpose: 'purpose',
+    objectKey: 'objectKey',
+    mimeType: 'mimeType',
+    sizeBytes: 'sizeBytes',
+    sha256: 'sha256',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
+    purgedAt: 'purgedAt'
+  };
+
+  export type MediaAssetScalarFieldEnum = (typeof MediaAssetScalarFieldEnum)[keyof typeof MediaAssetScalarFieldEnum]
+
+
   export const TenantProbeScalarFieldEnum: {
     id: 'id',
     tenantId: 'tenantId',
@@ -40536,7 +48559,11 @@ export namespace Prisma {
     parentId: 'parentId',
     name: 'name',
     sortOrder: 'sortOrder',
-    createdAt: 'createdAt'
+    status: 'status',
+    version: 'version',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
@@ -40547,7 +48574,11 @@ export namespace Prisma {
     tenantId: 'tenantId',
     name: 'name',
     logoUrl: 'logoUrl',
-    createdAt: 'createdAt'
+    status: 'status',
+    version: 'version',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
@@ -40569,7 +48600,8 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     createdBy: 'createdBy',
     updatedBy: 'updatedBy',
-    version: 'version'
+    version: 'version',
+    deletedAt: 'deletedAt'
   };
 
   export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -40584,11 +48616,33 @@ export namespace Prisma {
     price: 'price',
     costPrice: 'costPrice',
     weightG: 'weightG',
+    version: 'version',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type ProductVariantScalarFieldEnum = (typeof ProductVariantScalarFieldEnum)[keyof typeof ProductVariantScalarFieldEnum]
+
+
+  export const ProductImageScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    productId: 'productId',
+    mediaAssetId: 'mediaAssetId',
+    url: 'url',
+    altText: 'altText',
+    sortOrder: 'sortOrder',
+    isPrimary: 'isPrimary',
+    sizeBytes: 'sizeBytes',
+    mimeType: 'mimeType',
+    version: 'version',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum]
 
 
   export const OrderScalarFieldEnum: {
@@ -40637,6 +48691,40 @@ export namespace Prisma {
   };
 
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+  export const PaymentReconciliationRunScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    channel: 'channel',
+    billDate: 'billDate',
+    status: 'status',
+    localCount: 'localCount',
+    providerCount: 'providerCount',
+    discrepancyCount: 'discrepancyCount',
+    errorMessage: 'errorMessage',
+    completedAt: 'completedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PaymentReconciliationRunScalarFieldEnum = (typeof PaymentReconciliationRunScalarFieldEnum)[keyof typeof PaymentReconciliationRunScalarFieldEnum]
+
+
+  export const PaymentReconciliationDiscrepancyScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    runId: 'runId',
+    paymentNo: 'paymentNo',
+    type: 'type',
+    localAmount: 'localAmount',
+    providerAmount: 'providerAmount',
+    providerTradeNo: 'providerTradeNo',
+    resolvedAt: 'resolvedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type PaymentReconciliationDiscrepancyScalarFieldEnum = (typeof PaymentReconciliationDiscrepancyScalarFieldEnum)[keyof typeof PaymentReconciliationDiscrepancyScalarFieldEnum]
 
 
   export const OrderItemScalarFieldEnum: {
@@ -40979,6 +49067,8 @@ export namespace Prisma {
     customers?: CustomerListRelationFilter
     roles?: RoleListRelationFilter
     providerCallbackRoutes?: ProviderCallbackRouteListRelationFilter
+    mediaUploadSessions?: MediaUploadSessionListRelationFilter
+    mediaAssets?: MediaAssetListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -41005,6 +49095,8 @@ export namespace Prisma {
     customers?: CustomerOrderByRelationAggregateInput
     roles?: RoleOrderByRelationAggregateInput
     providerCallbackRoutes?: ProviderCallbackRouteOrderByRelationAggregateInput
+    mediaUploadSessions?: MediaUploadSessionOrderByRelationAggregateInput
+    mediaAssets?: MediaAssetOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -41034,6 +49126,8 @@ export namespace Prisma {
     customers?: CustomerListRelationFilter
     roles?: RoleListRelationFilter
     providerCallbackRoutes?: ProviderCallbackRouteListRelationFilter
+    mediaUploadSessions?: MediaUploadSessionListRelationFilter
+    mediaAssets?: MediaAssetListRelationFilter
   }, "id" | "subdomain" | "customDomain" | "schemaName" | "subscriptionId">
 
   export type TenantOrderByWithAggregationInput = {
@@ -41365,6 +49459,7 @@ export namespace Prisma {
     id?: UuidFilter<"RefreshSession"> | string
     userId?: UuidFilter<"RefreshSession"> | string
     tokenHash?: StringFilter<"RefreshSession"> | string
+    actorType?: StringFilter<"RefreshSession"> | string
     expiresAt?: DateTimeFilter<"RefreshSession"> | Date | string
     revokedAt?: DateTimeNullableFilter<"RefreshSession"> | Date | string | null
     createdAt?: DateTimeFilter<"RefreshSession"> | Date | string
@@ -41375,6 +49470,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     tokenHash?: SortOrder
+    actorType?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -41388,6 +49484,7 @@ export namespace Prisma {
     OR?: RefreshSessionWhereInput[]
     NOT?: RefreshSessionWhereInput | RefreshSessionWhereInput[]
     userId?: UuidFilter<"RefreshSession"> | string
+    actorType?: StringFilter<"RefreshSession"> | string
     expiresAt?: DateTimeFilter<"RefreshSession"> | Date | string
     revokedAt?: DateTimeNullableFilter<"RefreshSession"> | Date | string | null
     createdAt?: DateTimeFilter<"RefreshSession"> | Date | string
@@ -41398,6 +49495,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     tokenHash?: SortOrder
+    actorType?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -41413,6 +49511,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"RefreshSession"> | string
     userId?: UuidWithAggregatesFilter<"RefreshSession"> | string
     tokenHash?: StringWithAggregatesFilter<"RefreshSession"> | string
+    actorType?: StringWithAggregatesFilter<"RefreshSession"> | string
     expiresAt?: DateTimeWithAggregatesFilter<"RefreshSession"> | Date | string
     revokedAt?: DateTimeNullableWithAggregatesFilter<"RefreshSession"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"RefreshSession"> | Date | string
@@ -42094,6 +50193,276 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"AuditLog"> | Date | string
   }
 
+  export type DomainEventOutboxWhereInput = {
+    AND?: DomainEventOutboxWhereInput | DomainEventOutboxWhereInput[]
+    OR?: DomainEventOutboxWhereInput[]
+    NOT?: DomainEventOutboxWhereInput | DomainEventOutboxWhereInput[]
+    id?: UuidFilter<"DomainEventOutbox"> | string
+    tenantId?: UuidFilter<"DomainEventOutbox"> | string
+    aggregateType?: StringFilter<"DomainEventOutbox"> | string
+    aggregateId?: StringFilter<"DomainEventOutbox"> | string
+    eventType?: StringFilter<"DomainEventOutbox"> | string
+    payload?: JsonFilter<"DomainEventOutbox">
+    occurredAt?: DateTimeFilter<"DomainEventOutbox"> | Date | string
+    publishedAt?: DateTimeNullableFilter<"DomainEventOutbox"> | Date | string | null
+  }
+
+  export type DomainEventOutboxOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    aggregateType?: SortOrder
+    aggregateId?: SortOrder
+    eventType?: SortOrder
+    payload?: SortOrder
+    occurredAt?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+  }
+
+  export type DomainEventOutboxWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DomainEventOutboxWhereInput | DomainEventOutboxWhereInput[]
+    OR?: DomainEventOutboxWhereInput[]
+    NOT?: DomainEventOutboxWhereInput | DomainEventOutboxWhereInput[]
+    tenantId?: UuidFilter<"DomainEventOutbox"> | string
+    aggregateType?: StringFilter<"DomainEventOutbox"> | string
+    aggregateId?: StringFilter<"DomainEventOutbox"> | string
+    eventType?: StringFilter<"DomainEventOutbox"> | string
+    payload?: JsonFilter<"DomainEventOutbox">
+    occurredAt?: DateTimeFilter<"DomainEventOutbox"> | Date | string
+    publishedAt?: DateTimeNullableFilter<"DomainEventOutbox"> | Date | string | null
+  }, "id">
+
+  export type DomainEventOutboxOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    aggregateType?: SortOrder
+    aggregateId?: SortOrder
+    eventType?: SortOrder
+    payload?: SortOrder
+    occurredAt?: SortOrder
+    publishedAt?: SortOrderInput | SortOrder
+    _count?: DomainEventOutboxCountOrderByAggregateInput
+    _max?: DomainEventOutboxMaxOrderByAggregateInput
+    _min?: DomainEventOutboxMinOrderByAggregateInput
+  }
+
+  export type DomainEventOutboxScalarWhereWithAggregatesInput = {
+    AND?: DomainEventOutboxScalarWhereWithAggregatesInput | DomainEventOutboxScalarWhereWithAggregatesInput[]
+    OR?: DomainEventOutboxScalarWhereWithAggregatesInput[]
+    NOT?: DomainEventOutboxScalarWhereWithAggregatesInput | DomainEventOutboxScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"DomainEventOutbox"> | string
+    tenantId?: UuidWithAggregatesFilter<"DomainEventOutbox"> | string
+    aggregateType?: StringWithAggregatesFilter<"DomainEventOutbox"> | string
+    aggregateId?: StringWithAggregatesFilter<"DomainEventOutbox"> | string
+    eventType?: StringWithAggregatesFilter<"DomainEventOutbox"> | string
+    payload?: JsonWithAggregatesFilter<"DomainEventOutbox">
+    occurredAt?: DateTimeWithAggregatesFilter<"DomainEventOutbox"> | Date | string
+    publishedAt?: DateTimeNullableWithAggregatesFilter<"DomainEventOutbox"> | Date | string | null
+  }
+
+  export type MediaUploadSessionWhereInput = {
+    AND?: MediaUploadSessionWhereInput | MediaUploadSessionWhereInput[]
+    OR?: MediaUploadSessionWhereInput[]
+    NOT?: MediaUploadSessionWhereInput | MediaUploadSessionWhereInput[]
+    id?: UuidFilter<"MediaUploadSession"> | string
+    tenantId?: UuidFilter<"MediaUploadSession"> | string
+    actorId?: UuidFilter<"MediaUploadSession"> | string
+    purpose?: StringFilter<"MediaUploadSession"> | string
+    objectKey?: StringFilter<"MediaUploadSession"> | string
+    fileName?: StringFilter<"MediaUploadSession"> | string
+    mimeType?: StringFilter<"MediaUploadSession"> | string
+    sizeBytes?: IntFilter<"MediaUploadSession"> | number
+    status?: StringFilter<"MediaUploadSession"> | string
+    expiresAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    createdAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    asset?: XOR<MediaAssetNullableScalarRelationFilter, MediaAssetWhereInput> | null
+  }
+
+  export type MediaUploadSessionOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    actorId?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    fileName?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    asset?: MediaAssetOrderByWithRelationInput
+  }
+
+  export type MediaUploadSessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    objectKey?: string
+    AND?: MediaUploadSessionWhereInput | MediaUploadSessionWhereInput[]
+    OR?: MediaUploadSessionWhereInput[]
+    NOT?: MediaUploadSessionWhereInput | MediaUploadSessionWhereInput[]
+    tenantId?: UuidFilter<"MediaUploadSession"> | string
+    actorId?: UuidFilter<"MediaUploadSession"> | string
+    purpose?: StringFilter<"MediaUploadSession"> | string
+    fileName?: StringFilter<"MediaUploadSession"> | string
+    mimeType?: StringFilter<"MediaUploadSession"> | string
+    sizeBytes?: IntFilter<"MediaUploadSession"> | number
+    status?: StringFilter<"MediaUploadSession"> | string
+    expiresAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    createdAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    asset?: XOR<MediaAssetNullableScalarRelationFilter, MediaAssetWhereInput> | null
+  }, "id" | "objectKey">
+
+  export type MediaUploadSessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    actorId?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    fileName?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MediaUploadSessionCountOrderByAggregateInput
+    _avg?: MediaUploadSessionAvgOrderByAggregateInput
+    _max?: MediaUploadSessionMaxOrderByAggregateInput
+    _min?: MediaUploadSessionMinOrderByAggregateInput
+    _sum?: MediaUploadSessionSumOrderByAggregateInput
+  }
+
+  export type MediaUploadSessionScalarWhereWithAggregatesInput = {
+    AND?: MediaUploadSessionScalarWhereWithAggregatesInput | MediaUploadSessionScalarWhereWithAggregatesInput[]
+    OR?: MediaUploadSessionScalarWhereWithAggregatesInput[]
+    NOT?: MediaUploadSessionScalarWhereWithAggregatesInput | MediaUploadSessionScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"MediaUploadSession"> | string
+    tenantId?: UuidWithAggregatesFilter<"MediaUploadSession"> | string
+    actorId?: UuidWithAggregatesFilter<"MediaUploadSession"> | string
+    purpose?: StringWithAggregatesFilter<"MediaUploadSession"> | string
+    objectKey?: StringWithAggregatesFilter<"MediaUploadSession"> | string
+    fileName?: StringWithAggregatesFilter<"MediaUploadSession"> | string
+    mimeType?: StringWithAggregatesFilter<"MediaUploadSession"> | string
+    sizeBytes?: IntWithAggregatesFilter<"MediaUploadSession"> | number
+    status?: StringWithAggregatesFilter<"MediaUploadSession"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"MediaUploadSession"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"MediaUploadSession"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MediaUploadSession"> | Date | string
+  }
+
+  export type MediaAssetWhereInput = {
+    AND?: MediaAssetWhereInput | MediaAssetWhereInput[]
+    OR?: MediaAssetWhereInput[]
+    NOT?: MediaAssetWhereInput | MediaAssetWhereInput[]
+    id?: UuidFilter<"MediaAsset"> | string
+    tenantId?: UuidFilter<"MediaAsset"> | string
+    uploadSessionId?: UuidFilter<"MediaAsset"> | string
+    createdBy?: UuidFilter<"MediaAsset"> | string
+    purpose?: StringFilter<"MediaAsset"> | string
+    objectKey?: StringFilter<"MediaAsset"> | string
+    mimeType?: StringFilter<"MediaAsset"> | string
+    sizeBytes?: IntFilter<"MediaAsset"> | number
+    sha256?: StringFilter<"MediaAsset"> | string
+    status?: StringFilter<"MediaAsset"> | string
+    createdAt?: DateTimeFilter<"MediaAsset"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaAsset"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"MediaAsset"> | Date | string | null
+    purgedAt?: DateTimeNullableFilter<"MediaAsset"> | Date | string | null
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    uploadSession?: XOR<MediaUploadSessionScalarRelationFilter, MediaUploadSessionWhereInput>
+    productImage?: XOR<ProductImageNullableScalarRelationFilter, ProductImageWhereInput> | null
+  }
+
+  export type MediaAssetOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    uploadSessionId?: SortOrder
+    createdBy?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    sha256?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    purgedAt?: SortOrderInput | SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    uploadSession?: MediaUploadSessionOrderByWithRelationInput
+    productImage?: ProductImageOrderByWithRelationInput
+  }
+
+  export type MediaAssetWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    uploadSessionId?: string
+    objectKey?: string
+    AND?: MediaAssetWhereInput | MediaAssetWhereInput[]
+    OR?: MediaAssetWhereInput[]
+    NOT?: MediaAssetWhereInput | MediaAssetWhereInput[]
+    tenantId?: UuidFilter<"MediaAsset"> | string
+    createdBy?: UuidFilter<"MediaAsset"> | string
+    purpose?: StringFilter<"MediaAsset"> | string
+    mimeType?: StringFilter<"MediaAsset"> | string
+    sizeBytes?: IntFilter<"MediaAsset"> | number
+    sha256?: StringFilter<"MediaAsset"> | string
+    status?: StringFilter<"MediaAsset"> | string
+    createdAt?: DateTimeFilter<"MediaAsset"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaAsset"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"MediaAsset"> | Date | string | null
+    purgedAt?: DateTimeNullableFilter<"MediaAsset"> | Date | string | null
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    uploadSession?: XOR<MediaUploadSessionScalarRelationFilter, MediaUploadSessionWhereInput>
+    productImage?: XOR<ProductImageNullableScalarRelationFilter, ProductImageWhereInput> | null
+  }, "id" | "uploadSessionId" | "objectKey">
+
+  export type MediaAssetOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    uploadSessionId?: SortOrder
+    createdBy?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    sha256?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    purgedAt?: SortOrderInput | SortOrder
+    _count?: MediaAssetCountOrderByAggregateInput
+    _avg?: MediaAssetAvgOrderByAggregateInput
+    _max?: MediaAssetMaxOrderByAggregateInput
+    _min?: MediaAssetMinOrderByAggregateInput
+    _sum?: MediaAssetSumOrderByAggregateInput
+  }
+
+  export type MediaAssetScalarWhereWithAggregatesInput = {
+    AND?: MediaAssetScalarWhereWithAggregatesInput | MediaAssetScalarWhereWithAggregatesInput[]
+    OR?: MediaAssetScalarWhereWithAggregatesInput[]
+    NOT?: MediaAssetScalarWhereWithAggregatesInput | MediaAssetScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"MediaAsset"> | string
+    tenantId?: UuidWithAggregatesFilter<"MediaAsset"> | string
+    uploadSessionId?: UuidWithAggregatesFilter<"MediaAsset"> | string
+    createdBy?: UuidWithAggregatesFilter<"MediaAsset"> | string
+    purpose?: StringWithAggregatesFilter<"MediaAsset"> | string
+    objectKey?: StringWithAggregatesFilter<"MediaAsset"> | string
+    mimeType?: StringWithAggregatesFilter<"MediaAsset"> | string
+    sizeBytes?: IntWithAggregatesFilter<"MediaAsset"> | number
+    sha256?: StringWithAggregatesFilter<"MediaAsset"> | string
+    status?: StringWithAggregatesFilter<"MediaAsset"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MediaAsset"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"MediaAsset"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"MediaAsset"> | Date | string | null
+    purgedAt?: DateTimeNullableWithAggregatesFilter<"MediaAsset"> | Date | string | null
+  }
+
   export type TenantProbeWhereInput = {
     AND?: TenantProbeWhereInput | TenantProbeWhereInput[]
     OR?: TenantProbeWhereInput[]
@@ -42150,7 +50519,11 @@ export namespace Prisma {
     parentId?: UuidNullableFilter<"Category"> | string | null
     name?: StringFilter<"Category"> | string
     sortOrder?: IntFilter<"Category"> | number
+    status?: StringFilter<"Category"> | string
+    version?: IntFilter<"Category"> | number
+    deletedAt?: DateTimeNullableFilter<"Category"> | Date | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
     parent?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     children?: CategoryListRelationFilter
     products?: ProductListRelationFilter
@@ -42162,7 +50535,11 @@ export namespace Prisma {
     parentId?: SortOrderInput | SortOrder
     name?: SortOrder
     sortOrder?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     parent?: CategoryOrderByWithRelationInput
     children?: CategoryOrderByRelationAggregateInput
     products?: ProductOrderByRelationAggregateInput
@@ -42178,7 +50555,11 @@ export namespace Prisma {
     parentId?: UuidNullableFilter<"Category"> | string | null
     name?: StringFilter<"Category"> | string
     sortOrder?: IntFilter<"Category"> | number
+    status?: StringFilter<"Category"> | string
+    version?: IntFilter<"Category"> | number
+    deletedAt?: DateTimeNullableFilter<"Category"> | Date | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
     parent?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     children?: CategoryListRelationFilter
     products?: ProductListRelationFilter
@@ -42190,7 +50571,11 @@ export namespace Prisma {
     parentId?: SortOrderInput | SortOrder
     name?: SortOrder
     sortOrder?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
     _avg?: CategoryAvgOrderByAggregateInput
     _max?: CategoryMaxOrderByAggregateInput
@@ -42207,7 +50592,11 @@ export namespace Prisma {
     parentId?: UuidNullableWithAggregatesFilter<"Category"> | string | null
     name?: StringWithAggregatesFilter<"Category"> | string
     sortOrder?: IntWithAggregatesFilter<"Category"> | number
+    status?: StringWithAggregatesFilter<"Category"> | string
+    version?: IntWithAggregatesFilter<"Category"> | number
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Category"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
   }
 
   export type BrandWhereInput = {
@@ -42218,7 +50607,11 @@ export namespace Prisma {
     tenantId?: UuidFilter<"Brand"> | string
     name?: StringFilter<"Brand"> | string
     logoUrl?: StringNullableFilter<"Brand"> | string | null
+    status?: StringFilter<"Brand"> | string
+    version?: IntFilter<"Brand"> | number
+    deletedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeFilter<"Brand"> | Date | string
+    updatedAt?: DateTimeFilter<"Brand"> | Date | string
     products?: ProductListRelationFilter
   }
 
@@ -42227,7 +50620,11 @@ export namespace Prisma {
     tenantId?: SortOrder
     name?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     products?: ProductOrderByRelationAggregateInput
   }
 
@@ -42240,7 +50637,11 @@ export namespace Prisma {
     tenantId?: UuidFilter<"Brand"> | string
     name?: StringFilter<"Brand"> | string
     logoUrl?: StringNullableFilter<"Brand"> | string | null
+    status?: StringFilter<"Brand"> | string
+    version?: IntFilter<"Brand"> | number
+    deletedAt?: DateTimeNullableFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeFilter<"Brand"> | Date | string
+    updatedAt?: DateTimeFilter<"Brand"> | Date | string
     products?: ProductListRelationFilter
   }, "id" | "tenantId_name">
 
@@ -42249,10 +50650,16 @@ export namespace Prisma {
     tenantId?: SortOrder
     name?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: BrandCountOrderByAggregateInput
+    _avg?: BrandAvgOrderByAggregateInput
     _max?: BrandMaxOrderByAggregateInput
     _min?: BrandMinOrderByAggregateInput
+    _sum?: BrandSumOrderByAggregateInput
   }
 
   export type BrandScalarWhereWithAggregatesInput = {
@@ -42263,7 +50670,11 @@ export namespace Prisma {
     tenantId?: UuidWithAggregatesFilter<"Brand"> | string
     name?: StringWithAggregatesFilter<"Brand"> | string
     logoUrl?: StringNullableWithAggregatesFilter<"Brand"> | string | null
+    status?: StringWithAggregatesFilter<"Brand"> | string
+    version?: IntWithAggregatesFilter<"Brand"> | number
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Brand"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Brand"> | Date | string
   }
 
   export type ProductWhereInput = {
@@ -42286,9 +50697,11 @@ export namespace Prisma {
     createdBy?: UuidNullableFilter<"Product"> | string | null
     updatedBy?: UuidNullableFilter<"Product"> | string | null
     version?: IntFilter<"Product"> | number
+    deletedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
     variants?: ProductVariantListRelationFilter
+    images?: ProductImageListRelationFilter
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -42308,9 +50721,11 @@ export namespace Prisma {
     createdBy?: SortOrderInput | SortOrder
     updatedBy?: SortOrderInput | SortOrder
     version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     category?: CategoryOrderByWithRelationInput
     brand?: BrandOrderByWithRelationInput
     variants?: ProductVariantOrderByRelationAggregateInput
+    images?: ProductImageOrderByRelationAggregateInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -42335,9 +50750,11 @@ export namespace Prisma {
     createdBy?: UuidNullableFilter<"Product"> | string | null
     updatedBy?: UuidNullableFilter<"Product"> | string | null
     version?: IntFilter<"Product"> | number
+    deletedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
     variants?: ProductVariantListRelationFilter
+    images?: ProductImageListRelationFilter
   }, "id" | "tenantId_code" | "tenantId_seoSlug">
 
   export type ProductOrderByWithAggregationInput = {
@@ -42357,6 +50774,7 @@ export namespace Prisma {
     createdBy?: SortOrderInput | SortOrder
     updatedBy?: SortOrderInput | SortOrder
     version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     _count?: ProductCountOrderByAggregateInput
     _avg?: ProductAvgOrderByAggregateInput
     _max?: ProductMaxOrderByAggregateInput
@@ -42384,6 +50802,7 @@ export namespace Prisma {
     createdBy?: UuidNullableWithAggregatesFilter<"Product"> | string | null
     updatedBy?: UuidNullableWithAggregatesFilter<"Product"> | string | null
     version?: IntWithAggregatesFilter<"Product"> | number
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Product"> | Date | string | null
   }
 
   export type ProductVariantWhereInput = {
@@ -42398,6 +50817,8 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     weightG?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    version?: IntFilter<"ProductVariant"> | number
+    deletedAt?: DateTimeNullableFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -42414,6 +50835,8 @@ export namespace Prisma {
     price?: SortOrder
     costPrice?: SortOrder
     weightG?: SortOrderInput | SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     product?: ProductOrderByWithRelationInput
@@ -42434,6 +50857,8 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     weightG?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    version?: IntFilter<"ProductVariant"> | number
+    deletedAt?: DateTimeNullableFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
@@ -42450,6 +50875,8 @@ export namespace Prisma {
     price?: SortOrder
     costPrice?: SortOrder
     weightG?: SortOrderInput | SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductVariantCountOrderByAggregateInput
@@ -42471,8 +50898,115 @@ export namespace Prisma {
     price?: DecimalWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     weightG?: DecimalNullableWithAggregatesFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    version?: IntWithAggregatesFilter<"ProductVariant"> | number
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductVariant"> | Date | string
+  }
+
+  export type ProductImageWhereInput = {
+    AND?: ProductImageWhereInput | ProductImageWhereInput[]
+    OR?: ProductImageWhereInput[]
+    NOT?: ProductImageWhereInput | ProductImageWhereInput[]
+    id?: UuidFilter<"ProductImage"> | string
+    tenantId?: UuidFilter<"ProductImage"> | string
+    productId?: UuidFilter<"ProductImage"> | string
+    mediaAssetId?: UuidNullableFilter<"ProductImage"> | string | null
+    url?: StringFilter<"ProductImage"> | string
+    altText?: StringNullableFilter<"ProductImage"> | string | null
+    sortOrder?: IntFilter<"ProductImage"> | number
+    isPrimary?: BoolFilter<"ProductImage"> | boolean
+    sizeBytes?: IntFilter<"ProductImage"> | number
+    mimeType?: StringFilter<"ProductImage"> | string
+    version?: IntFilter<"ProductImage"> | number
+    deletedAt?: DateTimeNullableFilter<"ProductImage"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProductImage"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductImage"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    mediaAsset?: XOR<MediaAssetNullableScalarRelationFilter, MediaAssetWhereInput> | null
+  }
+
+  export type ProductImageOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    mediaAssetId?: SortOrderInput | SortOrder
+    url?: SortOrder
+    altText?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    isPrimary?: SortOrder
+    sizeBytes?: SortOrder
+    mimeType?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    product?: ProductOrderByWithRelationInput
+    mediaAsset?: MediaAssetOrderByWithRelationInput
+  }
+
+  export type ProductImageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    mediaAssetId?: string
+    AND?: ProductImageWhereInput | ProductImageWhereInput[]
+    OR?: ProductImageWhereInput[]
+    NOT?: ProductImageWhereInput | ProductImageWhereInput[]
+    tenantId?: UuidFilter<"ProductImage"> | string
+    productId?: UuidFilter<"ProductImage"> | string
+    url?: StringFilter<"ProductImage"> | string
+    altText?: StringNullableFilter<"ProductImage"> | string | null
+    sortOrder?: IntFilter<"ProductImage"> | number
+    isPrimary?: BoolFilter<"ProductImage"> | boolean
+    sizeBytes?: IntFilter<"ProductImage"> | number
+    mimeType?: StringFilter<"ProductImage"> | string
+    version?: IntFilter<"ProductImage"> | number
+    deletedAt?: DateTimeNullableFilter<"ProductImage"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProductImage"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductImage"> | Date | string
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    mediaAsset?: XOR<MediaAssetNullableScalarRelationFilter, MediaAssetWhereInput> | null
+  }, "id" | "mediaAssetId">
+
+  export type ProductImageOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    mediaAssetId?: SortOrderInput | SortOrder
+    url?: SortOrder
+    altText?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    isPrimary?: SortOrder
+    sizeBytes?: SortOrder
+    mimeType?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProductImageCountOrderByAggregateInput
+    _avg?: ProductImageAvgOrderByAggregateInput
+    _max?: ProductImageMaxOrderByAggregateInput
+    _min?: ProductImageMinOrderByAggregateInput
+    _sum?: ProductImageSumOrderByAggregateInput
+  }
+
+  export type ProductImageScalarWhereWithAggregatesInput = {
+    AND?: ProductImageScalarWhereWithAggregatesInput | ProductImageScalarWhereWithAggregatesInput[]
+    OR?: ProductImageScalarWhereWithAggregatesInput[]
+    NOT?: ProductImageScalarWhereWithAggregatesInput | ProductImageScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ProductImage"> | string
+    tenantId?: UuidWithAggregatesFilter<"ProductImage"> | string
+    productId?: UuidWithAggregatesFilter<"ProductImage"> | string
+    mediaAssetId?: UuidNullableWithAggregatesFilter<"ProductImage"> | string | null
+    url?: StringWithAggregatesFilter<"ProductImage"> | string
+    altText?: StringNullableWithAggregatesFilter<"ProductImage"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"ProductImage"> | number
+    isPrimary?: BoolWithAggregatesFilter<"ProductImage"> | boolean
+    sizeBytes?: IntWithAggregatesFilter<"ProductImage"> | number
+    mimeType?: StringWithAggregatesFilter<"ProductImage"> | string
+    version?: IntWithAggregatesFilter<"ProductImage"> | number
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ProductImage"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"ProductImage"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProductImage"> | Date | string
   }
 
   export type OrderWhereInput = {
@@ -42731,6 +51265,182 @@ export namespace Prisma {
     createdBy?: UuidNullableWithAggregatesFilter<"Payment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
+  }
+
+  export type PaymentReconciliationRunWhereInput = {
+    AND?: PaymentReconciliationRunWhereInput | PaymentReconciliationRunWhereInput[]
+    OR?: PaymentReconciliationRunWhereInput[]
+    NOT?: PaymentReconciliationRunWhereInput | PaymentReconciliationRunWhereInput[]
+    id?: UuidFilter<"PaymentReconciliationRun"> | string
+    tenantId?: UuidFilter<"PaymentReconciliationRun"> | string
+    channel?: StringFilter<"PaymentReconciliationRun"> | string
+    billDate?: DateTimeFilter<"PaymentReconciliationRun"> | Date | string
+    status?: StringFilter<"PaymentReconciliationRun"> | string
+    localCount?: IntFilter<"PaymentReconciliationRun"> | number
+    providerCount?: IntFilter<"PaymentReconciliationRun"> | number
+    discrepancyCount?: IntFilter<"PaymentReconciliationRun"> | number
+    errorMessage?: StringNullableFilter<"PaymentReconciliationRun"> | string | null
+    completedAt?: DateTimeNullableFilter<"PaymentReconciliationRun"> | Date | string | null
+    createdAt?: DateTimeFilter<"PaymentReconciliationRun"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentReconciliationRun"> | Date | string
+    discrepancies?: PaymentReconciliationDiscrepancyListRelationFilter
+  }
+
+  export type PaymentReconciliationRunOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    billDate?: SortOrder
+    status?: SortOrder
+    localCount?: SortOrder
+    providerCount?: SortOrder
+    discrepancyCount?: SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    discrepancies?: PaymentReconciliationDiscrepancyOrderByRelationAggregateInput
+  }
+
+  export type PaymentReconciliationRunWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_channel_billDate?: PaymentReconciliationRunTenantIdChannelBillDateCompoundUniqueInput
+    AND?: PaymentReconciliationRunWhereInput | PaymentReconciliationRunWhereInput[]
+    OR?: PaymentReconciliationRunWhereInput[]
+    NOT?: PaymentReconciliationRunWhereInput | PaymentReconciliationRunWhereInput[]
+    tenantId?: UuidFilter<"PaymentReconciliationRun"> | string
+    channel?: StringFilter<"PaymentReconciliationRun"> | string
+    billDate?: DateTimeFilter<"PaymentReconciliationRun"> | Date | string
+    status?: StringFilter<"PaymentReconciliationRun"> | string
+    localCount?: IntFilter<"PaymentReconciliationRun"> | number
+    providerCount?: IntFilter<"PaymentReconciliationRun"> | number
+    discrepancyCount?: IntFilter<"PaymentReconciliationRun"> | number
+    errorMessage?: StringNullableFilter<"PaymentReconciliationRun"> | string | null
+    completedAt?: DateTimeNullableFilter<"PaymentReconciliationRun"> | Date | string | null
+    createdAt?: DateTimeFilter<"PaymentReconciliationRun"> | Date | string
+    updatedAt?: DateTimeFilter<"PaymentReconciliationRun"> | Date | string
+    discrepancies?: PaymentReconciliationDiscrepancyListRelationFilter
+  }, "id" | "tenantId_channel_billDate">
+
+  export type PaymentReconciliationRunOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    billDate?: SortOrder
+    status?: SortOrder
+    localCount?: SortOrder
+    providerCount?: SortOrder
+    discrepancyCount?: SortOrder
+    errorMessage?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PaymentReconciliationRunCountOrderByAggregateInput
+    _avg?: PaymentReconciliationRunAvgOrderByAggregateInput
+    _max?: PaymentReconciliationRunMaxOrderByAggregateInput
+    _min?: PaymentReconciliationRunMinOrderByAggregateInput
+    _sum?: PaymentReconciliationRunSumOrderByAggregateInput
+  }
+
+  export type PaymentReconciliationRunScalarWhereWithAggregatesInput = {
+    AND?: PaymentReconciliationRunScalarWhereWithAggregatesInput | PaymentReconciliationRunScalarWhereWithAggregatesInput[]
+    OR?: PaymentReconciliationRunScalarWhereWithAggregatesInput[]
+    NOT?: PaymentReconciliationRunScalarWhereWithAggregatesInput | PaymentReconciliationRunScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PaymentReconciliationRun"> | string
+    tenantId?: UuidWithAggregatesFilter<"PaymentReconciliationRun"> | string
+    channel?: StringWithAggregatesFilter<"PaymentReconciliationRun"> | string
+    billDate?: DateTimeWithAggregatesFilter<"PaymentReconciliationRun"> | Date | string
+    status?: StringWithAggregatesFilter<"PaymentReconciliationRun"> | string
+    localCount?: IntWithAggregatesFilter<"PaymentReconciliationRun"> | number
+    providerCount?: IntWithAggregatesFilter<"PaymentReconciliationRun"> | number
+    discrepancyCount?: IntWithAggregatesFilter<"PaymentReconciliationRun"> | number
+    errorMessage?: StringNullableWithAggregatesFilter<"PaymentReconciliationRun"> | string | null
+    completedAt?: DateTimeNullableWithAggregatesFilter<"PaymentReconciliationRun"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PaymentReconciliationRun"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PaymentReconciliationRun"> | Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyWhereInput = {
+    AND?: PaymentReconciliationDiscrepancyWhereInput | PaymentReconciliationDiscrepancyWhereInput[]
+    OR?: PaymentReconciliationDiscrepancyWhereInput[]
+    NOT?: PaymentReconciliationDiscrepancyWhereInput | PaymentReconciliationDiscrepancyWhereInput[]
+    id?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    tenantId?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    runId?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    paymentNo?: StringFilter<"PaymentReconciliationDiscrepancy"> | string
+    type?: StringFilter<"PaymentReconciliationDiscrepancy"> | string
+    localAmount?: DecimalNullableFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: DecimalNullableFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: StringNullableFilter<"PaymentReconciliationDiscrepancy"> | string | null
+    resolvedAt?: DateTimeNullableFilter<"PaymentReconciliationDiscrepancy"> | Date | string | null
+    createdAt?: DateTimeFilter<"PaymentReconciliationDiscrepancy"> | Date | string
+    run?: XOR<PaymentReconciliationRunScalarRelationFilter, PaymentReconciliationRunWhereInput>
+  }
+
+  export type PaymentReconciliationDiscrepancyOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    runId?: SortOrder
+    paymentNo?: SortOrder
+    type?: SortOrder
+    localAmount?: SortOrderInput | SortOrder
+    providerAmount?: SortOrderInput | SortOrder
+    providerTradeNo?: SortOrderInput | SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    run?: PaymentReconciliationRunOrderByWithRelationInput
+  }
+
+  export type PaymentReconciliationDiscrepancyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_runId_paymentNo_type?: PaymentReconciliationDiscrepancyTenantIdRunIdPaymentNoTypeCompoundUniqueInput
+    AND?: PaymentReconciliationDiscrepancyWhereInput | PaymentReconciliationDiscrepancyWhereInput[]
+    OR?: PaymentReconciliationDiscrepancyWhereInput[]
+    NOT?: PaymentReconciliationDiscrepancyWhereInput | PaymentReconciliationDiscrepancyWhereInput[]
+    tenantId?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    runId?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    paymentNo?: StringFilter<"PaymentReconciliationDiscrepancy"> | string
+    type?: StringFilter<"PaymentReconciliationDiscrepancy"> | string
+    localAmount?: DecimalNullableFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: DecimalNullableFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: StringNullableFilter<"PaymentReconciliationDiscrepancy"> | string | null
+    resolvedAt?: DateTimeNullableFilter<"PaymentReconciliationDiscrepancy"> | Date | string | null
+    createdAt?: DateTimeFilter<"PaymentReconciliationDiscrepancy"> | Date | string
+    run?: XOR<PaymentReconciliationRunScalarRelationFilter, PaymentReconciliationRunWhereInput>
+  }, "id" | "tenantId_runId_paymentNo_type">
+
+  export type PaymentReconciliationDiscrepancyOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    runId?: SortOrder
+    paymentNo?: SortOrder
+    type?: SortOrder
+    localAmount?: SortOrderInput | SortOrder
+    providerAmount?: SortOrderInput | SortOrder
+    providerTradeNo?: SortOrderInput | SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: PaymentReconciliationDiscrepancyCountOrderByAggregateInput
+    _avg?: PaymentReconciliationDiscrepancyAvgOrderByAggregateInput
+    _max?: PaymentReconciliationDiscrepancyMaxOrderByAggregateInput
+    _min?: PaymentReconciliationDiscrepancyMinOrderByAggregateInput
+    _sum?: PaymentReconciliationDiscrepancySumOrderByAggregateInput
+  }
+
+  export type PaymentReconciliationDiscrepancyScalarWhereWithAggregatesInput = {
+    AND?: PaymentReconciliationDiscrepancyScalarWhereWithAggregatesInput | PaymentReconciliationDiscrepancyScalarWhereWithAggregatesInput[]
+    OR?: PaymentReconciliationDiscrepancyScalarWhereWithAggregatesInput[]
+    NOT?: PaymentReconciliationDiscrepancyScalarWhereWithAggregatesInput | PaymentReconciliationDiscrepancyScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | string
+    tenantId?: UuidWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | string
+    runId?: UuidWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | string
+    paymentNo?: StringWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | string
+    type?: StringWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | string
+    localAmount?: DecimalNullableWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: DecimalNullableWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: StringNullableWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | string | null
+    resolvedAt?: DateTimeNullableWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PaymentReconciliationDiscrepancy"> | Date | string
   }
 
   export type OrderItemWhereInput = {
@@ -43562,6 +52272,8 @@ export namespace Prisma {
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -43586,6 +52298,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -43610,6 +52324,8 @@ export namespace Prisma {
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -43634,6 +52350,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -43990,6 +52708,7 @@ export namespace Prisma {
   export type RefreshSessionCreateInput = {
     id?: string
     tokenHash: string
+    actorType?: string
     expiresAt: Date | string
     revokedAt?: Date | string | null
     createdAt?: Date | string
@@ -44000,6 +52719,7 @@ export namespace Prisma {
     id?: string
     userId: string
     tokenHash: string
+    actorType?: string
     expiresAt: Date | string
     revokedAt?: Date | string | null
     createdAt?: Date | string
@@ -44008,6 +52728,7 @@ export namespace Prisma {
   export type RefreshSessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
+    actorType?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44018,6 +52739,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
+    actorType?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44027,6 +52749,7 @@ export namespace Prisma {
     id?: string
     userId: string
     tokenHash: string
+    actorType?: string
     expiresAt: Date | string
     revokedAt?: Date | string | null
     createdAt?: Date | string
@@ -44035,6 +52758,7 @@ export namespace Prisma {
   export type RefreshSessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
+    actorType?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44044,6 +52768,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
+    actorType?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44776,6 +53501,312 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DomainEventOutboxCreateInput = {
+    id?: string
+    tenantId: string
+    aggregateType: string
+    aggregateId: string
+    eventType: string
+    payload: JsonNullValueInput | InputJsonValue
+    occurredAt?: Date | string
+    publishedAt?: Date | string | null
+  }
+
+  export type DomainEventOutboxUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    aggregateType: string
+    aggregateId: string
+    eventType: string
+    payload: JsonNullValueInput | InputJsonValue
+    occurredAt?: Date | string
+    publishedAt?: Date | string | null
+  }
+
+  export type DomainEventOutboxUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    aggregateType?: StringFieldUpdateOperationsInput | string
+    aggregateId?: StringFieldUpdateOperationsInput | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DomainEventOutboxUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    aggregateType?: StringFieldUpdateOperationsInput | string
+    aggregateId?: StringFieldUpdateOperationsInput | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DomainEventOutboxCreateManyInput = {
+    id?: string
+    tenantId: string
+    aggregateType: string
+    aggregateId: string
+    eventType: string
+    payload: JsonNullValueInput | InputJsonValue
+    occurredAt?: Date | string
+    publishedAt?: Date | string | null
+  }
+
+  export type DomainEventOutboxUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    aggregateType?: StringFieldUpdateOperationsInput | string
+    aggregateId?: StringFieldUpdateOperationsInput | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type DomainEventOutboxUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    aggregateType?: StringFieldUpdateOperationsInput | string
+    aggregateId?: StringFieldUpdateOperationsInput | string
+    eventType?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MediaUploadSessionCreateInput = {
+    id?: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutMediaUploadSessionsInput
+    asset?: MediaAssetCreateNestedOneWithoutUploadSessionInput
+  }
+
+  export type MediaUploadSessionUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    asset?: MediaAssetUncheckedCreateNestedOneWithoutUploadSessionInput
+  }
+
+  export type MediaUploadSessionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutMediaUploadSessionsNestedInput
+    asset?: MediaAssetUpdateOneWithoutUploadSessionNestedInput
+  }
+
+  export type MediaUploadSessionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: MediaAssetUncheckedUpdateOneWithoutUploadSessionNestedInput
+  }
+
+  export type MediaUploadSessionCreateManyInput = {
+    id?: string
+    tenantId: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaUploadSessionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaUploadSessionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaAssetCreateInput = {
+    id?: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    tenant: TenantCreateNestedOneWithoutMediaAssetsInput
+    uploadSession: MediaUploadSessionCreateNestedOneWithoutAssetInput
+    productImage?: ProductImageCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    uploadSessionId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    productImage?: ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tenant?: TenantUpdateOneRequiredWithoutMediaAssetsNestedInput
+    uploadSession?: MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput
+    productImage?: ProductImageUpdateOneWithoutMediaAssetNestedInput
+  }
+
+  export type MediaAssetUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    uploadSessionId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productImage?: ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput
+  }
+
+  export type MediaAssetCreateManyInput = {
+    id?: string
+    tenantId: string
+    uploadSessionId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+  }
+
+  export type MediaAssetUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MediaAssetUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    uploadSessionId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type TenantProbeCreateInput = {
     id?: string
     tenantId: string
@@ -44830,7 +53861,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     parent?: CategoryCreateNestedOneWithoutChildrenInput
     children?: CategoryCreateNestedManyWithoutParentInput
     products?: ProductCreateNestedManyWithoutCategoryInput
@@ -44842,7 +53877,11 @@ export namespace Prisma {
     parentId?: string | null
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     children?: CategoryUncheckedCreateNestedManyWithoutParentInput
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
   }
@@ -44852,7 +53891,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: CategoryUpdateOneWithoutChildrenNestedInput
     children?: CategoryUpdateManyWithoutParentNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
@@ -44864,7 +53907,11 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
@@ -44875,7 +53922,11 @@ export namespace Prisma {
     parentId?: string | null
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CategoryUpdateManyMutationInput = {
@@ -44883,7 +53934,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryUncheckedUpdateManyInput = {
@@ -44892,7 +53947,11 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BrandCreateInput = {
@@ -44900,7 +53959,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutBrandInput
   }
 
@@ -44909,7 +53972,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutBrandInput
   }
 
@@ -44918,7 +53985,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutBrandNestedInput
   }
 
@@ -44927,7 +53998,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
   }
 
@@ -44936,7 +54011,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BrandUpdateManyMutationInput = {
@@ -44944,7 +54023,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BrandUncheckedUpdateManyInput = {
@@ -44952,7 +54035,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductCreateInput = {
@@ -44970,9 +54057,11 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
     category?: CategoryCreateNestedOneWithoutProductsInput
     brand?: BrandCreateNestedOneWithoutProductsInput
     variants?: ProductVariantCreateNestedManyWithoutProductInput
+    images?: ProductImageCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -44992,7 +54081,9 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductUpdateInput = {
@@ -45010,9 +54101,11 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     category?: CategoryUpdateOneWithoutProductsNestedInput
     brand?: BrandUpdateOneWithoutProductsNestedInput
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
+    images?: ProductImageUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -45032,7 +54125,9 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -45052,6 +54147,7 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
   }
 
   export type ProductUpdateManyMutationInput = {
@@ -45069,6 +54165,7 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProductUncheckedUpdateManyInput = {
@@ -45088,6 +54185,7 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProductVariantCreateInput = {
@@ -45098,6 +54196,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -45114,6 +54214,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryTransactions?: InventoryTransactionUncheckedCreateNestedManyWithoutVariantInput
@@ -45128,6 +54230,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -45144,6 +54248,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryTransactions?: InventoryTransactionUncheckedUpdateManyWithoutVariantNestedInput
@@ -45159,6 +54265,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -45171,6 +54279,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45184,6 +54294,125 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductImageCreateInput = {
+    id?: string
+    tenantId: string
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutImagesInput
+    mediaAsset?: MediaAssetCreateNestedOneWithoutProductImageInput
+  }
+
+  export type ProductImageUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    mediaAssetId?: string | null
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductImageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutImagesNestedInput
+    mediaAsset?: MediaAssetUpdateOneWithoutProductImageNestedInput
+  }
+
+  export type ProductImageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductImageCreateManyInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    mediaAssetId?: string | null
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductImageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductImageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45495,6 +54724,205 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationRunCreateInput = {
+    id?: string
+    tenantId: string
+    channel: string
+    billDate: Date | string
+    status?: string
+    localCount?: number
+    providerCount?: number
+    discrepancyCount?: number
+    errorMessage?: string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    discrepancies?: PaymentReconciliationDiscrepancyCreateNestedManyWithoutRunInput
+  }
+
+  export type PaymentReconciliationRunUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    channel: string
+    billDate: Date | string
+    status?: string
+    localCount?: number
+    providerCount?: number
+    discrepancyCount?: number
+    errorMessage?: string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    discrepancies?: PaymentReconciliationDiscrepancyUncheckedCreateNestedManyWithoutRunInput
+  }
+
+  export type PaymentReconciliationRunUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    billDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    localCount?: IntFieldUpdateOperationsInput | number
+    providerCount?: IntFieldUpdateOperationsInput | number
+    discrepancyCount?: IntFieldUpdateOperationsInput | number
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    discrepancies?: PaymentReconciliationDiscrepancyUpdateManyWithoutRunNestedInput
+  }
+
+  export type PaymentReconciliationRunUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    billDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    localCount?: IntFieldUpdateOperationsInput | number
+    providerCount?: IntFieldUpdateOperationsInput | number
+    discrepancyCount?: IntFieldUpdateOperationsInput | number
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    discrepancies?: PaymentReconciliationDiscrepancyUncheckedUpdateManyWithoutRunNestedInput
+  }
+
+  export type PaymentReconciliationRunCreateManyInput = {
+    id?: string
+    tenantId: string
+    channel: string
+    billDate: Date | string
+    status?: string
+    localCount?: number
+    providerCount?: number
+    discrepancyCount?: number
+    errorMessage?: string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentReconciliationRunUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    billDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    localCount?: IntFieldUpdateOperationsInput | number
+    providerCount?: IntFieldUpdateOperationsInput | number
+    discrepancyCount?: IntFieldUpdateOperationsInput | number
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationRunUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    billDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    localCount?: IntFieldUpdateOperationsInput | number
+    providerCount?: IntFieldUpdateOperationsInput | number
+    discrepancyCount?: IntFieldUpdateOperationsInput | number
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyCreateInput = {
+    id?: string
+    tenantId: string
+    paymentNo: string
+    type: string
+    localAmount?: Decimal | DecimalJsLike | number | string | null
+    providerAmount?: Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: string | null
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    run: PaymentReconciliationRunCreateNestedOneWithoutDiscrepanciesInput
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    runId: string
+    paymentNo: string
+    type: string
+    localAmount?: Decimal | DecimalJsLike | number | string | null
+    providerAmount?: Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: string | null
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    paymentNo?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    localAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    run?: PaymentReconciliationRunUpdateOneRequiredWithoutDiscrepanciesNestedInput
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    runId?: StringFieldUpdateOperationsInput | string
+    paymentNo?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    localAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyCreateManyInput = {
+    id?: string
+    tenantId: string
+    runId: string
+    paymentNo: string
+    type: string
+    localAmount?: Decimal | DecimalJsLike | number | string | null
+    providerAmount?: Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: string | null
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    paymentNo?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    localAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    runId?: StringFieldUpdateOperationsInput | string
+    paymentNo?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    localAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemCreateInput = {
@@ -46533,6 +55961,18 @@ export namespace Prisma {
     none?: ProviderCallbackRouteWhereInput
   }
 
+  export type MediaUploadSessionListRelationFilter = {
+    every?: MediaUploadSessionWhereInput
+    some?: MediaUploadSessionWhereInput
+    none?: MediaUploadSessionWhereInput
+  }
+
+  export type MediaAssetListRelationFilter = {
+    every?: MediaAssetWhereInput
+    some?: MediaAssetWhereInput
+    none?: MediaAssetWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -46563,6 +56003,14 @@ export namespace Prisma {
   }
 
   export type ProviderCallbackRouteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MediaUploadSessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MediaAssetOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -46926,6 +56374,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     tokenHash?: SortOrder
+    actorType?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrder
     createdAt?: SortOrder
@@ -46935,6 +56384,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     tokenHash?: SortOrder
+    actorType?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrder
     createdAt?: SortOrder
@@ -46944,6 +56394,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     tokenHash?: SortOrder
+    actorType?: SortOrder
     expiresAt?: SortOrder
     revokedAt?: SortOrder
     createdAt?: SortOrder
@@ -47494,6 +56945,164 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type DomainEventOutboxCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    aggregateType?: SortOrder
+    aggregateId?: SortOrder
+    eventType?: SortOrder
+    payload?: SortOrder
+    occurredAt?: SortOrder
+    publishedAt?: SortOrder
+  }
+
+  export type DomainEventOutboxMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    aggregateType?: SortOrder
+    aggregateId?: SortOrder
+    eventType?: SortOrder
+    occurredAt?: SortOrder
+    publishedAt?: SortOrder
+  }
+
+  export type DomainEventOutboxMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    aggregateType?: SortOrder
+    aggregateId?: SortOrder
+    eventType?: SortOrder
+    occurredAt?: SortOrder
+    publishedAt?: SortOrder
+  }
+
+  export type MediaAssetNullableScalarRelationFilter = {
+    is?: MediaAssetWhereInput | null
+    isNot?: MediaAssetWhereInput | null
+  }
+
+  export type MediaUploadSessionCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    actorId?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    fileName?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MediaUploadSessionAvgOrderByAggregateInput = {
+    sizeBytes?: SortOrder
+  }
+
+  export type MediaUploadSessionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    actorId?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    fileName?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MediaUploadSessionMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    actorId?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    fileName?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    status?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MediaUploadSessionSumOrderByAggregateInput = {
+    sizeBytes?: SortOrder
+  }
+
+  export type MediaUploadSessionScalarRelationFilter = {
+    is?: MediaUploadSessionWhereInput
+    isNot?: MediaUploadSessionWhereInput
+  }
+
+  export type ProductImageNullableScalarRelationFilter = {
+    is?: ProductImageWhereInput | null
+    isNot?: ProductImageWhereInput | null
+  }
+
+  export type MediaAssetCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    uploadSessionId?: SortOrder
+    createdBy?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    sha256?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    purgedAt?: SortOrder
+  }
+
+  export type MediaAssetAvgOrderByAggregateInput = {
+    sizeBytes?: SortOrder
+  }
+
+  export type MediaAssetMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    uploadSessionId?: SortOrder
+    createdBy?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    sha256?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    purgedAt?: SortOrder
+  }
+
+  export type MediaAssetMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    uploadSessionId?: SortOrder
+    createdBy?: SortOrder
+    purpose?: SortOrder
+    objectKey?: SortOrder
+    mimeType?: SortOrder
+    sizeBytes?: SortOrder
+    sha256?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    purgedAt?: SortOrder
+  }
+
+  export type MediaAssetSumOrderByAggregateInput = {
+    sizeBytes?: SortOrder
+  }
+
   export type TenantProbeCountOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
@@ -47549,11 +57158,16 @@ export namespace Prisma {
     parentId?: SortOrder
     name?: SortOrder
     sortOrder?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CategoryAvgOrderByAggregateInput = {
     sortOrder?: SortOrder
+    version?: SortOrder
   }
 
   export type CategoryMaxOrderByAggregateInput = {
@@ -47562,7 +57176,11 @@ export namespace Prisma {
     parentId?: SortOrder
     name?: SortOrder
     sortOrder?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CategoryMinOrderByAggregateInput = {
@@ -47571,11 +57189,16 @@ export namespace Prisma {
     parentId?: SortOrder
     name?: SortOrder
     sortOrder?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CategorySumOrderByAggregateInput = {
     sortOrder?: SortOrder
+    version?: SortOrder
   }
 
   export type BrandTenantIdNameCompoundUniqueInput = {
@@ -47588,7 +57211,15 @@ export namespace Prisma {
     tenantId?: SortOrder
     name?: SortOrder
     logoUrl?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandAvgOrderByAggregateInput = {
+    version?: SortOrder
   }
 
   export type BrandMaxOrderByAggregateInput = {
@@ -47596,7 +57227,11 @@ export namespace Prisma {
     tenantId?: SortOrder
     name?: SortOrder
     logoUrl?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BrandMinOrderByAggregateInput = {
@@ -47604,7 +57239,15 @@ export namespace Prisma {
     tenantId?: SortOrder
     name?: SortOrder
     logoUrl?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandSumOrderByAggregateInput = {
+    version?: SortOrder
   }
 
   export type BrandNullableScalarRelationFilter = {
@@ -47618,7 +57261,17 @@ export namespace Prisma {
     none?: ProductVariantWhereInput
   }
 
+  export type ProductImageListRelationFilter = {
+    every?: ProductImageWhereInput
+    some?: ProductImageWhereInput
+    none?: ProductImageWhereInput
+  }
+
   export type ProductVariantOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductImageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -47649,6 +57302,7 @@ export namespace Prisma {
     createdBy?: SortOrder
     updatedBy?: SortOrder
     version?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type ProductAvgOrderByAggregateInput = {
@@ -47672,6 +57326,7 @@ export namespace Prisma {
     createdBy?: SortOrder
     updatedBy?: SortOrder
     version?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type ProductMinOrderByAggregateInput = {
@@ -47690,6 +57345,7 @@ export namespace Prisma {
     createdBy?: SortOrder
     updatedBy?: SortOrder
     version?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type ProductSumOrderByAggregateInput = {
@@ -47747,6 +57403,8 @@ export namespace Prisma {
     price?: SortOrder
     costPrice?: SortOrder
     weightG?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -47755,6 +57413,7 @@ export namespace Prisma {
     price?: SortOrder
     costPrice?: SortOrder
     weightG?: SortOrder
+    version?: SortOrder
   }
 
   export type ProductVariantMaxOrderByAggregateInput = {
@@ -47765,6 +57424,8 @@ export namespace Prisma {
     price?: SortOrder
     costPrice?: SortOrder
     weightG?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -47777,6 +57438,8 @@ export namespace Prisma {
     price?: SortOrder
     costPrice?: SortOrder
     weightG?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -47785,6 +57448,7 @@ export namespace Prisma {
     price?: SortOrder
     costPrice?: SortOrder
     weightG?: SortOrder
+    version?: SortOrder
   }
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -47801,6 +57465,69 @@ export namespace Prisma {
     _sum?: NestedDecimalNullableFilter<$PrismaModel>
     _min?: NestedDecimalNullableFilter<$PrismaModel>
     _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type ProductImageCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    mediaAssetId?: SortOrder
+    url?: SortOrder
+    altText?: SortOrder
+    sortOrder?: SortOrder
+    isPrimary?: SortOrder
+    sizeBytes?: SortOrder
+    mimeType?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductImageAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+    sizeBytes?: SortOrder
+    version?: SortOrder
+  }
+
+  export type ProductImageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    mediaAssetId?: SortOrder
+    url?: SortOrder
+    altText?: SortOrder
+    sortOrder?: SortOrder
+    isPrimary?: SortOrder
+    sizeBytes?: SortOrder
+    mimeType?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductImageMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    mediaAssetId?: SortOrder
+    url?: SortOrder
+    altText?: SortOrder
+    sortOrder?: SortOrder
+    isPrimary?: SortOrder
+    sizeBytes?: SortOrder
+    mimeType?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductImageSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+    sizeBytes?: SortOrder
+    version?: SortOrder
   }
 
   export type PaymentListRelationFilter = {
@@ -48005,6 +57732,140 @@ export namespace Prisma {
 
   export type PaymentSumOrderByAggregateInput = {
     amount?: SortOrder
+  }
+
+  export type PaymentReconciliationDiscrepancyListRelationFilter = {
+    every?: PaymentReconciliationDiscrepancyWhereInput
+    some?: PaymentReconciliationDiscrepancyWhereInput
+    none?: PaymentReconciliationDiscrepancyWhereInput
+  }
+
+  export type PaymentReconciliationDiscrepancyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PaymentReconciliationRunTenantIdChannelBillDateCompoundUniqueInput = {
+    tenantId: string
+    channel: string
+    billDate: Date | string
+  }
+
+  export type PaymentReconciliationRunCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    billDate?: SortOrder
+    status?: SortOrder
+    localCount?: SortOrder
+    providerCount?: SortOrder
+    discrepancyCount?: SortOrder
+    errorMessage?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentReconciliationRunAvgOrderByAggregateInput = {
+    localCount?: SortOrder
+    providerCount?: SortOrder
+    discrepancyCount?: SortOrder
+  }
+
+  export type PaymentReconciliationRunMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    billDate?: SortOrder
+    status?: SortOrder
+    localCount?: SortOrder
+    providerCount?: SortOrder
+    discrepancyCount?: SortOrder
+    errorMessage?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentReconciliationRunMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    channel?: SortOrder
+    billDate?: SortOrder
+    status?: SortOrder
+    localCount?: SortOrder
+    providerCount?: SortOrder
+    discrepancyCount?: SortOrder
+    errorMessage?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentReconciliationRunSumOrderByAggregateInput = {
+    localCount?: SortOrder
+    providerCount?: SortOrder
+    discrepancyCount?: SortOrder
+  }
+
+  export type PaymentReconciliationRunScalarRelationFilter = {
+    is?: PaymentReconciliationRunWhereInput
+    isNot?: PaymentReconciliationRunWhereInput
+  }
+
+  export type PaymentReconciliationDiscrepancyTenantIdRunIdPaymentNoTypeCompoundUniqueInput = {
+    tenantId: string
+    runId: string
+    paymentNo: string
+    type: string
+  }
+
+  export type PaymentReconciliationDiscrepancyCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    runId?: SortOrder
+    paymentNo?: SortOrder
+    type?: SortOrder
+    localAmount?: SortOrder
+    providerAmount?: SortOrder
+    providerTradeNo?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaymentReconciliationDiscrepancyAvgOrderByAggregateInput = {
+    localAmount?: SortOrder
+    providerAmount?: SortOrder
+  }
+
+  export type PaymentReconciliationDiscrepancyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    runId?: SortOrder
+    paymentNo?: SortOrder
+    type?: SortOrder
+    localAmount?: SortOrder
+    providerAmount?: SortOrder
+    providerTradeNo?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaymentReconciliationDiscrepancyMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    runId?: SortOrder
+    paymentNo?: SortOrder
+    type?: SortOrder
+    localAmount?: SortOrder
+    providerAmount?: SortOrder
+    providerTradeNo?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PaymentReconciliationDiscrepancySumOrderByAggregateInput = {
+    localAmount?: SortOrder
+    providerAmount?: SortOrder
   }
 
   export type ProductVariantScalarRelationFilter = {
@@ -48638,6 +58499,20 @@ export namespace Prisma {
     connect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
   }
 
+  export type MediaUploadSessionCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MediaUploadSessionCreateWithoutTenantInput, MediaUploadSessionUncheckedCreateWithoutTenantInput> | MediaUploadSessionCreateWithoutTenantInput[] | MediaUploadSessionUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaUploadSessionCreateOrConnectWithoutTenantInput | MediaUploadSessionCreateOrConnectWithoutTenantInput[]
+    createMany?: MediaUploadSessionCreateManyTenantInputEnvelope
+    connect?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+  }
+
+  export type MediaAssetCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MediaAssetCreateWithoutTenantInput, MediaAssetUncheckedCreateWithoutTenantInput> | MediaAssetCreateWithoutTenantInput[] | MediaAssetUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutTenantInput | MediaAssetCreateOrConnectWithoutTenantInput[]
+    createMany?: MediaAssetCreateManyTenantInputEnvelope
+    connect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+  }
+
   export type SubscriptionUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<SubscriptionCreateWithoutTenantInput, SubscriptionUncheckedCreateWithoutTenantInput> | SubscriptionCreateWithoutTenantInput[] | SubscriptionUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: SubscriptionCreateOrConnectWithoutTenantInput | SubscriptionCreateOrConnectWithoutTenantInput[]
@@ -48685,6 +58560,20 @@ export namespace Prisma {
     connectOrCreate?: ProviderCallbackRouteCreateOrConnectWithoutTenantInput | ProviderCallbackRouteCreateOrConnectWithoutTenantInput[]
     createMany?: ProviderCallbackRouteCreateManyTenantInputEnvelope
     connect?: ProviderCallbackRouteWhereUniqueInput | ProviderCallbackRouteWhereUniqueInput[]
+  }
+
+  export type MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MediaUploadSessionCreateWithoutTenantInput, MediaUploadSessionUncheckedCreateWithoutTenantInput> | MediaUploadSessionCreateWithoutTenantInput[] | MediaUploadSessionUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaUploadSessionCreateOrConnectWithoutTenantInput | MediaUploadSessionCreateOrConnectWithoutTenantInput[]
+    createMany?: MediaUploadSessionCreateManyTenantInputEnvelope
+    connect?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+  }
+
+  export type MediaAssetUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<MediaAssetCreateWithoutTenantInput, MediaAssetUncheckedCreateWithoutTenantInput> | MediaAssetCreateWithoutTenantInput[] | MediaAssetUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutTenantInput | MediaAssetCreateOrConnectWithoutTenantInput[]
+    createMany?: MediaAssetCreateManyTenantInputEnvelope
+    connect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -48821,6 +58710,34 @@ export namespace Prisma {
     deleteMany?: ProviderCallbackRouteScalarWhereInput | ProviderCallbackRouteScalarWhereInput[]
   }
 
+  export type MediaUploadSessionUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MediaUploadSessionCreateWithoutTenantInput, MediaUploadSessionUncheckedCreateWithoutTenantInput> | MediaUploadSessionCreateWithoutTenantInput[] | MediaUploadSessionUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaUploadSessionCreateOrConnectWithoutTenantInput | MediaUploadSessionCreateOrConnectWithoutTenantInput[]
+    upsert?: MediaUploadSessionUpsertWithWhereUniqueWithoutTenantInput | MediaUploadSessionUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MediaUploadSessionCreateManyTenantInputEnvelope
+    set?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    disconnect?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    delete?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    connect?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    update?: MediaUploadSessionUpdateWithWhereUniqueWithoutTenantInput | MediaUploadSessionUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MediaUploadSessionUpdateManyWithWhereWithoutTenantInput | MediaUploadSessionUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MediaUploadSessionScalarWhereInput | MediaUploadSessionScalarWhereInput[]
+  }
+
+  export type MediaAssetUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MediaAssetCreateWithoutTenantInput, MediaAssetUncheckedCreateWithoutTenantInput> | MediaAssetCreateWithoutTenantInput[] | MediaAssetUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutTenantInput | MediaAssetCreateOrConnectWithoutTenantInput[]
+    upsert?: MediaAssetUpsertWithWhereUniqueWithoutTenantInput | MediaAssetUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MediaAssetCreateManyTenantInputEnvelope
+    set?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    disconnect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    delete?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    connect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    update?: MediaAssetUpdateWithWhereUniqueWithoutTenantInput | MediaAssetUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MediaAssetUpdateManyWithWhereWithoutTenantInput | MediaAssetUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MediaAssetScalarWhereInput | MediaAssetScalarWhereInput[]
+  }
+
   export type SubscriptionUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<SubscriptionCreateWithoutTenantInput, SubscriptionUncheckedCreateWithoutTenantInput> | SubscriptionCreateWithoutTenantInput[] | SubscriptionUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: SubscriptionCreateOrConnectWithoutTenantInput | SubscriptionCreateOrConnectWithoutTenantInput[]
@@ -48917,6 +58834,34 @@ export namespace Prisma {
     update?: ProviderCallbackRouteUpdateWithWhereUniqueWithoutTenantInput | ProviderCallbackRouteUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: ProviderCallbackRouteUpdateManyWithWhereWithoutTenantInput | ProviderCallbackRouteUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: ProviderCallbackRouteScalarWhereInput | ProviderCallbackRouteScalarWhereInput[]
+  }
+
+  export type MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MediaUploadSessionCreateWithoutTenantInput, MediaUploadSessionUncheckedCreateWithoutTenantInput> | MediaUploadSessionCreateWithoutTenantInput[] | MediaUploadSessionUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaUploadSessionCreateOrConnectWithoutTenantInput | MediaUploadSessionCreateOrConnectWithoutTenantInput[]
+    upsert?: MediaUploadSessionUpsertWithWhereUniqueWithoutTenantInput | MediaUploadSessionUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MediaUploadSessionCreateManyTenantInputEnvelope
+    set?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    disconnect?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    delete?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    connect?: MediaUploadSessionWhereUniqueInput | MediaUploadSessionWhereUniqueInput[]
+    update?: MediaUploadSessionUpdateWithWhereUniqueWithoutTenantInput | MediaUploadSessionUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MediaUploadSessionUpdateManyWithWhereWithoutTenantInput | MediaUploadSessionUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MediaUploadSessionScalarWhereInput | MediaUploadSessionScalarWhereInput[]
+  }
+
+  export type MediaAssetUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<MediaAssetCreateWithoutTenantInput, MediaAssetUncheckedCreateWithoutTenantInput> | MediaAssetCreateWithoutTenantInput[] | MediaAssetUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutTenantInput | MediaAssetCreateOrConnectWithoutTenantInput[]
+    upsert?: MediaAssetUpsertWithWhereUniqueWithoutTenantInput | MediaAssetUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: MediaAssetCreateManyTenantInputEnvelope
+    set?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    disconnect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    delete?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    connect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+    update?: MediaAssetUpdateWithWhereUniqueWithoutTenantInput | MediaAssetUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: MediaAssetUpdateManyWithWhereWithoutTenantInput | MediaAssetUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: MediaAssetScalarWhereInput | MediaAssetScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutProviderCallbackRoutesInput = {
@@ -49569,6 +59514,112 @@ export namespace Prisma {
     update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutInvoicesInput, SubscriptionUpdateWithoutInvoicesInput>, SubscriptionUncheckedUpdateWithoutInvoicesInput>
   }
 
+  export type TenantCreateNestedOneWithoutMediaUploadSessionsInput = {
+    create?: XOR<TenantCreateWithoutMediaUploadSessionsInput, TenantUncheckedCreateWithoutMediaUploadSessionsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMediaUploadSessionsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type MediaAssetCreateNestedOneWithoutUploadSessionInput = {
+    create?: XOR<MediaAssetCreateWithoutUploadSessionInput, MediaAssetUncheckedCreateWithoutUploadSessionInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutUploadSessionInput
+    connect?: MediaAssetWhereUniqueInput
+  }
+
+  export type MediaAssetUncheckedCreateNestedOneWithoutUploadSessionInput = {
+    create?: XOR<MediaAssetCreateWithoutUploadSessionInput, MediaAssetUncheckedCreateWithoutUploadSessionInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutUploadSessionInput
+    connect?: MediaAssetWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutMediaUploadSessionsNestedInput = {
+    create?: XOR<TenantCreateWithoutMediaUploadSessionsInput, TenantUncheckedCreateWithoutMediaUploadSessionsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMediaUploadSessionsInput
+    upsert?: TenantUpsertWithoutMediaUploadSessionsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutMediaUploadSessionsInput, TenantUpdateWithoutMediaUploadSessionsInput>, TenantUncheckedUpdateWithoutMediaUploadSessionsInput>
+  }
+
+  export type MediaAssetUpdateOneWithoutUploadSessionNestedInput = {
+    create?: XOR<MediaAssetCreateWithoutUploadSessionInput, MediaAssetUncheckedCreateWithoutUploadSessionInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutUploadSessionInput
+    upsert?: MediaAssetUpsertWithoutUploadSessionInput
+    disconnect?: MediaAssetWhereInput | boolean
+    delete?: MediaAssetWhereInput | boolean
+    connect?: MediaAssetWhereUniqueInput
+    update?: XOR<XOR<MediaAssetUpdateToOneWithWhereWithoutUploadSessionInput, MediaAssetUpdateWithoutUploadSessionInput>, MediaAssetUncheckedUpdateWithoutUploadSessionInput>
+  }
+
+  export type MediaAssetUncheckedUpdateOneWithoutUploadSessionNestedInput = {
+    create?: XOR<MediaAssetCreateWithoutUploadSessionInput, MediaAssetUncheckedCreateWithoutUploadSessionInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutUploadSessionInput
+    upsert?: MediaAssetUpsertWithoutUploadSessionInput
+    disconnect?: MediaAssetWhereInput | boolean
+    delete?: MediaAssetWhereInput | boolean
+    connect?: MediaAssetWhereUniqueInput
+    update?: XOR<XOR<MediaAssetUpdateToOneWithWhereWithoutUploadSessionInput, MediaAssetUpdateWithoutUploadSessionInput>, MediaAssetUncheckedUpdateWithoutUploadSessionInput>
+  }
+
+  export type TenantCreateNestedOneWithoutMediaAssetsInput = {
+    create?: XOR<TenantCreateWithoutMediaAssetsInput, TenantUncheckedCreateWithoutMediaAssetsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMediaAssetsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type MediaUploadSessionCreateNestedOneWithoutAssetInput = {
+    create?: XOR<MediaUploadSessionCreateWithoutAssetInput, MediaUploadSessionUncheckedCreateWithoutAssetInput>
+    connectOrCreate?: MediaUploadSessionCreateOrConnectWithoutAssetInput
+    connect?: MediaUploadSessionWhereUniqueInput
+  }
+
+  export type ProductImageCreateNestedOneWithoutMediaAssetInput = {
+    create?: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductImageCreateOrConnectWithoutMediaAssetInput
+    connect?: ProductImageWhereUniqueInput
+  }
+
+  export type ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput = {
+    create?: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductImageCreateOrConnectWithoutMediaAssetInput
+    connect?: ProductImageWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutMediaAssetsNestedInput = {
+    create?: XOR<TenantCreateWithoutMediaAssetsInput, TenantUncheckedCreateWithoutMediaAssetsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutMediaAssetsInput
+    upsert?: TenantUpsertWithoutMediaAssetsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutMediaAssetsInput, TenantUpdateWithoutMediaAssetsInput>, TenantUncheckedUpdateWithoutMediaAssetsInput>
+  }
+
+  export type MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput = {
+    create?: XOR<MediaUploadSessionCreateWithoutAssetInput, MediaUploadSessionUncheckedCreateWithoutAssetInput>
+    connectOrCreate?: MediaUploadSessionCreateOrConnectWithoutAssetInput
+    upsert?: MediaUploadSessionUpsertWithoutAssetInput
+    connect?: MediaUploadSessionWhereUniqueInput
+    update?: XOR<XOR<MediaUploadSessionUpdateToOneWithWhereWithoutAssetInput, MediaUploadSessionUpdateWithoutAssetInput>, MediaUploadSessionUncheckedUpdateWithoutAssetInput>
+  }
+
+  export type ProductImageUpdateOneWithoutMediaAssetNestedInput = {
+    create?: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductImageCreateOrConnectWithoutMediaAssetInput
+    upsert?: ProductImageUpsertWithoutMediaAssetInput
+    disconnect?: ProductImageWhereInput | boolean
+    delete?: ProductImageWhereInput | boolean
+    connect?: ProductImageWhereUniqueInput
+    update?: XOR<XOR<ProductImageUpdateToOneWithWhereWithoutMediaAssetInput, ProductImageUpdateWithoutMediaAssetInput>, ProductImageUncheckedUpdateWithoutMediaAssetInput>
+  }
+
+  export type ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput = {
+    create?: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductImageCreateOrConnectWithoutMediaAssetInput
+    upsert?: ProductImageUpsertWithoutMediaAssetInput
+    disconnect?: ProductImageWhereInput | boolean
+    delete?: ProductImageWhereInput | boolean
+    connect?: ProductImageWhereUniqueInput
+    update?: XOR<XOR<ProductImageUpdateToOneWithWhereWithoutMediaAssetInput, ProductImageUpdateWithoutMediaAssetInput>, ProductImageUncheckedUpdateWithoutMediaAssetInput>
+  }
+
   export type CategoryCreateNestedOneWithoutChildrenInput = {
     create?: XOR<CategoryCreateWithoutChildrenInput, CategoryUncheckedCreateWithoutChildrenInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutChildrenInput
@@ -49730,11 +59781,25 @@ export namespace Prisma {
     connect?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[]
   }
 
+  export type ProductImageCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+  }
+
   export type ProductVariantUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput> | ProductVariantCreateWithoutProductInput[] | ProductVariantUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductVariantCreateOrConnectWithoutProductInput | ProductVariantCreateOrConnectWithoutProductInput[]
     createMany?: ProductVariantCreateManyProductInputEnvelope
     connect?: ProductVariantWhereUniqueInput | ProductVariantWhereUniqueInput[]
+  }
+
+  export type ProductImageUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
   }
 
   export type CategoryUpdateOneWithoutProductsNestedInput = {
@@ -49771,6 +59836,20 @@ export namespace Prisma {
     deleteMany?: ProductVariantScalarWhereInput | ProductVariantScalarWhereInput[]
   }
 
+  export type ProductImageUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    upsert?: ProductImageUpsertWithWhereUniqueWithoutProductInput | ProductImageUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    set?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    disconnect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    delete?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    update?: ProductImageUpdateWithWhereUniqueWithoutProductInput | ProductImageUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductImageUpdateManyWithWhereWithoutProductInput | ProductImageUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
+  }
+
   export type ProductVariantUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput> | ProductVariantCreateWithoutProductInput[] | ProductVariantUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductVariantCreateOrConnectWithoutProductInput | ProductVariantCreateOrConnectWithoutProductInput[]
@@ -49783,6 +59862,20 @@ export namespace Prisma {
     update?: ProductVariantUpdateWithWhereUniqueWithoutProductInput | ProductVariantUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: ProductVariantUpdateManyWithWhereWithoutProductInput | ProductVariantUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: ProductVariantScalarWhereInput | ProductVariantScalarWhereInput[]
+  }
+
+  export type ProductImageUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    upsert?: ProductImageUpsertWithWhereUniqueWithoutProductInput | ProductImageUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    set?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    disconnect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    delete?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    update?: ProductImageUpdateWithWhereUniqueWithoutProductInput | ProductImageUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductImageUpdateManyWithWhereWithoutProductInput | ProductImageUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
   }
 
   export type ProductCreateNestedOneWithoutVariantsInput = {
@@ -49889,6 +59982,36 @@ export namespace Prisma {
     update?: OrderItemUpdateWithWhereUniqueWithoutVariantInput | OrderItemUpdateWithWhereUniqueWithoutVariantInput[]
     updateMany?: OrderItemUpdateManyWithWhereWithoutVariantInput | OrderItemUpdateManyWithWhereWithoutVariantInput[]
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
+  }
+
+  export type ProductCreateNestedOneWithoutImagesInput = {
+    create?: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutImagesInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type MediaAssetCreateNestedOneWithoutProductImageInput = {
+    create?: XOR<MediaAssetCreateWithoutProductImageInput, MediaAssetUncheckedCreateWithoutProductImageInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutProductImageInput
+    connect?: MediaAssetWhereUniqueInput
+  }
+
+  export type ProductUpdateOneRequiredWithoutImagesNestedInput = {
+    create?: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutImagesInput
+    upsert?: ProductUpsertWithoutImagesInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutImagesInput, ProductUpdateWithoutImagesInput>, ProductUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type MediaAssetUpdateOneWithoutProductImageNestedInput = {
+    create?: XOR<MediaAssetCreateWithoutProductImageInput, MediaAssetUncheckedCreateWithoutProductImageInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutProductImageInput
+    upsert?: MediaAssetUpsertWithoutProductImageInput
+    disconnect?: MediaAssetWhereInput | boolean
+    delete?: MediaAssetWhereInput | boolean
+    connect?: MediaAssetWhereUniqueInput
+    update?: XOR<XOR<MediaAssetUpdateToOneWithWhereWithoutProductImageInput, MediaAssetUpdateWithoutProductImageInput>, MediaAssetUncheckedUpdateWithoutProductImageInput>
   }
 
   export type OrderItemCreateNestedManyWithoutOrderInput = {
@@ -50071,6 +60194,62 @@ export namespace Prisma {
     upsert?: OrderUpsertWithoutPaymentsInput
     connect?: OrderWhereUniqueInput
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutPaymentsInput, OrderUpdateWithoutPaymentsInput>, OrderUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type PaymentReconciliationDiscrepancyCreateNestedManyWithoutRunInput = {
+    create?: XOR<PaymentReconciliationDiscrepancyCreateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput> | PaymentReconciliationDiscrepancyCreateWithoutRunInput[] | PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput[]
+    connectOrCreate?: PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput | PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput[]
+    createMany?: PaymentReconciliationDiscrepancyCreateManyRunInputEnvelope
+    connect?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedCreateNestedManyWithoutRunInput = {
+    create?: XOR<PaymentReconciliationDiscrepancyCreateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput> | PaymentReconciliationDiscrepancyCreateWithoutRunInput[] | PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput[]
+    connectOrCreate?: PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput | PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput[]
+    createMany?: PaymentReconciliationDiscrepancyCreateManyRunInputEnvelope
+    connect?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+  }
+
+  export type PaymentReconciliationDiscrepancyUpdateManyWithoutRunNestedInput = {
+    create?: XOR<PaymentReconciliationDiscrepancyCreateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput> | PaymentReconciliationDiscrepancyCreateWithoutRunInput[] | PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput[]
+    connectOrCreate?: PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput | PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput[]
+    upsert?: PaymentReconciliationDiscrepancyUpsertWithWhereUniqueWithoutRunInput | PaymentReconciliationDiscrepancyUpsertWithWhereUniqueWithoutRunInput[]
+    createMany?: PaymentReconciliationDiscrepancyCreateManyRunInputEnvelope
+    set?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    disconnect?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    delete?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    connect?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    update?: PaymentReconciliationDiscrepancyUpdateWithWhereUniqueWithoutRunInput | PaymentReconciliationDiscrepancyUpdateWithWhereUniqueWithoutRunInput[]
+    updateMany?: PaymentReconciliationDiscrepancyUpdateManyWithWhereWithoutRunInput | PaymentReconciliationDiscrepancyUpdateManyWithWhereWithoutRunInput[]
+    deleteMany?: PaymentReconciliationDiscrepancyScalarWhereInput | PaymentReconciliationDiscrepancyScalarWhereInput[]
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedUpdateManyWithoutRunNestedInput = {
+    create?: XOR<PaymentReconciliationDiscrepancyCreateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput> | PaymentReconciliationDiscrepancyCreateWithoutRunInput[] | PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput[]
+    connectOrCreate?: PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput | PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput[]
+    upsert?: PaymentReconciliationDiscrepancyUpsertWithWhereUniqueWithoutRunInput | PaymentReconciliationDiscrepancyUpsertWithWhereUniqueWithoutRunInput[]
+    createMany?: PaymentReconciliationDiscrepancyCreateManyRunInputEnvelope
+    set?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    disconnect?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    delete?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    connect?: PaymentReconciliationDiscrepancyWhereUniqueInput | PaymentReconciliationDiscrepancyWhereUniqueInput[]
+    update?: PaymentReconciliationDiscrepancyUpdateWithWhereUniqueWithoutRunInput | PaymentReconciliationDiscrepancyUpdateWithWhereUniqueWithoutRunInput[]
+    updateMany?: PaymentReconciliationDiscrepancyUpdateManyWithWhereWithoutRunInput | PaymentReconciliationDiscrepancyUpdateManyWithWhereWithoutRunInput[]
+    deleteMany?: PaymentReconciliationDiscrepancyScalarWhereInput | PaymentReconciliationDiscrepancyScalarWhereInput[]
+  }
+
+  export type PaymentReconciliationRunCreateNestedOneWithoutDiscrepanciesInput = {
+    create?: XOR<PaymentReconciliationRunCreateWithoutDiscrepanciesInput, PaymentReconciliationRunUncheckedCreateWithoutDiscrepanciesInput>
+    connectOrCreate?: PaymentReconciliationRunCreateOrConnectWithoutDiscrepanciesInput
+    connect?: PaymentReconciliationRunWhereUniqueInput
+  }
+
+  export type PaymentReconciliationRunUpdateOneRequiredWithoutDiscrepanciesNestedInput = {
+    create?: XOR<PaymentReconciliationRunCreateWithoutDiscrepanciesInput, PaymentReconciliationRunUncheckedCreateWithoutDiscrepanciesInput>
+    connectOrCreate?: PaymentReconciliationRunCreateOrConnectWithoutDiscrepanciesInput
+    upsert?: PaymentReconciliationRunUpsertWithoutDiscrepanciesInput
+    connect?: PaymentReconciliationRunWhereUniqueInput
+    update?: XOR<XOR<PaymentReconciliationRunUpdateToOneWithWhereWithoutDiscrepanciesInput, PaymentReconciliationRunUpdateWithoutDiscrepanciesInput>, PaymentReconciliationRunUncheckedUpdateWithoutDiscrepanciesInput>
   }
 
   export type OrderCreateNestedOneWithoutItemsInput = {
@@ -51094,6 +61273,90 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MediaUploadSessionCreateWithoutTenantInput = {
+    id?: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    asset?: MediaAssetCreateNestedOneWithoutUploadSessionInput
+  }
+
+  export type MediaUploadSessionUncheckedCreateWithoutTenantInput = {
+    id?: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    asset?: MediaAssetUncheckedCreateNestedOneWithoutUploadSessionInput
+  }
+
+  export type MediaUploadSessionCreateOrConnectWithoutTenantInput = {
+    where: MediaUploadSessionWhereUniqueInput
+    create: XOR<MediaUploadSessionCreateWithoutTenantInput, MediaUploadSessionUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MediaUploadSessionCreateManyTenantInputEnvelope = {
+    data: MediaUploadSessionCreateManyTenantInput | MediaUploadSessionCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MediaAssetCreateWithoutTenantInput = {
+    id?: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    uploadSession: MediaUploadSessionCreateNestedOneWithoutAssetInput
+    productImage?: ProductImageCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetUncheckedCreateWithoutTenantInput = {
+    id?: string
+    uploadSessionId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    productImage?: ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetCreateOrConnectWithoutTenantInput = {
+    where: MediaAssetWhereUniqueInput
+    create: XOR<MediaAssetCreateWithoutTenantInput, MediaAssetUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MediaAssetCreateManyTenantInputEnvelope = {
+    data: MediaAssetCreateManyTenantInput | MediaAssetCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PlanUpsertWithoutTenantsInput = {
     update: XOR<PlanUpdateWithoutTenantsInput, PlanUncheckedUpdateWithoutTenantsInput>
     create: XOR<PlanCreateWithoutTenantsInput, PlanUncheckedCreateWithoutTenantsInput>
@@ -51403,6 +61666,76 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ProviderCallbackRoute"> | Date | string
   }
 
+  export type MediaUploadSessionUpsertWithWhereUniqueWithoutTenantInput = {
+    where: MediaUploadSessionWhereUniqueInput
+    update: XOR<MediaUploadSessionUpdateWithoutTenantInput, MediaUploadSessionUncheckedUpdateWithoutTenantInput>
+    create: XOR<MediaUploadSessionCreateWithoutTenantInput, MediaUploadSessionUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MediaUploadSessionUpdateWithWhereUniqueWithoutTenantInput = {
+    where: MediaUploadSessionWhereUniqueInput
+    data: XOR<MediaUploadSessionUpdateWithoutTenantInput, MediaUploadSessionUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type MediaUploadSessionUpdateManyWithWhereWithoutTenantInput = {
+    where: MediaUploadSessionScalarWhereInput
+    data: XOR<MediaUploadSessionUpdateManyMutationInput, MediaUploadSessionUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type MediaUploadSessionScalarWhereInput = {
+    AND?: MediaUploadSessionScalarWhereInput | MediaUploadSessionScalarWhereInput[]
+    OR?: MediaUploadSessionScalarWhereInput[]
+    NOT?: MediaUploadSessionScalarWhereInput | MediaUploadSessionScalarWhereInput[]
+    id?: UuidFilter<"MediaUploadSession"> | string
+    tenantId?: UuidFilter<"MediaUploadSession"> | string
+    actorId?: UuidFilter<"MediaUploadSession"> | string
+    purpose?: StringFilter<"MediaUploadSession"> | string
+    objectKey?: StringFilter<"MediaUploadSession"> | string
+    fileName?: StringFilter<"MediaUploadSession"> | string
+    mimeType?: StringFilter<"MediaUploadSession"> | string
+    sizeBytes?: IntFilter<"MediaUploadSession"> | number
+    status?: StringFilter<"MediaUploadSession"> | string
+    expiresAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    createdAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaUploadSession"> | Date | string
+  }
+
+  export type MediaAssetUpsertWithWhereUniqueWithoutTenantInput = {
+    where: MediaAssetWhereUniqueInput
+    update: XOR<MediaAssetUpdateWithoutTenantInput, MediaAssetUncheckedUpdateWithoutTenantInput>
+    create: XOR<MediaAssetCreateWithoutTenantInput, MediaAssetUncheckedCreateWithoutTenantInput>
+  }
+
+  export type MediaAssetUpdateWithWhereUniqueWithoutTenantInput = {
+    where: MediaAssetWhereUniqueInput
+    data: XOR<MediaAssetUpdateWithoutTenantInput, MediaAssetUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type MediaAssetUpdateManyWithWhereWithoutTenantInput = {
+    where: MediaAssetScalarWhereInput
+    data: XOR<MediaAssetUpdateManyMutationInput, MediaAssetUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type MediaAssetScalarWhereInput = {
+    AND?: MediaAssetScalarWhereInput | MediaAssetScalarWhereInput[]
+    OR?: MediaAssetScalarWhereInput[]
+    NOT?: MediaAssetScalarWhereInput | MediaAssetScalarWhereInput[]
+    id?: UuidFilter<"MediaAsset"> | string
+    tenantId?: UuidFilter<"MediaAsset"> | string
+    uploadSessionId?: UuidFilter<"MediaAsset"> | string
+    createdBy?: UuidFilter<"MediaAsset"> | string
+    purpose?: StringFilter<"MediaAsset"> | string
+    objectKey?: StringFilter<"MediaAsset"> | string
+    mimeType?: StringFilter<"MediaAsset"> | string
+    sizeBytes?: IntFilter<"MediaAsset"> | number
+    sha256?: StringFilter<"MediaAsset"> | string
+    status?: StringFilter<"MediaAsset"> | string
+    createdAt?: DateTimeFilter<"MediaAsset"> | Date | string
+    updatedAt?: DateTimeFilter<"MediaAsset"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"MediaAsset"> | Date | string | null
+    purgedAt?: DateTimeNullableFilter<"MediaAsset"> | Date | string | null
+  }
+
   export type TenantCreateWithoutProviderCallbackRoutesInput = {
     id?: string
     name: string
@@ -51424,6 +61757,8 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutProviderCallbackRoutesInput = {
@@ -51447,6 +61782,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutProviderCallbackRoutesInput = {
@@ -51486,6 +61823,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutProviderCallbackRoutesInput = {
@@ -51509,6 +61848,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutCustomersInput = {
@@ -51532,6 +61873,8 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutCustomersInput = {
@@ -51555,6 +61898,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutCustomersInput = {
@@ -51620,6 +61965,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutCustomersInput = {
@@ -51643,6 +61990,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type CustomerRefreshSessionUpsertWithWhereUniqueWithoutCustomerInput = {
@@ -51758,6 +62107,8 @@ export namespace Prisma {
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutAdminUsersInput = {
@@ -51781,6 +62132,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutAdminUsersInput = {
@@ -51809,6 +62162,7 @@ export namespace Prisma {
   export type RefreshSessionCreateWithoutUserInput = {
     id?: string
     tokenHash: string
+    actorType?: string
     expiresAt: Date | string
     revokedAt?: Date | string | null
     createdAt?: Date | string
@@ -51817,6 +62171,7 @@ export namespace Prisma {
   export type RefreshSessionUncheckedCreateWithoutUserInput = {
     id?: string
     tokenHash: string
+    actorType?: string
     expiresAt: Date | string
     revokedAt?: Date | string | null
     createdAt?: Date | string
@@ -51864,6 +62219,8 @@ export namespace Prisma {
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutAdminUsersInput = {
@@ -51887,6 +62244,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
@@ -51936,6 +62295,7 @@ export namespace Prisma {
     id?: UuidFilter<"RefreshSession"> | string
     userId?: UuidFilter<"RefreshSession"> | string
     tokenHash?: StringFilter<"RefreshSession"> | string
+    actorType?: StringFilter<"RefreshSession"> | string
     expiresAt?: DateTimeFilter<"RefreshSession"> | Date | string
     revokedAt?: DateTimeNullableFilter<"RefreshSession"> | Date | string | null
     createdAt?: DateTimeFilter<"RefreshSession"> | Date | string
@@ -52026,6 +62386,8 @@ export namespace Prisma {
     adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
     customers?: CustomerCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutRolesInput = {
@@ -52049,6 +62411,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutRolesInput = {
@@ -52124,6 +62488,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutRolesInput = {
@@ -52147,6 +62513,8 @@ export namespace Prisma {
     adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type RolePermissionUpsertWithWhereUniqueWithoutRoleInput = {
@@ -52464,6 +62832,8 @@ export namespace Prisma {
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPlanInput = {
@@ -52487,6 +62857,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPlanInput = {
@@ -52616,6 +62988,8 @@ export namespace Prisma {
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutSubscriptionsInput = {
@@ -52639,6 +63013,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutSubscriptionsInput = {
@@ -52706,6 +63082,8 @@ export namespace Prisma {
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutCurrentSubscriptionInput = {
@@ -52729,6 +63107,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutCurrentSubscriptionInput = {
@@ -52812,6 +63192,8 @@ export namespace Prisma {
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
@@ -52835,6 +63217,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type PlanUpsertWithoutSubscriptionsInput = {
@@ -52914,6 +63298,8 @@ export namespace Prisma {
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutCurrentSubscriptionInput = {
@@ -52937,6 +63323,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type InvoiceUpsertWithWhereUniqueWithoutSubscriptionInput = {
@@ -52976,6 +63364,8 @@ export namespace Prisma {
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutUsageMetricsInput = {
@@ -52999,6 +63389,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutUsageMetricsInput = {
@@ -53038,6 +63430,8 @@ export namespace Prisma {
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutUsageMetricsInput = {
@@ -53061,6 +63455,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutInvoicesInput = {
@@ -53084,6 +63480,8 @@ export namespace Prisma {
     customers?: CustomerCreateNestedManyWithoutTenantInput
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutInvoicesInput = {
@@ -53107,6 +63505,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutInvoicesInput = {
@@ -53185,6 +63585,8 @@ export namespace Prisma {
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutInvoicesInput = {
@@ -53208,6 +63610,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type SubscriptionUpsertWithoutInvoicesInput = {
@@ -53255,12 +63659,488 @@ export namespace Prisma {
     currentForTenant?: TenantUncheckedUpdateOneWithoutCurrentSubscriptionNestedInput
   }
 
+  export type TenantCreateWithoutMediaUploadSessionsInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutMediaUploadSessionsInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutMediaUploadSessionsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutMediaUploadSessionsInput, TenantUncheckedCreateWithoutMediaUploadSessionsInput>
+  }
+
+  export type MediaAssetCreateWithoutUploadSessionInput = {
+    id?: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    tenant: TenantCreateNestedOneWithoutMediaAssetsInput
+    productImage?: ProductImageCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetUncheckedCreateWithoutUploadSessionInput = {
+    id?: string
+    tenantId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    productImage?: ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetCreateOrConnectWithoutUploadSessionInput = {
+    where: MediaAssetWhereUniqueInput
+    create: XOR<MediaAssetCreateWithoutUploadSessionInput, MediaAssetUncheckedCreateWithoutUploadSessionInput>
+  }
+
+  export type TenantUpsertWithoutMediaUploadSessionsInput = {
+    update: XOR<TenantUpdateWithoutMediaUploadSessionsInput, TenantUncheckedUpdateWithoutMediaUploadSessionsInput>
+    create: XOR<TenantCreateWithoutMediaUploadSessionsInput, TenantUncheckedCreateWithoutMediaUploadSessionsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutMediaUploadSessionsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutMediaUploadSessionsInput, TenantUncheckedUpdateWithoutMediaUploadSessionsInput>
+  }
+
+  export type TenantUpdateWithoutMediaUploadSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutMediaUploadSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type MediaAssetUpsertWithoutUploadSessionInput = {
+    update: XOR<MediaAssetUpdateWithoutUploadSessionInput, MediaAssetUncheckedUpdateWithoutUploadSessionInput>
+    create: XOR<MediaAssetCreateWithoutUploadSessionInput, MediaAssetUncheckedCreateWithoutUploadSessionInput>
+    where?: MediaAssetWhereInput
+  }
+
+  export type MediaAssetUpdateToOneWithWhereWithoutUploadSessionInput = {
+    where?: MediaAssetWhereInput
+    data: XOR<MediaAssetUpdateWithoutUploadSessionInput, MediaAssetUncheckedUpdateWithoutUploadSessionInput>
+  }
+
+  export type MediaAssetUpdateWithoutUploadSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tenant?: TenantUpdateOneRequiredWithoutMediaAssetsNestedInput
+    productImage?: ProductImageUpdateOneWithoutMediaAssetNestedInput
+  }
+
+  export type MediaAssetUncheckedUpdateWithoutUploadSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productImage?: ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput
+  }
+
+  export type TenantCreateWithoutMediaAssetsInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutMediaAssetsInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutMediaAssetsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutMediaAssetsInput, TenantUncheckedCreateWithoutMediaAssetsInput>
+  }
+
+  export type MediaUploadSessionCreateWithoutAssetInput = {
+    id?: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutMediaUploadSessionsInput
+  }
+
+  export type MediaUploadSessionUncheckedCreateWithoutAssetInput = {
+    id?: string
+    tenantId: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaUploadSessionCreateOrConnectWithoutAssetInput = {
+    where: MediaUploadSessionWhereUniqueInput
+    create: XOR<MediaUploadSessionCreateWithoutAssetInput, MediaUploadSessionUncheckedCreateWithoutAssetInput>
+  }
+
+  export type ProductImageCreateWithoutMediaAssetInput = {
+    id?: string
+    tenantId: string
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutImagesInput
+  }
+
+  export type ProductImageUncheckedCreateWithoutMediaAssetInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductImageCreateOrConnectWithoutMediaAssetInput = {
+    where: ProductImageWhereUniqueInput
+    create: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
+  }
+
+  export type TenantUpsertWithoutMediaAssetsInput = {
+    update: XOR<TenantUpdateWithoutMediaAssetsInput, TenantUncheckedUpdateWithoutMediaAssetsInput>
+    create: XOR<TenantCreateWithoutMediaAssetsInput, TenantUncheckedCreateWithoutMediaAssetsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutMediaAssetsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutMediaAssetsInput, TenantUncheckedUpdateWithoutMediaAssetsInput>
+  }
+
+  export type TenantUpdateWithoutMediaAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutMediaAssetsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type MediaUploadSessionUpsertWithoutAssetInput = {
+    update: XOR<MediaUploadSessionUpdateWithoutAssetInput, MediaUploadSessionUncheckedUpdateWithoutAssetInput>
+    create: XOR<MediaUploadSessionCreateWithoutAssetInput, MediaUploadSessionUncheckedCreateWithoutAssetInput>
+    where?: MediaUploadSessionWhereInput
+  }
+
+  export type MediaUploadSessionUpdateToOneWithWhereWithoutAssetInput = {
+    where?: MediaUploadSessionWhereInput
+    data: XOR<MediaUploadSessionUpdateWithoutAssetInput, MediaUploadSessionUncheckedUpdateWithoutAssetInput>
+  }
+
+  export type MediaUploadSessionUpdateWithoutAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutMediaUploadSessionsNestedInput
+  }
+
+  export type MediaUploadSessionUncheckedUpdateWithoutAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductImageUpsertWithoutMediaAssetInput = {
+    update: XOR<ProductImageUpdateWithoutMediaAssetInput, ProductImageUncheckedUpdateWithoutMediaAssetInput>
+    create: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
+    where?: ProductImageWhereInput
+  }
+
+  export type ProductImageUpdateToOneWithWhereWithoutMediaAssetInput = {
+    where?: ProductImageWhereInput
+    data: XOR<ProductImageUpdateWithoutMediaAssetInput, ProductImageUncheckedUpdateWithoutMediaAssetInput>
+  }
+
+  export type ProductImageUpdateWithoutMediaAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutImagesNestedInput
+  }
+
+  export type ProductImageUncheckedUpdateWithoutMediaAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CategoryCreateWithoutChildrenInput = {
     id?: string
     tenantId: string
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     parent?: CategoryCreateNestedOneWithoutChildrenInput
     products?: ProductCreateNestedManyWithoutCategoryInput
   }
@@ -53271,7 +64151,11 @@ export namespace Prisma {
     parentId?: string | null
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -53285,7 +64169,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     children?: CategoryCreateNestedManyWithoutParentInput
     products?: ProductCreateNestedManyWithoutCategoryInput
   }
@@ -53295,7 +64183,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     children?: CategoryUncheckedCreateNestedManyWithoutParentInput
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
   }
@@ -53325,8 +64217,10 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
     brand?: BrandCreateNestedOneWithoutProductsInput
     variants?: ProductVariantCreateNestedManyWithoutProductInput
+    images?: ProductImageCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -53345,7 +64239,9 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -53374,7 +64270,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: CategoryUpdateOneWithoutChildrenNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
   }
@@ -53385,7 +64285,11 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
@@ -53414,7 +64318,11 @@ export namespace Prisma {
     parentId?: UuidNullableFilter<"Category"> | string | null
     name?: StringFilter<"Category"> | string
     sortOrder?: IntFilter<"Category"> | number
+    status?: StringFilter<"Category"> | string
+    version?: IntFilter<"Category"> | number
+    deletedAt?: DateTimeNullableFilter<"Category"> | Date | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
   }
 
   export type ProductUpsertWithWhereUniqueWithoutCategoryInput = {
@@ -53453,6 +64361,7 @@ export namespace Prisma {
     createdBy?: UuidNullableFilter<"Product"> | string | null
     updatedBy?: UuidNullableFilter<"Product"> | string | null
     version?: IntFilter<"Product"> | number
+    deletedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
   }
 
   export type ProductCreateWithoutBrandInput = {
@@ -53470,8 +64379,10 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
     category?: CategoryCreateNestedOneWithoutProductsInput
     variants?: ProductVariantCreateNestedManyWithoutProductInput
+    images?: ProductImageCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutBrandInput = {
@@ -53490,7 +64401,9 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutBrandInput = {
@@ -53524,7 +64437,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     parent?: CategoryCreateNestedOneWithoutChildrenInput
     children?: CategoryCreateNestedManyWithoutParentInput
   }
@@ -53535,7 +64452,11 @@ export namespace Prisma {
     parentId?: string | null
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
     children?: CategoryUncheckedCreateNestedManyWithoutParentInput
   }
 
@@ -53549,7 +64470,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BrandUncheckedCreateWithoutProductsInput = {
@@ -53557,7 +64482,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BrandCreateOrConnectWithoutProductsInput = {
@@ -53573,6 +64502,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryTransactions?: InventoryTransactionCreateNestedManyWithoutVariantInput
@@ -53587,6 +64518,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryTransactions?: InventoryTransactionUncheckedCreateNestedManyWithoutVariantInput
@@ -53600,6 +64533,48 @@ export namespace Prisma {
 
   export type ProductVariantCreateManyProductInputEnvelope = {
     data: ProductVariantCreateManyProductInput | ProductVariantCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductImageCreateWithoutProductInput = {
+    id?: string
+    tenantId: string
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    mediaAsset?: MediaAssetCreateNestedOneWithoutProductImageInput
+  }
+
+  export type ProductImageUncheckedCreateWithoutProductInput = {
+    id?: string
+    tenantId: string
+    mediaAssetId?: string | null
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductImageCreateOrConnectWithoutProductInput = {
+    where: ProductImageWhereUniqueInput
+    create: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductImageCreateManyProductInputEnvelope = {
+    data: ProductImageCreateManyProductInput | ProductImageCreateManyProductInput[]
     skipDuplicates?: boolean
   }
 
@@ -53619,7 +64594,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: CategoryUpdateOneWithoutChildrenNestedInput
     children?: CategoryUpdateManyWithoutParentNestedInput
   }
@@ -53630,7 +64609,11 @@ export namespace Prisma {
     parentId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
   }
 
@@ -53650,7 +64633,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BrandUncheckedUpdateWithoutProductsInput = {
@@ -53658,7 +64645,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductVariantUpsertWithWhereUniqueWithoutProductInput = {
@@ -53689,8 +64680,46 @@ export namespace Prisma {
     price?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string
     weightG?: DecimalNullableFilter<"ProductVariant"> | Decimal | DecimalJsLike | number | string | null
+    version?: IntFilter<"ProductVariant"> | number
+    deletedAt?: DateTimeNullableFilter<"ProductVariant"> | Date | string | null
     createdAt?: DateTimeFilter<"ProductVariant"> | Date | string
     updatedAt?: DateTimeFilter<"ProductVariant"> | Date | string
+  }
+
+  export type ProductImageUpsertWithWhereUniqueWithoutProductInput = {
+    where: ProductImageWhereUniqueInput
+    update: XOR<ProductImageUpdateWithoutProductInput, ProductImageUncheckedUpdateWithoutProductInput>
+    create: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductImageUpdateWithWhereUniqueWithoutProductInput = {
+    where: ProductImageWhereUniqueInput
+    data: XOR<ProductImageUpdateWithoutProductInput, ProductImageUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ProductImageUpdateManyWithWhereWithoutProductInput = {
+    where: ProductImageScalarWhereInput
+    data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type ProductImageScalarWhereInput = {
+    AND?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
+    OR?: ProductImageScalarWhereInput[]
+    NOT?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
+    id?: UuidFilter<"ProductImage"> | string
+    tenantId?: UuidFilter<"ProductImage"> | string
+    productId?: UuidFilter<"ProductImage"> | string
+    mediaAssetId?: UuidNullableFilter<"ProductImage"> | string | null
+    url?: StringFilter<"ProductImage"> | string
+    altText?: StringNullableFilter<"ProductImage"> | string | null
+    sortOrder?: IntFilter<"ProductImage"> | number
+    isPrimary?: BoolFilter<"ProductImage"> | boolean
+    sizeBytes?: IntFilter<"ProductImage"> | number
+    mimeType?: StringFilter<"ProductImage"> | string
+    version?: IntFilter<"ProductImage"> | number
+    deletedAt?: DateTimeNullableFilter<"ProductImage"> | Date | string | null
+    createdAt?: DateTimeFilter<"ProductImage"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductImage"> | Date | string
   }
 
   export type ProductCreateWithoutVariantsInput = {
@@ -53708,8 +64737,10 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
     category?: CategoryCreateNestedOneWithoutProductsInput
     brand?: BrandCreateNestedOneWithoutProductsInput
+    images?: ProductImageCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutVariantsInput = {
@@ -53729,6 +64760,8 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutVariantsInput = {
@@ -53834,8 +64867,10 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     category?: CategoryUpdateOneWithoutProductsNestedInput
     brand?: BrandUpdateOneWithoutProductsNestedInput
+    images?: ProductImageUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutVariantsInput = {
@@ -53855,6 +64890,8 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type InventoryTransactionUpsertWithWhereUniqueWithoutVariantInput = {
@@ -53919,6 +64956,190 @@ export namespace Prisma {
     unitPrice?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     quantity?: IntFilter<"OrderItem"> | number
     lineTotal?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type ProductCreateWithoutImagesInput = {
+    id?: string
+    tenantId: string
+    code: string
+    name: string
+    description?: string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: string | null
+    status?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    updatedBy?: string | null
+    version?: number
+    deletedAt?: Date | string | null
+    category?: CategoryCreateNestedOneWithoutProductsInput
+    brand?: BrandCreateNestedOneWithoutProductsInput
+    variants?: ProductVariantCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutImagesInput = {
+    id?: string
+    tenantId: string
+    categoryId?: string | null
+    brandId?: string | null
+    code: string
+    name: string
+    description?: string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: string | null
+    status?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    updatedBy?: string | null
+    version?: number
+    deletedAt?: Date | string | null
+    variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutImagesInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+  }
+
+  export type MediaAssetCreateWithoutProductImageInput = {
+    id?: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    tenant: TenantCreateNestedOneWithoutMediaAssetsInput
+    uploadSession: MediaUploadSessionCreateNestedOneWithoutAssetInput
+  }
+
+  export type MediaAssetUncheckedCreateWithoutProductImageInput = {
+    id?: string
+    tenantId: string
+    uploadSessionId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+  }
+
+  export type MediaAssetCreateOrConnectWithoutProductImageInput = {
+    where: MediaAssetWhereUniqueInput
+    create: XOR<MediaAssetCreateWithoutProductImageInput, MediaAssetUncheckedCreateWithoutProductImageInput>
+  }
+
+  export type ProductUpsertWithoutImagesInput = {
+    update: XOR<ProductUpdateWithoutImagesInput, ProductUncheckedUpdateWithoutImagesInput>
+    create: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutImagesInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutImagesInput, ProductUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type ProductUpdateWithoutImagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    category?: CategoryUpdateOneWithoutProductsNestedInput
+    brand?: BrandUpdateOneWithoutProductsNestedInput
+    variants?: ProductVariantUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutImagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type MediaAssetUpsertWithoutProductImageInput = {
+    update: XOR<MediaAssetUpdateWithoutProductImageInput, MediaAssetUncheckedUpdateWithoutProductImageInput>
+    create: XOR<MediaAssetCreateWithoutProductImageInput, MediaAssetUncheckedCreateWithoutProductImageInput>
+    where?: MediaAssetWhereInput
+  }
+
+  export type MediaAssetUpdateToOneWithWhereWithoutProductImageInput = {
+    where?: MediaAssetWhereInput
+    data: XOR<MediaAssetUpdateWithoutProductImageInput, MediaAssetUncheckedUpdateWithoutProductImageInput>
+  }
+
+  export type MediaAssetUpdateWithoutProductImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tenant?: TenantUpdateOneRequiredWithoutMediaAssetsNestedInput
+    uploadSession?: MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput
+  }
+
+  export type MediaAssetUncheckedUpdateWithoutProductImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    uploadSessionId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrderItemCreateWithoutOrderInput = {
@@ -54348,6 +65569,148 @@ export namespace Prisma {
     refunds?: RefundUncheckedUpdateManyWithoutOrderNestedInput
   }
 
+  export type PaymentReconciliationDiscrepancyCreateWithoutRunInput = {
+    id?: string
+    tenantId: string
+    paymentNo: string
+    type: string
+    localAmount?: Decimal | DecimalJsLike | number | string | null
+    providerAmount?: Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: string | null
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput = {
+    id?: string
+    tenantId: string
+    paymentNo: string
+    type: string
+    localAmount?: Decimal | DecimalJsLike | number | string | null
+    providerAmount?: Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: string | null
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyCreateOrConnectWithoutRunInput = {
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+    create: XOR<PaymentReconciliationDiscrepancyCreateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput>
+  }
+
+  export type PaymentReconciliationDiscrepancyCreateManyRunInputEnvelope = {
+    data: PaymentReconciliationDiscrepancyCreateManyRunInput | PaymentReconciliationDiscrepancyCreateManyRunInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaymentReconciliationDiscrepancyUpsertWithWhereUniqueWithoutRunInput = {
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+    update: XOR<PaymentReconciliationDiscrepancyUpdateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedUpdateWithoutRunInput>
+    create: XOR<PaymentReconciliationDiscrepancyCreateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedCreateWithoutRunInput>
+  }
+
+  export type PaymentReconciliationDiscrepancyUpdateWithWhereUniqueWithoutRunInput = {
+    where: PaymentReconciliationDiscrepancyWhereUniqueInput
+    data: XOR<PaymentReconciliationDiscrepancyUpdateWithoutRunInput, PaymentReconciliationDiscrepancyUncheckedUpdateWithoutRunInput>
+  }
+
+  export type PaymentReconciliationDiscrepancyUpdateManyWithWhereWithoutRunInput = {
+    where: PaymentReconciliationDiscrepancyScalarWhereInput
+    data: XOR<PaymentReconciliationDiscrepancyUpdateManyMutationInput, PaymentReconciliationDiscrepancyUncheckedUpdateManyWithoutRunInput>
+  }
+
+  export type PaymentReconciliationDiscrepancyScalarWhereInput = {
+    AND?: PaymentReconciliationDiscrepancyScalarWhereInput | PaymentReconciliationDiscrepancyScalarWhereInput[]
+    OR?: PaymentReconciliationDiscrepancyScalarWhereInput[]
+    NOT?: PaymentReconciliationDiscrepancyScalarWhereInput | PaymentReconciliationDiscrepancyScalarWhereInput[]
+    id?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    tenantId?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    runId?: UuidFilter<"PaymentReconciliationDiscrepancy"> | string
+    paymentNo?: StringFilter<"PaymentReconciliationDiscrepancy"> | string
+    type?: StringFilter<"PaymentReconciliationDiscrepancy"> | string
+    localAmount?: DecimalNullableFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: DecimalNullableFilter<"PaymentReconciliationDiscrepancy"> | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: StringNullableFilter<"PaymentReconciliationDiscrepancy"> | string | null
+    resolvedAt?: DateTimeNullableFilter<"PaymentReconciliationDiscrepancy"> | Date | string | null
+    createdAt?: DateTimeFilter<"PaymentReconciliationDiscrepancy"> | Date | string
+  }
+
+  export type PaymentReconciliationRunCreateWithoutDiscrepanciesInput = {
+    id?: string
+    tenantId: string
+    channel: string
+    billDate: Date | string
+    status?: string
+    localCount?: number
+    providerCount?: number
+    discrepancyCount?: number
+    errorMessage?: string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentReconciliationRunUncheckedCreateWithoutDiscrepanciesInput = {
+    id?: string
+    tenantId: string
+    channel: string
+    billDate: Date | string
+    status?: string
+    localCount?: number
+    providerCount?: number
+    discrepancyCount?: number
+    errorMessage?: string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentReconciliationRunCreateOrConnectWithoutDiscrepanciesInput = {
+    where: PaymentReconciliationRunWhereUniqueInput
+    create: XOR<PaymentReconciliationRunCreateWithoutDiscrepanciesInput, PaymentReconciliationRunUncheckedCreateWithoutDiscrepanciesInput>
+  }
+
+  export type PaymentReconciliationRunUpsertWithoutDiscrepanciesInput = {
+    update: XOR<PaymentReconciliationRunUpdateWithoutDiscrepanciesInput, PaymentReconciliationRunUncheckedUpdateWithoutDiscrepanciesInput>
+    create: XOR<PaymentReconciliationRunCreateWithoutDiscrepanciesInput, PaymentReconciliationRunUncheckedCreateWithoutDiscrepanciesInput>
+    where?: PaymentReconciliationRunWhereInput
+  }
+
+  export type PaymentReconciliationRunUpdateToOneWithWhereWithoutDiscrepanciesInput = {
+    where?: PaymentReconciliationRunWhereInput
+    data: XOR<PaymentReconciliationRunUpdateWithoutDiscrepanciesInput, PaymentReconciliationRunUncheckedUpdateWithoutDiscrepanciesInput>
+  }
+
+  export type PaymentReconciliationRunUpdateWithoutDiscrepanciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    billDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    localCount?: IntFieldUpdateOperationsInput | number
+    providerCount?: IntFieldUpdateOperationsInput | number
+    discrepancyCount?: IntFieldUpdateOperationsInput | number
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationRunUncheckedUpdateWithoutDiscrepanciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    channel?: StringFieldUpdateOperationsInput | string
+    billDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: StringFieldUpdateOperationsInput | string
+    localCount?: IntFieldUpdateOperationsInput | number
+    providerCount?: IntFieldUpdateOperationsInput | number
+    discrepancyCount?: IntFieldUpdateOperationsInput | number
+    errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type OrderCreateWithoutItemsInput = {
     id?: string
     tenantId: string
@@ -54415,6 +65778,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -54430,6 +65795,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     inventoryTransactions?: InventoryTransactionUncheckedCreateNestedManyWithoutVariantInput
@@ -54574,6 +65941,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -54589,6 +65958,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryTransactions?: InventoryTransactionUncheckedUpdateManyWithoutVariantNestedInput
@@ -55476,6 +66847,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     product: ProductCreateNestedOneWithoutVariantsInput
@@ -55491,6 +66864,8 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutVariantInput
@@ -55520,6 +66895,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutVariantsNestedInput
@@ -55535,6 +66912,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutVariantNestedInput
@@ -55617,6 +66996,36 @@ export namespace Prisma {
     externalNo: string
     resourceId: string
     createdAt?: Date | string
+  }
+
+  export type MediaUploadSessionCreateManyTenantInput = {
+    id?: string
+    actorId: string
+    purpose: string
+    objectKey: string
+    fileName: string
+    mimeType: string
+    sizeBytes: number
+    status?: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MediaAssetCreateManyTenantInput = {
+    id?: string
+    uploadSessionId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
   }
 
   export type SubscriptionUpdateWithoutTenantInput = {
@@ -55870,6 +67279,100 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MediaUploadSessionUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: MediaAssetUpdateOneWithoutUploadSessionNestedInput
+  }
+
+  export type MediaUploadSessionUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    asset?: MediaAssetUncheckedUpdateOneWithoutUploadSessionNestedInput
+  }
+
+  export type MediaUploadSessionUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    fileName?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaAssetUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    uploadSession?: MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput
+    productImage?: ProductImageUpdateOneWithoutMediaAssetNestedInput
+  }
+
+  export type MediaAssetUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadSessionId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productImage?: ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput
+  }
+
+  export type MediaAssetUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    uploadSessionId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type CustomerRefreshSessionCreateManyCustomerInput = {
     id?: string
     tokenHash: string
@@ -55909,6 +67412,7 @@ export namespace Prisma {
   export type RefreshSessionCreateManyUserInput = {
     id?: string
     tokenHash: string
+    actorType?: string
     expiresAt: Date | string
     revokedAt?: Date | string | null
     createdAt?: Date | string
@@ -55929,6 +67433,7 @@ export namespace Prisma {
   export type RefreshSessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
+    actorType?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55937,6 +67442,7 @@ export namespace Prisma {
   export type RefreshSessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
+    actorType?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -55945,6 +67451,7 @@ export namespace Prisma {
   export type RefreshSessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
+    actorType?: StringFieldUpdateOperationsInput | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -56050,6 +67557,8 @@ export namespace Prisma {
     customers?: CustomerUpdateManyWithoutTenantNestedInput
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPlanInput = {
@@ -56073,6 +67582,8 @@ export namespace Prisma {
     customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateManyWithoutPlanInput = {
@@ -56213,7 +67724,11 @@ export namespace Prisma {
     tenantId: string
     name: string
     sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProductCreateManyCategoryInput = {
@@ -56232,6 +67747,7 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
   }
 
   export type CategoryUpdateWithoutParentInput = {
@@ -56239,7 +67755,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUpdateManyWithoutParentNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
   }
@@ -56249,7 +67769,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
   }
@@ -56259,7 +67783,11 @@ export namespace Prisma {
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductUpdateWithoutCategoryInput = {
@@ -56277,8 +67805,10 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     brand?: BrandUpdateOneWithoutProductsNestedInput
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
+    images?: ProductImageUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -56297,7 +67827,9 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -56316,6 +67848,7 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProductCreateManyBrandInput = {
@@ -56334,6 +67867,7 @@ export namespace Prisma {
     createdBy?: string | null
     updatedBy?: string | null
     version?: number
+    deletedAt?: Date | string | null
   }
 
   export type ProductUpdateWithoutBrandInput = {
@@ -56351,8 +67885,10 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     category?: CategoryUpdateOneWithoutProductsNestedInput
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
+    images?: ProductImageUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutBrandInput = {
@@ -56371,7 +67907,9 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutBrandInput = {
@@ -56390,6 +67928,7 @@ export namespace Prisma {
     createdBy?: NullableStringFieldUpdateOperationsInput | string | null
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ProductVariantCreateManyProductInput = {
@@ -56400,6 +67939,24 @@ export namespace Prisma {
     price?: Decimal | DecimalJsLike | number | string
     costPrice?: Decimal | DecimalJsLike | number | string
     weightG?: Decimal | DecimalJsLike | number | string | null
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductImageCreateManyProductInput = {
+    id?: string
+    tenantId: string
+    mediaAssetId?: string | null
+    url: string
+    altText?: string | null
+    sortOrder?: number
+    isPrimary?: boolean
+    sizeBytes: number
+    mimeType: string
+    version?: number
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -56412,6 +67969,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryTransactions?: InventoryTransactionUpdateManyWithoutVariantNestedInput
@@ -56426,6 +67985,8 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventoryTransactions?: InventoryTransactionUncheckedUpdateManyWithoutVariantNestedInput
@@ -56440,6 +68001,56 @@ export namespace Prisma {
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     costPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     weightG?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductImageUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    mediaAsset?: MediaAssetUpdateOneWithoutProductImageNestedInput
+  }
+
+  export type ProductImageUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductImageUncheckedUpdateManyWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    altText?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    isPrimary?: BoolFieldUpdateOperationsInput | boolean
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    mimeType?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -56804,6 +68415,54 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     version?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PaymentReconciliationDiscrepancyCreateManyRunInput = {
+    id?: string
+    tenantId: string
+    paymentNo: string
+    type: string
+    localAmount?: Decimal | DecimalJsLike | number | string | null
+    providerAmount?: Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: string | null
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyUpdateWithoutRunInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    paymentNo?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    localAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedUpdateWithoutRunInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    paymentNo?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    localAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentReconciliationDiscrepancyUncheckedUpdateManyWithoutRunInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    paymentNo?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    localAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    providerTradeNo?: NullableStringFieldUpdateOperationsInput | string | null
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ShipmentItemCreateManyOrderItemInput = {

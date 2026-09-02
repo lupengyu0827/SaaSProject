@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import type {
   InventoryBalanceResponse,
   InventoryCommandRequest,
@@ -12,7 +12,7 @@ import { assertInventoryCommand, calculateInventoryBalance } from '../domain/inv
 
 @Injectable()
 export class InventoryService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(@Inject(PrismaService) private readonly prisma: PrismaService) {}
 
   getBalance(tenantId: string, variantId: string): Promise<InventoryBalanceResponse> {
     return this.prisma.$transaction(async (tx) => {

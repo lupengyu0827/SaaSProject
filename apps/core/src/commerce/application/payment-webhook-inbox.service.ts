@@ -1,10 +1,11 @@
 import { createHash } from 'node:crypto';
 
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable } from '@nestjs/common';
 
 import { Prisma } from '../../generated/prisma/index.js';
 import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service.js';
 import { PaymentService } from './payment.service.js';
+import type { WebhookDeadLetterResponse } from '@saas/contracts';
 
 export interface PaymentWebhookPayload {
   paymentId: string;
@@ -18,7 +19,9 @@ export interface PaymentWebhookPayload {
 @Injectable()
 export class PaymentWebhookInboxService {
   constructor(
+    @Inject(PrismaService)
     private readonly prisma: PrismaService,
+    @Inject(PaymentService)
     private readonly payments: PaymentService,
   ) {}
 
@@ -86,6 +89,50 @@ export class PaymentWebhookInboxService {
       }
     }
     return processed;
+  }
+
+  /** 查询支付回调死信摘要。 */
+  async listDeadLetters(tenantId: string): Promise<WebhookDeadLetterResponse[]> {
+    const events = await this.prisma.$transaction(async (tx) => {
+      await this.setTenant(tx, tenantId);
+      return tx.paymentWebhookEvent.findMany({
+        where: { tenantId, status: 'dead_letter' },
+        orderBy: { createdAt: 'desc' },
+        take: 100,
+      });
+    });
+    return events.map((event) => ({
+      id: event.id.toString(),
+      kind: 'payment',
+      channel: event.channel,
+      eventId: event.eventId,
+      attempts: event.attempts,
+      lastError: event.lastError,
+      createdAt: event.createdAt.toISOString(),
+    }));
+  }
+
+  /** 将指定支付死信恢复为待处理，并记录人工操作审计。 */
+  async replay(tenantId: string, actorId: string, id: bigint): Promise<void> {
+    await this.prisma.$transaction(async (tx) => {
+      await this.setTenant(tx, tenantId);
+      const updated = await tx.paymentWebhookEvent.updateMany({
+        where: { id, tenantId, status: 'dead_letter' },
+        data: { status: 'pending', attempts: 0, nextAttemptAt: new Date(), lastError: null },
+      });
+      if (updated.count !== 1) throw new ConflictException('Payment dead letter was not found');
+      await tx.auditLog.create({
+        data: {
+          tenantId,
+          actorId,
+          actorType: 'admin',
+          action: 'replay',
+          resourceType: 'payment_webhook',
+          resourceId: id.toString(),
+          diff: { previousStatus: 'dead_letter', status: 'pending' },
+        },
+      });
+    });
   }
 
   private markProcessed(tenantId: string, id: bigint): Promise<unknown> {

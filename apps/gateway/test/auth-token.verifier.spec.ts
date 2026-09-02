@@ -49,4 +49,19 @@ describe('AuthTokenVerifier', () => {
       actorType: 'customer',
     });
   });
+
+  it.each(['merchant_owner', 'merchant_staff'] as const)(
+    'accepts a tenant-bound %s token',
+    (actorType) => {
+      const token = jwt.sign({ tenantId: 'tenant-a', actorType, tokenType: 'access' }, secret, {
+        subject: 'merchant-a',
+        issuer: 'saas-core',
+        audience: 'saas-gateway',
+        expiresIn: 60,
+      });
+      expect(new AuthTokenVerifier().verify(`Bearer ${token}`, 'tenant-a')).toMatchObject({
+        actorType,
+      });
+    },
+  );
 });

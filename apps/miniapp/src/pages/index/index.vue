@@ -1,47 +1,41 @@
-<!-- 小程序品牌首页：以编辑式陈列呈现主推藏品、分类筛选与双列商品列表。 -->
+<!-- 消费者浅色首页：按 Figma homepage-light 还原，并通过语义 Token 预留多主题。 -->
 <script setup lang="ts">
 import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
-import type { ProductResponse } from '@saas/contracts';
+import type { PublicProductResponse } from '@saas/contracts';
 import { computed, ref, shallowRef } from 'vue';
 
 import { listActiveProducts } from '../../api/modules/product.api';
 import HomeProductCard from '../../components/product/HomeProductCard.vue';
+import { useAppTheme } from '../../composables/use-app-theme';
 import { formatCurrency, getLowestPrice, getPrimaryImage } from '../../utils/product-view';
 
 const PAGE_SIZE = 10;
-const ALL_CATEGORY = '全部';
-const categories = [ALL_CATEGORY, '高级珠宝', '典藏腕表', '经典箱包'] as const;
-const products = shallowRef<ProductResponse[]>([]);
-const searchKeyword = ref('');
-const activeCategory = ref<string>(ALL_CATEGORY);
+const { themeClass } = useAppTheme();
+const products = shallowRef<PublicProductResponse[]>([]);
 const isLoading = ref(false);
 const errorMessage = ref<string | null>(null);
-const filteredProducts = computed(() => {
-  if (activeCategory.value === ALL_CATEGORY) return products.value;
-  return products.value.filter((product) => getProductCategory(product) === activeCategory.value);
-});
-const heroProduct = computed(() => filteredProducts.value[0] ?? products.value[0] ?? null);
-const heroImage = computed(() => (heroProduct.value ? getPrimaryImage(heroProduct.value) : null));
-const heroPrice = computed(() => {
-  if (!heroProduct.value) return null;
-  const price = getLowestPrice(heroProduct.value);
-  return price ? formatCurrency(price) : null;
-});
-const sectionTitle = computed(() =>
-  searchKeyword.value.trim() ? `“${searchKeyword.value.trim()}” 的结果` : '本周新入藏',
-);
+const categoryItems = [
+  { label: '戒指', icon: '/static/figma/home-light/ring.svg' },
+  { label: '项链', icon: '/static/figma/home-light/jewel.svg' },
+  { label: '耳饰', icon: '/static/figma/home-light/jewel.svg' },
+  { label: '手链', icon: '/static/figma/home-light/jewel.svg' },
+  { label: '腕表', icon: '/static/figma/home-light/watch.svg' },
+  { label: '更多', icon: '/static/figma/home-light/layers.svg' },
+] as const;
+const popularProducts = computed(() => products.value.slice(0, 2));
+const newProducts = computed(() => products.value.slice(2, 6));
 
-/** 加载当前展示商品；Mock 模式和真实接口共用同一契约。 */
+/** 加载当前租户公开商品，页面不使用 Figma 示例假数据替代业务结果。 */
 async function loadProducts(): Promise<void> {
   if (isLoading.value) return;
   isLoading.value = true;
   errorMessage.value = null;
   try {
     const page = await listActiveProducts({
-      search: searchKeyword.value.trim() || undefined,
-      limit: PAGE_SIZE,
+      keyword: searchKeyword.value.trim() || undefined,
+      pageSize: PAGE_SIZE,
     });
-    products.value = page.items;
+    products.value = page.list;
   } catch (error: unknown) {
     errorMessage.value = error instanceof Error ? error.message : '加载藏品失败，请稍后重试';
   } finally {
@@ -49,36 +43,31 @@ async function loadProducts(): Promise<void> {
   }
 }
 
-function handleSearch(): void {
-  activeCategory.value = ALL_CATEGORY;
-  void loadProducts();
+function handleOpenCollection(): void {
+  void uni.switchTab({ url: '/pages/collection/index' });
+}
+function handleOpenSearch(keyword?: string): void {
+  const url = keyword
+    ? `/pages/search/index?keyword=${encodeURIComponent(keyword)}`
+    : '/pages/search/index';
+  void uni.navigateTo({ url });
+}
+function handleSelectCategory(label: string): void {
+  if (label === '更多') return handleOpenCollection();
+  handleOpenSearch(label);
+}
+function handleOpenProduct(product: PublicProductResponse): void {
+  void uni.navigateTo({ url: `/pages/product/detail?id=${encodeURIComponent(product.id)}` });
+}
+function productImage(product: PublicProductResponse): string | null {
+  return getPrimaryImage(product);
+}
+function productPrice(product: PublicProductResponse): string {
+  const price = getLowestPrice(product);
+  return price ? formatCurrency(price) : '价格待询';
 }
 
-function handleClearSearch(): void {
-  searchKeyword.value = '';
-  void loadProducts();
-}
-
-function handleSelectCategory(category: string): void {
-  activeCategory.value = category;
-}
-
-function handleOpenHero(): void {
-  if (!heroProduct.value) return;
-  void uni.navigateTo({
-    url: `/pages/product/detail?id=${encodeURIComponent(heroProduct.value.id)}`,
-  });
-}
-
-function getProductCategory(product: ProductResponse): string | null {
-  if (typeof product.attributes !== 'object' || product.attributes === null) return null;
-  const category = (product.attributes as Record<string, unknown>).category;
-  return typeof category === 'string' ? category : null;
-}
-
-onLoad(() => {
-  void loadProducts();
-});
+onLoad(() => void loadProducts());
 onPullDownRefresh(async () => {
   await loadProducts();
   uni.stopPullDownRefresh();
@@ -86,359 +75,339 @@ onPullDownRefresh(async () => {
 </script>
 
 <template>
-  <view class="page">
-    <view class="brand-header">
-      <view class="brand-lockup">
-        <text class="brand-name">L'ATELIER</text>
-        <text class="brand-caption">PRIVATE COLLECTION</text>
+  <view class="page" :class="themeClass">
+    <view class="homepage-header">
+      <view class="location-pill">
+        <image class="small-icon" src="/static/figma/home-light/map-pin.svg" mode="aspectFit" />
+        <text>上海国金中心店⌄</text>
+      </view>
+      <text class="brand-name">HARRY WINSTON</text>
+      <image class="scan-icon" src="/static/figma/home-light/scan.svg" mode="aspectFit" />
+    </view>
+
+    <view class="search-wrapper">
+      <view class="search-shell" @click="handleOpenSearch">
+        <image class="search-icon" src="/static/figma/home-light/search.svg" mode="aspectFit" />
+        <text class="search-placeholder">搜索 经典钻戒、绝美对戒、经典链饰...</text>
       </view>
     </view>
 
-    <view class="search-section">
-      <view class="search-shell">
-        <text class="search-symbol">⌕</text>
-        <input
-          v-model="searchKeyword"
-          class="search-input"
-          confirm-type="search"
-          placeholder="搜索藏品、编号"
-          placeholder-class="search-placeholder"
-          @confirm="handleSearch"
-        />
-        <text v-if="searchKeyword" class="clear-action" @click="handleClearSearch">清除</text>
-      </view>
-    </view>
-
-    <view v-if="heroProduct" class="hero" @click="handleOpenHero">
-      <image v-if="heroImage" class="hero-image" :src="heroImage" mode="aspectFill" />
-      <view class="hero-content">
-        <view class="hero-meta">
-          <text class="hero-kicker">EDITOR'S SELECTION</text>
-          <text class="hero-code">{{ heroProduct.code }}</text>
+    <view class="banner-section">
+      <view class="hero-banner">
+        <image class="hero-image" src="/static/figma/home-light/hero.png" mode="aspectFill" />
+        <view class="hero-overlay" />
+        <view class="banner-text">
+          <text class="banner-kicker">FALL COLLECTION</text>
+          <text class="banner-title">秋季雅致新作首发</text>
+          <text class="banner-copy">优雅流线，承载每一刻暖意。部分单品享尊贵刻字服务。</text>
         </view>
-        <text class="hero-title">{{ heroProduct.name }}</text>
-        <view class="hero-footer">
-          <text class="hero-price">{{ heroPrice }}</text>
-          <text class="hero-link">查看藏品档案&nbsp; →</text>
+        <view class="explore-pill" @click="handleOpenCollection">立即探索</view>
+      </view>
+    </view>
+
+    <view class="categories-section">
+      <view
+        v-for="category in categoryItems"
+        :key="category.label"
+        class="category-item"
+        @click="handleSelectCategory(category.label)"
+      >
+        <view class="category-icon-shell">
+          <image class="category-icon" :src="category.icon" mode="aspectFit" />
         </view>
+        <text>{{ category.label }}</text>
       </view>
     </view>
 
-    <view class="service-strip">
-      <view class="service-item">
-        <text class="service-mark">✓</text>
-        <text>专业鉴定</text>
+    <view class="content-section">
+      <text class="section-title">热门推荐 · Popular Picks</text>
+      <view v-if="popularProducts.length" class="product-grid">
+        <HomeProductCard v-for="product in popularProducts" :key="product.id" :product="product" />
       </view>
-      <view class="service-item">
-        <text class="service-mark">✓</text>
-        <text>一物一档</text>
-      </view>
-      <view class="service-item">
-        <text class="service-mark">✓</text>
-        <text>顺丰保价</text>
+      <view v-else class="state-panel">
+        <text>{{ isLoading ? '正在整理臻品陈列…' : (errorMessage ?? '暂无在售藏品') }}</text>
+        <text v-if="errorMessage" class="retry-action" @click="loadProducts">重新加载</text>
       </view>
     </view>
 
-    <scroll-view class="category-scroll" scroll-x enable-flex :show-scrollbar="false">
-      <view class="category-list">
-        <button
-          v-for="category in categories"
-          :key="category"
-          class="category-button"
-          :class="{ 'category-button--active': activeCategory === category }"
-          @click="handleSelectCategory(category)"
-        >
-          {{ category }}
-        </button>
-      </view>
-    </scroll-view>
-
-    <view class="collection-section">
-      <view class="section-heading">
-        <view>
-          <text class="section-kicker">CURATED OBJECTS</text>
-          <text class="section-title">{{ sectionTitle }}</text>
+    <view v-if="newProducts.length" class="new-arrivals">
+      <text class="section-title">新品速递 · Autumn Specials</text>
+      <scroll-view class="arrival-scroll" scroll-x enable-flex :show-scrollbar="false">
+        <view class="arrival-list">
+          <view
+            v-for="product in newProducts"
+            :key="product.id"
+            class="arrival-card"
+            @click="handleOpenProduct(product)"
+          >
+            <image
+              v-if="productImage(product)"
+              class="arrival-image"
+              :src="productImage(product) ?? ''"
+              mode="aspectFill"
+              lazy-load
+            />
+            <view v-else class="arrival-image arrival-placeholder">L</view>
+            <view class="arrival-copy">
+              <text class="arrival-name">{{ product.name }}</text>
+              <text class="arrival-price">{{ productPrice(product) }}</text>
+              <text class="arrival-action">查看详情⌄</text>
+            </view>
+          </view>
         </view>
-        <text class="section-count">{{ filteredProducts.length }} 件</text>
-      </view>
-
-      <view v-if="filteredProducts.length" class="product-grid">
-        <HomeProductCard v-for="product in filteredProducts" :key="product.id" :product="product" />
-      </view>
-
-      <view v-else-if="isLoading" class="compact-state">
-        <text class="state-title">正在整理藏品陈列</text>
-        <text class="state-copy">请稍候，精品档案即将呈现</text>
-      </view>
-
-      <view v-else class="compact-state">
-        <text class="state-title">暂时没有匹配的藏品</text>
-        <text class="state-copy">{{ errorMessage ?? '换个关键词或分类再看看' }}</text>
-        <button class="state-action" @click="handleClearSearch">查看全部藏品</button>
-      </view>
-    </view>
-
-    <view class="atelier-note">
-      <text class="note-monogram">L</text>
-      <text class="note-title">每一件旧物，都有继续被珍视的理由</text>
-      <text class="note-copy">甄选值得再次进入生活的珠宝、腕表与经典皮具。</text>
+      </scroll-view>
     </view>
   </view>
 </template>
 
 <style scoped lang="scss">
 @use '../../styles/tokens.scss' as *;
-
 .page {
   min-height: 100vh;
-  padding-bottom: calc(72rpx + env(safe-area-inset-bottom));
-  background: #f4f1eb;
+  padding: calc(env(safe-area-inset-top) + 88rpx) 0 48rpx;
+  color: var(--theme-text);
+  background: var(--theme-bg);
 }
-.brand-header {
-  min-height: 112rpx;
-  padding: calc(env(safe-area-inset-top) + 68rpx) 220rpx 24rpx 32rpx;
-  background: $bg-dark-base;
+.homepage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 98rpx;
+  padding: 16rpx 32rpx;
 }
-.brand-lockup,
-.brand-name,
-.brand-caption,
-.section-kicker,
-.section-title,
-.state-title,
-.state-copy,
-.note-monogram,
-.note-title,
-.note-copy {
-  display: block;
+.location-pill {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 20rpx;
+  border: 1rpx solid var(--theme-border);
+  border-radius: 999rpx;
+  color: var(--theme-text-secondary);
+  background: var(--theme-surface);
+  font-size: 22rpx;
+  white-space: nowrap;
+}
+.small-icon {
+  width: 24rpx;
+  height: 24rpx;
 }
 .brand-name {
-  color: #f1dfb6;
+  color: var(--theme-accent);
   font-family: $font-display;
-  font-size: 32rpx;
-  letter-spacing: 7rpx;
+  font-size: 30rpx;
+  font-weight: 700;
   white-space: nowrap;
 }
-.brand-caption {
-  margin-top: 4rpx;
-  color: #8e929b;
-  font-family: $font-mono;
-  font-size: 13rpx;
-  letter-spacing: 3rpx;
-  white-space: nowrap;
+.scan-icon {
+  width: 40rpx;
+  height: 40rpx;
 }
-.search-section {
-  padding: 24rpx 24rpx 20rpx;
-  background: $bg-dark-base;
+.search-wrapper {
+  padding: 8rpx 32rpx 24rpx;
 }
 .search-shell {
   display: flex;
   align-items: center;
   height: 80rpx;
   padding: 0 24rpx;
-  border: 1rpx solid rgba(241, 223, 182, 0.22);
-  border-radius: 12rpx;
-  background: #121720;
+  border: 1rpx solid var(--theme-border);
+  border-radius: 16rpx;
+  background: var(--theme-surface);
 }
-.search-symbol {
-  color: #c8a96b;
-  font-size: 30rpx;
+.search-icon {
+  width: 28rpx;
+  height: 28rpx;
 }
 .search-input {
+  min-width: 0;
   flex: 1;
   height: 80rpx;
   margin-left: 16rpx;
-  color: $text-dark-primary;
-  font-size: 24rpx;
+  color: var(--theme-text);
+  font-size: 26rpx;
 }
 .search-placeholder {
-  color: #727987;
+  color: var(--theme-text-muted);
 }
-.clear-action {
-  padding-left: 24rpx;
-  color: #d9bf88;
-  font-size: 21rpx;
-  white-space: nowrap;
+.banner-section {
+  padding: 0 32rpx 32rpx;
 }
-.hero {
-  margin: 24rpx;
+.hero-banner {
+  position: relative;
+  height: 360rpx;
   overflow: hidden;
-  border-radius: 8rpx;
-  background: $bg-surface;
-  box-shadow: 0 18rpx 48rpx rgba(68, 54, 35, 0.12);
+  border-radius: 32rpx;
 }
-.hero-image {
-  display: block;
+.hero-image,
+.hero-overlay {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 620rpx;
-  background: #ddd6c9;
+  height: 100%;
 }
-.hero-content {
-  padding: 28rpx 28rpx 32rpx;
+.hero-overlay {
+  background: var(--theme-overlay);
 }
-.hero-meta,
-.hero-footer,
-.service-strip,
-.service-item,
-.section-heading {
+.banner-text {
+  position: relative;
+  z-index: 1;
   display: flex;
-  align-items: center;
-}
-.hero-meta,
-.hero-footer,
-.section-heading {
-  justify-content: space-between;
-  gap: 24rpx;
-}
-.hero-kicker,
-.section-kicker {
-  color: #9b642e;
-  font-family: $font-mono;
-  font-size: 15rpx;
-  letter-spacing: 2rpx;
-}
-.hero-code,
-.section-count {
-  color: $text-secondary;
-  font-family: $font-mono;
-  font-size: 17rpx;
-}
-.hero-title {
-  display: block;
-  margin-top: 14rpx;
-  color: #171b22;
-  font-family: $font-display;
-  font-size: 38rpx;
-  font-weight: 600;
-  line-height: 1.4;
-}
-.hero-footer {
-  margin-top: 22rpx;
-  padding-top: 22rpx;
-  border-top: 1rpx solid #e8e1d5;
-}
-.hero-price {
-  color: #7f4b20;
-  font-family: $font-mono;
-  font-size: 25rpx;
-  font-weight: 600;
-}
-.hero-link {
-  color: #272b32;
-  font-size: 21rpx;
-  white-space: nowrap;
-}
-.service-strip {
-  justify-content: space-between;
-  margin: 0 24rpx;
-  padding: 24rpx 8rpx;
-  border-top: 1rpx solid #dcd4c6;
-  border-bottom: 1rpx solid #dcd4c6;
-}
-.service-item {
-  gap: 8rpx;
-  color: #4d5158;
-  font-size: 20rpx;
-  white-space: nowrap;
-}
-.service-mark {
-  color: #9b642e;
-  font-size: 18rpx;
-}
-.category-scroll {
-  width: 100%;
-  margin-top: 36rpx;
-  white-space: nowrap;
-}
-.category-list {
-  display: flex;
+  flex-direction: column;
   gap: 12rpx;
-  padding: 0 24rpx;
+  padding: 40rpx;
 }
-.category-button {
-  flex: 0 0 auto;
-  min-width: 112rpx;
-  margin: 0;
-  padding: 14rpx 24rpx;
-  border: 1rpx solid #d6cec1;
+.banner-kicker,
+.banner-title,
+.banner-copy {
+  display: block;
+}
+.banner-kicker {
+  color: #f5ece1;
+  font-family: $font-display;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+.banner-title {
+  color: #fff;
+  font-family: $font-display;
+  font-size: 44rpx;
+  font-weight: 700;
+}
+.banner-copy {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 22rpx;
+}
+.explore-pill {
+  position: absolute;
+  bottom: 40rpx;
+  left: 40rpx;
+  z-index: 1;
+  padding: 16rpx 28rpx;
   border-radius: 999rpx;
-  color: #62656a;
-  background: transparent;
-  font-size: 20rpx;
-  line-height: 1.4;
+  color: #1c1917;
+  background: #fff;
+  font-size: 22rpx;
+  font-weight: 700;
   white-space: nowrap;
 }
-.category-button::after,
-.state-action::after {
-  border: 0;
+.categories-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 32rpx 40rpx;
 }
-.category-button--active {
-  border-color: #171b22;
-  color: #f7f3eb;
-  background: #171b22;
+.category-item {
+  display: flex;
+  width: 92rpx;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  color: var(--theme-text);
+  font-size: 22rpx;
+  white-space: nowrap;
 }
-.collection-section {
-  padding: 48rpx 24rpx 0;
+.category-icon-shell {
+  display: flex;
+  width: 80rpx;
+  height: 80rpx;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid var(--theme-border);
+  border-radius: 50%;
+  background: var(--theme-surface);
 }
-.section-heading {
-  align-items: flex-end;
-  margin-bottom: 28rpx;
+.category-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+.content-section,
+.new-arrivals {
+  padding: 0 32rpx 40rpx;
 }
 .section-title {
-  margin-top: 8rpx;
-  color: #171b22;
+  display: block;
+  margin-bottom: 24rpx;
+  color: var(--theme-text);
   font-family: $font-display;
-  font-size: 36rpx;
-  font-weight: 600;
+  font-size: 32rpx;
+  font-weight: 700;
 }
 .product-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18rpx;
+  gap: 24rpx;
 }
-.compact-state {
-  padding: 80rpx 32rpx;
-  text-align: center;
+.state-panel {
+  display: flex;
+  min-height: 240rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  color: var(--theme-text-secondary);
+  font-size: 24rpx;
 }
-.state-title {
-  color: #171b22;
+.retry-action {
+  color: var(--theme-accent);
+  font-weight: 600;
+}
+.arrival-scroll {
+  width: calc(100% + 32rpx);
+  white-space: nowrap;
+}
+.arrival-list {
+  display: flex;
+  gap: 24rpx;
+  padding-right: 32rpx;
+}
+.arrival-card {
+  display: flex;
+  width: 520rpx;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 24rpx;
+  padding: 24rpx;
+  border: 1rpx solid var(--theme-border);
+  border-radius: 24rpx;
+  background: var(--theme-surface);
+}
+.arrival-image {
+  display: flex;
+  width: 140rpx;
+  height: 140rpx;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  background: var(--theme-border-soft);
+}
+.arrival-placeholder {
+  color: var(--theme-accent);
   font-family: $font-display;
-  font-size: 32rpx;
+  font-size: 48rpx;
 }
-.state-copy {
-  margin-top: 12rpx;
-  color: $text-secondary;
-  font-size: 21rpx;
+.arrival-copy {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 8rpx;
 }
-.state-action {
-  width: 240rpx;
-  margin: 28rpx auto 0;
-  border-radius: 8rpx;
-  color: $text-on-accent;
-  background: #171b22;
-  font-size: 22rpx;
+.arrival-name {
+  overflow: hidden;
+  color: var(--theme-text);
+  font-size: 24rpx;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.atelier-note {
-  margin: 72rpx 24rpx 0;
-  padding: 56rpx 40rpx;
-  border-top: 1rpx solid #d6cec1;
-  text-align: center;
+.arrival-price {
+  color: var(--theme-accent);
+  font-size: 24rpx;
+  font-weight: 700;
 }
-.note-monogram {
-  color: #9b642e;
-  font-family: $font-display;
-  font-size: 50rpx;
-}
-.note-title {
-  margin-top: 18rpx;
-  color: #272b32;
-  font-family: $font-display;
-  font-size: 26rpx;
-  line-height: 1.6;
-}
-.note-copy {
-  margin-top: 12rpx;
-  color: #7a7d82;
-  font-size: 19rpx;
-  line-height: 1.7;
+.arrival-action {
+  color: var(--theme-text-secondary);
+  font-size: 20rpx;
 }
 </style>

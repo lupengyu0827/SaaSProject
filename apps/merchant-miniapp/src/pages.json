@@ -1,0 +1,50 @@
+{
+  "pages": [
+    {
+      "path": "pages/auth/login",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F8F9FA"
+      }
+    },
+    {
+      "path": "pages/workbench/index",
+      "style": {
+        "navigationBarTitleText": "店铺工作台",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#F8F9FA"
+      }
+    },
+    {
+      "path": "pages/media/upload",
+      "style": {
+        "navigationBarTitleText": "商品图片上传",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#F8F9FA"
+      }
+    },
+    {
+      "path": "pages/products/index",
+      "style": {
+        "navigationBarTitleText": "商品管理",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#F8F9FA",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/products/editor",
+      "style": {
+        "navigationBarTitleText": "商品草稿",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#F8F9FA"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "店铺工作台",
+    "navigationBarBackgroundColor": "#F8F9FA",
+    "backgroundColor": "#F8F9FA"
+  }
+}

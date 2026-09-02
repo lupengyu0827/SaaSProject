@@ -1,11 +1,11 @@
 <!-- C 端商品陈列卡：展示真实商品契约数据并跳转详情。 -->
 <script setup lang="ts">
-import type { ProductResponse } from '@saas/contracts';
+import type { PublicProductResponse } from '@saas/contracts';
 import { computed } from 'vue';
 import { formatCurrency, getLowestPrice, getPrimaryImage } from '../../utils/product-view';
 
 interface Props {
-  product: ProductResponse;
+  product: PublicProductResponse;
 }
 const props = defineProps<Props>();
 const primaryImage = computed(() => getPrimaryImage(props.product));

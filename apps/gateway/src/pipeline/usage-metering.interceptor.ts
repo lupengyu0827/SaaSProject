@@ -1,6 +1,7 @@
 import {
   type CallHandler,
   type ExecutionContext,
+  Inject,
   Injectable,
   type NestInterceptor,
 } from '@nestjs/common';
@@ -15,7 +16,9 @@ import type { SaasRequest } from './request-context.js';
 @Injectable()
 export class UsageMeteringInterceptor implements NestInterceptor {
   constructor(
+    @Inject(Reflector)
     private readonly reflector: Reflector,
+    @Inject(RedisService)
     private readonly redis: RedisService,
   ) {}
 

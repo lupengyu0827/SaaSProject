@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import type { RegisterTenantRequest, RegisterTenantResponse } from '@saas/contracts';
 
 import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service.js';
@@ -6,7 +6,7 @@ import { hashPassword } from '../../auth/password-hasher.js';
 
 @Injectable()
 export class RegisterTenantService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(@Inject(PrismaService) private readonly prisma: PrismaService) {}
 
   async execute(input: RegisterTenantRequest): Promise<RegisterTenantResponse> {
     const planCode = input.planCode ?? 'free';

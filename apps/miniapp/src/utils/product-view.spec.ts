@@ -1,5 +1,5 @@
 /** 商品视图转换工具单元测试。 */
-import type { ProductResponse, ProductVariantResponse } from '@saas/contracts';
+import type { PublicProductResponse, PublicProductVariantResponse } from '@saas/contracts';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -9,7 +9,7 @@ import {
   getVariantSpecText,
 } from './product-view';
 
-const BASE_PRODUCT: ProductResponse = {
+const BASE_PRODUCT: PublicProductResponse = {
   id: 'product-1',
   code: 'LUX-001',
   name: '测试藏品',
@@ -17,12 +17,13 @@ const BASE_PRODUCT: ProductResponse = {
   categoryId: null,
   brandId: null,
   attributes: {},
-  seoSlug: null,
-  status: 'active',
-  version: 0,
   variants: [],
+  images: [],
+  primaryImage: null,
+  availableStockQty: 0,
+  minimumPrice: '0.00',
+  maximumPrice: '0.00',
   createdAt: '2026-08-27T00:00:00.000Z',
-  updatedAt: '2026-08-27T00:00:00.000Z',
 };
 
 describe('product view helpers', () => {
@@ -38,9 +39,22 @@ describe('product view helpers', () => {
     expect(getLowestPrice(product)).toBe('9999.99');
   });
 
-  it('reads the first image from extension attributes', () => {
+  it('reads the first image from the public image list', () => {
     expect(
-      getPrimaryImage({ ...BASE_PRODUCT, attributes: { images: ['https://image.test/1'] } }),
+      getPrimaryImage({
+        ...BASE_PRODUCT,
+        images: [
+          {
+            id: 'image-1',
+            url: 'https://image.test/1',
+            altText: null,
+            sortOrder: 0,
+            isPrimary: true,
+            sizeBytes: 1,
+            mimeType: 'image/jpeg',
+          },
+        ],
+      }),
     ).toBe('https://image.test/1');
   });
 
@@ -50,13 +64,11 @@ describe('product view helpers', () => {
   });
 });
 
-function createVariant(price: string): ProductVariantResponse {
+function createVariant(price: string): PublicProductVariantResponse {
   return {
     id: `variant-${price}`,
-    sku: `SKU-${price}`,
     specs: {},
     price,
-    costPrice: '0.00',
-    weightG: null,
+    availableStockQty: 1,
   };
 }

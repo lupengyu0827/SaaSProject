@@ -11,6 +11,21 @@
   --color-text-secondary: #64748b;
   --color-border-subtle: #e2e8f0;
   --shadow-luxury: 0 8px 24px -4px rgba(15, 23, 42, 0.06);
+  --pc-primary: #165dff;
+  --pc-primary-soft: #e8f3ff;
+  --pc-success: #00b42a;
+  --pc-warning: #ff7d00;
+  --pc-danger: #f53f3f;
+  --pc-text-primary: #1d2129;
+  --pc-text-regular: #4e5969;
+  --pc-text-secondary: #86909c;
+  --pc-text-muted: #9ca6b5;
+  --pc-border: #e5e6eb;
+  --pc-bg-page: #f7f8fa;
+  --pc-bg-surface: #ffffff;
+  --pc-sidebar-bg: #0f172a;
+  --pc-sidebar-muted: #94a3b8;
+  --pc-shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
   font-family: Inter, 'PingFang SC', system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,4 +40,10 @@ body {
   min-height: 100vh;
   margin: 0;
   background: var(--color-bg-base);
+}
+
+.el-button,
+.el-input__wrapper,
+.el-tag {
+  border-radius: 4px;
 }

@@ -37,3 +37,22 @@ export interface PaymentCheckoutResponse {
   channel: PaymentChannel;
   payload: Record<string, string>;
 }
+
+export type WebhookEventKind = 'payment' | 'refund';
+
+/** 管理端死信事件摘要；原始载荷不对外返回，避免泄露支付敏感信息。 */
+export interface WebhookDeadLetterResponse {
+  id: string;
+  kind: WebhookEventKind;
+  channel: string;
+  eventId: string;
+  attempts: number;
+  lastError: string | null;
+  createdAt: string;
+}
+
+export interface ReplayWebhookResponse {
+  replayed: true;
+  id: string;
+  kind: WebhookEventKind;
+}

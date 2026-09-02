@@ -34,6 +34,63 @@ export interface AuthTokensResponse {
   expiresIn: number;
 }
 
+/** 系统内可签发访问令牌的身份类型。 */
+export type ActorType =
+  'admin_user' | 'platform_admin' | 'merchant_owner' | 'merchant_staff' | 'customer';
+
+/**
+ * 商家账号密码登录请求。
+ * 默认由后端根据账号自动识别店铺；subdomain 仅用于兼容旧客户端或多店铺账号选择。
+ */
+export interface MerchantLoginRequest {
+  email: string;
+  password: string;
+  subdomain?: string;
+}
+
+/** 商家小程序当前会话。 */
+export interface MerchantSessionResponse extends AuthTokensResponse {
+  merchant: {
+    id: string;
+    displayName: string;
+    email: string;
+    actorType: 'merchant_owner' | 'merchant_staff';
+  };
+  tenant: {
+    id: string;
+    name: string;
+    subdomain: string;
+    status: 'active' | 'suspended' | 'terminated';
+  };
+  permissions: string[];
+}
+
+/** 管理后台当前登录会话，供 Gateway 与 PC 端共享。 */
+export interface AdminSessionResponse {
+  user: {
+    id: string;
+    email: string;
+    displayName: string;
+  };
+  tenant: {
+    id: string;
+    name: string;
+    subdomain: string;
+    status: 'active' | 'suspended' | 'terminated';
+  };
+  permissions: string[];
+}
+
+/** Refresh Token 轮换请求。 */
+export interface RefreshSessionRequest {
+  refreshToken: string;
+}
+
+/** 管理员退出响应。 */
+export interface LogoutResponse {
+  loggedOut: true;
+}
+
 /** 微信小程序登录请求，租户身份必须由 Header 提供。 */
 export interface MiniappLoginRequest {
   code: string;
@@ -50,7 +107,7 @@ export interface MiniappSessionResponse extends AuthTokensResponse {
 export interface AccessTokenClaims {
   sub: string;
   tenantId: string;
-  actorType: 'admin_user' | 'customer';
+  actorType: ActorType;
   tokenType: 'access';
 }
 

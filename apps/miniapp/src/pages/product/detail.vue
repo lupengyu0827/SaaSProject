@@ -1,17 +1,19 @@
 <!-- 商品详情页：展示真实商品资料、规格选择与可复制藏品编号。 -->
 <script setup lang="ts">
 import { onLoad } from '@dcloudio/uni-app';
-import type { ProductResponse, ProductVariantResponse } from '@saas/contracts';
+import type { PublicProductResponse, PublicProductVariantResponse } from '@saas/contracts';
 import { computed, ref, shallowRef } from 'vue';
 import { getProductDetail } from '../../api/modules/product.api';
 import StatePanel from '../../components/common/StatePanel.vue';
 import { formatCurrency, getPrimaryImage, getVariantSpecText } from '../../utils/product-view';
 
 const productId = ref('');
-const product = shallowRef<ProductResponse | null>(null);
-const selectedVariant = shallowRef<ProductVariantResponse | null>(null);
+const product = shallowRef<PublicProductResponse | null>(null);
+const selectedVariant = shallowRef<PublicProductVariantResponse | null>(null);
 const isLoading = ref(true);
 const errorMessage = ref<string | null>(null);
+const imageLoadFailed = ref(false);
+const imageReloadKey = ref(0);
 const primaryImage = computed(() => (product.value ? getPrimaryImage(product.value) : null));
 const priceText = computed(() =>
   selectedVariant.value ? formatCurrency(selectedVariant.value.price) : '价格待询',
@@ -29,6 +31,7 @@ async function loadProduct(): Promise<void> {
   try {
     product.value = await getProductDetail(productId.value);
     selectedVariant.value = product.value.variants[0] ?? null;
+    imageLoadFailed.value = false;
   } catch (error: unknown) {
     errorMessage.value = error instanceof Error ? error.message : '加载商品详情失败';
   } finally {
@@ -36,7 +39,7 @@ async function loadProduct(): Promise<void> {
   }
 }
 
-function handleSelectVariant(variant: ProductVariantResponse): void {
+function handleSelectVariant(variant: PublicProductVariantResponse): void {
   selectedVariant.value = variant;
 }
 function handleCopyCode(): void {
@@ -50,6 +53,17 @@ function handleRetry(): void {
   void loadProduct();
 }
 
+/** 标记商品主图加载失败，并提供显式重试入口。 */
+function handleImageError(): void {
+  imageLoadFailed.value = true;
+}
+
+/** 重新创建图片节点，触发微信客户端再次拉取媒体资源。 */
+function handleRetryImage(): void {
+  imageLoadFailed.value = false;
+  imageReloadKey.value += 1;
+}
+
 onLoad((query) => {
   productId.value = typeof query?.id === 'string' ? query.id : '';
   void loadProduct();
@@ -59,10 +73,22 @@ onLoad((query) => {
 <template>
   <view class="page">
     <template v-if="product">
-      <image v-if="primaryImage" class="hero-image" :src="primaryImage" mode="aspectFill" />
+      <image
+        v-if="primaryImage && !imageLoadFailed"
+        :key="imageReloadKey"
+        class="hero-image"
+        :src="primaryImage"
+        mode="aspectFill"
+        @error="handleImageError"
+      />
       <view v-else class="hero-image hero-placeholder">
         <text class="placeholder-monogram">L</text>
-        <text class="placeholder-caption">PRIVATE OBJECT</text>
+        <text class="placeholder-caption">
+          {{ imageLoadFailed ? 'IMAGE UNAVAILABLE' : 'PRIVATE OBJECT' }}
+        </text>
+        <button v-if="imageLoadFailed" class="image-retry" @click="handleRetryImage">
+          重新加载图片
+        </button>
       </view>
       <view class="detail-content">
         <view class="detail-meta">
@@ -84,7 +110,7 @@ onLoad((query) => {
                 @click="handleSelectVariant(variant)"
               >
                 <text class="variant-spec">{{ getVariantSpecText(variant) }}</text>
-                <text class="variant-sku">{{ variant.sku }}</text>
+                <text class="variant-sku">可售 {{ variant.availableStockQty }} 件</text>
               </button>
             </view>
           </scroll-view>
@@ -149,6 +175,19 @@ onLoad((query) => {
   font-family: $font-mono;
   font-size: 20rpx;
   letter-spacing: 5rpx;
+}
+.image-retry {
+  margin-top: 32rpx;
+  padding: 16rpx 28rpx;
+  border: 1rpx solid $border-dark-subtle;
+  border-radius: $radius-control;
+  color: $text-dark-primary;
+  background: $bg-dark-surface;
+  font-size: 24rpx;
+  white-space: nowrap;
+}
+.image-retry::after {
+  border: 0;
 }
 .detail-content {
   padding: 40rpx 32rpx 0;

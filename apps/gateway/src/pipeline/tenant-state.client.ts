@@ -1,4 +1,4 @@
-import { Injectable, ServiceUnavailableException } from '@nestjs/common';
+import { Inject, Injectable, ServiceUnavailableException } from '@nestjs/common';
 import type { TenantAccessState } from '@saas/contracts';
 
 import { RedisService } from '../infrastructure/redis.service.js';
@@ -10,7 +10,7 @@ export class TenantStateClient {
     { state: TenantAccessState; expiresAt: number }
   >();
 
-  constructor(private readonly redis: RedisService) {}
+  constructor(@Inject(RedisService) private readonly redis: RedisService) {}
 
   async get(tenantId: string): Promise<TenantAccessState> {
     const key = `tenant_state:${tenantId}`;

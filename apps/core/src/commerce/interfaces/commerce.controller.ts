@@ -13,6 +13,13 @@ import {
 import type {
   CreateBrandRequest,
   CreateCategoryRequest,
+  UpdateCategoryRequest,
+  CategoryResponse,
+  UpdateBrandRequest,
+  BrandResponse,
+  CatalogListQuery,
+  DeleteCatalogItemResponse,
+  RestoreCatalogItemResponse,
   CreateProductRequest,
   ProductListQuery,
   ProductPageResponse,
@@ -21,6 +28,11 @@ import type {
   CreateProductVariantRequest,
   UpdateProductVariantRequest,
   ProductVariantResponse,
+  BatchUpdateProductsRequest,
+  BatchUpdateProductsResponse,
+  CreateProductImageRequest,
+  ProductImageResponse,
+  SortProductImagesRequest,
   InventoryBalanceResponse,
   InventoryCommandRequest,
   InventoryOperation,
@@ -43,6 +55,18 @@ import type {
   RefundResponse,
   ReviewRefundRequest,
   ConfirmRefundRequest,
+  ReplayWebhookResponse,
+  WebhookDeadLetterResponse,
+  WebhookEventKind,
+  PublicProductListQuery,
+  PublicProductPageResponse,
+  PublicProductResponse,
+  BindProductDraftMediaRequest,
+  CreateProductDraftRequest,
+  ProductPublishValidationResponse,
+  PublishProductDraftRequest,
+  PublishProductDraftResponse,
+  SaveProductDraftRequest,
 } from '@saas/contracts';
 
 import { CatalogService } from '../application/catalog.service.js';
@@ -52,6 +76,7 @@ import { OrderService } from '../application/order.service.js';
 import { PaymentService } from '../application/payment.service.js';
 import { ShipmentService } from '../application/shipment.service.js';
 import { RefundService } from '../application/refund.service.js';
+import { WebhookOperationsService } from '../application/webhook-operations.service.js';
 
 @Controller('internal/commerce')
 export class CommerceController {
@@ -70,36 +95,113 @@ export class CommerceController {
     private readonly shipments: ShipmentService,
     @Inject(RefundService)
     private readonly refunds: RefundService,
+    @Inject(WebhookOperationsService)
+    private readonly webhookOperations: WebhookOperationsService,
   ) {}
+
+  /** 查询支付与退款回调死信。 */
+  @Get('webhook-dead-letters')
+  listWebhookDeadLetters(
+    @Headers('x-tenant-id') tenantId: string,
+  ): Promise<WebhookDeadLetterResponse[]> {
+    return this.webhookOperations.listDeadLetters(tenantId);
+  }
+
+  /** 人工重放指定回调死信。 */
+  @Post('webhook-dead-letters/:kind/:id/replay')
+  replayWebhookDeadLetter(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('kind') kind: WebhookEventKind,
+    @Param('id') id: string,
+  ): Promise<ReplayWebhookResponse> {
+    return this.webhookOperations.replay(tenantId, actorId, kind, id);
+  }
 
   @Post('categories')
   createCategory(
     @Headers('x-tenant-id') tenantId: string,
     @Body() input: CreateCategoryRequest,
-  ): Promise<{ id: string; name: string }> {
+  ): Promise<CategoryResponse> {
     return this.catalog.createCategory(tenantId, input);
   }
 
   @Get('categories')
   listCategories(
     @Headers('x-tenant-id') tenantId: string,
-  ): Promise<Array<{ id: string; name: string; parentId: string | null }>> {
-    return this.catalog.listCategories(tenantId);
+    @Query() query: CatalogListQuery,
+  ): Promise<CategoryResponse[]> {
+    return this.catalog.listCategories(tenantId, String(query.includeDeleted) === 'true');
+  }
+
+  @Delete('categories/:id')
+  async deleteCategory(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<DeleteCatalogItemResponse> {
+    await this.catalog.deleteCategory(tenantId, id);
+    return { deleted: true };
+  }
+
+  @Post('categories/:id/restore')
+  async restoreCategory(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<RestoreCatalogItemResponse> {
+    await this.catalog.restoreCategory(tenantId, id);
+    return { restored: true };
+  }
+
+  @Patch('categories/:id')
+  updateCategory(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+    @Body() input: UpdateCategoryRequest,
+  ): Promise<CategoryResponse> {
+    return this.catalog.updateCategory(tenantId, id, input);
   }
 
   @Post('brands')
   createBrand(
     @Headers('x-tenant-id') tenantId: string,
     @Body() input: CreateBrandRequest,
-  ): Promise<{ id: string; name: string }> {
+  ): Promise<BrandResponse> {
     return this.catalog.createBrand(tenantId, input);
   }
 
   @Get('brands')
   listBrands(
     @Headers('x-tenant-id') tenantId: string,
-  ): Promise<Array<{ id: string; name: string; logoUrl: string | null }>> {
-    return this.catalog.listBrands(tenantId);
+    @Query() query: CatalogListQuery,
+  ): Promise<BrandResponse[]> {
+    return this.catalog.listBrands(tenantId, String(query.includeDeleted) === 'true');
+  }
+
+  @Delete('brands/:id')
+  async deleteBrand(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<DeleteCatalogItemResponse> {
+    await this.catalog.deleteBrand(tenantId, id);
+    return { deleted: true };
+  }
+
+  @Post('brands/:id/restore')
+  async restoreBrand(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<RestoreCatalogItemResponse> {
+    await this.catalog.restoreBrand(tenantId, id);
+    return { restored: true };
+  }
+
+  @Patch('brands/:id')
+  updateBrand(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+    @Body() input: UpdateBrandRequest,
+  ): Promise<BrandResponse> {
+    return this.catalog.updateBrand(tenantId, id, input);
   }
 
   @Post('products')
@@ -111,6 +213,53 @@ export class CommerceController {
     return this.products.create(tenantId, actorId, input);
   }
 
+  @Post('product-drafts')
+  createProductDraft(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Body() input: CreateProductDraftRequest,
+  ): Promise<ProductResponse> {
+    return this.products.createDraft(tenantId, actorId, input);
+  }
+
+  @Patch('product-drafts/:id')
+  saveProductDraft(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('id') id: string,
+    @Body() input: SaveProductDraftRequest,
+  ): Promise<ProductResponse> {
+    return this.products.saveDraft(tenantId, actorId, id, input);
+  }
+
+  @Patch('product-drafts/:id/media')
+  bindProductDraftMedia(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('id') id: string,
+    @Body() input: BindProductDraftMediaRequest,
+  ): Promise<ProductResponse> {
+    return this.products.bindDraftMedia(tenantId, actorId, id, input);
+  }
+
+  @Get('product-drafts/:id/publish-validation')
+  validateProductDraft(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<ProductPublishValidationResponse> {
+    return this.products.validateDraftPublish(tenantId, id);
+  }
+
+  @Post('product-drafts/:id/publish')
+  publishProductDraft(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('id') id: string,
+    @Body() input: PublishProductDraftRequest,
+  ): Promise<PublishProductDraftResponse> {
+    return this.products.publishDraft(tenantId, actorId, id, input.version);
+  }
+
   @Get('products')
   listProducts(
     @Headers('x-tenant-id') tenantId: string,
@@ -118,7 +267,9 @@ export class CommerceController {
   ): Promise<ProductPageResponse> {
     return this.products.list(tenantId, {
       ...query,
-      limit: query.limit ? Number(query.limit) : undefined,
+      page: query.page ? Number(query.page) : undefined,
+      pageSize: query.pageSize ? Number(query.pageSize) : undefined,
+      includeDeleted: String(query.includeDeleted) === 'true',
     });
   }
 
@@ -128,6 +279,26 @@ export class CommerceController {
     @Param('id') id: string,
   ): Promise<ProductResponse> {
     return this.products.get(tenantId, id);
+  }
+
+  @Get('public/products')
+  listPublicProducts(
+    @Headers('x-tenant-id') tenantId: string,
+    @Query() query: PublicProductListQuery,
+  ): Promise<PublicProductPageResponse> {
+    return this.products.listPublic(tenantId, {
+      ...query,
+      page: query.page ? Number(query.page) : undefined,
+      pageSize: query.pageSize ? Number(query.pageSize) : undefined,
+    });
+  }
+
+  @Get('public/products/:id')
+  getPublicProduct(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<PublicProductResponse> {
+    return this.products.getPublic(tenantId, id);
   }
 
   @Patch('products/:id')
@@ -140,13 +311,52 @@ export class CommerceController {
     return this.products.update(tenantId, actorId, id, input);
   }
 
+  @Post('products/batch')
+  batchProducts(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Body() input: BatchUpdateProductsRequest,
+  ): Promise<BatchUpdateProductsResponse> {
+    return this.products.batchUpdate(tenantId, actorId, input);
+  }
+
   @Post('products/:id/variants')
   addVariant(
     @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
     @Param('id') productId: string,
     @Body() input: CreateProductVariantRequest,
   ): Promise<ProductVariantResponse> {
-    return this.products.addVariant(tenantId, productId, input);
+    return this.products.addVariant(tenantId, actorId, productId, input);
+  }
+
+  @Post('products/:id/images')
+  addProductImage(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') productId: string,
+    @Body() input: CreateProductImageRequest,
+  ): Promise<ProductImageResponse> {
+    return this.products.addImage(tenantId, productId, input);
+  }
+
+  @Patch('products/:id/images/sort')
+  async sortProductImages(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') productId: string,
+    @Body() input: SortProductImagesRequest,
+  ): Promise<{ sorted: true }> {
+    await this.products.sortImages(tenantId, productId, input);
+    return { sorted: true };
+  }
+
+  @Delete('products/:productId/images/:imageId')
+  async deleteProductImage(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('productId') productId: string,
+    @Param('imageId') imageId: string,
+  ): Promise<{ deleted: true }> {
+    await this.products.deleteImage(tenantId, productId, imageId);
+    return { deleted: true };
   }
 
   @Patch('variants/:id')

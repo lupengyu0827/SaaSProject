@@ -9,6 +9,7 @@ import { PaymentService } from '../src/commerce/application/payment.service.js';
 import { ProductService } from '../src/commerce/application/product.service.js';
 import { ShipmentService } from '../src/commerce/application/shipment.service.js';
 import { RefundService } from '../src/commerce/application/refund.service.js';
+import { RefundWebhookInboxService } from '../src/commerce/application/refund-webhook-inbox.service.js';
 import { MockPaymentProvider } from '../src/commerce/infrastructure/mock-payment.provider.js';
 import { PaymentProviderRegistry } from '../src/commerce/infrastructure/payment-provider.registry.js';
 import { WechatPayProvider } from '../src/commerce/infrastructure/wechat-pay.provider.js';
@@ -35,6 +36,7 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
     await prisma.$transaction(async (tx) => {
       await tx.$executeRaw`SELECT set_config('app.current_tenant_id', ${tenantId}, true)`;
       await tx.paymentWebhookEvent.deleteMany({ where: { tenantId } });
+      await tx.refundWebhookEvent.deleteMany({ where: { tenantId } });
       await tx.payment.deleteMany({ where: { tenantId } });
       await tx.refundTransaction.deleteMany({ where: { tenantId } });
       await tx.refundItem.deleteMany({ where: { tenantId } });
@@ -43,12 +45,84 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
       await tx.shipment.deleteMany({ where: { tenantId } });
       await tx.inventoryTransaction.deleteMany({ where: { tenantId } });
       await tx.order.deleteMany({ where: { tenantId } });
+      await tx.productImage.deleteMany({ where: { tenantId } });
+      await tx.mediaAsset.deleteMany({ where: { tenantId } });
+      await tx.mediaUploadSession.deleteMany({ where: { tenantId } });
       await tx.product.deleteMany({ where: { tenantId } });
       await tx.category.deleteMany({ where: { tenantId } });
       await tx.brand.deleteMany({ where: { tenantId } });
+      await tx.providerCallbackRoute.deleteMany({ where: { tenantId } });
       await tx.tenant.deleteMany({ where: { id: tenantId } });
     });
     await prisma.$disconnect();
+  });
+
+  it('creates, autosaves, binds media and atomically publishes a mobile draft', async () => {
+    const products = new ProductService(prisma);
+    const category = await prisma.category.create({
+      data: { tenantId, name: `S2 Category ${suffix}` },
+    });
+    const session = await prisma.mediaUploadSession.create({
+      data: {
+        tenantId,
+        actorId,
+        purpose: 'product',
+        objectKey: `${tenantId}/product/s2-${suffix}.jpg`,
+        fileName: 's2.jpg',
+        mimeType: 'image/jpeg',
+        sizeBytes: 1024,
+        status: 'confirmed',
+        expiresAt: new Date(Date.now() + 60_000),
+      },
+    });
+    const asset = await prisma.mediaAsset.create({
+      data: {
+        tenantId,
+        uploadSessionId: session.id,
+        createdBy: actorId,
+        purpose: 'product',
+        objectKey: session.objectKey,
+        mimeType: session.mimeType,
+        sizeBytes: session.sizeBytes,
+        sha256: 'a'.repeat(64),
+      },
+    });
+
+    const emptyDraft = await products.createDraft(tenantId, actorId, {});
+    expect(await products.validateDraftPublish(tenantId, emptyDraft.id)).toMatchObject({
+      valid: false,
+    });
+    const saved = await products.saveDraft(tenantId, actorId, emptyDraft.id, {
+      version: emptyDraft.version,
+      name: 'S2 Mobile Product',
+      categoryId: category.id,
+      price: '12800.00',
+      conditionGrade: 'excellent',
+      material: '粒面皮革',
+    });
+    const withMedia = await products.bindDraftMedia(tenantId, actorId, saved.id, {
+      version: saved.version,
+      assetIds: [asset.id],
+      primaryAssetId: asset.id,
+    });
+    expect(await products.validateDraftPublish(tenantId, withMedia.id)).toEqual({
+      valid: true,
+      issues: [],
+    });
+
+    const published = await products.publishDraft(
+      tenantId,
+      actorId,
+      withMedia.id,
+      withMedia.version,
+    );
+    expect(published.product).toMatchObject({ status: 'active', availableStockQty: 1 });
+    const publicProduct = await products.getPublic(tenantId, withMedia.id);
+    expect(publicProduct).toMatchObject({ name: 'S2 Mobile Product', availableStockQty: 1 });
+    expect(JSON.stringify(publicProduct)).not.toContain('costPrice');
+    expect(await prisma.mediaAsset.findUnique({ where: { id: asset.id } })).toMatchObject({
+      status: 'attached',
+    });
   });
 
   it('runs product, inventory, order and asynchronous payment to completion', async () => {
@@ -63,6 +137,7 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
     const inbox = new PaymentWebhookInboxService(prisma, payments);
     const shipments = new ShipmentService(prisma);
     const refunds = new RefundService(prisma, providers);
+    const refundInbox = new RefundWebhookInboxService(prisma, refunds);
 
     const draft = await products.create(tenantId, actorId, {
       code: `E2E-${suffix}`,
@@ -152,5 +227,32 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
       status: 'succeeded',
     });
     expect(await inventory.getBalance(tenantId, variantId)).toMatchObject({ onHand: 9 });
+
+    const secondRefund = await refunds.create(tenantId, actorId, order.id, {
+      idempotencyKey: `refund-second-${suffix}`,
+      reason: 'Database E2E asynchronous refund',
+      items: [{ orderItemId, quantity: 1 }],
+    });
+    await refunds.review(tenantId, actorId, secondRefund.id, { approved: true });
+    await prisma.$transaction(async (tx) => {
+      await tx.$executeRaw`SELECT set_config('app.current_tenant_id', ${tenantId}, true)`;
+      await tx.refundTransaction.create({
+        data: {
+          tenantId,
+          refundId: secondRefund.id,
+          channel: 'mock',
+          amount: secondRefund.amount,
+        },
+      });
+    });
+    await refundInbox.enqueue(tenantId, 'mock', `refund-event-${suffix}`, {
+      refundId: secondRefund.id,
+      providerRefundNo: `mock-refund-second-${suffix}`,
+      refundedAmount: secondRefund.amount,
+      succeeded: true,
+    });
+    expect(await refundInbox.processPending(tenantId)).toBe(1);
+    expect(await orders.get(tenantId, order.id)).toMatchObject({ status: 'refunded' });
+    expect(await inventory.getBalance(tenantId, variantId)).toMatchObject({ onHand: 10 });
   });
 });

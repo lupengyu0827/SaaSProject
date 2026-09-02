@@ -16,6 +16,14 @@ import { PaymentWebhookInboxService } from './application/payment-webhook-inbox.
 import { PaymentWebhookScheduler } from './infrastructure/payment-webhook.scheduler.js';
 import { ShipmentService } from './application/shipment.service.js';
 import { RefundService } from './application/refund.service.js';
+import { RefundWebhookInboxService } from './application/refund-webhook-inbox.service.js';
+import { RefundWebhookScheduler } from './infrastructure/refund-webhook.scheduler.js';
+import { WechatRefundCallbackService } from './infrastructure/wechat-refund-callback.service.js';
+import { PaymentReconciliationService } from './application/payment-reconciliation.service.js';
+import { PaymentReconciliationScheduler } from './infrastructure/payment-reconciliation.scheduler.js';
+import { PaymentBillReconciliationService } from './application/payment-bill-reconciliation.service.js';
+import { PaymentBillReconciliationScheduler } from './infrastructure/payment-bill-reconciliation.scheduler.js';
+import { WebhookOperationsService } from './application/webhook-operations.service.js';
 
 @Module({
   controllers: [CommerceController, PaymentCallbackController],
@@ -34,6 +42,14 @@ import { RefundService } from './application/refund.service.js';
     PaymentWebhookScheduler,
     ShipmentService,
     RefundService,
+    RefundWebhookInboxService,
+    RefundWebhookScheduler,
+    WechatRefundCallbackService,
+    PaymentReconciliationService,
+    PaymentReconciliationScheduler,
+    PaymentBillReconciliationService,
+    PaymentBillReconciliationScheduler,
+    WebhookOperationsService,
   ],
 })
 export class CommerceModule {}

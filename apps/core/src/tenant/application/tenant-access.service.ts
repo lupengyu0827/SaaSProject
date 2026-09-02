@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import type { TenantAccessState } from '@saas/contracts';
 
 import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service.js';
@@ -18,7 +18,7 @@ function asNumberRecord(value: unknown): Record<string, number> {
 
 @Injectable()
 export class TenantAccessService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(@Inject(PrismaService) private readonly prisma: PrismaService) {}
 
   async getState(tenantId: string): Promise<TenantAccessState> {
     const tenant = await this.prisma.tenant.findUnique({

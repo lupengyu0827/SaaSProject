@@ -1,11 +1,11 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Inject, Param } from '@nestjs/common';
 import type { ActorPermissionsResponse } from '@saas/contracts';
 
 import { RbacService } from '../application/rbac.service.js';
 
 @Controller('platform/tenants/:tenantId/actors')
 export class RbacController {
-  constructor(private readonly rbac: RbacService) {}
+  constructor(@Inject(RbacService) private readonly rbac: RbacService) {}
 
   @Get(':actorId/permissions')
   getPermissions(

@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import type { ActorPermissionsResponse } from '@saas/contracts';
 
 import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service.js';
 
 @Injectable()
 export class RbacService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(@Inject(PrismaService) private readonly prisma: PrismaService) {}
 
   async getActorPermissions(tenantId: string, actorId: string): Promise<ActorPermissionsResponse> {
     const assignments = await this.prisma.userRole.findMany({

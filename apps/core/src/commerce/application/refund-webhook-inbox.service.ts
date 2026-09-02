@@ -1,11 +1,12 @@
 /** 退款回调 Inbox：持久化已验签事件，并以指数退避方式幂等消费。 */
 import { createHash } from 'node:crypto';
 
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Inject, Injectable } from '@nestjs/common';
 
 import { Prisma } from '../../generated/prisma/index.js';
 import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service.js';
 import { RefundService } from './refund.service.js';
+import type { WebhookDeadLetterResponse } from '@saas/contracts';
 
 export interface RefundWebhookPayload {
   refundId: string;
@@ -18,7 +19,9 @@ export interface RefundWebhookPayload {
 @Injectable()
 export class RefundWebhookInboxService {
   constructor(
+    @Inject(PrismaService)
     private readonly prisma: PrismaService,
+    @Inject(RefundService)
     private readonly refunds: RefundService,
   ) {}
 
@@ -85,6 +88,50 @@ export class RefundWebhookInboxService {
       }
     }
     return processed;
+  }
+
+  /** 查询退款回调死信摘要。 */
+  async listDeadLetters(tenantId: string): Promise<WebhookDeadLetterResponse[]> {
+    const events = await this.prisma.$transaction(async (tx) => {
+      await this.setTenant(tx, tenantId);
+      return tx.refundWebhookEvent.findMany({
+        where: { tenantId, status: 'dead_letter' },
+        orderBy: { createdAt: 'desc' },
+        take: 100,
+      });
+    });
+    return events.map((event) => ({
+      id: event.id.toString(),
+      kind: 'refund',
+      channel: event.channel,
+      eventId: event.eventId,
+      attempts: event.attempts,
+      lastError: event.lastError,
+      createdAt: event.createdAt.toISOString(),
+    }));
+  }
+
+  /** 将指定退款死信恢复为待处理，并记录人工操作审计。 */
+  async replay(tenantId: string, actorId: string, id: bigint): Promise<void> {
+    await this.prisma.$transaction(async (tx) => {
+      await this.setTenant(tx, tenantId);
+      const updated = await tx.refundWebhookEvent.updateMany({
+        where: { id, tenantId, status: 'dead_letter' },
+        data: { status: 'pending', attempts: 0, nextAttemptAt: new Date(), lastError: null },
+      });
+      if (updated.count !== 1) throw new ConflictException('Refund dead letter was not found');
+      await tx.auditLog.create({
+        data: {
+          tenantId,
+          actorId,
+          actorType: 'admin',
+          action: 'replay',
+          resourceType: 'refund_webhook',
+          resourceId: id.toString(),
+          diff: { previousStatus: 'dead_letter', status: 'pending' },
+        },
+      });
+    });
   }
 
   private markProcessed(tenantId: string, id: bigint): Promise<unknown> {

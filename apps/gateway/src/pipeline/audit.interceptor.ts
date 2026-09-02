@@ -26,7 +26,7 @@ export class AuditInterceptor implements NestInterceptor {
             actorId: request.actor.id,
             actorType: request.actor.type,
             action: request.method.toLowerCase(),
-            resourceType: request.path,
+            resourceType: normalizeResourceType(request.path),
             requestId: request.header('x-request-id') ?? crypto.randomUUID(),
             ip: request.ip,
             userAgent: request.header('user-agent'),
@@ -48,4 +48,11 @@ export class AuditInterceptor implements NestInterceptor {
       // Audit delivery will move to a durable queue when the event bus is introduced.
     }
   }
+}
+
+/** 将实例路径归一化为稳定且满足审计表长度约束的资源类型。 */
+function normalizeResourceType(path: string): string {
+  return path
+    .replace(/[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}/gi, ':id')
+    .slice(0, 50);
 }

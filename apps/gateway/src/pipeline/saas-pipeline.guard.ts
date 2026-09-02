@@ -1,4 +1,4 @@
-import { CanActivate, type ExecutionContext, Injectable } from '@nestjs/common';
+import { CanActivate, type ExecutionContext, Inject, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
 import { GatewayPolicyEngine } from './gateway-policy.engine.js';
@@ -16,10 +16,15 @@ import { TenantStateClient } from './tenant-state.client.js';
 @Injectable()
 export class SaasPipelineGuard implements CanActivate {
   constructor(
+    @Inject(Reflector)
     private readonly reflector: Reflector,
+    @Inject(TenantStateClient)
     private readonly stateClient: TenantStateClient,
+    @Inject(GatewayPolicyEngine)
     private readonly policy: GatewayPolicyEngine,
+    @Inject(RbacClient)
     private readonly rbac: RbacClient,
+    @Inject(AuthTokenVerifier)
     private readonly tokens: AuthTokenVerifier,
   ) {}
 

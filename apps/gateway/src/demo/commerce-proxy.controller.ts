@@ -1,7 +1,25 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Inject,
+  Param,
+  Patch,
+  Post,
+  Query,
+  Req,
+} from '@nestjs/common';
 import type {
   CreateBrandRequest,
   CreateCategoryRequest,
+  UpdateCategoryRequest,
+  CategoryResponse,
+  UpdateBrandRequest,
+  BrandResponse,
+  CatalogListQuery,
+  DeleteCatalogItemResponse,
+  RestoreCatalogItemResponse,
   CreateProductRequest,
   ProductListQuery,
   ProductPageResponse,
@@ -10,6 +28,11 @@ import type {
   CreateProductVariantRequest,
   UpdateProductVariantRequest,
   ProductVariantResponse,
+  BatchUpdateProductsRequest,
+  BatchUpdateProductsResponse,
+  CreateProductImageRequest,
+  ProductImageResponse,
+  SortProductImagesRequest,
   InventoryBalanceResponse,
   InventoryCommandRequest,
   InventoryOperation,
@@ -32,6 +55,18 @@ import type {
   RefundResponse,
   ReviewRefundRequest,
   ConfirmRefundRequest,
+  ReplayWebhookResponse,
+  WebhookDeadLetterResponse,
+  WebhookEventKind,
+  PublicProductListQuery,
+  PublicProductPageResponse,
+  PublicProductResponse,
+  BindProductDraftMediaRequest,
+  CreateProductDraftRequest,
+  ProductPublishValidationResponse,
+  PublishProductDraftRequest,
+  PublishProductDraftResponse,
+  SaveProductDraftRequest,
 } from '@saas/contracts';
 
 import { CoreProxyService } from '../infrastructure/core-proxy.service.js';
@@ -48,14 +83,36 @@ import type { SaasRequest } from '../pipeline/request-context.js';
 @EnforceQuota('api_calls')
 @MeterUsage('api_calls')
 export class CommerceProxyController {
-  constructor(private readonly core: CoreProxyService) {}
+  constructor(@Inject(CoreProxyService) private readonly core: CoreProxyService) {}
+
+  /** 查询租户支付与退款回调死信。 */
+  @Get('webhook-dead-letters')
+  @RequireFeature('orders.basic')
+  @RequirePermission('webhooks.replay')
+  listWebhookDeadLetters(@Req() req: SaasRequest): Promise<WebhookDeadLetterResponse[]> {
+    return this.core.request('/webhook-dead-letters', this.context(req));
+  }
+
+  /** 人工重放死信；Core 会再次执行租户校验并记录审计。 */
+  @Post('webhook-dead-letters/:kind/:id/replay')
+  @RequireFeature('orders.basic')
+  @RequirePermission('webhooks.replay')
+  replayWebhookDeadLetter(
+    @Req() req: SaasRequest,
+    @Param('kind') kind: WebhookEventKind,
+    @Param('id') id: string,
+  ): Promise<ReplayWebhookResponse> {
+    return this.core.request(`/webhook-dead-letters/${kind}/${id}/replay`, this.context(req), {
+      method: 'POST',
+    });
+  }
 
   @Post('categories')
   @RequirePermission('products.write')
   category(
     @Req() req: SaasRequest,
     @Body() input: CreateCategoryRequest,
-  ): Promise<{ id: string; name: string }> {
+  ): Promise<CategoryResponse> {
     return this.core.request('/categories', this.context(req), { method: 'POST', body: input });
   }
 
@@ -63,25 +120,85 @@ export class CommerceProxyController {
   @RequirePermission('products.read')
   categories(
     @Req() req: SaasRequest,
-  ): Promise<Array<{ id: string; name: string; parentId: string | null }>> {
-    return this.core.request('/categories', this.context(req));
+    @Query() query: CatalogListQuery,
+  ): Promise<CategoryResponse[]> {
+    const suffix = query.includeDeleted ? '?includeDeleted=true' : '';
+    return this.core.request(`/categories${suffix}`, this.context(req));
+  }
+
+  @Delete('categories/:id')
+  @RequirePermission('products.write')
+  deleteCategory(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+  ): Promise<DeleteCatalogItemResponse> {
+    return this.core.request(`/categories/${id}`, this.context(req), { method: 'DELETE' });
+  }
+
+  @Post('categories/:id/restore')
+  @RequirePermission('products.write')
+  restoreCategory(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+  ): Promise<RestoreCatalogItemResponse> {
+    return this.core.request(`/categories/${id}/restore`, this.context(req), { method: 'POST' });
+  }
+
+  @Patch('categories/:id')
+  @RequirePermission('products.write')
+  updateCategory(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+    @Body() input: UpdateCategoryRequest,
+  ): Promise<CategoryResponse> {
+    return this.core.request(`/categories/${id}`, this.context(req), {
+      method: 'PATCH',
+      body: input,
+    });
   }
 
   @Post('brands')
   @RequirePermission('products.write')
-  brand(
-    @Req() req: SaasRequest,
-    @Body() input: CreateBrandRequest,
-  ): Promise<{ id: string; name: string }> {
+  brand(@Req() req: SaasRequest, @Body() input: CreateBrandRequest): Promise<BrandResponse> {
     return this.core.request('/brands', this.context(req), { method: 'POST', body: input });
   }
 
   @Get('brands')
   @RequirePermission('products.read')
-  brands(
+  brands(@Req() req: SaasRequest, @Query() query: CatalogListQuery): Promise<BrandResponse[]> {
+    const suffix = query.includeDeleted ? '?includeDeleted=true' : '';
+    return this.core.request(`/brands${suffix}`, this.context(req));
+  }
+
+  @Delete('brands/:id')
+  @RequirePermission('products.write')
+  deleteBrand(
     @Req() req: SaasRequest,
-  ): Promise<Array<{ id: string; name: string; logoUrl: string | null }>> {
-    return this.core.request('/brands', this.context(req));
+    @Param('id') id: string,
+  ): Promise<DeleteCatalogItemResponse> {
+    return this.core.request(`/brands/${id}`, this.context(req), { method: 'DELETE' });
+  }
+
+  @Post('brands/:id/restore')
+  @RequirePermission('products.write')
+  restoreBrand(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+  ): Promise<RestoreCatalogItemResponse> {
+    return this.core.request(`/brands/${id}/restore`, this.context(req), { method: 'POST' });
+  }
+
+  @Patch('brands/:id')
+  @RequirePermission('products.write')
+  updateBrand(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+    @Body() input: UpdateBrandRequest,
+  ): Promise<BrandResponse> {
+    return this.core.request(`/brands/${id}`, this.context(req), {
+      method: 'PATCH',
+      body: input,
+    });
   }
 
   @Post('products')
@@ -90,12 +207,99 @@ export class CommerceProxyController {
     return this.core.request('/products', this.context(req), { method: 'POST', body: input });
   }
 
+  @Post('product-drafts')
+  @RequirePermission('products.write')
+  createProductDraft(
+    @Req() req: SaasRequest,
+    @Body() input: CreateProductDraftRequest,
+  ): Promise<ProductResponse> {
+    return this.core.request('/product-drafts', this.context(req), { method: 'POST', body: input });
+  }
+
+  @Patch('product-drafts/:id')
+  @RequirePermission('products.write')
+  saveProductDraft(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+    @Body() input: SaveProductDraftRequest,
+  ): Promise<ProductResponse> {
+    return this.core.request(`/product-drafts/${id}`, this.context(req), {
+      method: 'PATCH',
+      body: input,
+    });
+  }
+
+  @Patch('product-drafts/:id/media')
+  @RequirePermission('products.write')
+  bindProductDraftMedia(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+    @Body() input: BindProductDraftMediaRequest,
+  ): Promise<ProductResponse> {
+    return this.core.request(`/product-drafts/${id}/media`, this.context(req), {
+      method: 'PATCH',
+      body: input,
+    });
+  }
+
+  @Get('product-drafts/:id/publish-validation')
+  @RequirePermission('products.read')
+  validateProductDraft(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+  ): Promise<ProductPublishValidationResponse> {
+    return this.core.request(`/product-drafts/${id}/publish-validation`, this.context(req));
+  }
+
+  @Post('product-drafts/:id/publish')
+  @RequirePermission('products.write')
+  publishProductDraft(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+    @Body() input: PublishProductDraftRequest,
+  ): Promise<PublishProductDraftResponse> {
+    return this.core.request(`/product-drafts/${id}/publish`, this.context(req), {
+      method: 'POST',
+      body: input,
+    });
+  }
+
+  @Post('products/batch')
+  @RequirePermission('products.write')
+  batchProducts(
+    @Req() req: SaasRequest,
+    @Body() input: BatchUpdateProductsRequest,
+  ): Promise<BatchUpdateProductsResponse> {
+    return this.core.request('/products/batch', this.context(req), { method: 'POST', body: input });
+  }
+
   @Get('products')
   list(@Req() req: SaasRequest, @Query() query: ProductListQuery): Promise<ProductPageResponse> {
     const search = new URLSearchParams();
     for (const [key, value] of Object.entries(query))
       if (value !== undefined) search.set(key, String(value));
     return this.core.request(`/products?${search.toString()}`, this.context(req));
+  }
+
+  /** 消费者商品目录；Core 仅返回公开字段白名单。 */
+  @Get('public/products')
+  listPublicProducts(
+    @Req() req: SaasRequest,
+    @Query() query: PublicProductListQuery,
+  ): Promise<PublicProductPageResponse> {
+    const search = new URLSearchParams();
+    for (const [key, value] of Object.entries(query)) {
+      if (value !== undefined) search.set(key, String(value));
+    }
+    return this.core.request(`/public/products?${search.toString()}`, this.context(req));
+  }
+
+  @Get('public/products/:id')
+  getPublicProduct(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+  ): Promise<PublicProductResponse> {
+    return this.core.request(`/public/products/${id}`, this.context(req));
   }
 
   @Get('products/:id')
@@ -146,6 +350,44 @@ export class CommerceProxyController {
   @RequirePermission('products.write')
   deleteVariant(@Req() req: SaasRequest, @Param('id') id: string): Promise<{ deleted: true }> {
     return this.core.request(`/variants/${id}`, this.context(req), { method: 'DELETE' });
+  }
+
+  @Post('products/:id/images')
+  @RequirePermission('products.write')
+  addProductImage(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+    @Body() input: CreateProductImageRequest,
+  ): Promise<ProductImageResponse> {
+    return this.core.request(`/products/${id}/images`, this.context(req), {
+      method: 'POST',
+      body: input,
+    });
+  }
+
+  @Patch('products/:id/images/sort')
+  @RequirePermission('products.write')
+  sortProductImages(
+    @Req() req: SaasRequest,
+    @Param('id') id: string,
+    @Body() input: SortProductImagesRequest,
+  ): Promise<{ sorted: true }> {
+    return this.core.request(`/products/${id}/images/sort`, this.context(req), {
+      method: 'PATCH',
+      body: input,
+    });
+  }
+
+  @Delete('products/:productId/images/:imageId')
+  @RequirePermission('products.write')
+  deleteProductImage(
+    @Req() req: SaasRequest,
+    @Param('productId') productId: string,
+    @Param('imageId') imageId: string,
+  ): Promise<{ deleted: true }> {
+    return this.core.request(`/products/${productId}/images/${imageId}`, this.context(req), {
+      method: 'DELETE',
+    });
   }
 
   @Get('inventory/:variantId')

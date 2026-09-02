@@ -8,6 +8,7 @@ import { OperationsModule } from './operations/operations.module.js';
 import { PrismaModule } from './shared/infrastructure/prisma/prisma.module.js';
 import { TenantModule } from './tenant/tenant.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { MediaModule } from './media/media.module.js';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AuthModule } from './auth/auth.module.js';
     CommerceModule,
     OperationsModule,
     ExtensionModule,
+    MediaModule,
   ],
   controllers: [HealthController],
 })

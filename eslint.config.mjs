@@ -28,7 +28,11 @@ export default tseslint.config(
     },
   },
   {
-    files: ['apps/pc-admin/**/*.{ts,vue}', 'apps/miniapp/**/*.{ts,vue}'],
+    files: [
+      'apps/pc-admin/**/*.{ts,vue}',
+      'apps/miniapp/**/*.{ts,vue}',
+      'apps/merchant-miniapp/**/*.{ts,vue}',
+    ],
     languageOptions: {
       globals: { ...globals.browser, uni: 'readonly' },
       parserOptions: {

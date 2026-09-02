@@ -7,3 +7,4 @@ export * from './commerce/order.js';
 export * from './commerce/payment.js';
 export * from './commerce/shipment.js';
 export * from './commerce/refund.js';
+export * from './media/media.js';

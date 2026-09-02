@@ -7,6 +7,9 @@ import type {
   CreateProviderRefundInput,
   CreateProviderRefundResult,
   PaymentProvider,
+  QueryProviderPaymentInput,
+  QueryProviderPaymentResult,
+  ProviderTradeBillEntry,
 } from './payment-provider.js';
 
 @Injectable()
@@ -37,5 +40,16 @@ export class MockPaymentProvider implements PaymentProvider {
       eventId: `mock-refund-event-${digest.slice(0, 24)}`,
       status: 'succeeded',
     });
+  }
+
+  /** Mock 支付默认保持待支付，测试可通过真实回调推进状态。 */
+  queryPayment(input: QueryProviderPaymentInput): Promise<QueryProviderPaymentResult> {
+    void input;
+    return Promise.resolve({ status: 'pending' });
+  }
+
+  downloadTradeBill(billDate: string): Promise<ProviderTradeBillEntry[]> {
+    void billDate;
+    return Promise.resolve([]);
   }
 }

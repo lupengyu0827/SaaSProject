@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import type { AccessTokenClaims } from '@saas/contracts';
+import type { AccessTokenClaims, ActorType } from '@saas/contracts';
 import jwt, { type JwtPayload } from 'jsonwebtoken';
 
 function getJwtSecret(): string {
@@ -24,7 +24,7 @@ export class AuthTokenVerifier {
       if (
         typeof decoded.sub !== 'string' ||
         claims.tenantId !== expectedTenantId ||
-        !['admin_user', 'customer'].includes(String(claims.actorType)) ||
+        !isActorType(claims.actorType) ||
         claims.tokenType !== 'access'
       ) {
         throw new UnauthorizedException('Token tenant or type is invalid');
@@ -32,7 +32,7 @@ export class AuthTokenVerifier {
       return {
         sub: decoded.sub,
         tenantId: expectedTenantId,
-        actorType: claims.actorType as 'admin_user' | 'customer',
+        actorType: claims.actorType,
         tokenType: 'access',
       };
     } catch (error: unknown) {
@@ -40,4 +40,10 @@ export class AuthTokenVerifier {
       throw new UnauthorizedException('Access token is invalid or expired');
     }
   }
+}
+
+function isActorType(value: unknown): value is ActorType {
+  return ['admin_user', 'platform_admin', 'merchant_owner', 'merchant_staff', 'customer'].includes(
+    String(value),
+  );
 }

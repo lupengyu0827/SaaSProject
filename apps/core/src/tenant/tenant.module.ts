@@ -10,8 +10,10 @@ import { RbacController } from './interfaces/rbac.controller.js';
 import { AuditController } from './interfaces/audit.controller.js';
 import { RlsTenantProbeService } from './application/rls-tenant-probe.service.js';
 import { RlsProbeController } from './interfaces/rls-probe.controller.js';
+import { BillingModule } from '../billing/billing.module.js';
 
 @Module({
+  imports: [BillingModule],
   controllers: [TenantController, RbacController, AuditController, RlsProbeController],
   providers: [
     RegisterTenantService,

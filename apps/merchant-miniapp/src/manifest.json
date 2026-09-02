@@ -1,0 +1,17 @@
+{
+  "name": "SaaS Merchant Miniapp",
+  "appid": "__UNI__SAAS_MERCHANT_MINIAPP",
+  "description": "多租户电商 SaaS 商家小程序",
+  "versionName": "0.1.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "mp-weixin": {
+    "appid": "wxd16fb6d7645f1006",
+    "setting": {
+      "urlCheck": false,
+      "es6": true,
+      "minified": true
+    },
+    "usingComponents": true
+  }
+}

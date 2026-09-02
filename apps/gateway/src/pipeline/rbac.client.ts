@@ -1,11 +1,11 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
 import type { ActorPermissionsResponse } from '@saas/contracts';
 
 import { RedisService } from '../infrastructure/redis.service.js';
 
 @Injectable()
 export class RbacClient {
-  constructor(private readonly redis: RedisService) {}
+  constructor(@Inject(RedisService) private readonly redis: RedisService) {}
 
   async enforce(tenantId: string, actorId: string, permission?: string): Promise<void> {
     if (!permission) return;

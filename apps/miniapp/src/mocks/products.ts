@@ -1,9 +1,13 @@
 /** 小程序商品 Mock：用于无后端环境下完整演示首页、搜索与商品详情。 */
-import type { ProductPageResponse, ProductResponse } from '@saas/contracts';
+import type {
+  PublicProductListQuery,
+  PublicProductPageResponse,
+  PublicProductResponse,
+} from '@saas/contracts';
 
 const MOCK_CREATED_AT = '2026-08-20T08:00:00.000Z';
 
-export const MOCK_PRODUCTS: ProductResponse[] = [
+export const MOCK_PRODUCTS: PublicProductResponse[] = [
   createMockProduct({
     id: 'mock-diamond-ring',
     code: 'OBJ-2608-001',
@@ -37,20 +41,20 @@ export const MOCK_PRODUCTS: ProductResponse[] = [
 ];
 
 /** 按关键词返回 Mock 商品列表。 */
-export function listMockProducts(search?: string): ProductPageResponse {
-  const keyword = search?.trim().toLocaleLowerCase();
-  const items = keyword
+export function listMockProducts(query: PublicProductListQuery = {}): PublicProductPageResponse {
+  const keyword = query.keyword?.trim().toLocaleLowerCase();
+  const list = keyword
     ? MOCK_PRODUCTS.filter((product) =>
         [product.name, product.code, product.description ?? ''].some((value) =>
           value.toLocaleLowerCase().includes(keyword),
         ),
       )
     : MOCK_PRODUCTS;
-  return { items, nextCursor: null };
+  return { list, total: list.length, page: query.page ?? 1, pageSize: query.pageSize ?? 20 };
 }
 
 /** 根据 ID 读取 Mock 商品。 */
-export function getMockProduct(productId: string): ProductResponse | null {
+export function getMockProduct(productId: string): PublicProductResponse | null {
   return MOCK_PRODUCTS.find((product) => product.id === productId) ?? null;
 }
 
@@ -65,7 +69,7 @@ interface MockProductInput {
   condition: string;
 }
 
-function createMockProduct(input: MockProductInput): ProductResponse {
+function createMockProduct(input: MockProductInput): PublicProductResponse {
   return {
     id: input.id,
     code: input.code,
@@ -74,25 +78,32 @@ function createMockProduct(input: MockProductInput): ProductResponse {
     categoryId: null,
     brandId: null,
     attributes: {
-      primaryImage: input.image,
-      category: input.category,
-      condition: input.condition,
-      images: [input.image],
+      material: input.category,
+      conditionGrade: 'excellent',
     },
-    seoSlug: null,
-    status: 'active',
-    version: 1,
     variants: [
       {
         id: `${input.id}-default`,
-        sku: `${input.code}-01`,
         specs: { 品相: input.condition },
         price: input.price,
-        costPrice: '0.00',
-        weightG: null,
+        availableStockQty: 1,
       },
     ],
+    images: [
+      {
+        id: `${input.id}-image`,
+        url: input.image,
+        altText: input.name,
+        sortOrder: 0,
+        isPrimary: true,
+        sizeBytes: 1,
+        mimeType: 'image/jpeg',
+      },
+    ],
+    primaryImage: input.image,
+    availableStockQty: 1,
+    minimumPrice: input.price,
+    maximumPrice: input.price,
     createdAt: MOCK_CREATED_AT,
-    updatedAt: MOCK_CREATED_AT,
   };
 }

@@ -4,6 +4,7 @@
 
 <style lang="scss">
 @use './styles/tokens.scss' as *;
+@use './styles/themes.scss';
 
 page {
   min-height: 100%;

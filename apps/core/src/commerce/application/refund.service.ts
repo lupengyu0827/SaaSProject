@@ -68,8 +68,10 @@ export class RefundService {
           include: { items: true },
         });
         if (!order) throw new NotFoundException('Order not found');
-        if (!['paid', 'fulfilled'].includes(order.status))
-          throw new ConflictException('Only paid or fulfilled orders can request refunds');
+        if (!['paid', 'fulfilled', 'partially_refunded'].includes(order.status))
+          throw new ConflictException(
+            'Only paid, fulfilled or partially refunded orders can request refunds',
+          );
 
         const reservedItems = await tx.refundItem.findMany({
           where: {

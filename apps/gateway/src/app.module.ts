@@ -16,6 +16,9 @@ import { CoreProxyService } from './infrastructure/core-proxy.service.js';
 import { CommerceProxyController } from './demo/commerce-proxy.controller.js';
 import { CacheInvalidationController } from './pipeline/cache-invalidation.controller.js';
 import { MiniappAuthController } from './auth/miniapp-auth.controller.js';
+import { AdminAuthController } from './auth/admin-auth.controller.js';
+import { MerchantAuthController } from './auth/merchant-auth.controller.js';
+import { MediaProxyController } from './media/media-proxy.controller.js';
 
 @Module({
   controllers: [
@@ -24,6 +27,9 @@ import { MiniappAuthController } from './auth/miniapp-auth.controller.js';
     CacheInvalidationController,
     CommerceProxyController,
     MiniappAuthController,
+    AdminAuthController,
+    MerchantAuthController,
+    MediaProxyController,
   ],
   providers: [
     RedisService,

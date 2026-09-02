@@ -184,6 +184,7 @@ exports.Prisma.RefreshSessionScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   tokenHash: 'tokenHash',
+  actorType: 'actorType',
   expiresAt: 'expiresAt',
   revokedAt: 'revokedAt',
   createdAt: 'createdAt'
@@ -290,6 +291,49 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.DomainEventOutboxScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  aggregateType: 'aggregateType',
+  aggregateId: 'aggregateId',
+  eventType: 'eventType',
+  payload: 'payload',
+  occurredAt: 'occurredAt',
+  publishedAt: 'publishedAt'
+};
+
+exports.Prisma.MediaUploadSessionScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  actorId: 'actorId',
+  purpose: 'purpose',
+  objectKey: 'objectKey',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MediaAssetScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  uploadSessionId: 'uploadSessionId',
+  createdBy: 'createdBy',
+  purpose: 'purpose',
+  objectKey: 'objectKey',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  sha256: 'sha256',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  purgedAt: 'purgedAt'
+};
+
 exports.Prisma.TenantProbeScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -303,7 +347,11 @@ exports.Prisma.CategoryScalarFieldEnum = {
   parentId: 'parentId',
   name: 'name',
   sortOrder: 'sortOrder',
-  createdAt: 'createdAt'
+  status: 'status',
+  version: 'version',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.BrandScalarFieldEnum = {
@@ -311,7 +359,11 @@ exports.Prisma.BrandScalarFieldEnum = {
   tenantId: 'tenantId',
   name: 'name',
   logoUrl: 'logoUrl',
-  createdAt: 'createdAt'
+  status: 'status',
+  version: 'version',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ProductScalarFieldEnum = {
@@ -330,7 +382,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   updatedAt: 'updatedAt',
   createdBy: 'createdBy',
   updatedBy: 'updatedBy',
-  version: 'version'
+  version: 'version',
+  deletedAt: 'deletedAt'
 };
 
 exports.Prisma.ProductVariantScalarFieldEnum = {
@@ -342,6 +395,25 @@ exports.Prisma.ProductVariantScalarFieldEnum = {
   price: 'price',
   costPrice: 'costPrice',
   weightG: 'weightG',
+  version: 'version',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductImageScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  productId: 'productId',
+  mediaAssetId: 'mediaAssetId',
+  url: 'url',
+  altText: 'altText',
+  sortOrder: 'sortOrder',
+  isPrimary: 'isPrimary',
+  sizeBytes: 'sizeBytes',
+  mimeType: 'mimeType',
+  version: 'version',
+  deletedAt: 'deletedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -386,6 +458,34 @@ exports.Prisma.PaymentScalarFieldEnum = {
   createdBy: 'createdBy',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentReconciliationRunScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  channel: 'channel',
+  billDate: 'billDate',
+  status: 'status',
+  localCount: 'localCount',
+  providerCount: 'providerCount',
+  discrepancyCount: 'discrepancyCount',
+  errorMessage: 'errorMessage',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentReconciliationDiscrepancyScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  runId: 'runId',
+  paymentNo: 'paymentNo',
+  type: 'type',
+  localAmount: 'localAmount',
+  providerAmount: 'providerAmount',
+  providerTradeNo: 'providerTradeNo',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.OrderItemScalarFieldEnum = {
@@ -560,13 +660,19 @@ exports.Prisma.ModelName = {
   UsageMetric: 'UsageMetric',
   Invoice: 'Invoice',
   AuditLog: 'AuditLog',
+  DomainEventOutbox: 'DomainEventOutbox',
+  MediaUploadSession: 'MediaUploadSession',
+  MediaAsset: 'MediaAsset',
   TenantProbe: 'TenantProbe',
   Category: 'Category',
   Brand: 'Brand',
   Product: 'Product',
   ProductVariant: 'ProductVariant',
+  ProductImage: 'ProductImage',
   Order: 'Order',
   Payment: 'Payment',
+  PaymentReconciliationRun: 'PaymentReconciliationRun',
+  PaymentReconciliationDiscrepancy: 'PaymentReconciliationDiscrepancy',
   OrderItem: 'OrderItem',
   Shipment: 'Shipment',
   ShipmentItem: 'ShipmentItem',

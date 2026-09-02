@@ -1,12 +1,12 @@
 <!-- 首页双列商品卡：以图片、品类、品相和价格构成紧凑的编辑式陈列。 -->
 <script setup lang="ts">
-import type { ProductResponse } from '@saas/contracts';
+import type { PublicProductResponse } from '@saas/contracts';
 import { computed } from 'vue';
 
 import { formatCurrency, getLowestPrice, getPrimaryImage } from '../../utils/product-view';
 
 interface Props {
-  product: ProductResponse;
+  product: PublicProductResponse;
 }
 const props = defineProps<Props>();
 const primaryImage = computed(() => getPrimaryImage(props.product));
@@ -14,19 +14,17 @@ const lowestPrice = computed(() => getLowestPrice(props.product));
 const priceText = computed(() =>
   lowestPrice.value ? formatCurrency(lowestPrice.value) : '价格待询',
 );
-const categoryText = computed(() => getAttributeText('category') ?? '私人藏品');
-const conditionText = computed(() => getAttributeText('condition') ?? '已鉴定');
+const categoryText = computed(() => props.product.attributes.material ?? '私人藏品');
+const conditionText = computed(() => conditionLabel(props.product.attributes.conditionGrade));
+const starIcon = '/static/figma/home-light/star.svg';
 
 /** 进入藏品详情。 */
 function handleOpenDetail(): void {
   void uni.navigateTo({ url: `/pages/product/detail?id=${encodeURIComponent(props.product.id)}` });
 }
 
-function getAttributeText(key: string): string | null {
-  if (typeof props.product.attributes !== 'object' || props.product.attributes === null)
-    return null;
-  const value = (props.product.attributes as Record<string, unknown>)[key];
-  return typeof value === 'string' ? value : null;
+function conditionLabel(grade: PublicProductResponse['attributes']['conditionGrade']): string {
+  return { new: '全新', excellent: '近新', good: '品相良好', fair: '有使用痕迹' }[grade ?? 'good'];
 }
 </script>
 
@@ -44,16 +42,13 @@ function getAttributeText(key: string): string | null {
       <text>IMAGE PENDING</text>
     </view>
     <view class="product-content">
-      <view class="product-meta">
-        <text class="product-category">{{ categoryText }}</text>
-        <text class="product-code">{{ product.code }}</text>
-      </view>
+      <text class="product-category">{{ categoryText }}</text>
       <text class="product-name">{{ product.name }}</text>
-      <text class="product-condition">{{ conditionText }}</text>
-      <view class="product-footer">
-        <text class="product-price">{{ priceText }}</text>
-        <text class="product-arrow">→</text>
+      <view class="product-condition">
+        <image class="condition-star" :src="starIcon" mode="aspectFit" />
+        <text>{{ conditionText }}</text>
       </view>
+      <text class="product-price">{{ priceText }}</text>
     </view>
   </view>
 </template>
@@ -62,9 +57,9 @@ function getAttributeText(key: string): string | null {
 @use '../../styles/tokens.scss' as *;
 .product-card {
   overflow: hidden;
-  border-radius: 6rpx;
-  background: $bg-surface;
-  box-shadow: 0 10rpx 28rpx rgba(68, 54, 35, 0.08);
+  border: 1rpx solid var(--theme-border-soft);
+  border-radius: 24rpx;
+  background: var(--theme-surface);
 }
 .product-card--pressed {
   opacity: 0.82;
@@ -72,8 +67,8 @@ function getAttributeText(key: string): string | null {
 .product-image {
   display: block;
   width: 100%;
-  height: 400rpx;
-  background: #ddd6c9;
+  height: 320rpx;
+  background: var(--theme-border-soft);
 }
 .product-placeholder {
   display: flex;
@@ -92,59 +87,46 @@ function getAttributeText(key: string): string | null {
   font-size: 64rpx;
 }
 .product-content {
-  padding: 20rpx 18rpx 22rpx;
-}
-.product-meta,
-.product-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8rpx;
+  padding: 24rpx;
 }
 .product-category {
-  color: #9b642e;
-  font-size: 16rpx;
+  display: block;
+  color: var(--theme-accent);
+  font-family: $font-display;
+  font-size: 20rpx;
+  font-weight: 700;
   letter-spacing: 1rpx;
   white-space: nowrap;
 }
-.product-code {
-  color: $text-secondary;
-  font-family: $font-mono;
-  font-size: 14rpx;
-  white-space: nowrap;
-}
 .product-name {
-  display: -webkit-box;
-  min-height: 72rpx;
-  margin-top: 14rpx;
-  overflow: hidden;
-  color: #171b22;
-  font-family: $font-display;
-  font-size: 25rpx;
-  font-weight: 600;
-  line-height: 1.42;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-}
-.product-condition {
   display: block;
   margin-top: 8rpx;
-  color: #858078;
-  font-size: 17rpx;
+  overflow: hidden;
+  color: var(--theme-text);
+  font-size: 26rpx;
+  font-weight: 500;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.product-footer {
-  margin-top: 18rpx;
-  padding-top: 16rpx;
-  border-top: 1rpx solid #ece6dc;
+.product-condition {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-top: 8rpx;
+  color: var(--theme-text-secondary);
+  font-size: 20rpx;
+}
+.condition-star {
+  width: 20rpx;
+  height: 20rpx;
 }
 .product-price {
-  color: #7f4b20;
+  display: block;
+  margin-top: 8rpx;
+  color: var(--theme-text);
   font-family: $font-mono;
-  font-size: 21rpx;
-  font-weight: 600;
-}
-.product-arrow {
-  color: #8f765d;
-  font-size: 22rpx;
+  font-size: 28rpx;
+  font-weight: 700;
 }
 </style>

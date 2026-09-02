@@ -84,6 +84,7 @@ const permissions = [
   ['inventory.write', '管理库存流水'],
   ['payments.read', '查看支付单'],
   ['payments.write', '创建与确认支付'],
+  ['webhooks.replay', '查看并重放支付回调死信'],
 ] as const;
 
 async function main(): Promise<void> {

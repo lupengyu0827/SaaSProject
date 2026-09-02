@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common';
 import type {
   RegisterTenantRequest,
   RegisterTenantResponse,
@@ -14,9 +14,13 @@ import type { TenantDbContext } from '../domain/tenant-db-context.js';
 @Controller('platform/tenants')
 export class TenantController {
   constructor(
+    @Inject(RegisterTenantService)
     private readonly registerTenant: RegisterTenantService,
+    @Inject(TenantAccessService)
     private readonly access: TenantAccessService,
+    @Inject(TenantContextResolver)
     private readonly contextResolver: TenantContextResolver,
+    @Inject(UsageMeterService)
     private readonly usage: UsageMeterService,
   ) {}
 

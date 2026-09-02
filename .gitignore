@@ -12,3 +12,9 @@ coverage/
 .vscode/
 minio-data/
 postgres-data/
+storage/media/
+docs/
+plans/
+.workbuddy/
+
+*.md

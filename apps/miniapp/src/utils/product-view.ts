@@ -1,5 +1,7 @@
 /** 商品契约到视图文本的纯转换工具。 */
-import type { ProductResponse, ProductVariantResponse } from '@saas/contracts';
+import type { PublicProductResponse, PublicProductVariantResponse } from '@saas/contracts';
+
+import { getApiBaseUrl } from '../config/runtime';
 
 /** 格式化人民币金额，避免浮点数转换。 */
 export function formatCurrency(amount: string): string {
@@ -9,7 +11,7 @@ export function formatCurrency(amount: string): string {
 }
 
 /** 获取最低规格价格。 */
-export function getLowestPrice(product: ProductResponse): string | null {
+export function getLowestPrice(product: PublicProductResponse): string | null {
   return product.variants.reduce<string | null>((lowestPrice, variant) => {
     if (lowestPrice === null) return variant.price;
     return compareDecimal(variant.price, lowestPrice) < 0 ? variant.price : lowestPrice;
@@ -17,21 +19,19 @@ export function getLowestPrice(product: ProductResponse): string | null {
 }
 
 /** 从扩展属性安全读取主图。 */
-export function getPrimaryImage(product: ProductResponse): string | null {
-  if (!isRecord(product.attributes)) return null;
-  const directImage = product.attributes.primaryImage ?? product.attributes.imageUrl;
-  if (typeof directImage === 'string' && directImage.length > 0) return directImage;
-  const images = product.attributes.images;
-  return Array.isArray(images) && typeof images[0] === 'string' ? images[0] : null;
+export function getPrimaryImage(product: PublicProductResponse): string | null {
+  const url = product.primaryImage ?? product.images[0]?.url ?? null;
+  if (!url || url.startsWith('http') || url.startsWith('/static/')) return url;
+  return `${getApiBaseUrl()}${url.replace(/^\/api/, '')}`;
 }
 
 /** 将 SKU specs 转成短文本。 */
-export function getVariantSpecText(variant: ProductVariantResponse): string {
-  if (!isRecord(variant.specs)) return variant.sku;
+export function getVariantSpecText(variant: PublicProductVariantResponse): string {
+  if (!isRecord(variant.specs)) return '默认规格';
   const values = Object.values(variant.specs)
     .filter((value): value is string | number => ['string', 'number'].includes(typeof value))
     .slice(0, 3);
-  return values.length > 0 ? values.join(' · ') : variant.sku;
+  return values.length > 0 ? values.join(' · ') : '默认规格';
 }
 
 function compareDecimal(left: string, right: string): number {

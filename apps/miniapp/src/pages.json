@@ -34,6 +34,13 @@
       "style": {
         "navigationBarTitleText": "藏品档案"
       }
+    },
+    {
+      "path": "pages/search/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#FAF8F5"
+      }
     }
   ],
   "globalStyle": {

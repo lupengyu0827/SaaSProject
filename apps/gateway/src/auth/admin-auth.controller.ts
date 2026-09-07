@@ -8,23 +8,18 @@ import {
   Req,
   UnauthorizedException,
 } from '@nestjs/common';
-import type {
-  AdminSessionResponse,
-  AuthTokensResponse,
-  LoginRequest,
-  LogoutResponse,
-  RefreshSessionRequest,
-} from '@saas/contracts';
+import type { AdminSessionResponse, AuthTokensResponse, LogoutResponse } from '@saas/contracts';
 
 import { Public } from '../pipeline/pipeline.metadata.js';
 import type { SaasRequest } from '../pipeline/request-context.js';
+import { AdminLoginDto, RefreshSessionDto } from '../http/dto/auth.dto.js';
 
 @Controller('admin/auth')
 export class AdminAuthController {
   /** 管理员登录；租户由子域字段解析，不能由请求 Header 冒充。 */
   @Public()
   @Post('login')
-  login(@Req() request: SaasRequest, @Body() input: LoginRequest): Promise<AuthTokensResponse> {
+  login(@Req() request: SaasRequest, @Body() input: AdminLoginDto): Promise<AuthTokensResponse> {
     return this.forward('/login', request, input);
   }
 
@@ -33,7 +28,7 @@ export class AdminAuthController {
   @Post('refresh')
   refresh(
     @Req() request: SaasRequest,
-    @Body() input: RefreshSessionRequest,
+    @Body() input: RefreshSessionDto,
   ): Promise<AuthTokensResponse> {
     return this.forward('/refresh', request, input);
   }
@@ -41,10 +36,7 @@ export class AdminAuthController {
   /** 撤销当前 Refresh Token。 */
   @Public()
   @Post('logout')
-  logout(
-    @Req() request: SaasRequest,
-    @Body() input: RefreshSessionRequest,
-  ): Promise<LogoutResponse> {
+  logout(@Req() request: SaasRequest, @Body() input: RefreshSessionDto): Promise<LogoutResponse> {
     return this.forward('/logout', request, input);
   }
 
@@ -66,7 +58,7 @@ export class AdminAuthController {
     extraHeaders: Record<string, string> = {},
   ): Promise<T> {
     const response = await fetch(
-      `${process.env.CORE_BASE_URL ?? 'http://localhost:3001'}/api/auth${path}`,
+      `${process.env.CORE_BASE_URL ?? 'http://localhost:3101'}/api/auth${path}`,
       {
         method: body === undefined ? 'GET' : 'POST',
         headers: {

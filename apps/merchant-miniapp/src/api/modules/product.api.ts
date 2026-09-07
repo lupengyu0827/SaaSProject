@@ -4,6 +4,8 @@ import type {
   CatalogListQuery,
   CategoryResponse,
   CreateProductDraftRequest,
+  ProductLifecycleCommandRequest,
+  ProductLifecycleEventResponse,
   ProductListQuery,
   ProductPageResponse,
   ProductPublishValidationResponse,
@@ -18,6 +20,7 @@ import {
   getMerchantApiBaseUrl,
   getMerchantTenantId,
 } from '../../config/runtime';
+import { unwrapApiData } from '../envelope';
 import { MerchantApiError } from '../errors';
 
 type QueryValue = string | number | boolean | undefined;
@@ -72,6 +75,37 @@ export function publishProductDraft(
   );
 }
 
+/** 下架在售商品；原因写入审计。 */
+export function unlistProduct(
+  id: string,
+  input: ProductLifecycleCommandRequest,
+): Promise<ProductResponse> {
+  return request<ProductResponse>(
+    `/commerce/products/${encodeURIComponent(id)}/unlist`,
+    'POST',
+    input,
+  );
+}
+
+/** 查询商品生命周期只读事件，用于经营追溯。 */
+export function listProductLifecycleEvents(id: string): Promise<ProductLifecycleEventResponse[]> {
+  return request<ProductLifecycleEventResponse[]>(
+    `/commerce/products/${encodeURIComponent(id)}/lifecycle-events`,
+  );
+}
+
+/** 重新上架商品。 */
+export function relistProduct(
+  id: string,
+  input: ProductLifecycleCommandRequest,
+): Promise<ProductResponse> {
+  return request<ProductResponse>(
+    `/commerce/products/${encodeURIComponent(id)}/relist`,
+    'POST',
+    input,
+  );
+}
+
 function request<T>(
   path: string,
   method: 'GET' | 'POST' | 'PATCH' = 'GET',
@@ -101,8 +135,9 @@ function request<T>(
       },
       timeout: 15_000,
       success: (response) => {
-        if (response.statusCode >= 200 && response.statusCode < 300) resolve(response.data as T);
-        else reject(new MerchantApiError(errorMessage(response.data), response.statusCode));
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          resolve(unwrapApiData(response.data) as T);
+        } else reject(new MerchantApiError(errorMessage(response.data), response.statusCode));
       },
       fail: (failure) => reject(new MerchantApiError(failure.errMsg || '网络连接失败')),
     });

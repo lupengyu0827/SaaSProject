@@ -66,11 +66,17 @@ const statusOptions: Array<{ label: string; value?: ProductStatus }> = [
   { label: '全部' },
   { label: '草稿', value: 'draft' },
   { label: '在售', value: 'active' },
+  { label: '已售', value: 'sold' },
   { label: '已归档', value: 'archived' },
 ];
+/** 编辑抽屉允许手工设置的状态；已售由成交确认流程原子置为，禁止手动下发。 */
+const editableStatusOptions = statusOptions.filter(
+  (option) => option.value !== undefined && option.value !== 'sold',
+);
 const statusLabels: Record<ProductStatus, string> = {
   draft: '草稿',
   active: '在售',
+  sold: '已售',
   archived: '已归档',
 };
 
@@ -433,7 +439,7 @@ onMounted(() => void handleLoad());
           <el-form-item label="商品名称"><el-input v-model="editDraft.name" :disabled="!canWrite" /></el-form-item>
           <el-form-item label="分类"><div class="flex w-full gap-2"><el-select v-model="editDraft.categoryId" clearable filterable class="flex-1" :disabled="!canWrite" empty-text="暂无分类，请先新增"><el-option v-for="item in categories" :key="item.id" :label="item.name" :value="item.id" /></el-select><el-button v-if="canWrite" class="whitespace-nowrap" @click="handleCreateCategory('edit')">新增分类</el-button></div></el-form-item>
           <el-form-item label="品牌"><div class="flex w-full gap-2"><el-select v-model="editDraft.brandId" clearable filterable class="flex-1" :disabled="!canWrite" empty-text="暂无品牌，请先新增"><el-option v-for="item in brands" :key="item.id" :label="item.name" :value="item.id" /></el-select><el-button v-if="canWrite" class="whitespace-nowrap" @click="handleCreateBrand('edit')">新增品牌</el-button></div></el-form-item>
-          <el-form-item label="状态"><el-select v-model="editDraft.status" class="w-full" :disabled="!canWrite"><el-option v-for="option in statusOptions.slice(1)" :key="option.label" :label="option.label" :value="option.value" /></el-select></el-form-item>
+          <el-form-item label="状态"><el-select v-model="editDraft.status" class="w-full" :disabled="!canWrite"><el-option v-for="option in editableStatusOptions" :key="option.label" :label="option.label" :value="option.value" /></el-select></el-form-item>
           <el-form-item label="描述"><el-input v-model="editDraft.description" type="textarea" :rows="3" :disabled="!canWrite" /></el-form-item>
         </el-form>
         <div v-if="canWrite" class="mb-6 text-right"><el-button type="primary" :loading="submitting" @click="handleSave">保存商品</el-button></div>

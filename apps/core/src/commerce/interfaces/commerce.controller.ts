@@ -24,6 +24,8 @@ import type {
   ProductListQuery,
   ProductPageResponse,
   ProductResponse,
+  ProductLifecycleCommandRequest,
+  ProductLifecycleEventResponse,
   UpdateProductRequest,
   CreateProductVariantRequest,
   UpdateProductVariantRequest,
@@ -63,10 +65,27 @@ import type {
   PublicProductResponse,
   BindProductDraftMediaRequest,
   CreateProductDraftRequest,
+  DeleteProductDraftRequest,
+  DeleteProductDraftResponse,
+  DuplicateProductDraftRequest,
+  ProductDraftListQuery,
   ProductPublishValidationResponse,
   PublishProductDraftRequest,
   PublishProductDraftResponse,
   SaveProductDraftRequest,
+  BrandModelResponse,
+  BrandDirectoryGroupResponse,
+  BrandSeriesResponse,
+  CreateBrandModelRequest,
+  CreateBrandSeriesRequest,
+  CreateProductIntakeRequest,
+  IntakeBrandResponse,
+  IntakeCategoryResponse,
+  IntakeEmployeeResponse,
+  ProductIntakeResponse,
+  RecyclingTypeResponse,
+  UpdateBrandModelRequest,
+  UpdateBrandSeriesRequest,
 } from '@saas/contracts';
 
 import { CatalogService } from '../application/catalog.service.js';
@@ -77,6 +96,7 @@ import { PaymentService } from '../application/payment.service.js';
 import { ShipmentService } from '../application/shipment.service.js';
 import { RefundService } from '../application/refund.service.js';
 import { WebhookOperationsService } from '../application/webhook-operations.service.js';
+import { ProductIntakeService } from '../application/product-intake.service.js';
 
 @Controller('internal/commerce')
 export class CommerceController {
@@ -97,7 +117,115 @@ export class CommerceController {
     private readonly refunds: RefundService,
     @Inject(WebhookOperationsService)
     private readonly webhookOperations: WebhookOperationsService,
+    @Inject(ProductIntakeService)
+    private readonly productIntakes: ProductIntakeService,
   ) {}
+
+  @Get('intake-options/categories')
+  intakeCategories(@Headers('x-tenant-id') tenantId: string): Promise<IntakeCategoryResponse[]> {
+    return this.productIntakes.categories(tenantId);
+  }
+
+  @Get('intake-options/brands')
+  intakeBrands(
+    @Headers('x-tenant-id') tenantId: string,
+    @Query('categoryId') categoryId?: string,
+    @Query('keyword') keyword?: string,
+  ): Promise<IntakeBrandResponse[]> {
+    return this.productIntakes.brands(tenantId, categoryId, keyword);
+  }
+
+  @Get('intake-options/brand-directory')
+  intakeBrandDirectory(
+    @Headers('x-tenant-id') tenantId: string,
+    @Query('categoryId') categoryId?: string,
+    @Query('keyword') keyword?: string,
+  ): Promise<BrandDirectoryGroupResponse[]> {
+    return this.productIntakes.brandDirectory(tenantId, categoryId, keyword);
+  }
+
+  @Get('intake-options/employees')
+  intakeEmployees(@Headers('x-tenant-id') tenantId: string): Promise<IntakeEmployeeResponse[]> {
+    return this.productIntakes.employees(tenantId);
+  }
+
+  @Get('intake-options/recycling-types')
+  intakeRecyclingTypes(@Headers('x-tenant-id') tenantId: string): Promise<RecyclingTypeResponse[]> {
+    return this.productIntakes.recyclingTypes(tenantId);
+  }
+
+  @Get('intake-options/brands/:brandId/series')
+  listBrandSeries(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('brandId') brandId: string,
+  ): Promise<BrandSeriesResponse[]> {
+    return this.productIntakes.listSeries(tenantId, brandId);
+  }
+
+  @Post('intake-options/brands/:brandId/series')
+  createBrandSeries(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('brandId') brandId: string,
+    @Body() input: CreateBrandSeriesRequest,
+  ): Promise<BrandSeriesResponse> {
+    return this.productIntakes.createSeries(tenantId, brandId, input);
+  }
+
+  @Patch('intake-options/brands/:brandId/series/:id')
+  updateBrandSeries(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('brandId') brandId: string,
+    @Param('id') id: string,
+    @Body() input: UpdateBrandSeriesRequest,
+  ): Promise<BrandSeriesResponse> {
+    return this.productIntakes.updateSeries(tenantId, brandId, id, input);
+  }
+
+  @Get('intake-options/brands/:brandId/models')
+  listBrandModels(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('brandId') brandId: string,
+    @Query('seriesId') seriesId?: string,
+  ): Promise<BrandModelResponse[]> {
+    return this.productIntakes.listModels(tenantId, brandId, seriesId);
+  }
+
+  @Get('intake-options/brands/:brandId/series/:seriesId/models')
+  listSeriesModels(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('brandId') brandId: string,
+    @Param('seriesId') seriesId: string,
+  ): Promise<BrandModelResponse[]> {
+    return this.productIntakes.listModels(tenantId, brandId, seriesId);
+  }
+
+  @Post('intake-options/brands/:brandId/models')
+  createBrandModel(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('brandId') brandId: string,
+    @Body() input: CreateBrandModelRequest,
+  ): Promise<BrandModelResponse> {
+    return this.productIntakes.createModel(tenantId, brandId, input);
+  }
+
+  @Patch('intake-options/brands/:brandId/models/:id')
+  updateBrandModel(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('brandId') brandId: string,
+    @Param('id') id: string,
+    @Body() input: UpdateBrandModelRequest,
+  ): Promise<BrandModelResponse> {
+    return this.productIntakes.updateModel(tenantId, brandId, id, input);
+  }
+
+  @Post('product-intakes')
+  createProductIntake(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Body() input: CreateProductIntakeRequest,
+  ): Promise<ProductIntakeResponse> {
+    return this.productIntakes.create(tenantId, actorId, input);
+  }
 
   /** 查询支付与退款回调死信。 */
   @Get('webhook-dead-letters')
@@ -222,6 +350,47 @@ export class CommerceController {
     return this.products.createDraft(tenantId, actorId, input);
   }
 
+  @Get('product-drafts')
+  listProductDrafts(
+    @Headers('x-tenant-id') tenantId: string,
+    @Query() query: ProductDraftListQuery,
+  ): Promise<ProductPageResponse> {
+    return this.products.listDrafts(tenantId, {
+      ...query,
+      page: query.page ? Number(query.page) : undefined,
+      pageSize: query.pageSize ? Number(query.pageSize) : undefined,
+    });
+  }
+
+  @Get('product-drafts/:id')
+  getProductDraft(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<ProductResponse> {
+    return this.products.getDraft(tenantId, id);
+  }
+
+  @Delete('product-drafts/:id')
+  async deleteProductDraft(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('id') id: string,
+    @Body() input: DeleteProductDraftRequest,
+  ): Promise<DeleteProductDraftResponse> {
+    await this.products.deleteDraft(tenantId, actorId, id, input.version);
+    return { deleted: true };
+  }
+
+  @Post('product-drafts/:id/duplicate')
+  duplicateProductDraft(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('id') id: string,
+    @Body() input: DuplicateProductDraftRequest,
+  ): Promise<ProductResponse> {
+    return this.products.duplicateDraft(tenantId, actorId, id, input.version);
+  }
+
   @Patch('product-drafts/:id')
   saveProductDraft(
     @Headers('x-tenant-id') tenantId: string,
@@ -279,6 +448,34 @@ export class CommerceController {
     @Param('id') id: string,
   ): Promise<ProductResponse> {
     return this.products.get(tenantId, id);
+  }
+
+  @Post('products/:id/unlist')
+  unlistProduct(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('id') id: string,
+    @Body() input: ProductLifecycleCommandRequest,
+  ): Promise<ProductResponse> {
+    return this.products.unlist(tenantId, actorId, id, input);
+  }
+
+  @Post('products/:id/relist')
+  relistProduct(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+    @Param('id') id: string,
+    @Body() input: ProductLifecycleCommandRequest,
+  ): Promise<ProductResponse> {
+    return this.products.relist(tenantId, actorId, id, input);
+  }
+
+  @Get('products/:id/lifecycle-events')
+  listProductLifecycleEvents(
+    @Headers('x-tenant-id') tenantId: string,
+    @Param('id') id: string,
+  ): Promise<ProductLifecycleEventResponse[]> {
+    return this.products.listLifecycleEvents(tenantId, id);
   }
 
   @Get('public/products')

@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import { AdminAuthController } from '../src/auth/admin-auth.controller.js';
 import { MerchantAuthController } from '../src/auth/merchant-auth.controller.js';
+import { MiniappAuthController } from '../src/auth/miniapp-auth.controller.js';
 import type { SaasRequest } from '../src/pipeline/request-context.js';
 
 function createRequest(actorType: NonNullable<SaasRequest['actor']>['type']): SaasRequest {
@@ -22,6 +23,12 @@ describe('authentication role boundaries', () => {
 
   it('rejects a merchant token from the legacy admin session endpoint', () => {
     expect(() => new AdminAuthController().session(createRequest('merchant_owner'))).toThrow(
+      UnauthorizedException,
+    );
+  });
+
+  it('rejects a merchant token from the customer session endpoint', () => {
+    expect(() => new MiniappAuthController().session(createRequest('merchant_owner'))).toThrow(
       UnauthorizedException,
     );
   });

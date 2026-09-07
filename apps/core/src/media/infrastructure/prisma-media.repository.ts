@@ -1,5 +1,5 @@
 /** Prisma 媒体仓储：实现租户过滤、事务、审计、事件和存储用量落库。 */
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import type {
   MediaAdminListQuery,
   MediaAdminListResponse,
@@ -18,7 +18,7 @@ import type {
 
 @Injectable()
 export class PrismaMediaRepository implements MediaRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(@Inject(PrismaService) private readonly prisma: PrismaService) {}
 
   async createSession(session: MediaUploadSessionRecord): Promise<void> {
     await this.prisma.$transaction(async (tx) => {
@@ -114,7 +114,21 @@ export class PrismaMediaRepository implements MediaRepository {
         tenantId,
         status: 'attached',
         deletedAt: null,
-        productImage: { is: { deletedAt: null, product: { status: 'active', deletedAt: null } } },
+        OR: [
+          {
+            productImage: {
+              is: { deletedAt: null, product: { status: 'active', deletedAt: null } },
+            },
+          },
+          {
+            productIntakeMedia: {
+              is: {
+                visibility: 'public',
+                intake: { product: { status: 'active', deletedAt: null } },
+              },
+            },
+          },
+        ],
       },
       select: { objectKey: true, mimeType: true },
     });

@@ -1,4 +1,4 @@
-<!-- 商家商品草稿编辑器：自动保存、媒体绑定、预览和原子发布。 -->
+<!-- 商家商品草稿编辑器：自动保存、媒体绑定、预览和原子发布，视觉与消费者端对齐。 -->
 <script setup lang="ts">
 import { onHide, onLoad, onShow, onUnload } from '@dcloudio/uni-app';
 import type { CategoryResponse, ProductResponse, ProductPublishIssue } from '@saas/contracts';
@@ -13,8 +13,10 @@ import {
   validateProductDraft,
 } from '../../api/modules/product.api';
 import type { UploadQueueItem } from '../../composables/media-upload-queue';
+import { useAppTheme } from '../../composables/use-app-theme';
 import { productDraftFingerprint } from '../../composables/product-draft-autosave';
 
+const { themeClass } = useAppTheme();
 const MEDIA_QUEUE_KEY = 'saas.merchant.mediaUploadQueue';
 const productId = ref('');
 const product = shallowRef<ProductResponse | null>(null);
@@ -46,7 +48,7 @@ const selectedCategoryIndex = computed(() =>
 const localImages = computed(() =>
   uploadedItems.value.filter(({ status, assetId }) => status === 'uploaded' && Boolean(assetId)),
 );
-const previewPrice = computed(() => (form.price.trim() ? `¥ ${form.price.trim()}` : '价格待填写'));
+const previewPrice = computed(() => (form.price.trim() ? `\u00a5 ${form.price.trim()}` : '价格待填写'));
 
 async function loadDraft(): Promise<void> {
   if (!productId.value) return;
@@ -97,7 +99,7 @@ async function saveNow(): Promise<ProductResponse | null> {
     });
     savedFingerprint = pendingFingerprint;
     saveSucceeded = true;
-    saveMessage.value = `已自动保存 · v${product.value.version}`;
+    saveMessage.value = `已自动保存 \u00b7 v${product.value.version}`;
     return product.value;
   } catch (error: unknown) {
     saveMessage.value = error instanceof Error ? error.message : '自动保存失败';
@@ -184,7 +186,7 @@ function showPublishIssues(issues: ProductPublishIssue[]): Promise<void> {
   return new Promise((resolve) => {
     uni.showModal({
       title: '还不能发布',
-      content: issues.map(({ message }) => `• ${message}`).join('\n'),
+      content: issues.map(({ message }) => `\u2022 ${message}`).join('\n'),
       showCancel: false,
       success: () => resolve(),
     });
@@ -222,183 +224,248 @@ onUnload(() => {
 </script>
 
 <template>
-  <view class="page-shell">
-    <view v-if="loading" class="state">正在打开商品草稿…</view>
+  <view class="page" :class="themeClass">
+    <view v-if="loading" class="loading-state">正在打开商品草稿…</view>
     <template v-else-if="product">
-      <view class="draft-heading"
-        ><text class="eyebrow">ONE OF ONE OBJECT</text
-        ><text class="title">{{ form.name || '未命名草稿' }}</text
-        ><text class="save-state">{{ saveMessage }}</text></view
-      >
-      <view class="section"
-        ><text class="section-title">1. 商品图片</text
-        ><scroll-view v-if="localImages.length" class="image-scroll" scroll-x
-          ><view class="image-list"
-            ><image
+      <view class="draft-heading">
+        <text class="eyebrow">ONE OF ONE OBJECT</text>
+        <text class="title">{{ form.name || '未命名草稿' }}</text>
+        <view class="save-state">{{ saveMessage }}</view>
+      </view>
+
+      <view class="section">
+        <view class="section-head">
+          <image class="section-icon" src="/static/merchant/image.svg" mode="aspectFit" />
+          <text class="section-title">1. 商品图片</text>
+        </view>
+        <scroll-view v-if="localImages.length" class="image-scroll" scroll-x>
+          <view class="image-list">
+            <image
               v-for="item in localImages"
               :key="item.id"
               class="image"
               :src="item.filePath"
-              mode="aspectFill" /></view></scroll-view
-        ><text v-else class="hint">尚未从手机上传商品图片</text
-        ><view class="button-row"
-          ><button class="secondary" @click="handleOpenUpload">拍照或选择</button
-          ><button class="secondary" @click="handleBindImages">绑定到草稿</button></view
-        ></view
-      >
-      <view class="section"
-        ><text class="section-title">2. 基本资料</text><text class="label">商品名称</text
-        ><input
-          v-model="form.name"
-          class="input"
-          maxlength="200"
-          placeholder="例如：黑色粒面皮革手提包"
-        /><text class="label">商品分类</text
-        ><picker
-          :range="categories"
-          range-key="name"
-          :value="selectedCategoryIndex"
-          @change="handleCategoryChange"
-          ><view class="input">{{
-            categories[selectedCategoryIndex]?.name ?? '请选择分类'
-          }}</view></picker
-        ><text class="label">销售价格</text
-        ><input v-model="form.price" class="input" type="digit" placeholder="0.00" /><text
-          class="label"
-          >商品说明</text
-        ><textarea
-          v-model="form.description"
-          class="textarea"
-          maxlength="2000"
-          placeholder="描述品相、附件和值得关注的细节"
-        />
+              mode="aspectFill"
+            />
+          </view>
+        </scroll-view>
+        <text v-else class="hint">尚未从手机上传商品图片</text>
+        <view class="button-row">
+          <view class="btn-secondary" @click="handleOpenUpload">拍照或选择</view>
+          <view class="btn-secondary" @click="handleBindImages">绑定到草稿</view>
+        </view>
       </view>
-      <view class="section"
-        ><text class="section-title">3. 成色与属性</text><text class="label">成色</text
-        ><picker
-          :range="['全新', '近新', '良好', '有使用痕迹']"
-          :value="['new', 'excellent', 'good', 'fair'].indexOf(form.conditionGrade)"
-          @change="
-            form.conditionGrade =
-              ['new', 'excellent', 'good', 'fair'][Number($event.detail.value)] ?? 'excellent'
-          "
-          ><view class="input">{{
-            { new: '全新', excellent: '近新', good: '良好', fair: '有使用痕迹' }[
-              form.conditionGrade
-            ]
-          }}</view></picker
-        ><text class="label">材质</text
-        ><input v-model="form.material" class="input" placeholder="例如：粒面皮革、18K 金" /><text
-          class="label"
-          >颜色</text
-        ><input v-model="form.color" class="input" placeholder="例如：黑色"
-      /></view>
-      <view v-if="previewing" class="preview"
-        ><text class="preview-kicker">CONSUMER PREVIEW</text
-        ><image
+
+      <view class="section">
+        <view class="section-head">
+          <image class="section-icon" src="/static/merchant/file-text.svg" mode="aspectFit" />
+          <text class="section-title">2. 基本资料</text>
+        </view>
+        <view class="field">
+          <text class="label">商品名称</text>
+          <view class="input-shell">
+            <input v-model="form.name" class="input" maxlength="200" placeholder="例如：黑色粒面皮革手提包" />
+          </view>
+        </view>
+        <view class="field">
+          <text class="label">商品分类</text>
+          <picker
+            :range="categories"
+            range-key="name"
+            :value="selectedCategoryIndex"
+            @change="handleCategoryChange"
+          >
+            <view class="input-shell picker-display">{{ categories[selectedCategoryIndex]?.name ?? '请选择分类' }}</view>
+          </picker>
+        </view>
+        <view class="field">
+          <text class="label">销售价格</text>
+          <view class="input-shell">
+            <input v-model="form.price" class="input" type="digit" placeholder="0.00" />
+          </view>
+        </view>
+        <view class="field">
+          <text class="label">商品说明</text>
+          <view class="input-shell textarea-shell">
+            <textarea v-model="form.description" class="textarea" maxlength="2000" placeholder="描述品相、附件和值得关注的细节" />
+          </view>
+        </view>
+      </view>
+
+      <view class="section">
+        <view class="section-head">
+          <image class="section-icon" src="/static/merchant/sparkles.svg" mode="aspectFit" />
+          <text class="section-title">3. 成色与属性</text>
+        </view>
+        <view class="field">
+          <text class="label">成色</text>
+          <picker
+            :range="['全新', '近新', '良好', '有使用痕迹']"
+            :value="['new', 'excellent', 'good', 'fair'].indexOf(form.conditionGrade)"
+            @change="
+              form.conditionGrade =
+                ['new', 'excellent', 'good', 'fair'][Number($event.detail.value)] ?? 'excellent'
+            "
+          >
+            <view class="input-shell picker-display">{{
+              { new: '全新', excellent: '近新', good: '良好', fair: '有使用痕迹' }[
+                form.conditionGrade
+              ]
+            }}</view>
+          </picker>
+        </view>
+        <view class="field">
+          <text class="label">材质</text>
+          <view class="input-shell">
+            <input v-model="form.material" class="input" placeholder="例如：粒面皮革、18K 金" />
+          </view>
+        </view>
+        <view class="field">
+          <text class="label">颜色</text>
+          <view class="input-shell">
+            <input v-model="form.color" class="input" placeholder="例如：黑色" />
+          </view>
+        </view>
+      </view>
+
+      <view v-if="previewing" class="preview">
+        <view class="preview-head">
+          <image class="preview-icon" src="/static/merchant/eye.svg" mode="aspectFit" />
+          <text class="preview-kicker">CONSUMER PREVIEW</text>
+        </view>
+        <image
           v-if="localImages[0]"
           class="preview-image"
           :src="localImages[0].filePath"
           mode="aspectFill"
-        /><text class="preview-name">{{ form.name || '商品名称待填写' }}</text
-        ><text class="preview-price">{{ previewPrice }}</text
-        ><text class="preview-copy">{{ form.description || '商品说明待填写' }}</text></view
-      >
-      <view class="footer-actions"
-        ><button class="secondary" @click="previewing = !previewing">
-          {{ previewing ? '关闭预览' : '消费者预览' }}</button
-        ><button class="primary" :loading="publishing" @click="handlePublish">
+        />
+        <text class="preview-name">{{ form.name || '商品名称待填写' }}</text>
+        <text class="preview-price">{{ previewPrice }}</text>
+        <text class="preview-copy">{{ form.description || '商品说明待填写' }}</text>
+      </view>
+
+      <view class="footer-actions">
+        <view class="btn-secondary" @click="previewing = !previewing">
+          {{ previewing ? '关闭预览' : '消费者预览' }}
+        </view>
+        <button class="btn-primary" :loading="publishing" @click="handlePublish">
           检查并发布
-        </button></view
-      >
+        </button>
+      </view>
     </template>
   </view>
 </template>
 
 <style scoped lang="scss">
-@use '../../styles/tokens.scss' as *;
-.page-shell {
+@import '../../styles/tokens.scss';
+.page {
   min-height: 100vh;
   box-sizing: border-box;
-  padding: 40rpx 32rpx 240rpx;
-  background: $bg-base;
+  padding: 24rpx 32rpx 240rpx;
+  color: var(--theme-text);
+  background: var(--theme-bg);
 }
-.state {
+.loading-state {
   padding: 80rpx 24rpx;
-  color: $text-secondary;
+  color: var(--theme-text-secondary);
   text-align: center;
-}
-.draft-heading,
-.section {
-  display: flex;
-  flex-direction: column;
+  font-size: 26rpx;
 }
 .draft-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
   padding: 8rpx 0 32rpx;
-  border-bottom: 2rpx solid $border-subtle;
+  border-bottom: 1rpx solid var(--theme-border-soft);
 }
-.eyebrow,
-.preview-kicker {
-  color: $accent-gold;
+.eyebrow {
+  color: var(--theme-accent);
+  font-family: $font-mono;
   font-size: 18rpx;
   letter-spacing: 3rpx;
 }
 .title {
-  margin-top: 12rpx;
-  color: $text-primary;
+  color: var(--theme-text);
+  font-family: $font-display;
   font-size: 40rpx;
-  font-weight: 600;
-}
-.save-state,
-.hint {
-  margin-top: 12rpx;
-  color: $text-secondary;
-  font-size: 22rpx;
+  font-weight: 700;
 }
 .save-state {
   align-self: flex-start;
-  padding: 8rpx 16rpx;
+  padding: 8rpx 20rpx;
   border-radius: 999rpx;
-  background: $accent-champagne;
-  color: $accent-gold;
+  background: var(--theme-accent-soft);
+  color: var(--theme-accent);
+  font-size: 22rpx;
   white-space: nowrap;
 }
 .section {
-  gap: 16rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
   margin-top: 24rpx;
   padding: 32rpx 28rpx;
-  border-radius: 16rpx;
-  background: $bg-surface;
-  box-shadow: 0 12rpx 32rpx -8rpx rgba(15, 23, 42, 0.06);
+  border-radius: $radius-card;
+  background: var(--theme-surface);
+  box-shadow: $shadow-luxury;
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.section-icon {
+  width: 32rpx;
+  height: 32rpx;
 }
 .section-title {
-  color: $text-primary;
+  color: var(--theme-text);
   font-size: 30rpx;
   font-weight: 600;
 }
-.label {
-  margin-top: 8rpx;
-  color: $text-secondary;
-  font-size: 23rpx;
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
 }
-.input,
-.textarea {
-  box-sizing: border-box;
-  width: 100%;
-  border: 2rpx solid $border-subtle;
-  border-radius: 12rpx;
-  color: $text-primary;
-  background: $bg-base;
+.label {
+  color: var(--theme-text-secondary);
+  font-size: 24rpx;
+}
+.input-shell {
+  border: 1rpx solid var(--theme-border);
+  border-radius: $radius-control;
+  background: var(--theme-bg);
+}
+.picker-display {
+  height: 88rpx;
+  padding: 0 24rpx;
+  color: var(--theme-text);
   font-size: 26rpx;
+  line-height: 88rpx;
 }
 .input {
   height: 88rpx;
   padding: 0 24rpx;
   line-height: 88rpx;
+  color: var(--theme-text);
+  font-size: 26rpx;
+}
+.textarea-shell {
+  padding: 4rpx;
 }
 .textarea {
+  box-sizing: border-box;
+  width: 100%;
   height: 180rpx;
   padding: 20rpx 24rpx;
+  color: var(--theme-text);
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+.hint {
+  color: var(--theme-text-muted);
+  font-size: 24rpx;
   line-height: 1.6;
 }
 .image-scroll {
@@ -413,66 +480,73 @@ onUnload(() => {
   width: 180rpx;
   height: 180rpx;
   flex: 0 0 auto;
-  border-radius: 12rpx;
+  border-radius: $radius-control;
 }
-.button-row,
-.footer-actions {
+.button-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16rpx;
 }
-.primary,
-.secondary {
-  border-radius: 14rpx;
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 0;
+  border: 1rpx solid var(--theme-border);
+  border-radius: $radius-control;
+  background: var(--theme-surface);
+  color: var(--theme-text);
   font-size: 26rpx;
   white-space: nowrap;
 }
-.primary {
-  background: $accent-gold;
-  color: $bg-surface;
-}
-.secondary {
-  border: 2rpx solid $border-subtle;
-  background: $bg-surface;
-  color: $text-primary;
-}
-.primary::after,
-.secondary::after {
-  border: 0;
-}
 .preview {
-  margin-top: 32rpx;
+  margin-top: 24rpx;
   padding: 28rpx;
-  border: 2rpx solid $border-subtle;
-  border-radius: 20rpx;
-  background: #111622;
+  border-radius: $radius-card;
+  background: #0f172a;
+}
+.preview-head {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.preview-icon {
+  width: 28rpx;
+  height: 28rpx;
+}
+.preview-kicker {
+  color: #f59e0b;
+  font-family: $font-mono;
+  font-size: 18rpx;
+  letter-spacing: 3rpx;
 }
 .preview-image {
   display: block;
   width: 100%;
   height: 600rpx;
   margin-top: 20rpx;
-  border-radius: 12rpx;
-}
-.preview-name,
-.preview-price,
-.preview-copy {
-  display: block;
-  margin-top: 16rpx;
+  border-radius: $radius-control;
 }
 .preview-name {
+  display: block;
+  margin-top: 16rpx;
   color: #f8fafc;
   font-size: 36rpx;
   font-weight: 600;
 }
 .preview-price {
+  display: block;
+  margin-top: 12rpx;
   color: #f59e0b;
-  font-family: monospace;
+  font-family: $font-mono;
   font-size: 32rpx;
+  font-weight: 700;
 }
 .preview-copy {
+  display: block;
+  margin-top: 16rpx;
   color: #94a3b8;
-  font-size: 25rpx;
+  font-size: 24rpx;
   line-height: 1.7;
 }
 .footer-actions {
@@ -480,9 +554,23 @@ onUnload(() => {
   right: 0;
   bottom: 0;
   left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
   padding: 24rpx 32rpx calc(24rpx + env(safe-area-inset-bottom));
-  border-top: 2rpx solid $border-subtle;
-  background: $bg-surface;
+  border-top: 1rpx solid var(--theme-border-soft);
+  background: var(--theme-surface);
   box-shadow: 0 -12rpx 32rpx rgba(15, 23, 42, 0.06);
+}
+.btn-primary {
+  border-radius: 999rpx;
+  background: var(--theme-accent);
+  color: #ffffff;
+  font-size: 26rpx;
+  font-weight: 600;
+  line-height: 80rpx;
+}
+.btn-primary::after {
+  border: 0;
 }
 </style>

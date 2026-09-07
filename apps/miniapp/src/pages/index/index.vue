@@ -7,10 +7,12 @@ import { computed, ref, shallowRef } from 'vue';
 import { listActiveProducts } from '../../api/modules/product.api';
 import HomeProductCard from '../../components/product/HomeProductCard.vue';
 import { useAppTheme } from '../../composables/use-app-theme';
+import { useSafeArea } from '../../composables/use-safe-area';
 import { formatCurrency, getLowestPrice, getPrimaryImage } from '../../utils/product-view';
 
 const PAGE_SIZE = 10;
 const { themeClass } = useAppTheme();
+const { statusBarHeight } = useSafeArea();
 const products = shallowRef<PublicProductResponse[]>([]);
 const isLoading = ref(false);
 const errorMessage = ref<string | null>(null);
@@ -31,10 +33,7 @@ async function loadProducts(): Promise<void> {
   isLoading.value = true;
   errorMessage.value = null;
   try {
-    const page = await listActiveProducts({
-      keyword: searchKeyword.value.trim() || undefined,
-      pageSize: PAGE_SIZE,
-    });
+    const page = await listActiveProducts({ pageSize: PAGE_SIZE });
     products.value = page.list;
   } catch (error: unknown) {
     errorMessage.value = error instanceof Error ? error.message : '加载藏品失败，请稍后重试';
@@ -76,6 +75,7 @@ onPullDownRefresh(async () => {
 
 <template>
   <view class="page" :class="themeClass">
+    <view class="status-bar" :style="{ height: `${statusBarHeight}px` }" />
     <view class="homepage-header">
       <view class="location-pill">
         <image class="small-icon" src="/static/figma/home-light/map-pin.svg" mode="aspectFit" />
@@ -86,7 +86,7 @@ onPullDownRefresh(async () => {
     </view>
 
     <view class="search-wrapper">
-      <view class="search-shell" @click="handleOpenSearch">
+      <view class="search-shell" @click="handleOpenSearch()">
         <image class="search-icon" src="/static/figma/home-light/search.svg" mode="aspectFit" />
         <text class="search-placeholder">搜索 经典钻戒、绝美对戒、经典链饰...</text>
       </view>
@@ -164,16 +164,19 @@ onPullDownRefresh(async () => {
 @use '../../styles/tokens.scss' as *;
 .page {
   min-height: 100vh;
-  padding: calc(env(safe-area-inset-top) + 88rpx) 0 48rpx;
+  padding: 0 0 calc(48rpx + env(safe-area-inset-bottom));
   color: var(--theme-text);
   background: var(--theme-bg);
+}
+.status-bar {
+  width: 100%;
 }
 .homepage-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 98rpx;
-  padding: 16rpx 32rpx;
+  height: 88rpx;
+  padding: 0 32rpx;
 }
 .location-pill {
   display: flex;

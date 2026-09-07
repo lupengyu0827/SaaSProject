@@ -22,7 +22,7 @@ export class TenantStateClient {
       if (fallback && fallback.expiresAt > Date.now()) return this.withPendingUsage(fallback.state);
     }
 
-    const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3001';
+    const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3101';
     const response = await fetch(`${coreBaseUrl}/api/platform/tenants/${tenantId}/access-state`);
     if (!response.ok) throw new ServiceUnavailableException('Unable to resolve tenant state');
     const state = (await response.json()) as TenantAccessState;

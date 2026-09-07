@@ -11,6 +11,9 @@ import type {
   CreateProductRequest,
   CreateProductVariantRequest,
   ProductImageResponse,
+  ProductLifecycleCommandRequest,
+  ProductLifecycleEventResponse,
+  ProductDraftListQuery,
   ProductListQuery,
   ProductPageResponse,
   ProductResponse,
@@ -27,6 +30,8 @@ import type {
   UpdateProductRequest,
   UpdateProductVariantRequest,
 } from '@saas/contracts';
+import { ProductDraftErrorCode } from '@saas/contracts';
+import { ProductLifecycleErrorCode } from '@saas/contracts';
 import { Prisma } from '../../generated/prisma/index.js';
 import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service.js';
 import {
@@ -71,6 +76,132 @@ export class ProductService {
     });
   }
 
+  /** 查询当前租户未删除草稿，供商家恢复最近编辑。 */
+  listDrafts(tenantId: string, query: ProductDraftListQuery): Promise<ProductPageResponse> {
+    const page = Math.max(Number(query.page) || 1, 1);
+    const pageSize = Math.min(Math.max(Number(query.pageSize) || 20, 1), 100);
+    return this.prisma.$transaction(async (tx) => {
+      await this.tenant(tx, tenantId);
+      const where: Prisma.ProductWhereInput = {
+        tenantId,
+        status: 'draft',
+        deletedAt: null,
+        OR: query.keyword
+          ? [
+              { name: { contains: query.keyword, mode: 'insensitive' } },
+              { code: { contains: query.keyword, mode: 'insensitive' } },
+            ]
+          : undefined,
+      };
+      const [total, rows] = await Promise.all([
+        tx.product.count({ where }),
+        tx.product.findMany({
+          where,
+          include: {
+            variants: { where: { deletedAt: null }, include: { inventoryTransactions: true } },
+            images: { where: { deletedAt: null }, orderBy: { sortOrder: 'asc' } },
+          },
+          orderBy: [{ updatedAt: 'desc' }, { id: 'desc' }],
+          skip: (page - 1) * pageSize,
+          take: pageSize,
+        }),
+      ]);
+      return { list: rows.map(toResponse), total, page, pageSize };
+    });
+  }
+
+  /** 查询当前租户的单个未删除草稿。 */
+  getDraft(tenantId: string, id: string): Promise<ProductResponse> {
+    return this.prisma.$transaction(async (tx) => {
+      await this.tenant(tx, tenantId);
+      return this.draftResponse(tx, tenantId, id);
+    });
+  }
+
+  /** 软删除草稿并解除媒体占用，保留审计与领域事件。 */
+  deleteDraft(tenantId: string, actorId: string, id: string, version: number): Promise<void> {
+    return this.prisma.$transaction(async (tx) => {
+      await this.tenant(tx, tenantId);
+      const current = await tx.product.findFirst({
+        where: { id, tenantId, status: 'draft', deletedAt: null },
+        select: { version: true },
+      });
+      if (!current) throw new NotFoundException('商品草稿不存在');
+      if (current.version !== version) throw draftVersionConflict(current.version);
+      const deletedAt = new Date();
+      const images = await tx.productImage.findMany({
+        where: { tenantId, productId: id, deletedAt: null },
+        select: { mediaAssetId: true },
+      });
+      const changed = await tx.product.updateMany({
+        where: { id, tenantId, status: 'draft', deletedAt: null, version },
+        data: { status: 'archived', deletedAt, updatedBy: actorId, version: { increment: 1 } },
+      });
+      if (changed.count !== 1) await this.throwDraftVersionConflict(tx, tenantId, id);
+      await tx.productImage.updateMany({
+        where: { tenantId, productId: id, deletedAt: null },
+        data: { mediaAssetId: null, isPrimary: false, deletedAt },
+      });
+      const assetIds = images.flatMap(({ mediaAssetId }) => (mediaAssetId ? [mediaAssetId] : []));
+      if (assetIds.length)
+        await tx.mediaAsset.updateMany({
+          where: { id: { in: assetIds }, tenantId, status: 'attached' },
+          data: { status: 'temporary' },
+        });
+      await this.recordWrite(tx, tenantId, actorId, 'product.draft.deleted', id, { version });
+    });
+  }
+
+  /** 复制草稿资料和默认规格；媒体资源因唯一绑定约束不复制。 */
+  duplicateDraft(
+    tenantId: string,
+    actorId: string,
+    id: string,
+    version: number,
+  ): Promise<ProductResponse> {
+    return this.prisma.$transaction(async (tx) => {
+      await this.tenant(tx, tenantId);
+      const source = await tx.product.findFirst({
+        where: { id, tenantId, status: 'draft', deletedAt: null },
+        include: { variants: { where: { deletedAt: null }, orderBy: { createdAt: 'asc' } } },
+      });
+      if (!source) throw new NotFoundException('商品草稿不存在');
+      if (source.version !== version) throw draftVersionConflict(source.version);
+      const sourceVariant = source.variants[0];
+      if (!sourceVariant) throw new ConflictException('草稿缺少默认规格');
+      const suffix = randomUUID().replaceAll('-', '').slice(0, 12).toUpperCase();
+      const copy = await tx.product.create({
+        data: {
+          tenantId,
+          code: `DRAFT-${suffix}`,
+          name: source.name,
+          description: source.description,
+          categoryId: source.categoryId,
+          brandId: source.brandId,
+          attributes: source.attributes as Prisma.InputJsonValue,
+          status: 'draft',
+          createdBy: actorId,
+          updatedBy: actorId,
+          variants: {
+            create: {
+              tenantId,
+              sku: `SKU-${suffix}`,
+              specs: sourceVariant.specs as Prisma.InputJsonValue,
+              price: sourceVariant.price,
+              costPrice: sourceVariant.costPrice,
+              weightG: sourceVariant.weightG,
+            },
+          },
+        },
+      });
+      await this.recordWrite(tx, tenantId, actorId, 'product.draft.duplicated', copy.id, {
+        sourceProductId: id,
+        sourceVersion: version,
+      });
+      return this.draftResponse(tx, tenantId, copy.id);
+    });
+  }
+
   /** 乐观锁增量保存草稿；未提交字段继续保留原值。 */
   saveDraft(
     tenantId: string,
@@ -103,7 +234,7 @@ export class ProductService {
           version: { increment: 1 },
         },
       });
-      if (updated.count !== 1) throw new ConflictException('草稿已在其他设备修改，请刷新后重试');
+      if (updated.count !== 1) await this.throwDraftVersionConflict(tx, tenantId, id);
       if (input.price !== undefined) {
         const variant = await tx.productVariant.findFirst({
           where: { tenantId, productId: id, deletedAt: null },
@@ -163,8 +294,7 @@ export class ProductService {
         where: { id, tenantId, status: 'draft', version: input.version },
         data: { updatedBy: actorId, version: { increment: 1 } },
       });
-      if (changed.count !== 1)
-        throw new ConflictException('草稿图片已在其他设备修改，请刷新后重试');
+      if (changed.count !== 1) await this.throwDraftVersionConflict(tx, tenantId, id);
       const previous = await tx.productImage.findMany({
         where: { tenantId, productId: id, deletedAt: null },
         select: { mediaAssetId: true },
@@ -232,7 +362,11 @@ export class ProductService {
     return this.prisma.$transaction(async (tx) => {
       await this.tenant(tx, tenantId);
       const product = await this.response(tx, tenantId, id);
+      if (product.status === 'active' && [product.version, product.version - 1].includes(version)) {
+        return { product, publishedAt: product.updatedAt };
+      }
       if (product.status !== 'draft') throw new ConflictException('只有草稿可以发布');
+      if (product.version !== version) throw draftVersionConflict(product.version);
       const issues = publishIssues(product);
       if (issues.length)
         throw new ConflictException({ message: '商品资料尚未满足发布要求', issues });
@@ -249,10 +383,13 @@ export class ProductService {
         where: { id, tenantId, status: 'draft', version },
         data: { status: 'active', updatedBy: actorId, version: { increment: 1 } },
       });
-      if (changed.count !== 1) throw new ConflictException('草稿已更新，请刷新并重新确认发布');
+      if (changed.count !== 1) await this.throwDraftVersionConflict(tx, tenantId, id);
       await this.recordUsage(tx, tenantId, 'products', 1);
       await this.recordWrite(tx, tenantId, actorId, 'product.published', id, {
         source: 'merchant_miniapp',
+        fromStatus: 'draft',
+        toStatus: 'active',
+        reason: '商品发布',
       });
       return {
         product: await this.response(tx, tenantId, id),
@@ -375,15 +512,112 @@ export class ProductService {
     query: PublicProductListQuery,
   ): Promise<PublicProductPageResponse> {
     const page = await this.list(tenantId, { ...query, status: 'active' });
-    return { ...page, list: page.list.map(toPublicProductResponse) };
+    const media = await this.publicDetailMedia(
+      tenantId,
+      page.list.map(({ id }) => id),
+    );
+    return {
+      ...page,
+      list: page.list.map((product) => ({
+        ...toPublicProductResponse(product),
+        detailMedia: media.get(product.id) ?? [],
+      })),
+    };
   }
 
   /** 查询消费者可见的单个在售商品。 */
   async getPublic(tenantId: string, id: string): Promise<PublicProductResponse> {
     const product = await this.get(tenantId, id);
-    if (product.status !== 'active' || product.deletedAt)
-      throw new NotFoundException('藏品不存在或已下架');
-    return toPublicProductResponse(product);
+    if (product.deletedAt) throw new NotFoundException('藏品不存在');
+    if (product.status === 'archived')
+      throw new NotFoundException({
+        code: ProductLifecycleErrorCode.PUBLIC_UNLISTED,
+        message: '商品已下架',
+        data: { availability: 'unlisted' },
+      });
+    if (product.status === 'sold')
+      throw new NotFoundException({
+        code: ProductLifecycleErrorCode.PUBLIC_SOLD,
+        message: '商品已售',
+        data: { availability: 'sold' },
+      });
+    if (product.status !== 'active') throw new NotFoundException('藏品不存在');
+    const media = await this.publicDetailMedia(tenantId, [product.id]);
+    return { ...toPublicProductResponse(product), detailMedia: media.get(product.id) ?? [] };
+  }
+
+  private async publicDetailMedia(
+    tenantId: string,
+    productIds: string[],
+  ): Promise<Map<string, PublicProductResponse['detailMedia']>> {
+    if (!productIds.length) return new Map();
+    return this.prisma.$transaction(async (tx) => {
+      await this.tenant(tx, tenantId);
+      const rows = await tx.productIntakeMedia.findMany({
+        where: {
+          tenantId,
+          visibility: 'public',
+          intake: { productId: { in: productIds }, product: { status: 'active', deletedAt: null } },
+        },
+        include: { mediaAsset: true, intake: { select: { productId: true } } },
+        orderBy: [{ group: 'asc' }, { sortOrder: 'asc' }],
+      });
+      const result = new Map<string, PublicProductResponse['detailMedia']>();
+      for (const row of rows) {
+        const list = result.get(row.intake.productId) ?? [];
+        list.push({
+          assetId: row.mediaAssetId,
+          type: row.group === 'detail_video' ? 'video' : 'image',
+          url: `/api/media/public/assets/${row.mediaAssetId}/content?tenantId=${encodeURIComponent(tenantId)}`,
+          mimeType: row.mediaAsset.mimeType,
+          sortOrder: row.sortOrder,
+          durationSeconds: row.durationSeconds,
+        });
+        result.set(row.intake.productId, list);
+      }
+      return result;
+    });
+  }
+
+  /** 商家下架在售商品；相同命令重试不重复写审计和事件。 */
+  unlist(
+    tenantId: string,
+    actorId: string,
+    id: string,
+    input: ProductLifecycleCommandRequest,
+  ): Promise<ProductResponse> {
+    return this.transitionLifecycle(tenantId, actorId, id, input, 'active', 'archived');
+  }
+
+  /** 商家重新上架商品；库存必须大于零。 */
+  relist(
+    tenantId: string,
+    actorId: string,
+    id: string,
+    input: ProductLifecycleCommandRequest,
+  ): Promise<ProductResponse> {
+    return this.transitionLifecycle(tenantId, actorId, id, input, 'archived', 'active');
+  }
+
+  /** 查询当前租户商品的发布、上下架和已售轨迹。 */
+  listLifecycleEvents(tenantId: string, id: string): Promise<ProductLifecycleEventResponse[]> {
+    return this.prisma.$transaction(async (tx) => {
+      await this.tenant(tx, tenantId);
+      if (!(await tx.product.findFirst({ where: { id, tenantId } })))
+        throw new NotFoundException('商品不存在');
+      const rows = await tx.auditLog.findMany({
+        where: {
+          tenantId,
+          resourceType: 'product',
+          resourceId: id,
+          action: {
+            in: ['product.published', 'product.unlisted', 'product.relisted', 'product.sold'],
+          },
+        },
+        orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+      });
+      return rows.map(toLifecycleEventResponse);
+    });
   }
 
   update(
@@ -396,7 +630,7 @@ export class ProductService {
       await this.tenant(tx, tenantId);
       const current = await tx.product.findFirst({ where: { id, tenantId, deletedAt: null } });
       if (!current) throw new NotFoundException('商品不存在');
-      if (input.status) assertStatusTransition(current.status as ProductStatus, input.status);
+      if (input.status) throw lifecycleBypassConflict();
       await this.assertRelations(
         tx,
         tenantId,
@@ -412,7 +646,6 @@ export class ProductService {
           brandId: input.brandId,
           attributes: input.attributes as Prisma.InputJsonValue | undefined,
           seoSlug: input.seoSlug?.trim(),
-          status: input.status,
           updatedBy: actorId,
           version: { increment: 1 },
         },
@@ -430,6 +663,7 @@ export class ProductService {
   ): Promise<BatchUpdateProductsResponse> {
     const ids = [...new Set(input.ids)].slice(0, 100);
     if (!ids.length) throw new ConflictException('请选择商品');
+    if (input.action === 'activate' || input.action === 'archive') throw lifecycleBypassConflict();
     return this.prisma.$transaction(async (tx) => {
       await this.tenant(tx, tenantId);
       if ((await tx.product.count({ where: { id: { in: ids }, tenantId } })) !== ids.length)
@@ -437,18 +671,12 @@ export class ProductService {
       const data: Prisma.ProductUpdateManyMutationInput =
         input.action === 'restore'
           ? { deletedAt: null, status: 'draft', updatedBy: actorId, version: { increment: 1 } }
-          : input.action === 'soft_delete'
-            ? {
-                deletedAt: new Date(),
-                status: 'archived',
-                updatedBy: actorId,
-                version: { increment: 1 },
-              }
-            : {
-                status: input.action === 'activate' ? 'active' : 'archived',
-                updatedBy: actorId,
-                version: { increment: 1 },
-              };
+          : {
+              deletedAt: new Date(),
+              status: 'archived',
+              updatedBy: actorId,
+              version: { increment: 1 },
+            };
       const result = await tx.product.updateMany({ where: { id: { in: ids }, tenantId }, data });
       await this.recordWrite(
         tx,
@@ -611,6 +839,71 @@ export class ProductService {
     });
   }
 
+  private transitionLifecycle(
+    tenantId: string,
+    actorId: string,
+    id: string,
+    input: ProductLifecycleCommandRequest,
+    expected: ProductStatus,
+    target: ProductStatus,
+  ): Promise<ProductResponse> {
+    const reason = input.reason.trim();
+    if (reason.length < 2) {
+      throw new ConflictException({
+        code: ProductLifecycleErrorCode.VALIDATION_FAILED,
+        message: '请填写至少 2 个字符的操作原因',
+        data: null,
+      });
+    }
+    return this.prisma.$transaction(async (tx) => {
+      await this.tenant(tx, tenantId);
+      const product = await this.response(tx, tenantId, id);
+      if (
+        product.status === target &&
+        [product.version, product.version - 1].includes(input.version)
+      )
+        return product;
+      if (product.status !== expected) {
+        throw new ConflictException({
+          code: ProductLifecycleErrorCode.INVALID_TRANSITION,
+          message: `商品当前状态为 ${product.status}，不能执行此操作`,
+          data: { currentStatus: product.status },
+        });
+      }
+      if (product.version !== input.version) throw draftVersionConflict(product.version);
+      assertStatusTransition(product.status, target);
+      if (target === 'active') {
+        const issues = publishIssues(product);
+        if (issues.length) {
+          throw new ConflictException({
+            code: ProductLifecycleErrorCode.VALIDATION_FAILED,
+            message: '商品资料不完整，不能重新上架',
+            data: { issues },
+          });
+        }
+      }
+      if (target === 'active' && product.availableStockQty <= 0) {
+        throw new ConflictException({
+          code: ProductLifecycleErrorCode.INSUFFICIENT_STOCK,
+          message: '商品可售库存不足，不能重新上架',
+          data: { availableStockQty: product.availableStockQty },
+        });
+      }
+      const changed = await tx.product.updateMany({
+        where: { id, tenantId, status: expected, deletedAt: null, version: input.version },
+        data: { status: target, updatedBy: actorId, version: { increment: 1 } },
+      });
+      if (changed.count !== 1) await this.throwDraftVersionConflict(tx, tenantId, id);
+      const event = target === 'active' ? 'relisted' : 'unlisted';
+      await this.recordWrite(tx, tenantId, actorId, `product.${event}`, id, {
+        fromStatus: expected,
+        toStatus: target,
+        reason,
+      });
+      return this.response(tx, tenantId, id);
+    });
+  }
+
   private response(
     tx: Prisma.TransactionClient,
     tenantId: string,
@@ -633,6 +926,39 @@ export class ProductService {
         if (!row) throw new NotFoundException('商品不存在');
         return toResponse(row);
       });
+  }
+  private draftResponse(
+    tx: Prisma.TransactionClient,
+    tenantId: string,
+    id: string,
+  ): Promise<ProductResponse> {
+    return tx.product
+      .findFirst({
+        where: { id, tenantId, status: 'draft', deletedAt: null },
+        include: {
+          variants: {
+            where: { deletedAt: null },
+            include: { inventoryTransactions: true },
+            orderBy: { createdAt: 'asc' },
+          },
+          images: { where: { deletedAt: null }, orderBy: { sortOrder: 'asc' } },
+        },
+      })
+      .then((row) => {
+        if (!row) throw new NotFoundException('商品草稿不存在');
+        return toResponse(row);
+      });
+  }
+  private async throwDraftVersionConflict(
+    tx: Prisma.TransactionClient,
+    tenantId: string,
+    id: string,
+  ): Promise<never> {
+    const latest = await tx.product.findFirst({
+      where: { id, tenantId },
+      select: { version: true },
+    });
+    throw draftVersionConflict(latest?.version ?? -1);
   }
   private variant(
     tx: Prisma.TransactionClient,
@@ -702,7 +1028,12 @@ export class ProductService {
       typeof quotas.products === 'number'
         ? quotas.products
         : -1;
-    if (limit >= 0 && (await tx.product.count({ where: { tenantId, deletedAt: null } })) >= limit)
+    if (
+      limit >= 0 &&
+      (await tx.product.count({
+        where: { tenantId, deletedAt: null, status: { not: 'draft' } },
+      })) >= limit
+    )
       throw new ConflictException(`商品数量已达套餐上限（${limit}），请升级套餐或清理商品`);
   }
   private recordUsage(
@@ -828,6 +1159,49 @@ function assertVariant(input: CreateProductVariantRequest): void {
     throw new ConflictException('期初库存必须为非负整数');
 }
 
+/** 构造前后端可稳定识别的草稿乐观锁冲突。 */
+function draftVersionConflict(currentVersion: number): ConflictException {
+  return new ConflictException({
+    code: ProductDraftErrorCode.VERSION_CONFLICT,
+    message: '草稿已在其他设备修改，请刷新后重试',
+    data: { currentVersion },
+  });
+}
+
+function lifecycleBypassConflict(): ConflictException {
+  return new ConflictException({
+    code: ProductLifecycleErrorCode.INVALID_TRANSITION,
+    message: '商品状态必须通过发布、上架或下架专用接口修改',
+    data: null,
+  });
+}
+
+function toLifecycleEventResponse(row: {
+  id: bigint;
+  action: string;
+  actorId: string | null;
+  diff: Prisma.JsonValue | null;
+  createdAt: Date;
+}): ProductLifecycleEventResponse {
+  const diff =
+    typeof row.diff === 'object' && row.diff !== null && !Array.isArray(row.diff) ? row.diff : {};
+  const actionType = row.action.replace('product.', '');
+  return {
+    id: row.id.toString(),
+    type: actionType as ProductLifecycleEventResponse['type'],
+    fromStatus: typeof diff.fromStatus === 'string' ? (diff.fromStatus as ProductStatus) : null,
+    toStatus:
+      typeof diff.toStatus === 'string'
+        ? (diff.toStatus as ProductStatus)
+        : row.action === 'product.published'
+          ? 'active'
+          : 'sold',
+    reason: typeof diff.reason === 'string' ? diff.reason : null,
+    actorId: row.actorId,
+    occurredAt: row.createdAt.toISOString(),
+  };
+}
+
 /** 将商家商品模型转换为消费者字段白名单。 */
 export function toPublicProductResponse(product: ProductResponse): PublicProductResponse {
   const attributes = product.attributes;
@@ -839,6 +1213,7 @@ export function toPublicProductResponse(product: ProductResponse): PublicProduct
     categoryId: product.categoryId,
     brandId: product.brandId,
     attributes: {
+      usageCondition: attributes.usageCondition,
       conditionGrade: attributes.conditionGrade,
       authenticityStatus: attributes.authenticityStatus,
       material: attributes.material,
@@ -848,6 +1223,26 @@ export function toPublicProductResponse(product: ProductResponse): PublicProduct
       accessories: attributes.accessories,
       appraisalOrganization: attributes.appraisalOrganization,
       appraisalCertificateNo: attributes.appraisalCertificateNo,
+      size: typeof attributes.size === 'string' ? attributes.size : undefined,
+      customTips: typeof attributes.customTips === 'string' ? attributes.customTips : undefined,
+      audience: typeof attributes.audience === 'string' ? attributes.audience : undefined,
+      warrantyCard:
+        attributes.warrantyCard === 'present' || attributes.warrantyCard === 'absent'
+          ? attributes.warrantyCard
+          : undefined,
+      warrantyCardYear:
+        typeof attributes.warrantyCardYear === 'number' ? attributes.warrantyCardYear : undefined,
+      seriesId: typeof attributes.seriesId === 'string' ? attributes.seriesId : undefined,
+      seriesName: typeof attributes.seriesName === 'string' ? attributes.seriesName : undefined,
+      modelId: typeof attributes.modelId === 'string' ? attributes.modelId : undefined,
+      modelName: typeof attributes.modelName === 'string' ? attributes.modelName : undefined,
+      officialGuidePrice:
+        typeof attributes.officialGuidePrice === 'string'
+          ? attributes.officialGuidePrice
+          : undefined,
+      tags: Array.isArray(attributes.tags)
+        ? attributes.tags.filter((item): item is string => typeof item === 'string')
+        : undefined,
     },
     variants: product.variants.map(({ id, specs, price, availableStockQty }) => ({
       id,
@@ -856,6 +1251,7 @@ export function toPublicProductResponse(product: ProductResponse): PublicProduct
       availableStockQty,
     })),
     images: product.images,
+    detailMedia: [],
     primaryImage: product.primaryImage,
     availableStockQty: product.availableStockQty,
     minimumPrice: product.minimumPrice,

@@ -15,6 +15,9 @@ export const MOCK_PRODUCTS: PublicProductResponse[] = [
     description: '主石采用经典祖母绿切割，阶梯式刻面呈现清澈光影，适合日常珍藏与重要纪念。',
     image: '/static/images/mock/diamond-ring.jpg',
     price: '128000.00',
+    originalPrice: '148000.00',
+    rating: 4.9,
+    reviewCount: 124,
     category: '高级珠宝',
     condition: '臻品 · 近新',
   }),
@@ -25,6 +28,9 @@ export const MOCK_PRODUCTS: PublicProductResponse[] = [
     description: '复古比例的黄金方形表壳，搭配深棕皮革表带，保留温润自然的岁月质感。',
     image: '/static/images/mock/vintage-watch.jpg',
     price: '46500.00',
+    originalPrice: '52000.00',
+    rating: 4.7,
+    reviewCount: 86,
     category: '典藏腕表',
     condition: '中古 · 优良',
   }),
@@ -35,6 +41,9 @@ export const MOCK_PRODUCTS: PublicProductResponse[] = [
     description: '克制利落的廓形，粒面皮革搭配哑光金色五金，兼顾收藏价值与日常使用。',
     image: '/static/images/mock/black-handbag.jpg',
     price: '32800.00',
+    originalPrice: '36800.00',
+    rating: 4.8,
+    reviewCount: 203,
     category: '经典箱包',
     condition: '臻品 · 轻微使用',
   }),
@@ -67,6 +76,9 @@ interface MockProductInput {
   price: string;
   category: string;
   condition: string;
+  originalPrice?: string;
+  rating?: number;
+  reviewCount?: number;
 }
 
 function createMockProduct(input: MockProductInput): PublicProductResponse {
@@ -86,6 +98,7 @@ function createMockProduct(input: MockProductInput): PublicProductResponse {
         id: `${input.id}-default`,
         specs: { 品相: input.condition },
         price: input.price,
+        originalPrice: input.originalPrice ?? null,
         availableStockQty: 1,
       },
     ],
@@ -104,6 +117,8 @@ function createMockProduct(input: MockProductInput): PublicProductResponse {
     availableStockQty: 1,
     minimumPrice: input.price,
     maximumPrice: input.price,
+    rating: input.rating ?? null,
+    reviewCount: input.reviewCount ?? null,
     createdAt: MOCK_CREATED_AT,
   };
 }

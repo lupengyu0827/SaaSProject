@@ -7,6 +7,7 @@ import type {
   OrderPageResponse,
   OrderResponse,
   RefundResponse,
+  ReviewRefundRequest,
   ShipmentResponse,
   ReplayWebhookResponse,
   WebhookDeadLetterResponse,
@@ -39,6 +40,12 @@ export const orderApi = {
   },
   createRefund(id: string, input: CreateRefundRequest): Promise<RefundResponse> {
     return requestApi(`/orders/${id}/refunds`, { method: 'POST', body: input });
+  },
+  reviewRefund(id: string, input: ReviewRefundRequest): Promise<RefundResponse> {
+    return requestApi(`/refunds/${id}/review`, { method: 'POST', body: input });
+  },
+  executeRefund(id: string): Promise<RefundResponse> {
+    return requestApi(`/refunds/${id}/execute`, { method: 'POST' });
   },
   deadLetters(): Promise<WebhookDeadLetterResponse[]> {
     return requestApi('/webhook-dead-letters');

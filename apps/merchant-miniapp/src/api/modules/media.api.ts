@@ -8,9 +8,10 @@ import type {
 
 import {
   getMerchantAccessToken,
-  getMerchantApiBaseUrl,
   getMerchantTenantId,
 } from '../../config/runtime';
+import { absoluteMediaUrl } from '../../utils/media-url';
+import { unwrapApiData } from '../envelope';
 import { MerchantApiError } from '../errors';
 
 /** 创建短时上传会话。 */
@@ -29,7 +30,7 @@ export function uploadMediaFile(
   let task!: UniApp.UploadTask;
   const result = new Promise<MediaUploadSessionResponse>((resolve, reject) => {
     task = uni.uploadFile({
-      url: absoluteUrl(session.uploadUrl),
+      url: absoluteMediaUrl(session.uploadUrl),
       filePath,
       name: 'file',
       header: authHeaders(),
@@ -52,14 +53,15 @@ export function confirmMediaUpload(
 function requestJson<T>(path: string, method: 'GET' | 'POST', data?: unknown): Promise<T> {
   return new Promise<T>((resolve, reject) => {
     void uni.request({
-      url: absoluteUrl(path),
+      url: absoluteMediaUrl(path),
       method,
       header: { ...authHeaders(), 'content-type': 'application/json' },
       data: data as UniApp.RequestOptions['data'],
       timeout: 15_000,
       success: (response) => {
-        if (response.statusCode >= 200 && response.statusCode < 300) resolve(response.data as T);
-        else reject(new MerchantApiError(errorMessage(response.data), response.statusCode));
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          resolve(unwrapApiData(response.data) as T);
+        } else reject(new MerchantApiError(errorMessage(response.data), response.statusCode));
       },
       fail: (failure) => reject(new MerchantApiError(failure.errMsg || '网络连接失败')),
     });
@@ -77,17 +79,13 @@ function authHeaders(): Record<string, string> {
   };
 }
 
-function absoluteUrl(path: string): string {
-  return path.startsWith('http') ? path : `${getMerchantApiBaseUrl()}${path.replace(/^\/api/, '')}`;
-}
-
 function parseUploadResponse<T>(
   response: UniApp.UploadFileSuccessCallbackResult,
   resolve: (value: T) => void,
   reject: (error: MerchantApiError) => void,
 ): void {
   const payload = parseJson(response.data);
-  if (response.statusCode >= 200 && response.statusCode < 300) resolve(payload as T);
+  if (response.statusCode >= 200 && response.statusCode < 300) resolve(unwrapApiData(payload) as T);
   else reject(new MerchantApiError(errorMessage(payload), response.statusCode));
 }
 

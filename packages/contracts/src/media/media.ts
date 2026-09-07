@@ -1,6 +1,6 @@
 /** 媒体上传契约：商品、回收、售后凭证和店铺素材共享。 */
 export type MediaPurpose = 'product' | 'recycling' | 'after_sale' | 'store_branding';
-export type MediaMimeType = 'image/jpeg' | 'image/png' | 'image/webp';
+export type MediaMimeType = 'image/jpeg' | 'image/png' | 'image/webp' | 'video/mp4';
 export type MediaUploadStatus = 'initiated' | 'uploaded' | 'confirmed' | 'expired' | 'canceled';
 export type MediaAssetStatus = 'temporary' | 'attached' | 'deleted';
 

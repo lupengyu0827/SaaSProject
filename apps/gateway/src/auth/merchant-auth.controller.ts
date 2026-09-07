@@ -8,16 +8,11 @@ import {
   Req,
   UnauthorizedException,
 } from '@nestjs/common';
-import type {
-  AuthTokensResponse,
-  LogoutResponse,
-  MerchantLoginRequest,
-  MerchantSessionResponse,
-  RefreshSessionRequest,
-} from '@saas/contracts';
+import type { AuthTokensResponse, LogoutResponse, MerchantSessionResponse } from '@saas/contracts';
 
 import { Public } from '../pipeline/pipeline.metadata.js';
 import type { SaasRequest } from '../pipeline/request-context.js';
+import { MerchantLoginDto, RefreshSessionDto } from '../http/dto/auth.dto.js';
 
 type MerchantContextResponse = Omit<MerchantSessionResponse, keyof AuthTokensResponse>;
 
@@ -27,7 +22,7 @@ export class MerchantAuthController {
   @Post('login')
   login(
     @Req() request: SaasRequest,
-    @Body() input: MerchantLoginRequest,
+    @Body() input: MerchantLoginDto,
   ): Promise<MerchantSessionResponse> {
     return this.forward('/login', request, input);
   }
@@ -36,17 +31,14 @@ export class MerchantAuthController {
   @Post('refresh')
   refresh(
     @Req() request: SaasRequest,
-    @Body() input: RefreshSessionRequest,
+    @Body() input: RefreshSessionDto,
   ): Promise<MerchantSessionResponse> {
     return this.forward('/refresh', request, input);
   }
 
   @Public()
   @Post('logout')
-  logout(
-    @Req() request: SaasRequest,
-    @Body() input: RefreshSessionRequest,
-  ): Promise<LogoutResponse> {
+  logout(@Req() request: SaasRequest, @Body() input: RefreshSessionDto): Promise<LogoutResponse> {
     return this.forward('/logout', request, input);
   }
 
@@ -72,7 +64,7 @@ export class MerchantAuthController {
     extraHeaders: Record<string, string> = {},
   ): Promise<T> {
     const response = await fetch(
-      `${process.env.CORE_BASE_URL ?? 'http://localhost:3001'}/api/auth/merchant${path}`,
+      `${process.env.CORE_BASE_URL ?? 'http://localhost:3101'}/api/auth/merchant${path}`,
       {
         method: body === undefined ? 'GET' : 'POST',
         headers: {

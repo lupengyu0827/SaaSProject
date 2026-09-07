@@ -37,7 +37,7 @@ export class AuditInterceptor implements NestInterceptor {
   }
 
   private async write(input: CreateAuditLogRequest): Promise<void> {
-    const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3001';
+    const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3101';
     try {
       await fetch(`${coreBaseUrl}/api/internal/audit-logs`, {
         method: 'POST',

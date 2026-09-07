@@ -7,7 +7,7 @@ export class CoreProxyService {
     context: { tenantId: string; actorId: string },
     init?: { method?: string; body?: unknown },
   ): Promise<T> {
-    const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3001';
+    const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3101';
     const response = await fetch(`${coreBaseUrl}/api/internal/commerce${path}`, {
       method: init?.method ?? 'GET',
       headers: {

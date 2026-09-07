@@ -4,6 +4,7 @@ export class ApiClientError extends Error {
     message: string,
     readonly statusCode?: number,
     readonly traceId?: string,
+    readonly code?: number,
   ) {
     super(message);
     this.name = 'ApiClientError';

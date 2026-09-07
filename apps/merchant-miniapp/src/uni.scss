@@ -1,0 +1,34 @@
+/* =========================================================================
+ * uView-Plus 主题桥接（商家端 Amber Atelier 琥珀金）
+ *
+ * 说明：
+ * - uview-plus 的 theme.scss 使用 `$u-xxx: ... !default`，因此只需在
+ *   @import 之前声明同名变量即可覆盖主题色。
+ * - 色值必须与 docs/Merchant-Style.md 色彩 Token 及 src/styles/themes.scss
+ *   保持一致（--theme-accent 等 CSS 变量），不要单独改动。
+ * - uni.scss 会被 uni-app 自动注入所有 scss 编译单元，无需手动 import。
+ * ========================================================================= */
+
+/* 主色：琥珀金（--theme-accent / #D4A359） */
+$u-primary: #d4a359;
+$u-primary-dark: #b45309;
+$u-primary-disabled: #e0c39a;
+$u-primary-light: #f5ece1;
+
+/* 功能色 */
+$u-success: #047857;
+$u-error: #be123c;
+$u-warning: #d4a359;
+$u-info: #706e6b;
+
+/* 中性色（对齐 --theme-text 字阶） */
+$u-main-color: #1c1917;
+$u-content-color: #706e6b;
+$u-tips-color: #9e9a96;
+$u-light-color: #faf8f5;
+
+/* 边框 / 背景 */
+$u-border-color: #eae4dc;
+$u-bg-color: #faf8f5;
+
+@import 'uview-plus/theme.scss';

@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class GatewayCacheInvalidator {
   async invalidateTenant(tenantId: string): Promise<void> {
-    const gatewayBaseUrl = process.env.GATEWAY_BASE_URL ?? 'http://localhost:3000';
+    const gatewayBaseUrl = process.env.GATEWAY_BASE_URL ?? 'http://localhost:3100';
     try {
       await fetch(`${gatewayBaseUrl}/api/internal/cache/tenants/${tenantId}`, {
         method: 'DELETE',

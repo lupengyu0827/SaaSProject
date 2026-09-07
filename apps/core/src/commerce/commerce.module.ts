@@ -24,6 +24,7 @@ import { PaymentReconciliationScheduler } from './infrastructure/payment-reconci
 import { PaymentBillReconciliationService } from './application/payment-bill-reconciliation.service.js';
 import { PaymentBillReconciliationScheduler } from './infrastructure/payment-bill-reconciliation.scheduler.js';
 import { WebhookOperationsService } from './application/webhook-operations.service.js';
+import { ProductIntakeService } from './application/product-intake.service.js';
 
 @Module({
   controllers: [CommerceController, PaymentCallbackController],
@@ -50,6 +51,7 @@ import { WebhookOperationsService } from './application/webhook-operations.servi
     PaymentBillReconciliationService,
     PaymentBillReconciliationScheduler,
     WebhookOperationsService,
+    ProductIntakeService,
   ],
 })
 export class CommerceModule {}

@@ -18,7 +18,8 @@ export function assertStatusTransition(current: ProductStatus, next: ProductStat
   const allowed: Record<ProductStatus, ProductStatus[]> = {
     draft: ['draft', 'active', 'archived'],
     active: ['active', 'archived'],
-    archived: ['archived'],
+    archived: ['archived', 'active'],
+    sold: ['sold'],
   };
   if (!allowed[current].includes(next)) {
     throw new ConflictException(`Product status cannot transition from ${current} to ${next}`);

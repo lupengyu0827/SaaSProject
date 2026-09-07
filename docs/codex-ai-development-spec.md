@@ -60,6 +60,8 @@ HTTP 客户端: 统一使用封装的 useApiClient (禁止直接 import axios / 
 构建:      Vite 5.x
 ```
 
+> 本小节仅适用于 **PC 端 `apps/pc-admin`**。小程序端（`apps/merchant-miniapp` / `apps/miniapp`）为 uni-app + Vue3，**UI 组件统一使用 uView-Plus**（`uview-plus`，easycom 已配、`uni.scss` 已桥接品牌主题），交互组件优先用 uView，禁止重复造轮子；商家端视觉与组件规范见 `docs/Merchant-Style.md`。
+
 ### 2.2 目录结构与命名约定
 
 ```

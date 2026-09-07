@@ -119,10 +119,40 @@ export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
  */
 export type Brand = $Result.DefaultSelection<Prisma.$BrandPayload>
 /**
+ * Model BrandCategory
+ * 
+ */
+export type BrandCategory = $Result.DefaultSelection<Prisma.$BrandCategoryPayload>
+/**
+ * Model BrandSeries
+ * 
+ */
+export type BrandSeries = $Result.DefaultSelection<Prisma.$BrandSeriesPayload>
+/**
+ * Model BrandModel
+ * 
+ */
+export type BrandModel = $Result.DefaultSelection<Prisma.$BrandModelPayload>
+/**
+ * Model RecyclingType
+ * 
+ */
+export type RecyclingType = $Result.DefaultSelection<Prisma.$RecyclingTypePayload>
+/**
  * Model Product
  * 
  */
 export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
+/**
+ * Model ProductIntake
+ * 
+ */
+export type ProductIntake = $Result.DefaultSelection<Prisma.$ProductIntakePayload>
+/**
+ * Model ProductIntakeMedia
+ * 
+ */
+export type ProductIntakeMedia = $Result.DefaultSelection<Prisma.$ProductIntakeMediaPayload>
 /**
  * Model ProductVariant
  * 
@@ -528,6 +558,46 @@ export class PrismaClient<
   get brand(): Prisma.BrandDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.brandCategory`: Exposes CRUD operations for the **BrandCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BrandCategories
+    * const brandCategories = await prisma.brandCategory.findMany()
+    * ```
+    */
+  get brandCategory(): Prisma.BrandCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.brandSeries`: Exposes CRUD operations for the **BrandSeries** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BrandSeries
+    * const brandSeries = await prisma.brandSeries.findMany()
+    * ```
+    */
+  get brandSeries(): Prisma.BrandSeriesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.brandModel`: Exposes CRUD operations for the **BrandModel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BrandModels
+    * const brandModels = await prisma.brandModel.findMany()
+    * ```
+    */
+  get brandModel(): Prisma.BrandModelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.recyclingType`: Exposes CRUD operations for the **RecyclingType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RecyclingTypes
+    * const recyclingTypes = await prisma.recyclingType.findMany()
+    * ```
+    */
+  get recyclingType(): Prisma.RecyclingTypeDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.product`: Exposes CRUD operations for the **Product** model.
     * Example usage:
     * ```ts
@@ -536,6 +606,26 @@ export class PrismaClient<
     * ```
     */
   get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productIntake`: Exposes CRUD operations for the **ProductIntake** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductIntakes
+    * const productIntakes = await prisma.productIntake.findMany()
+    * ```
+    */
+  get productIntake(): Prisma.ProductIntakeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productIntakeMedia`: Exposes CRUD operations for the **ProductIntakeMedia** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductIntakeMedias
+    * const productIntakeMedias = await prisma.productIntakeMedia.findMany()
+    * ```
+    */
+  get productIntakeMedia(): Prisma.ProductIntakeMediaDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.productVariant`: Exposes CRUD operations for the **ProductVariant** model.
@@ -1148,7 +1238,13 @@ export namespace Prisma {
     TenantProbe: 'TenantProbe',
     Category: 'Category',
     Brand: 'Brand',
+    BrandCategory: 'BrandCategory',
+    BrandSeries: 'BrandSeries',
+    BrandModel: 'BrandModel',
+    RecyclingType: 'RecyclingType',
     Product: 'Product',
+    ProductIntake: 'ProductIntake',
+    ProductIntakeMedia: 'ProductIntakeMedia',
     ProductVariant: 'ProductVariant',
     ProductImage: 'ProductImage',
     Order: 'Order',
@@ -1182,7 +1278,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "providerCallbackRoute" | "customer" | "customerRefreshSession" | "adminUser" | "refreshSession" | "role" | "permission" | "rolePermission" | "userRole" | "plan" | "subscription" | "usageMetric" | "invoice" | "auditLog" | "domainEventOutbox" | "mediaUploadSession" | "mediaAsset" | "tenantProbe" | "category" | "brand" | "product" | "productVariant" | "productImage" | "order" | "payment" | "paymentReconciliationRun" | "paymentReconciliationDiscrepancy" | "orderItem" | "shipment" | "shipmentItem" | "refund" | "refundItem" | "refundTransaction" | "inventoryTransaction" | "paymentWebhookEvent" | "refundWebhookEvent"
+      modelProps: "tenant" | "providerCallbackRoute" | "customer" | "customerRefreshSession" | "adminUser" | "refreshSession" | "role" | "permission" | "rolePermission" | "userRole" | "plan" | "subscription" | "usageMetric" | "invoice" | "auditLog" | "domainEventOutbox" | "mediaUploadSession" | "mediaAsset" | "tenantProbe" | "category" | "brand" | "brandCategory" | "brandSeries" | "brandModel" | "recyclingType" | "product" | "productIntake" | "productIntakeMedia" | "productVariant" | "productImage" | "order" | "payment" | "paymentReconciliationRun" | "paymentReconciliationDiscrepancy" | "orderItem" | "shipment" | "shipmentItem" | "refund" | "refundItem" | "refundTransaction" | "inventoryTransaction" | "paymentWebhookEvent" | "refundWebhookEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2740,6 +2836,302 @@ export namespace Prisma {
           }
         }
       }
+      BrandCategory: {
+        payload: Prisma.$BrandCategoryPayload<ExtArgs>
+        fields: Prisma.BrandCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BrandCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BrandCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.BrandCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BrandCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.BrandCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.BrandCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.BrandCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BrandCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.BrandCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>
+          }
+          update: {
+            args: Prisma.BrandCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.BrandCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BrandCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BrandCategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.BrandCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.BrandCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBrandCategory>
+          }
+          groupBy: {
+            args: Prisma.BrandCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BrandCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BrandCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<BrandCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      BrandSeries: {
+        payload: Prisma.$BrandSeriesPayload<ExtArgs>
+        fields: Prisma.BrandSeriesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BrandSeriesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BrandSeriesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>
+          }
+          findFirst: {
+            args: Prisma.BrandSeriesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BrandSeriesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>
+          }
+          findMany: {
+            args: Prisma.BrandSeriesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>[]
+          }
+          create: {
+            args: Prisma.BrandSeriesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>
+          }
+          createMany: {
+            args: Prisma.BrandSeriesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BrandSeriesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>[]
+          }
+          delete: {
+            args: Prisma.BrandSeriesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>
+          }
+          update: {
+            args: Prisma.BrandSeriesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>
+          }
+          deleteMany: {
+            args: Prisma.BrandSeriesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BrandSeriesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BrandSeriesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>[]
+          }
+          upsert: {
+            args: Prisma.BrandSeriesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandSeriesPayload>
+          }
+          aggregate: {
+            args: Prisma.BrandSeriesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBrandSeries>
+          }
+          groupBy: {
+            args: Prisma.BrandSeriesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BrandSeriesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BrandSeriesCountArgs<ExtArgs>
+            result: $Utils.Optional<BrandSeriesCountAggregateOutputType> | number
+          }
+        }
+      }
+      BrandModel: {
+        payload: Prisma.$BrandModelPayload<ExtArgs>
+        fields: Prisma.BrandModelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BrandModelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BrandModelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>
+          }
+          findFirst: {
+            args: Prisma.BrandModelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BrandModelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>
+          }
+          findMany: {
+            args: Prisma.BrandModelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>[]
+          }
+          create: {
+            args: Prisma.BrandModelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>
+          }
+          createMany: {
+            args: Prisma.BrandModelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BrandModelCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>[]
+          }
+          delete: {
+            args: Prisma.BrandModelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>
+          }
+          update: {
+            args: Prisma.BrandModelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>
+          }
+          deleteMany: {
+            args: Prisma.BrandModelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BrandModelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BrandModelUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>[]
+          }
+          upsert: {
+            args: Prisma.BrandModelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BrandModelPayload>
+          }
+          aggregate: {
+            args: Prisma.BrandModelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBrandModel>
+          }
+          groupBy: {
+            args: Prisma.BrandModelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BrandModelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BrandModelCountArgs<ExtArgs>
+            result: $Utils.Optional<BrandModelCountAggregateOutputType> | number
+          }
+        }
+      }
+      RecyclingType: {
+        payload: Prisma.$RecyclingTypePayload<ExtArgs>
+        fields: Prisma.RecyclingTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RecyclingTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RecyclingTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>
+          }
+          findFirst: {
+            args: Prisma.RecyclingTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RecyclingTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>
+          }
+          findMany: {
+            args: Prisma.RecyclingTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>[]
+          }
+          create: {
+            args: Prisma.RecyclingTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>
+          }
+          createMany: {
+            args: Prisma.RecyclingTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RecyclingTypeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>[]
+          }
+          delete: {
+            args: Prisma.RecyclingTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>
+          }
+          update: {
+            args: Prisma.RecyclingTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.RecyclingTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RecyclingTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RecyclingTypeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>[]
+          }
+          upsert: {
+            args: Prisma.RecyclingTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RecyclingTypePayload>
+          }
+          aggregate: {
+            args: Prisma.RecyclingTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRecyclingType>
+          }
+          groupBy: {
+            args: Prisma.RecyclingTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RecyclingTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RecyclingTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<RecyclingTypeCountAggregateOutputType> | number
+          }
+        }
+      }
       Product: {
         payload: Prisma.$ProductPayload<ExtArgs>
         fields: Prisma.ProductFieldRefs
@@ -2811,6 +3203,154 @@ export namespace Prisma {
           count: {
             args: Prisma.ProductCountArgs<ExtArgs>
             result: $Utils.Optional<ProductCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProductIntake: {
+        payload: Prisma.$ProductIntakePayload<ExtArgs>
+        fields: Prisma.ProductIntakeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductIntakeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductIntakeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>
+          }
+          findFirst: {
+            args: Prisma.ProductIntakeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductIntakeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>
+          }
+          findMany: {
+            args: Prisma.ProductIntakeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>[]
+          }
+          create: {
+            args: Prisma.ProductIntakeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>
+          }
+          createMany: {
+            args: Prisma.ProductIntakeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductIntakeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>[]
+          }
+          delete: {
+            args: Prisma.ProductIntakeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>
+          }
+          update: {
+            args: Prisma.ProductIntakeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductIntakeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductIntakeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductIntakeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductIntakeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakePayload>
+          }
+          aggregate: {
+            args: Prisma.ProductIntakeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductIntake>
+          }
+          groupBy: {
+            args: Prisma.ProductIntakeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductIntakeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductIntakeCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductIntakeCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProductIntakeMedia: {
+        payload: Prisma.$ProductIntakeMediaPayload<ExtArgs>
+        fields: Prisma.ProductIntakeMediaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductIntakeMediaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductIntakeMediaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>
+          }
+          findFirst: {
+            args: Prisma.ProductIntakeMediaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductIntakeMediaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>
+          }
+          findMany: {
+            args: Prisma.ProductIntakeMediaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>[]
+          }
+          create: {
+            args: Prisma.ProductIntakeMediaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>
+          }
+          createMany: {
+            args: Prisma.ProductIntakeMediaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProductIntakeMediaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>[]
+          }
+          delete: {
+            args: Prisma.ProductIntakeMediaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>
+          }
+          update: {
+            args: Prisma.ProductIntakeMediaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductIntakeMediaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductIntakeMediaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProductIntakeMediaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProductIntakeMediaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductIntakeMediaPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductIntakeMediaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductIntakeMedia>
+          }
+          groupBy: {
+            args: Prisma.ProductIntakeMediaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductIntakeMediaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductIntakeMediaCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductIntakeMediaCountAggregateOutputType> | number
           }
         }
       }
@@ -4041,7 +4581,13 @@ export namespace Prisma {
     tenantProbe?: TenantProbeOmit
     category?: CategoryOmit
     brand?: BrandOmit
+    brandCategory?: BrandCategoryOmit
+    brandSeries?: BrandSeriesOmit
+    brandModel?: BrandModelOmit
+    recyclingType?: RecyclingTypeOmit
     product?: ProductOmit
+    productIntake?: ProductIntakeOmit
+    productIntakeMedia?: ProductIntakeMediaOmit
     productVariant?: ProductVariantOmit
     productImage?: ProductImageOmit
     order?: OrderOmit
@@ -4146,6 +4692,12 @@ export namespace Prisma {
     providerCallbackRoutes: number
     mediaUploadSessions: number
     mediaAssets: number
+    brandSeries: number
+    brandModels: number
+    brandCategories: number
+    recyclingTypes: number
+    productIntakes: number
+    productIntakeMedia: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4158,6 +4710,12 @@ export namespace Prisma {
     providerCallbackRoutes?: boolean | TenantCountOutputTypeCountProviderCallbackRoutesArgs
     mediaUploadSessions?: boolean | TenantCountOutputTypeCountMediaUploadSessionsArgs
     mediaAssets?: boolean | TenantCountOutputTypeCountMediaAssetsArgs
+    brandSeries?: boolean | TenantCountOutputTypeCountBrandSeriesArgs
+    brandModels?: boolean | TenantCountOutputTypeCountBrandModelsArgs
+    brandCategories?: boolean | TenantCountOutputTypeCountBrandCategoriesArgs
+    recyclingTypes?: boolean | TenantCountOutputTypeCountRecyclingTypesArgs
+    productIntakes?: boolean | TenantCountOutputTypeCountProductIntakesArgs
+    productIntakeMedia?: boolean | TenantCountOutputTypeCountProductIntakeMediaArgs
   }
 
   // Custom InputTypes
@@ -4234,6 +4792,48 @@ export namespace Prisma {
     where?: MediaAssetWhereInput
   }
 
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountBrandSeriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandSeriesWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountBrandModelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandModelWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountBrandCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandCategoryWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountRecyclingTypesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecyclingTypeWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountProductIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountProductIntakeMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeMediaWhereInput
+  }
+
 
   /**
    * Count Type CustomerCountOutputType
@@ -4273,11 +4873,15 @@ export namespace Prisma {
   export type AdminUserCountOutputType = {
     userRoles: number
     sessions: number
+    appraisedIntakes: number
+    recycledIntakes: number
   }
 
   export type AdminUserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | AdminUserCountOutputTypeCountUserRolesArgs
     sessions?: boolean | AdminUserCountOutputTypeCountSessionsArgs
+    appraisedIntakes?: boolean | AdminUserCountOutputTypeCountAppraisedIntakesArgs
+    recycledIntakes?: boolean | AdminUserCountOutputTypeCountRecycledIntakesArgs
   }
 
   // Custom InputTypes
@@ -4303,6 +4907,20 @@ export namespace Prisma {
    */
   export type AdminUserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RefreshSessionWhereInput
+  }
+
+  /**
+   * AdminUserCountOutputType without action
+   */
+  export type AdminUserCountOutputTypeCountAppraisedIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeWhereInput
+  }
+
+  /**
+   * AdminUserCountOutputType without action
+   */
+  export type AdminUserCountOutputTypeCountRecycledIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeWhereInput
   }
 
 
@@ -4455,11 +5073,15 @@ export namespace Prisma {
   export type CategoryCountOutputType = {
     children: number
     products: number
+    brandModels: number
+    brands: number
   }
 
   export type CategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     children?: boolean | CategoryCountOutputTypeCountChildrenArgs
     products?: boolean | CategoryCountOutputTypeCountProductsArgs
+    brandModels?: boolean | CategoryCountOutputTypeCountBrandModelsArgs
+    brands?: boolean | CategoryCountOutputTypeCountBrandsArgs
   }
 
   // Custom InputTypes
@@ -4487,6 +5109,20 @@ export namespace Prisma {
     where?: ProductWhereInput
   }
 
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountBrandModelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandModelWhereInput
+  }
+
+  /**
+   * CategoryCountOutputType without action
+   */
+  export type CategoryCountOutputTypeCountBrandsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandCategoryWhereInput
+  }
+
 
   /**
    * Count Type BrandCountOutputType
@@ -4494,10 +5130,16 @@ export namespace Prisma {
 
   export type BrandCountOutputType = {
     products: number
+    series: number
+    models: number
+    categories: number
   }
 
   export type BrandCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | BrandCountOutputTypeCountProductsArgs
+    series?: boolean | BrandCountOutputTypeCountSeriesArgs
+    models?: boolean | BrandCountOutputTypeCountModelsArgs
+    categories?: boolean | BrandCountOutputTypeCountCategoriesArgs
   }
 
   // Custom InputTypes
@@ -4516,6 +5158,129 @@ export namespace Prisma {
    */
   export type BrandCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductWhereInput
+  }
+
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountSeriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandSeriesWhereInput
+  }
+
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountModelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandModelWhereInput
+  }
+
+  /**
+   * BrandCountOutputType without action
+   */
+  export type BrandCountOutputTypeCountCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandCategoryWhereInput
+  }
+
+
+  /**
+   * Count Type BrandSeriesCountOutputType
+   */
+
+  export type BrandSeriesCountOutputType = {
+    models: number
+    intakes: number
+  }
+
+  export type BrandSeriesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    models?: boolean | BrandSeriesCountOutputTypeCountModelsArgs
+    intakes?: boolean | BrandSeriesCountOutputTypeCountIntakesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BrandSeriesCountOutputType without action
+   */
+  export type BrandSeriesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeriesCountOutputType
+     */
+    select?: BrandSeriesCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BrandSeriesCountOutputType without action
+   */
+  export type BrandSeriesCountOutputTypeCountModelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandModelWhereInput
+  }
+
+  /**
+   * BrandSeriesCountOutputType without action
+   */
+  export type BrandSeriesCountOutputTypeCountIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeWhereInput
+  }
+
+
+  /**
+   * Count Type BrandModelCountOutputType
+   */
+
+  export type BrandModelCountOutputType = {
+    intakes: number
+  }
+
+  export type BrandModelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intakes?: boolean | BrandModelCountOutputTypeCountIntakesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BrandModelCountOutputType without action
+   */
+  export type BrandModelCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModelCountOutputType
+     */
+    select?: BrandModelCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BrandModelCountOutputType without action
+   */
+  export type BrandModelCountOutputTypeCountIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeWhereInput
+  }
+
+
+  /**
+   * Count Type RecyclingTypeCountOutputType
+   */
+
+  export type RecyclingTypeCountOutputType = {
+    intakes: number
+  }
+
+  export type RecyclingTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    intakes?: boolean | RecyclingTypeCountOutputTypeCountIntakesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * RecyclingTypeCountOutputType without action
+   */
+  export type RecyclingTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingTypeCountOutputType
+     */
+    select?: RecyclingTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * RecyclingTypeCountOutputType without action
+   */
+  export type RecyclingTypeCountOutputTypeCountIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeWhereInput
   }
 
 
@@ -4556,6 +5321,37 @@ export namespace Prisma {
    */
   export type ProductCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProductImageWhereInput
+  }
+
+
+  /**
+   * Count Type ProductIntakeCountOutputType
+   */
+
+  export type ProductIntakeCountOutputType = {
+    media: number
+  }
+
+  export type ProductIntakeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    media?: boolean | ProductIntakeCountOutputTypeCountMediaArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProductIntakeCountOutputType without action
+   */
+  export type ProductIntakeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeCountOutputType
+     */
+    select?: ProductIntakeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProductIntakeCountOutputType without action
+   */
+  export type ProductIntakeCountOutputTypeCountMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeMediaWhereInput
   }
 
 
@@ -5046,6 +5842,12 @@ export namespace Prisma {
     providerCallbackRoutes?: boolean | Tenant$providerCallbackRoutesArgs<ExtArgs>
     mediaUploadSessions?: boolean | Tenant$mediaUploadSessionsArgs<ExtArgs>
     mediaAssets?: boolean | Tenant$mediaAssetsArgs<ExtArgs>
+    brandSeries?: boolean | Tenant$brandSeriesArgs<ExtArgs>
+    brandModels?: boolean | Tenant$brandModelsArgs<ExtArgs>
+    brandCategories?: boolean | Tenant$brandCategoriesArgs<ExtArgs>
+    recyclingTypes?: boolean | Tenant$recyclingTypesArgs<ExtArgs>
+    productIntakes?: boolean | Tenant$productIntakesArgs<ExtArgs>
+    productIntakeMedia?: boolean | Tenant$productIntakeMediaArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -5117,6 +5919,12 @@ export namespace Prisma {
     providerCallbackRoutes?: boolean | Tenant$providerCallbackRoutesArgs<ExtArgs>
     mediaUploadSessions?: boolean | Tenant$mediaUploadSessionsArgs<ExtArgs>
     mediaAssets?: boolean | Tenant$mediaAssetsArgs<ExtArgs>
+    brandSeries?: boolean | Tenant$brandSeriesArgs<ExtArgs>
+    brandModels?: boolean | Tenant$brandModelsArgs<ExtArgs>
+    brandCategories?: boolean | Tenant$brandCategoriesArgs<ExtArgs>
+    recyclingTypes?: boolean | Tenant$recyclingTypesArgs<ExtArgs>
+    productIntakes?: boolean | Tenant$productIntakesArgs<ExtArgs>
+    productIntakeMedia?: boolean | Tenant$productIntakeMediaArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5142,6 +5950,12 @@ export namespace Prisma {
       providerCallbackRoutes: Prisma.$ProviderCallbackRoutePayload<ExtArgs>[]
       mediaUploadSessions: Prisma.$MediaUploadSessionPayload<ExtArgs>[]
       mediaAssets: Prisma.$MediaAssetPayload<ExtArgs>[]
+      brandSeries: Prisma.$BrandSeriesPayload<ExtArgs>[]
+      brandModels: Prisma.$BrandModelPayload<ExtArgs>[]
+      brandCategories: Prisma.$BrandCategoryPayload<ExtArgs>[]
+      recyclingTypes: Prisma.$RecyclingTypePayload<ExtArgs>[]
+      productIntakes: Prisma.$ProductIntakePayload<ExtArgs>[]
+      productIntakeMedia: Prisma.$ProductIntakeMediaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5563,6 +6377,12 @@ export namespace Prisma {
     providerCallbackRoutes<T extends Tenant$providerCallbackRoutesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$providerCallbackRoutesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProviderCallbackRoutePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mediaUploadSessions<T extends Tenant$mediaUploadSessionsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$mediaUploadSessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     mediaAssets<T extends Tenant$mediaAssetsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$mediaAssetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    brandSeries<T extends Tenant$brandSeriesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$brandSeriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    brandModels<T extends Tenant$brandModelsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$brandModelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    brandCategories<T extends Tenant$brandCategoriesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$brandCategoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recyclingTypes<T extends Tenant$recyclingTypesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$recyclingTypesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productIntakes<T extends Tenant$productIntakesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$productIntakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productIntakeMedia<T extends Tenant$productIntakeMediaArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$productIntakeMediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6253,6 +7073,150 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MediaAssetScalarFieldEnum | MediaAssetScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.brandSeries
+   */
+  export type Tenant$brandSeriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    where?: BrandSeriesWhereInput
+    orderBy?: BrandSeriesOrderByWithRelationInput | BrandSeriesOrderByWithRelationInput[]
+    cursor?: BrandSeriesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandSeriesScalarFieldEnum | BrandSeriesScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.brandModels
+   */
+  export type Tenant$brandModelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    where?: BrandModelWhereInput
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    cursor?: BrandModelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandModelScalarFieldEnum | BrandModelScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.brandCategories
+   */
+  export type Tenant$brandCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    where?: BrandCategoryWhereInput
+    orderBy?: BrandCategoryOrderByWithRelationInput | BrandCategoryOrderByWithRelationInput[]
+    cursor?: BrandCategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandCategoryScalarFieldEnum | BrandCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.recyclingTypes
+   */
+  export type Tenant$recyclingTypesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    where?: RecyclingTypeWhereInput
+    orderBy?: RecyclingTypeOrderByWithRelationInput | RecyclingTypeOrderByWithRelationInput[]
+    cursor?: RecyclingTypeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RecyclingTypeScalarFieldEnum | RecyclingTypeScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.productIntakes
+   */
+  export type Tenant$productIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    where?: ProductIntakeWhereInput
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    cursor?: ProductIntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.productIntakeMedia
+   */
+  export type Tenant$productIntakeMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    where?: ProductIntakeMediaWhereInput
+    orderBy?: ProductIntakeMediaOrderByWithRelationInput | ProductIntakeMediaOrderByWithRelationInput[]
+    cursor?: ProductIntakeMediaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeMediaScalarFieldEnum | ProductIntakeMediaScalarFieldEnum[]
   }
 
   /**
@@ -9760,6 +10724,8 @@ export namespace Prisma {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     userRoles?: boolean | AdminUser$userRolesArgs<ExtArgs>
     sessions?: boolean | AdminUser$sessionsArgs<ExtArgs>
+    appraisedIntakes?: boolean | AdminUser$appraisedIntakesArgs<ExtArgs>
+    recycledIntakes?: boolean | AdminUser$recycledIntakesArgs<ExtArgs>
     _count?: boolean | AdminUserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adminUser"]>
 
@@ -9803,6 +10769,8 @@ export namespace Prisma {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     userRoles?: boolean | AdminUser$userRolesArgs<ExtArgs>
     sessions?: boolean | AdminUser$sessionsArgs<ExtArgs>
+    appraisedIntakes?: boolean | AdminUser$appraisedIntakesArgs<ExtArgs>
+    recycledIntakes?: boolean | AdminUser$recycledIntakesArgs<ExtArgs>
     _count?: boolean | AdminUserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdminUserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9818,6 +10786,8 @@ export namespace Prisma {
       tenant: Prisma.$TenantPayload<ExtArgs>
       userRoles: Prisma.$UserRolePayload<ExtArgs>[]
       sessions: Prisma.$RefreshSessionPayload<ExtArgs>[]
+      appraisedIntakes: Prisma.$ProductIntakePayload<ExtArgs>[]
+      recycledIntakes: Prisma.$ProductIntakePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10225,6 +11195,8 @@ export namespace Prisma {
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     userRoles<T extends AdminUser$userRolesArgs<ExtArgs> = {}>(args?: Subset<T, AdminUser$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends AdminUser$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, AdminUser$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    appraisedIntakes<T extends AdminUser$appraisedIntakesArgs<ExtArgs> = {}>(args?: Subset<T, AdminUser$appraisedIntakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    recycledIntakes<T extends AdminUser$recycledIntakesArgs<ExtArgs> = {}>(args?: Subset<T, AdminUser$recycledIntakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10703,6 +11675,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RefreshSessionScalarFieldEnum | RefreshSessionScalarFieldEnum[]
+  }
+
+  /**
+   * AdminUser.appraisedIntakes
+   */
+  export type AdminUser$appraisedIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    where?: ProductIntakeWhereInput
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    cursor?: ProductIntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * AdminUser.recycledIntakes
+   */
+  export type AdminUser$recycledIntakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    where?: ProductIntakeWhereInput
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    cursor?: ProductIntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
   }
 
   /**
@@ -24515,6 +25535,7 @@ export namespace Prisma {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
     productImage?: boolean | MediaAsset$productImageArgs<ExtArgs>
+    productIntakeMedia?: boolean | MediaAsset$productIntakeMediaArgs<ExtArgs>
   }, ExtArgs["result"]["mediaAsset"]>
 
   export type MediaAssetSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -24577,6 +25598,7 @@ export namespace Prisma {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     uploadSession?: boolean | MediaUploadSessionDefaultArgs<ExtArgs>
     productImage?: boolean | MediaAsset$productImageArgs<ExtArgs>
+    productIntakeMedia?: boolean | MediaAsset$productIntakeMediaArgs<ExtArgs>
   }
   export type MediaAssetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
@@ -24593,6 +25615,7 @@ export namespace Prisma {
       tenant: Prisma.$TenantPayload<ExtArgs>
       uploadSession: Prisma.$MediaUploadSessionPayload<ExtArgs>
       productImage: Prisma.$ProductImagePayload<ExtArgs> | null
+      productIntakeMedia: Prisma.$ProductIntakeMediaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -25006,6 +26029,7 @@ export namespace Prisma {
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     uploadSession<T extends MediaUploadSessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MediaUploadSessionDefaultArgs<ExtArgs>>): Prisma__MediaUploadSessionClient<$Result.GetResult<Prisma.$MediaUploadSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     productImage<T extends MediaAsset$productImageArgs<ExtArgs> = {}>(args?: Subset<T, MediaAsset$productImageArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    productIntakeMedia<T extends MediaAsset$productIntakeMediaArgs<ExtArgs> = {}>(args?: Subset<T, MediaAsset$productIntakeMediaArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25461,6 +26485,25 @@ export namespace Prisma {
      */
     include?: ProductImageInclude<ExtArgs> | null
     where?: ProductImageWhereInput
+  }
+
+  /**
+   * MediaAsset.productIntakeMedia
+   */
+  export type MediaAsset$productIntakeMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    where?: ProductIntakeMediaWhereInput
   }
 
   /**
@@ -26705,6 +27748,8 @@ export namespace Prisma {
     parent?: boolean | Category$parentArgs<ExtArgs>
     children?: boolean | Category$childrenArgs<ExtArgs>
     products?: boolean | Category$productsArgs<ExtArgs>
+    brandModels?: boolean | Category$brandModelsArgs<ExtArgs>
+    brands?: boolean | Category$brandsArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
 
@@ -26754,6 +27799,8 @@ export namespace Prisma {
     parent?: boolean | Category$parentArgs<ExtArgs>
     children?: boolean | Category$childrenArgs<ExtArgs>
     products?: boolean | Category$productsArgs<ExtArgs>
+    brandModels?: boolean | Category$brandModelsArgs<ExtArgs>
+    brands?: boolean | Category$brandsArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -26769,6 +27816,8 @@ export namespace Prisma {
       parent: Prisma.$CategoryPayload<ExtArgs> | null
       children: Prisma.$CategoryPayload<ExtArgs>[]
       products: Prisma.$ProductPayload<ExtArgs>[]
+      brandModels: Prisma.$BrandModelPayload<ExtArgs>[]
+      brands: Prisma.$BrandCategoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -27178,6 +28227,8 @@ export namespace Prisma {
     parent<T extends Category$parentArgs<ExtArgs> = {}>(args?: Subset<T, Category$parentArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     children<T extends Category$childrenArgs<ExtArgs> = {}>(args?: Subset<T, Category$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     products<T extends Category$productsArgs<ExtArgs> = {}>(args?: Subset<T, Category$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    brandModels<T extends Category$brandModelsArgs<ExtArgs> = {}>(args?: Subset<T, Category$brandModelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    brands<T extends Category$brandsArgs<ExtArgs> = {}>(args?: Subset<T, Category$brandsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27680,6 +28731,54 @@ export namespace Prisma {
   }
 
   /**
+   * Category.brandModels
+   */
+  export type Category$brandModelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    where?: BrandModelWhereInput
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    cursor?: BrandModelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandModelScalarFieldEnum | BrandModelScalarFieldEnum[]
+  }
+
+  /**
+   * Category.brands
+   */
+  export type Category$brandsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    where?: BrandCategoryWhereInput
+    orderBy?: BrandCategoryOrderByWithRelationInput | BrandCategoryOrderByWithRelationInput[]
+    cursor?: BrandCategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandCategoryScalarFieldEnum | BrandCategoryScalarFieldEnum[]
+  }
+
+  /**
    * Category without action
    */
   export type CategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -27722,6 +28821,8 @@ export namespace Prisma {
     id: string | null
     tenantId: string | null
     name: string | null
+    englishName: string | null
+    initial: string | null
     logoUrl: string | null
     status: string | null
     version: number | null
@@ -27734,6 +28835,8 @@ export namespace Prisma {
     id: string | null
     tenantId: string | null
     name: string | null
+    englishName: string | null
+    initial: string | null
     logoUrl: string | null
     status: string | null
     version: number | null
@@ -27746,6 +28849,8 @@ export namespace Prisma {
     id: number
     tenantId: number
     name: number
+    englishName: number
+    initial: number
     logoUrl: number
     status: number
     version: number
@@ -27768,6 +28873,8 @@ export namespace Prisma {
     id?: true
     tenantId?: true
     name?: true
+    englishName?: true
+    initial?: true
     logoUrl?: true
     status?: true
     version?: true
@@ -27780,6 +28887,8 @@ export namespace Prisma {
     id?: true
     tenantId?: true
     name?: true
+    englishName?: true
+    initial?: true
     logoUrl?: true
     status?: true
     version?: true
@@ -27792,6 +28901,8 @@ export namespace Prisma {
     id?: true
     tenantId?: true
     name?: true
+    englishName?: true
+    initial?: true
     logoUrl?: true
     status?: true
     version?: true
@@ -27891,6 +29002,8 @@ export namespace Prisma {
     id: string
     tenantId: string
     name: string
+    englishName: string | null
+    initial: string
     logoUrl: string | null
     status: string
     version: number
@@ -27922,6 +29035,8 @@ export namespace Prisma {
     id?: boolean
     tenantId?: boolean
     name?: boolean
+    englishName?: boolean
+    initial?: boolean
     logoUrl?: boolean
     status?: boolean
     version?: boolean
@@ -27929,6 +29044,9 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     products?: boolean | Brand$productsArgs<ExtArgs>
+    series?: boolean | Brand$seriesArgs<ExtArgs>
+    models?: boolean | Brand$modelsArgs<ExtArgs>
+    categories?: boolean | Brand$categoriesArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["brand"]>
 
@@ -27936,6 +29054,8 @@ export namespace Prisma {
     id?: boolean
     tenantId?: boolean
     name?: boolean
+    englishName?: boolean
+    initial?: boolean
     logoUrl?: boolean
     status?: boolean
     version?: boolean
@@ -27948,6 +29068,8 @@ export namespace Prisma {
     id?: boolean
     tenantId?: boolean
     name?: boolean
+    englishName?: boolean
+    initial?: boolean
     logoUrl?: boolean
     status?: boolean
     version?: boolean
@@ -27960,6 +29082,8 @@ export namespace Prisma {
     id?: boolean
     tenantId?: boolean
     name?: boolean
+    englishName?: boolean
+    initial?: boolean
     logoUrl?: boolean
     status?: boolean
     version?: boolean
@@ -27968,9 +29092,12 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type BrandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "logoUrl" | "status" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
+  export type BrandOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "englishName" | "initial" | "logoUrl" | "status" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["brand"]>
   export type BrandInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     products?: boolean | Brand$productsArgs<ExtArgs>
+    series?: boolean | Brand$seriesArgs<ExtArgs>
+    models?: boolean | Brand$modelsArgs<ExtArgs>
+    categories?: boolean | Brand$categoriesArgs<ExtArgs>
     _count?: boolean | BrandCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type BrandIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -27980,11 +29107,16 @@ export namespace Prisma {
     name: "Brand"
     objects: {
       products: Prisma.$ProductPayload<ExtArgs>[]
+      series: Prisma.$BrandSeriesPayload<ExtArgs>[]
+      models: Prisma.$BrandModelPayload<ExtArgs>[]
+      categories: Prisma.$BrandCategoryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       tenantId: string
       name: string
+      englishName: string | null
+      initial: string
       logoUrl: string | null
       status: string
       version: number
@@ -28386,6 +29518,9 @@ export namespace Prisma {
   export interface Prisma__BrandClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     products<T extends Brand$productsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    series<T extends Brand$seriesArgs<ExtArgs> = {}>(args?: Subset<T, Brand$seriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    models<T extends Brand$modelsArgs<ExtArgs> = {}>(args?: Subset<T, Brand$modelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    categories<T extends Brand$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Brand$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28418,6 +29553,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Brand", 'String'>
     readonly tenantId: FieldRef<"Brand", 'String'>
     readonly name: FieldRef<"Brand", 'String'>
+    readonly englishName: FieldRef<"Brand", 'String'>
+    readonly initial: FieldRef<"Brand", 'String'>
     readonly logoUrl: FieldRef<"Brand", 'String'>
     readonly status: FieldRef<"Brand", 'String'>
     readonly version: FieldRef<"Brand", 'Int'>
@@ -28836,6 +29973,78 @@ export namespace Prisma {
   }
 
   /**
+   * Brand.series
+   */
+  export type Brand$seriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    where?: BrandSeriesWhereInput
+    orderBy?: BrandSeriesOrderByWithRelationInput | BrandSeriesOrderByWithRelationInput[]
+    cursor?: BrandSeriesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandSeriesScalarFieldEnum | BrandSeriesScalarFieldEnum[]
+  }
+
+  /**
+   * Brand.models
+   */
+  export type Brand$modelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    where?: BrandModelWhereInput
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    cursor?: BrandModelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandModelScalarFieldEnum | BrandModelScalarFieldEnum[]
+  }
+
+  /**
+   * Brand.categories
+   */
+  export type Brand$categoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    where?: BrandCategoryWhereInput
+    orderBy?: BrandCategoryOrderByWithRelationInput | BrandCategoryOrderByWithRelationInput[]
+    cursor?: BrandCategoryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandCategoryScalarFieldEnum | BrandCategoryScalarFieldEnum[]
+  }
+
+  /**
    * Brand without action
    */
   export type BrandDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -28851,6 +30060,4717 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: BrandInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BrandCategory
+   */
+
+  export type AggregateBrandCategory = {
+    _count: BrandCategoryCountAggregateOutputType | null
+    _min: BrandCategoryMinAggregateOutputType | null
+    _max: BrandCategoryMaxAggregateOutputType | null
+  }
+
+  export type BrandCategoryMinAggregateOutputType = {
+    tenantId: string | null
+    brandId: string | null
+    categoryId: string | null
+    createdAt: Date | null
+  }
+
+  export type BrandCategoryMaxAggregateOutputType = {
+    tenantId: string | null
+    brandId: string | null
+    categoryId: string | null
+    createdAt: Date | null
+  }
+
+  export type BrandCategoryCountAggregateOutputType = {
+    tenantId: number
+    brandId: number
+    categoryId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BrandCategoryMinAggregateInputType = {
+    tenantId?: true
+    brandId?: true
+    categoryId?: true
+    createdAt?: true
+  }
+
+  export type BrandCategoryMaxAggregateInputType = {
+    tenantId?: true
+    brandId?: true
+    categoryId?: true
+    createdAt?: true
+  }
+
+  export type BrandCategoryCountAggregateInputType = {
+    tenantId?: true
+    brandId?: true
+    categoryId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BrandCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandCategory to aggregate.
+     */
+    where?: BrandCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandCategories to fetch.
+     */
+    orderBy?: BrandCategoryOrderByWithRelationInput | BrandCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BrandCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BrandCategories
+    **/
+    _count?: true | BrandCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BrandCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BrandCategoryMaxAggregateInputType
+  }
+
+  export type GetBrandCategoryAggregateType<T extends BrandCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateBrandCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBrandCategory[P]>
+      : GetScalarType<T[P], AggregateBrandCategory[P]>
+  }
+
+
+
+
+  export type BrandCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandCategoryWhereInput
+    orderBy?: BrandCategoryOrderByWithAggregationInput | BrandCategoryOrderByWithAggregationInput[]
+    by: BrandCategoryScalarFieldEnum[] | BrandCategoryScalarFieldEnum
+    having?: BrandCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BrandCategoryCountAggregateInputType | true
+    _min?: BrandCategoryMinAggregateInputType
+    _max?: BrandCategoryMaxAggregateInputType
+  }
+
+  export type BrandCategoryGroupByOutputType = {
+    tenantId: string
+    brandId: string
+    categoryId: string
+    createdAt: Date
+    _count: BrandCategoryCountAggregateOutputType | null
+    _min: BrandCategoryMinAggregateOutputType | null
+    _max: BrandCategoryMaxAggregateOutputType | null
+  }
+
+  type GetBrandCategoryGroupByPayload<T extends BrandCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BrandCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BrandCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BrandCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], BrandCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BrandCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tenantId?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["brandCategory"]>
+
+  export type BrandCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tenantId?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["brandCategory"]>
+
+  export type BrandCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    tenantId?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["brandCategory"]>
+
+  export type BrandCategorySelectScalar = {
+    tenantId?: boolean
+    brandId?: boolean
+    categoryId?: boolean
+    createdAt?: boolean
+  }
+
+  export type BrandCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"tenantId" | "brandId" | "categoryId" | "createdAt", ExtArgs["result"]["brandCategory"]>
+  export type BrandCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+  export type BrandCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+  export type BrandCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $BrandCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BrandCategory"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      brand: Prisma.$BrandPayload<ExtArgs>
+      category: Prisma.$CategoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      tenantId: string
+      brandId: string
+      categoryId: string
+      createdAt: Date
+    }, ExtArgs["result"]["brandCategory"]>
+    composites: {}
+  }
+
+  type BrandCategoryGetPayload<S extends boolean | null | undefined | BrandCategoryDefaultArgs> = $Result.GetResult<Prisma.$BrandCategoryPayload, S>
+
+  type BrandCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BrandCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BrandCategoryCountAggregateInputType | true
+    }
+
+  export interface BrandCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BrandCategory'], meta: { name: 'BrandCategory' } }
+    /**
+     * Find zero or one BrandCategory that matches the filter.
+     * @param {BrandCategoryFindUniqueArgs} args - Arguments to find a BrandCategory
+     * @example
+     * // Get one BrandCategory
+     * const brandCategory = await prisma.brandCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BrandCategoryFindUniqueArgs>(args: SelectSubset<T, BrandCategoryFindUniqueArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BrandCategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BrandCategoryFindUniqueOrThrowArgs} args - Arguments to find a BrandCategory
+     * @example
+     * // Get one BrandCategory
+     * const brandCategory = await prisma.brandCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BrandCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, BrandCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BrandCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandCategoryFindFirstArgs} args - Arguments to find a BrandCategory
+     * @example
+     * // Get one BrandCategory
+     * const brandCategory = await prisma.brandCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BrandCategoryFindFirstArgs>(args?: SelectSubset<T, BrandCategoryFindFirstArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BrandCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandCategoryFindFirstOrThrowArgs} args - Arguments to find a BrandCategory
+     * @example
+     * // Get one BrandCategory
+     * const brandCategory = await prisma.brandCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BrandCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, BrandCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BrandCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BrandCategories
+     * const brandCategories = await prisma.brandCategory.findMany()
+     * 
+     * // Get first 10 BrandCategories
+     * const brandCategories = await prisma.brandCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `tenantId`
+     * const brandCategoryWithTenantIdOnly = await prisma.brandCategory.findMany({ select: { tenantId: true } })
+     * 
+     */
+    findMany<T extends BrandCategoryFindManyArgs>(args?: SelectSubset<T, BrandCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BrandCategory.
+     * @param {BrandCategoryCreateArgs} args - Arguments to create a BrandCategory.
+     * @example
+     * // Create one BrandCategory
+     * const BrandCategory = await prisma.brandCategory.create({
+     *   data: {
+     *     // ... data to create a BrandCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends BrandCategoryCreateArgs>(args: SelectSubset<T, BrandCategoryCreateArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BrandCategories.
+     * @param {BrandCategoryCreateManyArgs} args - Arguments to create many BrandCategories.
+     * @example
+     * // Create many BrandCategories
+     * const brandCategory = await prisma.brandCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BrandCategoryCreateManyArgs>(args?: SelectSubset<T, BrandCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BrandCategories and returns the data saved in the database.
+     * @param {BrandCategoryCreateManyAndReturnArgs} args - Arguments to create many BrandCategories.
+     * @example
+     * // Create many BrandCategories
+     * const brandCategory = await prisma.brandCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BrandCategories and only return the `tenantId`
+     * const brandCategoryWithTenantIdOnly = await prisma.brandCategory.createManyAndReturn({
+     *   select: { tenantId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BrandCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, BrandCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BrandCategory.
+     * @param {BrandCategoryDeleteArgs} args - Arguments to delete one BrandCategory.
+     * @example
+     * // Delete one BrandCategory
+     * const BrandCategory = await prisma.brandCategory.delete({
+     *   where: {
+     *     // ... filter to delete one BrandCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BrandCategoryDeleteArgs>(args: SelectSubset<T, BrandCategoryDeleteArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BrandCategory.
+     * @param {BrandCategoryUpdateArgs} args - Arguments to update one BrandCategory.
+     * @example
+     * // Update one BrandCategory
+     * const brandCategory = await prisma.brandCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BrandCategoryUpdateArgs>(args: SelectSubset<T, BrandCategoryUpdateArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BrandCategories.
+     * @param {BrandCategoryDeleteManyArgs} args - Arguments to filter BrandCategories to delete.
+     * @example
+     * // Delete a few BrandCategories
+     * const { count } = await prisma.brandCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BrandCategoryDeleteManyArgs>(args?: SelectSubset<T, BrandCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BrandCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BrandCategories
+     * const brandCategory = await prisma.brandCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BrandCategoryUpdateManyArgs>(args: SelectSubset<T, BrandCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BrandCategories and returns the data updated in the database.
+     * @param {BrandCategoryUpdateManyAndReturnArgs} args - Arguments to update many BrandCategories.
+     * @example
+     * // Update many BrandCategories
+     * const brandCategory = await prisma.brandCategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BrandCategories and only return the `tenantId`
+     * const brandCategoryWithTenantIdOnly = await prisma.brandCategory.updateManyAndReturn({
+     *   select: { tenantId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BrandCategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, BrandCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BrandCategory.
+     * @param {BrandCategoryUpsertArgs} args - Arguments to update or create a BrandCategory.
+     * @example
+     * // Update or create a BrandCategory
+     * const brandCategory = await prisma.brandCategory.upsert({
+     *   create: {
+     *     // ... data to create a BrandCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BrandCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BrandCategoryUpsertArgs>(args: SelectSubset<T, BrandCategoryUpsertArgs<ExtArgs>>): Prisma__BrandCategoryClient<$Result.GetResult<Prisma.$BrandCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BrandCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandCategoryCountArgs} args - Arguments to filter BrandCategories to count.
+     * @example
+     * // Count the number of BrandCategories
+     * const count = await prisma.brandCategory.count({
+     *   where: {
+     *     // ... the filter for the BrandCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends BrandCategoryCountArgs>(
+      args?: Subset<T, BrandCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BrandCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BrandCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BrandCategoryAggregateArgs>(args: Subset<T, BrandCategoryAggregateArgs>): Prisma.PrismaPromise<GetBrandCategoryAggregateType<T>>
+
+    /**
+     * Group by BrandCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BrandCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BrandCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: BrandCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BrandCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBrandCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BrandCategory model
+   */
+  readonly fields: BrandCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BrandCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BrandCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BrandCategory model
+   */
+  interface BrandCategoryFieldRefs {
+    readonly tenantId: FieldRef<"BrandCategory", 'String'>
+    readonly brandId: FieldRef<"BrandCategory", 'String'>
+    readonly categoryId: FieldRef<"BrandCategory", 'String'>
+    readonly createdAt: FieldRef<"BrandCategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BrandCategory findUnique
+   */
+  export type BrandCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandCategory to fetch.
+     */
+    where: BrandCategoryWhereUniqueInput
+  }
+
+  /**
+   * BrandCategory findUniqueOrThrow
+   */
+  export type BrandCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandCategory to fetch.
+     */
+    where: BrandCategoryWhereUniqueInput
+  }
+
+  /**
+   * BrandCategory findFirst
+   */
+  export type BrandCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandCategory to fetch.
+     */
+    where?: BrandCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandCategories to fetch.
+     */
+    orderBy?: BrandCategoryOrderByWithRelationInput | BrandCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandCategories.
+     */
+    cursor?: BrandCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandCategories.
+     */
+    distinct?: BrandCategoryScalarFieldEnum | BrandCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * BrandCategory findFirstOrThrow
+   */
+  export type BrandCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandCategory to fetch.
+     */
+    where?: BrandCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandCategories to fetch.
+     */
+    orderBy?: BrandCategoryOrderByWithRelationInput | BrandCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandCategories.
+     */
+    cursor?: BrandCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandCategories.
+     */
+    distinct?: BrandCategoryScalarFieldEnum | BrandCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * BrandCategory findMany
+   */
+  export type BrandCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandCategories to fetch.
+     */
+    where?: BrandCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandCategories to fetch.
+     */
+    orderBy?: BrandCategoryOrderByWithRelationInput | BrandCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BrandCategories.
+     */
+    cursor?: BrandCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandCategories.
+     */
+    skip?: number
+    distinct?: BrandCategoryScalarFieldEnum | BrandCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * BrandCategory create
+   */
+  export type BrandCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BrandCategory.
+     */
+    data: XOR<BrandCategoryCreateInput, BrandCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * BrandCategory createMany
+   */
+  export type BrandCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BrandCategories.
+     */
+    data: BrandCategoryCreateManyInput | BrandCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BrandCategory createManyAndReturn
+   */
+  export type BrandCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many BrandCategories.
+     */
+    data: BrandCategoryCreateManyInput | BrandCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BrandCategory update
+   */
+  export type BrandCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BrandCategory.
+     */
+    data: XOR<BrandCategoryUpdateInput, BrandCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which BrandCategory to update.
+     */
+    where: BrandCategoryWhereUniqueInput
+  }
+
+  /**
+   * BrandCategory updateMany
+   */
+  export type BrandCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BrandCategories.
+     */
+    data: XOR<BrandCategoryUpdateManyMutationInput, BrandCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which BrandCategories to update
+     */
+    where?: BrandCategoryWhereInput
+    /**
+     * Limit how many BrandCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BrandCategory updateManyAndReturn
+   */
+  export type BrandCategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update BrandCategories.
+     */
+    data: XOR<BrandCategoryUpdateManyMutationInput, BrandCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which BrandCategories to update
+     */
+    where?: BrandCategoryWhereInput
+    /**
+     * Limit how many BrandCategories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BrandCategory upsert
+   */
+  export type BrandCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BrandCategory to update in case it exists.
+     */
+    where: BrandCategoryWhereUniqueInput
+    /**
+     * In case the BrandCategory found by the `where` argument doesn't exist, create a new BrandCategory with this data.
+     */
+    create: XOR<BrandCategoryCreateInput, BrandCategoryUncheckedCreateInput>
+    /**
+     * In case the BrandCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BrandCategoryUpdateInput, BrandCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * BrandCategory delete
+   */
+  export type BrandCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which BrandCategory to delete.
+     */
+    where: BrandCategoryWhereUniqueInput
+  }
+
+  /**
+   * BrandCategory deleteMany
+   */
+  export type BrandCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandCategories to delete
+     */
+    where?: BrandCategoryWhereInput
+    /**
+     * Limit how many BrandCategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BrandCategory without action
+   */
+  export type BrandCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandCategory
+     */
+    select?: BrandCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandCategory
+     */
+    omit?: BrandCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BrandSeries
+   */
+
+  export type AggregateBrandSeries = {
+    _count: BrandSeriesCountAggregateOutputType | null
+    _avg: BrandSeriesAvgAggregateOutputType | null
+    _sum: BrandSeriesSumAggregateOutputType | null
+    _min: BrandSeriesMinAggregateOutputType | null
+    _max: BrandSeriesMaxAggregateOutputType | null
+  }
+
+  export type BrandSeriesAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type BrandSeriesSumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type BrandSeriesMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    brandId: string | null
+    name: string | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BrandSeriesMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    brandId: string | null
+    name: string | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BrandSeriesCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    brandId: number
+    name: number
+    status: number
+    version: number
+    deletedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BrandSeriesAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type BrandSeriesSumAggregateInputType = {
+    version?: true
+  }
+
+  export type BrandSeriesMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    brandId?: true
+    name?: true
+    status?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BrandSeriesMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    brandId?: true
+    name?: true
+    status?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BrandSeriesCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    brandId?: true
+    name?: true
+    status?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BrandSeriesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandSeries to aggregate.
+     */
+    where?: BrandSeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandSeries to fetch.
+     */
+    orderBy?: BrandSeriesOrderByWithRelationInput | BrandSeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BrandSeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandSeries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandSeries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BrandSeries
+    **/
+    _count?: true | BrandSeriesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BrandSeriesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BrandSeriesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BrandSeriesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BrandSeriesMaxAggregateInputType
+  }
+
+  export type GetBrandSeriesAggregateType<T extends BrandSeriesAggregateArgs> = {
+        [P in keyof T & keyof AggregateBrandSeries]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBrandSeries[P]>
+      : GetScalarType<T[P], AggregateBrandSeries[P]>
+  }
+
+
+
+
+  export type BrandSeriesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandSeriesWhereInput
+    orderBy?: BrandSeriesOrderByWithAggregationInput | BrandSeriesOrderByWithAggregationInput[]
+    by: BrandSeriesScalarFieldEnum[] | BrandSeriesScalarFieldEnum
+    having?: BrandSeriesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BrandSeriesCountAggregateInputType | true
+    _avg?: BrandSeriesAvgAggregateInputType
+    _sum?: BrandSeriesSumAggregateInputType
+    _min?: BrandSeriesMinAggregateInputType
+    _max?: BrandSeriesMaxAggregateInputType
+  }
+
+  export type BrandSeriesGroupByOutputType = {
+    id: string
+    tenantId: string
+    brandId: string
+    name: string
+    status: string
+    version: number
+    deletedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BrandSeriesCountAggregateOutputType | null
+    _avg: BrandSeriesAvgAggregateOutputType | null
+    _sum: BrandSeriesSumAggregateOutputType | null
+    _min: BrandSeriesMinAggregateOutputType | null
+    _max: BrandSeriesMaxAggregateOutputType | null
+  }
+
+  type GetBrandSeriesGroupByPayload<T extends BrandSeriesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BrandSeriesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BrandSeriesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BrandSeriesGroupByOutputType[P]>
+            : GetScalarType<T[P], BrandSeriesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BrandSeriesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    name?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    models?: boolean | BrandSeries$modelsArgs<ExtArgs>
+    intakes?: boolean | BrandSeries$intakesArgs<ExtArgs>
+    _count?: boolean | BrandSeriesCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["brandSeries"]>
+
+  export type BrandSeriesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    name?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["brandSeries"]>
+
+  export type BrandSeriesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    name?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["brandSeries"]>
+
+  export type BrandSeriesSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    name?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BrandSeriesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "brandId" | "name" | "status" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["brandSeries"]>
+  export type BrandSeriesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    models?: boolean | BrandSeries$modelsArgs<ExtArgs>
+    intakes?: boolean | BrandSeries$intakesArgs<ExtArgs>
+    _count?: boolean | BrandSeriesCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BrandSeriesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+  }
+  export type BrandSeriesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+  }
+
+  export type $BrandSeriesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BrandSeries"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      brand: Prisma.$BrandPayload<ExtArgs>
+      models: Prisma.$BrandModelPayload<ExtArgs>[]
+      intakes: Prisma.$ProductIntakePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      brandId: string
+      name: string
+      status: string
+      version: number
+      deletedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["brandSeries"]>
+    composites: {}
+  }
+
+  type BrandSeriesGetPayload<S extends boolean | null | undefined | BrandSeriesDefaultArgs> = $Result.GetResult<Prisma.$BrandSeriesPayload, S>
+
+  type BrandSeriesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BrandSeriesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BrandSeriesCountAggregateInputType | true
+    }
+
+  export interface BrandSeriesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BrandSeries'], meta: { name: 'BrandSeries' } }
+    /**
+     * Find zero or one BrandSeries that matches the filter.
+     * @param {BrandSeriesFindUniqueArgs} args - Arguments to find a BrandSeries
+     * @example
+     * // Get one BrandSeries
+     * const brandSeries = await prisma.brandSeries.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BrandSeriesFindUniqueArgs>(args: SelectSubset<T, BrandSeriesFindUniqueArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BrandSeries that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BrandSeriesFindUniqueOrThrowArgs} args - Arguments to find a BrandSeries
+     * @example
+     * // Get one BrandSeries
+     * const brandSeries = await prisma.brandSeries.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BrandSeriesFindUniqueOrThrowArgs>(args: SelectSubset<T, BrandSeriesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BrandSeries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandSeriesFindFirstArgs} args - Arguments to find a BrandSeries
+     * @example
+     * // Get one BrandSeries
+     * const brandSeries = await prisma.brandSeries.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BrandSeriesFindFirstArgs>(args?: SelectSubset<T, BrandSeriesFindFirstArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BrandSeries that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandSeriesFindFirstOrThrowArgs} args - Arguments to find a BrandSeries
+     * @example
+     * // Get one BrandSeries
+     * const brandSeries = await prisma.brandSeries.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BrandSeriesFindFirstOrThrowArgs>(args?: SelectSubset<T, BrandSeriesFindFirstOrThrowArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BrandSeries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandSeriesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BrandSeries
+     * const brandSeries = await prisma.brandSeries.findMany()
+     * 
+     * // Get first 10 BrandSeries
+     * const brandSeries = await prisma.brandSeries.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const brandSeriesWithIdOnly = await prisma.brandSeries.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BrandSeriesFindManyArgs>(args?: SelectSubset<T, BrandSeriesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BrandSeries.
+     * @param {BrandSeriesCreateArgs} args - Arguments to create a BrandSeries.
+     * @example
+     * // Create one BrandSeries
+     * const BrandSeries = await prisma.brandSeries.create({
+     *   data: {
+     *     // ... data to create a BrandSeries
+     *   }
+     * })
+     * 
+     */
+    create<T extends BrandSeriesCreateArgs>(args: SelectSubset<T, BrandSeriesCreateArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BrandSeries.
+     * @param {BrandSeriesCreateManyArgs} args - Arguments to create many BrandSeries.
+     * @example
+     * // Create many BrandSeries
+     * const brandSeries = await prisma.brandSeries.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BrandSeriesCreateManyArgs>(args?: SelectSubset<T, BrandSeriesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BrandSeries and returns the data saved in the database.
+     * @param {BrandSeriesCreateManyAndReturnArgs} args - Arguments to create many BrandSeries.
+     * @example
+     * // Create many BrandSeries
+     * const brandSeries = await prisma.brandSeries.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BrandSeries and only return the `id`
+     * const brandSeriesWithIdOnly = await prisma.brandSeries.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BrandSeriesCreateManyAndReturnArgs>(args?: SelectSubset<T, BrandSeriesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BrandSeries.
+     * @param {BrandSeriesDeleteArgs} args - Arguments to delete one BrandSeries.
+     * @example
+     * // Delete one BrandSeries
+     * const BrandSeries = await prisma.brandSeries.delete({
+     *   where: {
+     *     // ... filter to delete one BrandSeries
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BrandSeriesDeleteArgs>(args: SelectSubset<T, BrandSeriesDeleteArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BrandSeries.
+     * @param {BrandSeriesUpdateArgs} args - Arguments to update one BrandSeries.
+     * @example
+     * // Update one BrandSeries
+     * const brandSeries = await prisma.brandSeries.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BrandSeriesUpdateArgs>(args: SelectSubset<T, BrandSeriesUpdateArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BrandSeries.
+     * @param {BrandSeriesDeleteManyArgs} args - Arguments to filter BrandSeries to delete.
+     * @example
+     * // Delete a few BrandSeries
+     * const { count } = await prisma.brandSeries.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BrandSeriesDeleteManyArgs>(args?: SelectSubset<T, BrandSeriesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BrandSeries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandSeriesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BrandSeries
+     * const brandSeries = await prisma.brandSeries.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BrandSeriesUpdateManyArgs>(args: SelectSubset<T, BrandSeriesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BrandSeries and returns the data updated in the database.
+     * @param {BrandSeriesUpdateManyAndReturnArgs} args - Arguments to update many BrandSeries.
+     * @example
+     * // Update many BrandSeries
+     * const brandSeries = await prisma.brandSeries.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BrandSeries and only return the `id`
+     * const brandSeriesWithIdOnly = await prisma.brandSeries.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BrandSeriesUpdateManyAndReturnArgs>(args: SelectSubset<T, BrandSeriesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BrandSeries.
+     * @param {BrandSeriesUpsertArgs} args - Arguments to update or create a BrandSeries.
+     * @example
+     * // Update or create a BrandSeries
+     * const brandSeries = await prisma.brandSeries.upsert({
+     *   create: {
+     *     // ... data to create a BrandSeries
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BrandSeries we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BrandSeriesUpsertArgs>(args: SelectSubset<T, BrandSeriesUpsertArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BrandSeries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandSeriesCountArgs} args - Arguments to filter BrandSeries to count.
+     * @example
+     * // Count the number of BrandSeries
+     * const count = await prisma.brandSeries.count({
+     *   where: {
+     *     // ... the filter for the BrandSeries we want to count
+     *   }
+     * })
+    **/
+    count<T extends BrandSeriesCountArgs>(
+      args?: Subset<T, BrandSeriesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BrandSeriesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BrandSeries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandSeriesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BrandSeriesAggregateArgs>(args: Subset<T, BrandSeriesAggregateArgs>): Prisma.PrismaPromise<GetBrandSeriesAggregateType<T>>
+
+    /**
+     * Group by BrandSeries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandSeriesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BrandSeriesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BrandSeriesGroupByArgs['orderBy'] }
+        : { orderBy?: BrandSeriesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BrandSeriesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBrandSeriesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BrandSeries model
+   */
+  readonly fields: BrandSeriesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BrandSeries.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BrandSeriesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    models<T extends BrandSeries$modelsArgs<ExtArgs> = {}>(args?: Subset<T, BrandSeries$modelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intakes<T extends BrandSeries$intakesArgs<ExtArgs> = {}>(args?: Subset<T, BrandSeries$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BrandSeries model
+   */
+  interface BrandSeriesFieldRefs {
+    readonly id: FieldRef<"BrandSeries", 'String'>
+    readonly tenantId: FieldRef<"BrandSeries", 'String'>
+    readonly brandId: FieldRef<"BrandSeries", 'String'>
+    readonly name: FieldRef<"BrandSeries", 'String'>
+    readonly status: FieldRef<"BrandSeries", 'String'>
+    readonly version: FieldRef<"BrandSeries", 'Int'>
+    readonly deletedAt: FieldRef<"BrandSeries", 'DateTime'>
+    readonly createdAt: FieldRef<"BrandSeries", 'DateTime'>
+    readonly updatedAt: FieldRef<"BrandSeries", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BrandSeries findUnique
+   */
+  export type BrandSeriesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandSeries to fetch.
+     */
+    where: BrandSeriesWhereUniqueInput
+  }
+
+  /**
+   * BrandSeries findUniqueOrThrow
+   */
+  export type BrandSeriesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandSeries to fetch.
+     */
+    where: BrandSeriesWhereUniqueInput
+  }
+
+  /**
+   * BrandSeries findFirst
+   */
+  export type BrandSeriesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandSeries to fetch.
+     */
+    where?: BrandSeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandSeries to fetch.
+     */
+    orderBy?: BrandSeriesOrderByWithRelationInput | BrandSeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandSeries.
+     */
+    cursor?: BrandSeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandSeries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandSeries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandSeries.
+     */
+    distinct?: BrandSeriesScalarFieldEnum | BrandSeriesScalarFieldEnum[]
+  }
+
+  /**
+   * BrandSeries findFirstOrThrow
+   */
+  export type BrandSeriesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandSeries to fetch.
+     */
+    where?: BrandSeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandSeries to fetch.
+     */
+    orderBy?: BrandSeriesOrderByWithRelationInput | BrandSeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandSeries.
+     */
+    cursor?: BrandSeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandSeries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandSeries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandSeries.
+     */
+    distinct?: BrandSeriesScalarFieldEnum | BrandSeriesScalarFieldEnum[]
+  }
+
+  /**
+   * BrandSeries findMany
+   */
+  export type BrandSeriesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandSeries to fetch.
+     */
+    where?: BrandSeriesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandSeries to fetch.
+     */
+    orderBy?: BrandSeriesOrderByWithRelationInput | BrandSeriesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BrandSeries.
+     */
+    cursor?: BrandSeriesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandSeries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandSeries.
+     */
+    skip?: number
+    distinct?: BrandSeriesScalarFieldEnum | BrandSeriesScalarFieldEnum[]
+  }
+
+  /**
+   * BrandSeries create
+   */
+  export type BrandSeriesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BrandSeries.
+     */
+    data: XOR<BrandSeriesCreateInput, BrandSeriesUncheckedCreateInput>
+  }
+
+  /**
+   * BrandSeries createMany
+   */
+  export type BrandSeriesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BrandSeries.
+     */
+    data: BrandSeriesCreateManyInput | BrandSeriesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BrandSeries createManyAndReturn
+   */
+  export type BrandSeriesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * The data used to create many BrandSeries.
+     */
+    data: BrandSeriesCreateManyInput | BrandSeriesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BrandSeries update
+   */
+  export type BrandSeriesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BrandSeries.
+     */
+    data: XOR<BrandSeriesUpdateInput, BrandSeriesUncheckedUpdateInput>
+    /**
+     * Choose, which BrandSeries to update.
+     */
+    where: BrandSeriesWhereUniqueInput
+  }
+
+  /**
+   * BrandSeries updateMany
+   */
+  export type BrandSeriesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BrandSeries.
+     */
+    data: XOR<BrandSeriesUpdateManyMutationInput, BrandSeriesUncheckedUpdateManyInput>
+    /**
+     * Filter which BrandSeries to update
+     */
+    where?: BrandSeriesWhereInput
+    /**
+     * Limit how many BrandSeries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BrandSeries updateManyAndReturn
+   */
+  export type BrandSeriesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * The data used to update BrandSeries.
+     */
+    data: XOR<BrandSeriesUpdateManyMutationInput, BrandSeriesUncheckedUpdateManyInput>
+    /**
+     * Filter which BrandSeries to update
+     */
+    where?: BrandSeriesWhereInput
+    /**
+     * Limit how many BrandSeries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BrandSeries upsert
+   */
+  export type BrandSeriesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BrandSeries to update in case it exists.
+     */
+    where: BrandSeriesWhereUniqueInput
+    /**
+     * In case the BrandSeries found by the `where` argument doesn't exist, create a new BrandSeries with this data.
+     */
+    create: XOR<BrandSeriesCreateInput, BrandSeriesUncheckedCreateInput>
+    /**
+     * In case the BrandSeries was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BrandSeriesUpdateInput, BrandSeriesUncheckedUpdateInput>
+  }
+
+  /**
+   * BrandSeries delete
+   */
+  export type BrandSeriesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    /**
+     * Filter which BrandSeries to delete.
+     */
+    where: BrandSeriesWhereUniqueInput
+  }
+
+  /**
+   * BrandSeries deleteMany
+   */
+  export type BrandSeriesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandSeries to delete
+     */
+    where?: BrandSeriesWhereInput
+    /**
+     * Limit how many BrandSeries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BrandSeries.models
+   */
+  export type BrandSeries$modelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    where?: BrandModelWhereInput
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    cursor?: BrandModelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BrandModelScalarFieldEnum | BrandModelScalarFieldEnum[]
+  }
+
+  /**
+   * BrandSeries.intakes
+   */
+  export type BrandSeries$intakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    where?: ProductIntakeWhereInput
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    cursor?: ProductIntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * BrandSeries without action
+   */
+  export type BrandSeriesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BrandModel
+   */
+
+  export type AggregateBrandModel = {
+    _count: BrandModelCountAggregateOutputType | null
+    _avg: BrandModelAvgAggregateOutputType | null
+    _sum: BrandModelSumAggregateOutputType | null
+    _min: BrandModelMinAggregateOutputType | null
+    _max: BrandModelMaxAggregateOutputType | null
+  }
+
+  export type BrandModelAvgAggregateOutputType = {
+    officialGuidePrice: Decimal | null
+    version: number | null
+  }
+
+  export type BrandModelSumAggregateOutputType = {
+    officialGuidePrice: Decimal | null
+    version: number | null
+  }
+
+  export type BrandModelMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    brandId: string | null
+    seriesId: string | null
+    categoryId: string | null
+    name: string | null
+    officialGuidePrice: Decimal | null
+    defaultMaterial: string | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BrandModelMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    brandId: string | null
+    seriesId: string | null
+    categoryId: string | null
+    name: string | null
+    officialGuidePrice: Decimal | null
+    defaultMaterial: string | null
+    status: string | null
+    version: number | null
+    deletedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BrandModelCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    brandId: number
+    seriesId: number
+    categoryId: number
+    name: number
+    officialGuidePrice: number
+    defaultMaterial: number
+    status: number
+    version: number
+    deletedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BrandModelAvgAggregateInputType = {
+    officialGuidePrice?: true
+    version?: true
+  }
+
+  export type BrandModelSumAggregateInputType = {
+    officialGuidePrice?: true
+    version?: true
+  }
+
+  export type BrandModelMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    brandId?: true
+    seriesId?: true
+    categoryId?: true
+    name?: true
+    officialGuidePrice?: true
+    defaultMaterial?: true
+    status?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BrandModelMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    brandId?: true
+    seriesId?: true
+    categoryId?: true
+    name?: true
+    officialGuidePrice?: true
+    defaultMaterial?: true
+    status?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BrandModelCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    brandId?: true
+    seriesId?: true
+    categoryId?: true
+    name?: true
+    officialGuidePrice?: true
+    defaultMaterial?: true
+    status?: true
+    version?: true
+    deletedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BrandModelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandModel to aggregate.
+     */
+    where?: BrandModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandModels to fetch.
+     */
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BrandModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandModels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandModels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BrandModels
+    **/
+    _count?: true | BrandModelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BrandModelAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BrandModelSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BrandModelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BrandModelMaxAggregateInputType
+  }
+
+  export type GetBrandModelAggregateType<T extends BrandModelAggregateArgs> = {
+        [P in keyof T & keyof AggregateBrandModel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBrandModel[P]>
+      : GetScalarType<T[P], AggregateBrandModel[P]>
+  }
+
+
+
+
+  export type BrandModelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BrandModelWhereInput
+    orderBy?: BrandModelOrderByWithAggregationInput | BrandModelOrderByWithAggregationInput[]
+    by: BrandModelScalarFieldEnum[] | BrandModelScalarFieldEnum
+    having?: BrandModelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BrandModelCountAggregateInputType | true
+    _avg?: BrandModelAvgAggregateInputType
+    _sum?: BrandModelSumAggregateInputType
+    _min?: BrandModelMinAggregateInputType
+    _max?: BrandModelMaxAggregateInputType
+  }
+
+  export type BrandModelGroupByOutputType = {
+    id: string
+    tenantId: string
+    brandId: string
+    seriesId: string | null
+    categoryId: string | null
+    name: string
+    officialGuidePrice: Decimal | null
+    defaultMaterial: string | null
+    status: string
+    version: number
+    deletedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BrandModelCountAggregateOutputType | null
+    _avg: BrandModelAvgAggregateOutputType | null
+    _sum: BrandModelSumAggregateOutputType | null
+    _min: BrandModelMinAggregateOutputType | null
+    _max: BrandModelMaxAggregateOutputType | null
+  }
+
+  type GetBrandModelGroupByPayload<T extends BrandModelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BrandModelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BrandModelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BrandModelGroupByOutputType[P]>
+            : GetScalarType<T[P], BrandModelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BrandModelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    seriesId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    officialGuidePrice?: boolean
+    defaultMaterial?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    series?: boolean | BrandModel$seriesArgs<ExtArgs>
+    category?: boolean | BrandModel$categoryArgs<ExtArgs>
+    intakes?: boolean | BrandModel$intakesArgs<ExtArgs>
+    _count?: boolean | BrandModelCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["brandModel"]>
+
+  export type BrandModelSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    seriesId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    officialGuidePrice?: boolean
+    defaultMaterial?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    series?: boolean | BrandModel$seriesArgs<ExtArgs>
+    category?: boolean | BrandModel$categoryArgs<ExtArgs>
+  }, ExtArgs["result"]["brandModel"]>
+
+  export type BrandModelSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    seriesId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    officialGuidePrice?: boolean
+    defaultMaterial?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    series?: boolean | BrandModel$seriesArgs<ExtArgs>
+    category?: boolean | BrandModel$categoryArgs<ExtArgs>
+  }, ExtArgs["result"]["brandModel"]>
+
+  export type BrandModelSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    brandId?: boolean
+    seriesId?: boolean
+    categoryId?: boolean
+    name?: boolean
+    officialGuidePrice?: boolean
+    defaultMaterial?: boolean
+    status?: boolean
+    version?: boolean
+    deletedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BrandModelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "brandId" | "seriesId" | "categoryId" | "name" | "officialGuidePrice" | "defaultMaterial" | "status" | "version" | "deletedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["brandModel"]>
+  export type BrandModelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    series?: boolean | BrandModel$seriesArgs<ExtArgs>
+    category?: boolean | BrandModel$categoryArgs<ExtArgs>
+    intakes?: boolean | BrandModel$intakesArgs<ExtArgs>
+    _count?: boolean | BrandModelCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BrandModelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    series?: boolean | BrandModel$seriesArgs<ExtArgs>
+    category?: boolean | BrandModel$categoryArgs<ExtArgs>
+  }
+  export type BrandModelIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    brand?: boolean | BrandDefaultArgs<ExtArgs>
+    series?: boolean | BrandModel$seriesArgs<ExtArgs>
+    category?: boolean | BrandModel$categoryArgs<ExtArgs>
+  }
+
+  export type $BrandModelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BrandModel"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      brand: Prisma.$BrandPayload<ExtArgs>
+      series: Prisma.$BrandSeriesPayload<ExtArgs> | null
+      category: Prisma.$CategoryPayload<ExtArgs> | null
+      intakes: Prisma.$ProductIntakePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      brandId: string
+      seriesId: string | null
+      categoryId: string | null
+      name: string
+      officialGuidePrice: Prisma.Decimal | null
+      defaultMaterial: string | null
+      status: string
+      version: number
+      deletedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["brandModel"]>
+    composites: {}
+  }
+
+  type BrandModelGetPayload<S extends boolean | null | undefined | BrandModelDefaultArgs> = $Result.GetResult<Prisma.$BrandModelPayload, S>
+
+  type BrandModelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BrandModelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BrandModelCountAggregateInputType | true
+    }
+
+  export interface BrandModelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BrandModel'], meta: { name: 'BrandModel' } }
+    /**
+     * Find zero or one BrandModel that matches the filter.
+     * @param {BrandModelFindUniqueArgs} args - Arguments to find a BrandModel
+     * @example
+     * // Get one BrandModel
+     * const brandModel = await prisma.brandModel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BrandModelFindUniqueArgs>(args: SelectSubset<T, BrandModelFindUniqueArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BrandModel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BrandModelFindUniqueOrThrowArgs} args - Arguments to find a BrandModel
+     * @example
+     * // Get one BrandModel
+     * const brandModel = await prisma.brandModel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BrandModelFindUniqueOrThrowArgs>(args: SelectSubset<T, BrandModelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BrandModel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandModelFindFirstArgs} args - Arguments to find a BrandModel
+     * @example
+     * // Get one BrandModel
+     * const brandModel = await prisma.brandModel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BrandModelFindFirstArgs>(args?: SelectSubset<T, BrandModelFindFirstArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BrandModel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandModelFindFirstOrThrowArgs} args - Arguments to find a BrandModel
+     * @example
+     * // Get one BrandModel
+     * const brandModel = await prisma.brandModel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BrandModelFindFirstOrThrowArgs>(args?: SelectSubset<T, BrandModelFindFirstOrThrowArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BrandModels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandModelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BrandModels
+     * const brandModels = await prisma.brandModel.findMany()
+     * 
+     * // Get first 10 BrandModels
+     * const brandModels = await prisma.brandModel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const brandModelWithIdOnly = await prisma.brandModel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BrandModelFindManyArgs>(args?: SelectSubset<T, BrandModelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BrandModel.
+     * @param {BrandModelCreateArgs} args - Arguments to create a BrandModel.
+     * @example
+     * // Create one BrandModel
+     * const BrandModel = await prisma.brandModel.create({
+     *   data: {
+     *     // ... data to create a BrandModel
+     *   }
+     * })
+     * 
+     */
+    create<T extends BrandModelCreateArgs>(args: SelectSubset<T, BrandModelCreateArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BrandModels.
+     * @param {BrandModelCreateManyArgs} args - Arguments to create many BrandModels.
+     * @example
+     * // Create many BrandModels
+     * const brandModel = await prisma.brandModel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BrandModelCreateManyArgs>(args?: SelectSubset<T, BrandModelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BrandModels and returns the data saved in the database.
+     * @param {BrandModelCreateManyAndReturnArgs} args - Arguments to create many BrandModels.
+     * @example
+     * // Create many BrandModels
+     * const brandModel = await prisma.brandModel.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BrandModels and only return the `id`
+     * const brandModelWithIdOnly = await prisma.brandModel.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BrandModelCreateManyAndReturnArgs>(args?: SelectSubset<T, BrandModelCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BrandModel.
+     * @param {BrandModelDeleteArgs} args - Arguments to delete one BrandModel.
+     * @example
+     * // Delete one BrandModel
+     * const BrandModel = await prisma.brandModel.delete({
+     *   where: {
+     *     // ... filter to delete one BrandModel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BrandModelDeleteArgs>(args: SelectSubset<T, BrandModelDeleteArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BrandModel.
+     * @param {BrandModelUpdateArgs} args - Arguments to update one BrandModel.
+     * @example
+     * // Update one BrandModel
+     * const brandModel = await prisma.brandModel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BrandModelUpdateArgs>(args: SelectSubset<T, BrandModelUpdateArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BrandModels.
+     * @param {BrandModelDeleteManyArgs} args - Arguments to filter BrandModels to delete.
+     * @example
+     * // Delete a few BrandModels
+     * const { count } = await prisma.brandModel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BrandModelDeleteManyArgs>(args?: SelectSubset<T, BrandModelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BrandModels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandModelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BrandModels
+     * const brandModel = await prisma.brandModel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BrandModelUpdateManyArgs>(args: SelectSubset<T, BrandModelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BrandModels and returns the data updated in the database.
+     * @param {BrandModelUpdateManyAndReturnArgs} args - Arguments to update many BrandModels.
+     * @example
+     * // Update many BrandModels
+     * const brandModel = await prisma.brandModel.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BrandModels and only return the `id`
+     * const brandModelWithIdOnly = await prisma.brandModel.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BrandModelUpdateManyAndReturnArgs>(args: SelectSubset<T, BrandModelUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BrandModel.
+     * @param {BrandModelUpsertArgs} args - Arguments to update or create a BrandModel.
+     * @example
+     * // Update or create a BrandModel
+     * const brandModel = await prisma.brandModel.upsert({
+     *   create: {
+     *     // ... data to create a BrandModel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BrandModel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BrandModelUpsertArgs>(args: SelectSubset<T, BrandModelUpsertArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BrandModels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandModelCountArgs} args - Arguments to filter BrandModels to count.
+     * @example
+     * // Count the number of BrandModels
+     * const count = await prisma.brandModel.count({
+     *   where: {
+     *     // ... the filter for the BrandModels we want to count
+     *   }
+     * })
+    **/
+    count<T extends BrandModelCountArgs>(
+      args?: Subset<T, BrandModelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BrandModelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BrandModel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandModelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BrandModelAggregateArgs>(args: Subset<T, BrandModelAggregateArgs>): Prisma.PrismaPromise<GetBrandModelAggregateType<T>>
+
+    /**
+     * Group by BrandModel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BrandModelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BrandModelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BrandModelGroupByArgs['orderBy'] }
+        : { orderBy?: BrandModelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BrandModelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBrandModelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BrandModel model
+   */
+  readonly fields: BrandModelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BrandModel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BrandModelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    brand<T extends BrandDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BrandDefaultArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    series<T extends BrandModel$seriesArgs<ExtArgs> = {}>(args?: Subset<T, BrandModel$seriesArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    category<T extends BrandModel$categoryArgs<ExtArgs> = {}>(args?: Subset<T, BrandModel$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    intakes<T extends BrandModel$intakesArgs<ExtArgs> = {}>(args?: Subset<T, BrandModel$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BrandModel model
+   */
+  interface BrandModelFieldRefs {
+    readonly id: FieldRef<"BrandModel", 'String'>
+    readonly tenantId: FieldRef<"BrandModel", 'String'>
+    readonly brandId: FieldRef<"BrandModel", 'String'>
+    readonly seriesId: FieldRef<"BrandModel", 'String'>
+    readonly categoryId: FieldRef<"BrandModel", 'String'>
+    readonly name: FieldRef<"BrandModel", 'String'>
+    readonly officialGuidePrice: FieldRef<"BrandModel", 'Decimal'>
+    readonly defaultMaterial: FieldRef<"BrandModel", 'String'>
+    readonly status: FieldRef<"BrandModel", 'String'>
+    readonly version: FieldRef<"BrandModel", 'Int'>
+    readonly deletedAt: FieldRef<"BrandModel", 'DateTime'>
+    readonly createdAt: FieldRef<"BrandModel", 'DateTime'>
+    readonly updatedAt: FieldRef<"BrandModel", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BrandModel findUnique
+   */
+  export type BrandModelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandModel to fetch.
+     */
+    where: BrandModelWhereUniqueInput
+  }
+
+  /**
+   * BrandModel findUniqueOrThrow
+   */
+  export type BrandModelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandModel to fetch.
+     */
+    where: BrandModelWhereUniqueInput
+  }
+
+  /**
+   * BrandModel findFirst
+   */
+  export type BrandModelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandModel to fetch.
+     */
+    where?: BrandModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandModels to fetch.
+     */
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandModels.
+     */
+    cursor?: BrandModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandModels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandModels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandModels.
+     */
+    distinct?: BrandModelScalarFieldEnum | BrandModelScalarFieldEnum[]
+  }
+
+  /**
+   * BrandModel findFirstOrThrow
+   */
+  export type BrandModelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandModel to fetch.
+     */
+    where?: BrandModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandModels to fetch.
+     */
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BrandModels.
+     */
+    cursor?: BrandModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandModels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandModels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BrandModels.
+     */
+    distinct?: BrandModelScalarFieldEnum | BrandModelScalarFieldEnum[]
+  }
+
+  /**
+   * BrandModel findMany
+   */
+  export type BrandModelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * Filter, which BrandModels to fetch.
+     */
+    where?: BrandModelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BrandModels to fetch.
+     */
+    orderBy?: BrandModelOrderByWithRelationInput | BrandModelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BrandModels.
+     */
+    cursor?: BrandModelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BrandModels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BrandModels.
+     */
+    skip?: number
+    distinct?: BrandModelScalarFieldEnum | BrandModelScalarFieldEnum[]
+  }
+
+  /**
+   * BrandModel create
+   */
+  export type BrandModelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BrandModel.
+     */
+    data: XOR<BrandModelCreateInput, BrandModelUncheckedCreateInput>
+  }
+
+  /**
+   * BrandModel createMany
+   */
+  export type BrandModelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BrandModels.
+     */
+    data: BrandModelCreateManyInput | BrandModelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BrandModel createManyAndReturn
+   */
+  export type BrandModelCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * The data used to create many BrandModels.
+     */
+    data: BrandModelCreateManyInput | BrandModelCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BrandModel update
+   */
+  export type BrandModelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BrandModel.
+     */
+    data: XOR<BrandModelUpdateInput, BrandModelUncheckedUpdateInput>
+    /**
+     * Choose, which BrandModel to update.
+     */
+    where: BrandModelWhereUniqueInput
+  }
+
+  /**
+   * BrandModel updateMany
+   */
+  export type BrandModelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BrandModels.
+     */
+    data: XOR<BrandModelUpdateManyMutationInput, BrandModelUncheckedUpdateManyInput>
+    /**
+     * Filter which BrandModels to update
+     */
+    where?: BrandModelWhereInput
+    /**
+     * Limit how many BrandModels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BrandModel updateManyAndReturn
+   */
+  export type BrandModelUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * The data used to update BrandModels.
+     */
+    data: XOR<BrandModelUpdateManyMutationInput, BrandModelUncheckedUpdateManyInput>
+    /**
+     * Filter which BrandModels to update
+     */
+    where?: BrandModelWhereInput
+    /**
+     * Limit how many BrandModels to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BrandModel upsert
+   */
+  export type BrandModelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BrandModel to update in case it exists.
+     */
+    where: BrandModelWhereUniqueInput
+    /**
+     * In case the BrandModel found by the `where` argument doesn't exist, create a new BrandModel with this data.
+     */
+    create: XOR<BrandModelCreateInput, BrandModelUncheckedCreateInput>
+    /**
+     * In case the BrandModel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BrandModelUpdateInput, BrandModelUncheckedUpdateInput>
+  }
+
+  /**
+   * BrandModel delete
+   */
+  export type BrandModelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    /**
+     * Filter which BrandModel to delete.
+     */
+    where: BrandModelWhereUniqueInput
+  }
+
+  /**
+   * BrandModel deleteMany
+   */
+  export type BrandModelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BrandModels to delete
+     */
+    where?: BrandModelWhereInput
+    /**
+     * Limit how many BrandModels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BrandModel.series
+   */
+  export type BrandModel$seriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    where?: BrandSeriesWhereInput
+  }
+
+  /**
+   * BrandModel.category
+   */
+  export type BrandModel$categoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Category
+     */
+    select?: CategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Category
+     */
+    omit?: CategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CategoryInclude<ExtArgs> | null
+    where?: CategoryWhereInput
+  }
+
+  /**
+   * BrandModel.intakes
+   */
+  export type BrandModel$intakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    where?: ProductIntakeWhereInput
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    cursor?: ProductIntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * BrandModel without action
+   */
+  export type BrandModelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RecyclingType
+   */
+
+  export type AggregateRecyclingType = {
+    _count: RecyclingTypeCountAggregateOutputType | null
+    _avg: RecyclingTypeAvgAggregateOutputType | null
+    _sum: RecyclingTypeSumAggregateOutputType | null
+    _min: RecyclingTypeMinAggregateOutputType | null
+    _max: RecyclingTypeMaxAggregateOutputType | null
+  }
+
+  export type RecyclingTypeAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type RecyclingTypeSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type RecyclingTypeMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    sortOrder: number | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecyclingTypeMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    sortOrder: number | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type RecyclingTypeCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    name: number
+    sortOrder: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type RecyclingTypeAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type RecyclingTypeSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type RecyclingTypeMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    sortOrder?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecyclingTypeMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    sortOrder?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type RecyclingTypeCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    sortOrder?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type RecyclingTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecyclingType to aggregate.
+     */
+    where?: RecyclingTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecyclingTypes to fetch.
+     */
+    orderBy?: RecyclingTypeOrderByWithRelationInput | RecyclingTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RecyclingTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecyclingTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecyclingTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RecyclingTypes
+    **/
+    _count?: true | RecyclingTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RecyclingTypeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RecyclingTypeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RecyclingTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RecyclingTypeMaxAggregateInputType
+  }
+
+  export type GetRecyclingTypeAggregateType<T extends RecyclingTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateRecyclingType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRecyclingType[P]>
+      : GetScalarType<T[P], AggregateRecyclingType[P]>
+  }
+
+
+
+
+  export type RecyclingTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RecyclingTypeWhereInput
+    orderBy?: RecyclingTypeOrderByWithAggregationInput | RecyclingTypeOrderByWithAggregationInput[]
+    by: RecyclingTypeScalarFieldEnum[] | RecyclingTypeScalarFieldEnum
+    having?: RecyclingTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RecyclingTypeCountAggregateInputType | true
+    _avg?: RecyclingTypeAvgAggregateInputType
+    _sum?: RecyclingTypeSumAggregateInputType
+    _min?: RecyclingTypeMinAggregateInputType
+    _max?: RecyclingTypeMaxAggregateInputType
+  }
+
+  export type RecyclingTypeGroupByOutputType = {
+    id: string
+    tenantId: string
+    name: string
+    sortOrder: number
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: RecyclingTypeCountAggregateOutputType | null
+    _avg: RecyclingTypeAvgAggregateOutputType | null
+    _sum: RecyclingTypeSumAggregateOutputType | null
+    _min: RecyclingTypeMinAggregateOutputType | null
+    _max: RecyclingTypeMaxAggregateOutputType | null
+  }
+
+  type GetRecyclingTypeGroupByPayload<T extends RecyclingTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RecyclingTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RecyclingTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RecyclingTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], RecyclingTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RecyclingTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    sortOrder?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intakes?: boolean | RecyclingType$intakesArgs<ExtArgs>
+    _count?: boolean | RecyclingTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recyclingType"]>
+
+  export type RecyclingTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    sortOrder?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recyclingType"]>
+
+  export type RecyclingTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    sortOrder?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["recyclingType"]>
+
+  export type RecyclingTypeSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    sortOrder?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type RecyclingTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "sortOrder" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["recyclingType"]>
+  export type RecyclingTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intakes?: boolean | RecyclingType$intakesArgs<ExtArgs>
+    _count?: boolean | RecyclingTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type RecyclingTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type RecyclingTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $RecyclingTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RecyclingType"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      intakes: Prisma.$ProductIntakePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      name: string
+      sortOrder: number
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["recyclingType"]>
+    composites: {}
+  }
+
+  type RecyclingTypeGetPayload<S extends boolean | null | undefined | RecyclingTypeDefaultArgs> = $Result.GetResult<Prisma.$RecyclingTypePayload, S>
+
+  type RecyclingTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RecyclingTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RecyclingTypeCountAggregateInputType | true
+    }
+
+  export interface RecyclingTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RecyclingType'], meta: { name: 'RecyclingType' } }
+    /**
+     * Find zero or one RecyclingType that matches the filter.
+     * @param {RecyclingTypeFindUniqueArgs} args - Arguments to find a RecyclingType
+     * @example
+     * // Get one RecyclingType
+     * const recyclingType = await prisma.recyclingType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RecyclingTypeFindUniqueArgs>(args: SelectSubset<T, RecyclingTypeFindUniqueArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RecyclingType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RecyclingTypeFindUniqueOrThrowArgs} args - Arguments to find a RecyclingType
+     * @example
+     * // Get one RecyclingType
+     * const recyclingType = await prisma.recyclingType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RecyclingTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, RecyclingTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecyclingType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecyclingTypeFindFirstArgs} args - Arguments to find a RecyclingType
+     * @example
+     * // Get one RecyclingType
+     * const recyclingType = await prisma.recyclingType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RecyclingTypeFindFirstArgs>(args?: SelectSubset<T, RecyclingTypeFindFirstArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RecyclingType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecyclingTypeFindFirstOrThrowArgs} args - Arguments to find a RecyclingType
+     * @example
+     * // Get one RecyclingType
+     * const recyclingType = await prisma.recyclingType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RecyclingTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, RecyclingTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RecyclingTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecyclingTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RecyclingTypes
+     * const recyclingTypes = await prisma.recyclingType.findMany()
+     * 
+     * // Get first 10 RecyclingTypes
+     * const recyclingTypes = await prisma.recyclingType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const recyclingTypeWithIdOnly = await prisma.recyclingType.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RecyclingTypeFindManyArgs>(args?: SelectSubset<T, RecyclingTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RecyclingType.
+     * @param {RecyclingTypeCreateArgs} args - Arguments to create a RecyclingType.
+     * @example
+     * // Create one RecyclingType
+     * const RecyclingType = await prisma.recyclingType.create({
+     *   data: {
+     *     // ... data to create a RecyclingType
+     *   }
+     * })
+     * 
+     */
+    create<T extends RecyclingTypeCreateArgs>(args: SelectSubset<T, RecyclingTypeCreateArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RecyclingTypes.
+     * @param {RecyclingTypeCreateManyArgs} args - Arguments to create many RecyclingTypes.
+     * @example
+     * // Create many RecyclingTypes
+     * const recyclingType = await prisma.recyclingType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RecyclingTypeCreateManyArgs>(args?: SelectSubset<T, RecyclingTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RecyclingTypes and returns the data saved in the database.
+     * @param {RecyclingTypeCreateManyAndReturnArgs} args - Arguments to create many RecyclingTypes.
+     * @example
+     * // Create many RecyclingTypes
+     * const recyclingType = await prisma.recyclingType.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RecyclingTypes and only return the `id`
+     * const recyclingTypeWithIdOnly = await prisma.recyclingType.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RecyclingTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, RecyclingTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RecyclingType.
+     * @param {RecyclingTypeDeleteArgs} args - Arguments to delete one RecyclingType.
+     * @example
+     * // Delete one RecyclingType
+     * const RecyclingType = await prisma.recyclingType.delete({
+     *   where: {
+     *     // ... filter to delete one RecyclingType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RecyclingTypeDeleteArgs>(args: SelectSubset<T, RecyclingTypeDeleteArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RecyclingType.
+     * @param {RecyclingTypeUpdateArgs} args - Arguments to update one RecyclingType.
+     * @example
+     * // Update one RecyclingType
+     * const recyclingType = await prisma.recyclingType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RecyclingTypeUpdateArgs>(args: SelectSubset<T, RecyclingTypeUpdateArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RecyclingTypes.
+     * @param {RecyclingTypeDeleteManyArgs} args - Arguments to filter RecyclingTypes to delete.
+     * @example
+     * // Delete a few RecyclingTypes
+     * const { count } = await prisma.recyclingType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RecyclingTypeDeleteManyArgs>(args?: SelectSubset<T, RecyclingTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RecyclingTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecyclingTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RecyclingTypes
+     * const recyclingType = await prisma.recyclingType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RecyclingTypeUpdateManyArgs>(args: SelectSubset<T, RecyclingTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RecyclingTypes and returns the data updated in the database.
+     * @param {RecyclingTypeUpdateManyAndReturnArgs} args - Arguments to update many RecyclingTypes.
+     * @example
+     * // Update many RecyclingTypes
+     * const recyclingType = await prisma.recyclingType.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RecyclingTypes and only return the `id`
+     * const recyclingTypeWithIdOnly = await prisma.recyclingType.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RecyclingTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, RecyclingTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RecyclingType.
+     * @param {RecyclingTypeUpsertArgs} args - Arguments to update or create a RecyclingType.
+     * @example
+     * // Update or create a RecyclingType
+     * const recyclingType = await prisma.recyclingType.upsert({
+     *   create: {
+     *     // ... data to create a RecyclingType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RecyclingType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RecyclingTypeUpsertArgs>(args: SelectSubset<T, RecyclingTypeUpsertArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RecyclingTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecyclingTypeCountArgs} args - Arguments to filter RecyclingTypes to count.
+     * @example
+     * // Count the number of RecyclingTypes
+     * const count = await prisma.recyclingType.count({
+     *   where: {
+     *     // ... the filter for the RecyclingTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends RecyclingTypeCountArgs>(
+      args?: Subset<T, RecyclingTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RecyclingTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RecyclingType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecyclingTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RecyclingTypeAggregateArgs>(args: Subset<T, RecyclingTypeAggregateArgs>): Prisma.PrismaPromise<GetRecyclingTypeAggregateType<T>>
+
+    /**
+     * Group by RecyclingType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RecyclingTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RecyclingTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RecyclingTypeGroupByArgs['orderBy'] }
+        : { orderBy?: RecyclingTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RecyclingTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRecyclingTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RecyclingType model
+   */
+  readonly fields: RecyclingTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RecyclingType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RecyclingTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    intakes<T extends RecyclingType$intakesArgs<ExtArgs> = {}>(args?: Subset<T, RecyclingType$intakesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RecyclingType model
+   */
+  interface RecyclingTypeFieldRefs {
+    readonly id: FieldRef<"RecyclingType", 'String'>
+    readonly tenantId: FieldRef<"RecyclingType", 'String'>
+    readonly name: FieldRef<"RecyclingType", 'String'>
+    readonly sortOrder: FieldRef<"RecyclingType", 'Int'>
+    readonly status: FieldRef<"RecyclingType", 'String'>
+    readonly createdAt: FieldRef<"RecyclingType", 'DateTime'>
+    readonly updatedAt: FieldRef<"RecyclingType", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RecyclingType findUnique
+   */
+  export type RecyclingTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecyclingType to fetch.
+     */
+    where: RecyclingTypeWhereUniqueInput
+  }
+
+  /**
+   * RecyclingType findUniqueOrThrow
+   */
+  export type RecyclingTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecyclingType to fetch.
+     */
+    where: RecyclingTypeWhereUniqueInput
+  }
+
+  /**
+   * RecyclingType findFirst
+   */
+  export type RecyclingTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecyclingType to fetch.
+     */
+    where?: RecyclingTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecyclingTypes to fetch.
+     */
+    orderBy?: RecyclingTypeOrderByWithRelationInput | RecyclingTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecyclingTypes.
+     */
+    cursor?: RecyclingTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecyclingTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecyclingTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecyclingTypes.
+     */
+    distinct?: RecyclingTypeScalarFieldEnum | RecyclingTypeScalarFieldEnum[]
+  }
+
+  /**
+   * RecyclingType findFirstOrThrow
+   */
+  export type RecyclingTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecyclingType to fetch.
+     */
+    where?: RecyclingTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecyclingTypes to fetch.
+     */
+    orderBy?: RecyclingTypeOrderByWithRelationInput | RecyclingTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RecyclingTypes.
+     */
+    cursor?: RecyclingTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecyclingTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecyclingTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RecyclingTypes.
+     */
+    distinct?: RecyclingTypeScalarFieldEnum | RecyclingTypeScalarFieldEnum[]
+  }
+
+  /**
+   * RecyclingType findMany
+   */
+  export type RecyclingTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which RecyclingTypes to fetch.
+     */
+    where?: RecyclingTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RecyclingTypes to fetch.
+     */
+    orderBy?: RecyclingTypeOrderByWithRelationInput | RecyclingTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RecyclingTypes.
+     */
+    cursor?: RecyclingTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RecyclingTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RecyclingTypes.
+     */
+    skip?: number
+    distinct?: RecyclingTypeScalarFieldEnum | RecyclingTypeScalarFieldEnum[]
+  }
+
+  /**
+   * RecyclingType create
+   */
+  export type RecyclingTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RecyclingType.
+     */
+    data: XOR<RecyclingTypeCreateInput, RecyclingTypeUncheckedCreateInput>
+  }
+
+  /**
+   * RecyclingType createMany
+   */
+  export type RecyclingTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RecyclingTypes.
+     */
+    data: RecyclingTypeCreateManyInput | RecyclingTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RecyclingType createManyAndReturn
+   */
+  export type RecyclingTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * The data used to create many RecyclingTypes.
+     */
+    data: RecyclingTypeCreateManyInput | RecyclingTypeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RecyclingType update
+   */
+  export type RecyclingTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RecyclingType.
+     */
+    data: XOR<RecyclingTypeUpdateInput, RecyclingTypeUncheckedUpdateInput>
+    /**
+     * Choose, which RecyclingType to update.
+     */
+    where: RecyclingTypeWhereUniqueInput
+  }
+
+  /**
+   * RecyclingType updateMany
+   */
+  export type RecyclingTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RecyclingTypes.
+     */
+    data: XOR<RecyclingTypeUpdateManyMutationInput, RecyclingTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which RecyclingTypes to update
+     */
+    where?: RecyclingTypeWhereInput
+    /**
+     * Limit how many RecyclingTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecyclingType updateManyAndReturn
+   */
+  export type RecyclingTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * The data used to update RecyclingTypes.
+     */
+    data: XOR<RecyclingTypeUpdateManyMutationInput, RecyclingTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which RecyclingTypes to update
+     */
+    where?: RecyclingTypeWhereInput
+    /**
+     * Limit how many RecyclingTypes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RecyclingType upsert
+   */
+  export type RecyclingTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RecyclingType to update in case it exists.
+     */
+    where: RecyclingTypeWhereUniqueInput
+    /**
+     * In case the RecyclingType found by the `where` argument doesn't exist, create a new RecyclingType with this data.
+     */
+    create: XOR<RecyclingTypeCreateInput, RecyclingTypeUncheckedCreateInput>
+    /**
+     * In case the RecyclingType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RecyclingTypeUpdateInput, RecyclingTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * RecyclingType delete
+   */
+  export type RecyclingTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    /**
+     * Filter which RecyclingType to delete.
+     */
+    where: RecyclingTypeWhereUniqueInput
+  }
+
+  /**
+   * RecyclingType deleteMany
+   */
+  export type RecyclingTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RecyclingTypes to delete
+     */
+    where?: RecyclingTypeWhereInput
+    /**
+     * Limit how many RecyclingTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RecyclingType.intakes
+   */
+  export type RecyclingType$intakesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    where?: ProductIntakeWhereInput
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    cursor?: ProductIntakeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * RecyclingType without action
+   */
+  export type RecyclingTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
   }
 
 
@@ -29152,6 +35072,7 @@ export namespace Prisma {
     brand?: boolean | Product$brandArgs<ExtArgs>
     variants?: boolean | Product$variantsArgs<ExtArgs>
     images?: boolean | Product$imagesArgs<ExtArgs>
+    intake?: boolean | Product$intakeArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -29225,6 +35146,7 @@ export namespace Prisma {
     brand?: boolean | Product$brandArgs<ExtArgs>
     variants?: boolean | Product$variantsArgs<ExtArgs>
     images?: boolean | Product$imagesArgs<ExtArgs>
+    intake?: boolean | Product$intakeArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -29243,6 +35165,7 @@ export namespace Prisma {
       brand: Prisma.$BrandPayload<ExtArgs> | null
       variants: Prisma.$ProductVariantPayload<ExtArgs>[]
       images: Prisma.$ProductImagePayload<ExtArgs>[]
+      intake: Prisma.$ProductIntakePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -29660,6 +35583,7 @@ export namespace Prisma {
     brand<T extends Product$brandArgs<ExtArgs> = {}>(args?: Subset<T, Product$brandArgs<ExtArgs>>): Prisma__BrandClient<$Result.GetResult<Prisma.$BrandPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     variants<T extends Product$variantsArgs<ExtArgs> = {}>(args?: Subset<T, Product$variantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductVariantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     images<T extends Product$imagesArgs<ExtArgs> = {}>(args?: Subset<T, Product$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    intake<T extends Product$intakeArgs<ExtArgs> = {}>(args?: Subset<T, Product$intakeArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -30188,6 +36112,25 @@ export namespace Prisma {
   }
 
   /**
+   * Product.intake
+   */
+  export type Product$intakeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    where?: ProductIntakeWhereInput
+  }
+
+  /**
    * Product without action
    */
   export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -30203,6 +36146,2809 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProductInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProductIntake
+   */
+
+  export type AggregateProductIntake = {
+    _count: ProductIntakeCountAggregateOutputType | null
+    _avg: ProductIntakeAvgAggregateOutputType | null
+    _sum: ProductIntakeSumAggregateOutputType | null
+    _min: ProductIntakeMinAggregateOutputType | null
+    _max: ProductIntakeMaxAggregateOutputType | null
+  }
+
+  export type ProductIntakeAvgAggregateOutputType = {
+    officialGuidePrice: Decimal | null
+    stockQuantity: number | null
+    inventoryAgeWarningDays: number | null
+    totalCostPrice: Decimal | null
+    peerPrice: Decimal | null
+    agentPrice: Decimal | null
+    warrantyCardYear: number | null
+  }
+
+  export type ProductIntakeSumAggregateOutputType = {
+    officialGuidePrice: Decimal | null
+    stockQuantity: number | null
+    inventoryAgeWarningDays: number | null
+    totalCostPrice: Decimal | null
+    peerPrice: Decimal | null
+    agentPrice: Decimal | null
+    warrantyCardYear: number | null
+  }
+
+  export type ProductIntakeMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    productId: string | null
+    idempotencyKey: string | null
+    requestFingerprint: string | null
+    action: string | null
+    customTips: string | null
+    condition: string | null
+    seriesId: string | null
+    modelId: string | null
+    officialGuidePrice: Decimal | null
+    ownershipType: string | null
+    stockQuantity: number | null
+    inventoryAgeWarningDays: number | null
+    totalCostPrice: Decimal | null
+    peerPrice: Decimal | null
+    agentPrice: Decimal | null
+    appraiserEmployeeId: string | null
+    appraiserName: string | null
+    recyclingTypeId: string | null
+    recyclingEmployeeId: string | null
+    recyclingEmployeeName: string | null
+    recyclingNotes: string | null
+    recycledAt: Date | null
+    audience: string | null
+    warrantyCard: string | null
+    warrantyCardYear: number | null
+    uniqueCode: string | null
+    internalNotes: string | null
+    stockedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductIntakeMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    productId: string | null
+    idempotencyKey: string | null
+    requestFingerprint: string | null
+    action: string | null
+    customTips: string | null
+    condition: string | null
+    seriesId: string | null
+    modelId: string | null
+    officialGuidePrice: Decimal | null
+    ownershipType: string | null
+    stockQuantity: number | null
+    inventoryAgeWarningDays: number | null
+    totalCostPrice: Decimal | null
+    peerPrice: Decimal | null
+    agentPrice: Decimal | null
+    appraiserEmployeeId: string | null
+    appraiserName: string | null
+    recyclingTypeId: string | null
+    recyclingEmployeeId: string | null
+    recyclingEmployeeName: string | null
+    recyclingNotes: string | null
+    recycledAt: Date | null
+    audience: string | null
+    warrantyCard: string | null
+    warrantyCardYear: number | null
+    uniqueCode: string | null
+    internalNotes: string | null
+    stockedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductIntakeCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    productId: number
+    idempotencyKey: number
+    requestFingerprint: number
+    action: number
+    customTips: number
+    condition: number
+    seriesId: number
+    modelId: number
+    officialGuidePrice: number
+    ownershipType: number
+    stockQuantity: number
+    inventoryAgeWarningDays: number
+    totalCostPrice: number
+    peerPrice: number
+    agentPrice: number
+    appraiserEmployeeId: number
+    appraiserName: number
+    recyclingTypeId: number
+    recyclingEmployeeId: number
+    recyclingEmployeeName: number
+    recyclingNotes: number
+    recycledAt: number
+    audience: number
+    warrantyCard: number
+    warrantyCardYear: number
+    uniqueCode: number
+    tags: number
+    accessories: number
+    internalNotes: number
+    stockedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductIntakeAvgAggregateInputType = {
+    officialGuidePrice?: true
+    stockQuantity?: true
+    inventoryAgeWarningDays?: true
+    totalCostPrice?: true
+    peerPrice?: true
+    agentPrice?: true
+    warrantyCardYear?: true
+  }
+
+  export type ProductIntakeSumAggregateInputType = {
+    officialGuidePrice?: true
+    stockQuantity?: true
+    inventoryAgeWarningDays?: true
+    totalCostPrice?: true
+    peerPrice?: true
+    agentPrice?: true
+    warrantyCardYear?: true
+  }
+
+  export type ProductIntakeMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    productId?: true
+    idempotencyKey?: true
+    requestFingerprint?: true
+    action?: true
+    customTips?: true
+    condition?: true
+    seriesId?: true
+    modelId?: true
+    officialGuidePrice?: true
+    ownershipType?: true
+    stockQuantity?: true
+    inventoryAgeWarningDays?: true
+    totalCostPrice?: true
+    peerPrice?: true
+    agentPrice?: true
+    appraiserEmployeeId?: true
+    appraiserName?: true
+    recyclingTypeId?: true
+    recyclingEmployeeId?: true
+    recyclingEmployeeName?: true
+    recyclingNotes?: true
+    recycledAt?: true
+    audience?: true
+    warrantyCard?: true
+    warrantyCardYear?: true
+    uniqueCode?: true
+    internalNotes?: true
+    stockedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductIntakeMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    productId?: true
+    idempotencyKey?: true
+    requestFingerprint?: true
+    action?: true
+    customTips?: true
+    condition?: true
+    seriesId?: true
+    modelId?: true
+    officialGuidePrice?: true
+    ownershipType?: true
+    stockQuantity?: true
+    inventoryAgeWarningDays?: true
+    totalCostPrice?: true
+    peerPrice?: true
+    agentPrice?: true
+    appraiserEmployeeId?: true
+    appraiserName?: true
+    recyclingTypeId?: true
+    recyclingEmployeeId?: true
+    recyclingEmployeeName?: true
+    recyclingNotes?: true
+    recycledAt?: true
+    audience?: true
+    warrantyCard?: true
+    warrantyCardYear?: true
+    uniqueCode?: true
+    internalNotes?: true
+    stockedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductIntakeCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    productId?: true
+    idempotencyKey?: true
+    requestFingerprint?: true
+    action?: true
+    customTips?: true
+    condition?: true
+    seriesId?: true
+    modelId?: true
+    officialGuidePrice?: true
+    ownershipType?: true
+    stockQuantity?: true
+    inventoryAgeWarningDays?: true
+    totalCostPrice?: true
+    peerPrice?: true
+    agentPrice?: true
+    appraiserEmployeeId?: true
+    appraiserName?: true
+    recyclingTypeId?: true
+    recyclingEmployeeId?: true
+    recyclingEmployeeName?: true
+    recyclingNotes?: true
+    recycledAt?: true
+    audience?: true
+    warrantyCard?: true
+    warrantyCardYear?: true
+    uniqueCode?: true
+    tags?: true
+    accessories?: true
+    internalNotes?: true
+    stockedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductIntakeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductIntake to aggregate.
+     */
+    where?: ProductIntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakes to fetch.
+     */
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductIntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductIntakes
+    **/
+    _count?: true | ProductIntakeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductIntakeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductIntakeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductIntakeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductIntakeMaxAggregateInputType
+  }
+
+  export type GetProductIntakeAggregateType<T extends ProductIntakeAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductIntake]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductIntake[P]>
+      : GetScalarType<T[P], AggregateProductIntake[P]>
+  }
+
+
+
+
+  export type ProductIntakeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeWhereInput
+    orderBy?: ProductIntakeOrderByWithAggregationInput | ProductIntakeOrderByWithAggregationInput[]
+    by: ProductIntakeScalarFieldEnum[] | ProductIntakeScalarFieldEnum
+    having?: ProductIntakeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductIntakeCountAggregateInputType | true
+    _avg?: ProductIntakeAvgAggregateInputType
+    _sum?: ProductIntakeSumAggregateInputType
+    _min?: ProductIntakeMinAggregateInputType
+    _max?: ProductIntakeMaxAggregateInputType
+  }
+
+  export type ProductIntakeGroupByOutputType = {
+    id: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips: string | null
+    condition: string
+    seriesId: string | null
+    modelId: string | null
+    officialGuidePrice: Decimal
+    ownershipType: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays: number
+    totalCostPrice: Decimal
+    peerPrice: Decimal
+    agentPrice: Decimal
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId: string | null
+    recyclingEmployeeId: string | null
+    recyclingEmployeeName: string | null
+    recyclingNotes: string | null
+    recycledAt: Date
+    audience: string | null
+    warrantyCard: string
+    warrantyCardYear: number | null
+    uniqueCode: string | null
+    tags: JsonValue
+    accessories: JsonValue
+    internalNotes: string | null
+    stockedAt: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductIntakeCountAggregateOutputType | null
+    _avg: ProductIntakeAvgAggregateOutputType | null
+    _sum: ProductIntakeSumAggregateOutputType | null
+    _min: ProductIntakeMinAggregateOutputType | null
+    _max: ProductIntakeMaxAggregateOutputType | null
+  }
+
+  type GetProductIntakeGroupByPayload<T extends ProductIntakeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductIntakeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductIntakeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductIntakeGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductIntakeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductIntakeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    idempotencyKey?: boolean
+    requestFingerprint?: boolean
+    action?: boolean
+    customTips?: boolean
+    condition?: boolean
+    seriesId?: boolean
+    modelId?: boolean
+    officialGuidePrice?: boolean
+    ownershipType?: boolean
+    stockQuantity?: boolean
+    inventoryAgeWarningDays?: boolean
+    totalCostPrice?: boolean
+    peerPrice?: boolean
+    agentPrice?: boolean
+    appraiserEmployeeId?: boolean
+    appraiserName?: boolean
+    recyclingTypeId?: boolean
+    recyclingEmployeeId?: boolean
+    recyclingEmployeeName?: boolean
+    recyclingNotes?: boolean
+    recycledAt?: boolean
+    audience?: boolean
+    warrantyCard?: boolean
+    warrantyCardYear?: boolean
+    uniqueCode?: boolean
+    tags?: boolean
+    accessories?: boolean
+    internalNotes?: boolean
+    stockedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    series?: boolean | ProductIntake$seriesArgs<ExtArgs>
+    model?: boolean | ProductIntake$modelArgs<ExtArgs>
+    appraiser?: boolean | AdminUserDefaultArgs<ExtArgs>
+    recyclingEmployee?: boolean | ProductIntake$recyclingEmployeeArgs<ExtArgs>
+    recyclingType?: boolean | ProductIntake$recyclingTypeArgs<ExtArgs>
+    media?: boolean | ProductIntake$mediaArgs<ExtArgs>
+    _count?: boolean | ProductIntakeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productIntake"]>
+
+  export type ProductIntakeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    idempotencyKey?: boolean
+    requestFingerprint?: boolean
+    action?: boolean
+    customTips?: boolean
+    condition?: boolean
+    seriesId?: boolean
+    modelId?: boolean
+    officialGuidePrice?: boolean
+    ownershipType?: boolean
+    stockQuantity?: boolean
+    inventoryAgeWarningDays?: boolean
+    totalCostPrice?: boolean
+    peerPrice?: boolean
+    agentPrice?: boolean
+    appraiserEmployeeId?: boolean
+    appraiserName?: boolean
+    recyclingTypeId?: boolean
+    recyclingEmployeeId?: boolean
+    recyclingEmployeeName?: boolean
+    recyclingNotes?: boolean
+    recycledAt?: boolean
+    audience?: boolean
+    warrantyCard?: boolean
+    warrantyCardYear?: boolean
+    uniqueCode?: boolean
+    tags?: boolean
+    accessories?: boolean
+    internalNotes?: boolean
+    stockedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    series?: boolean | ProductIntake$seriesArgs<ExtArgs>
+    model?: boolean | ProductIntake$modelArgs<ExtArgs>
+    appraiser?: boolean | AdminUserDefaultArgs<ExtArgs>
+    recyclingEmployee?: boolean | ProductIntake$recyclingEmployeeArgs<ExtArgs>
+    recyclingType?: boolean | ProductIntake$recyclingTypeArgs<ExtArgs>
+  }, ExtArgs["result"]["productIntake"]>
+
+  export type ProductIntakeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    idempotencyKey?: boolean
+    requestFingerprint?: boolean
+    action?: boolean
+    customTips?: boolean
+    condition?: boolean
+    seriesId?: boolean
+    modelId?: boolean
+    officialGuidePrice?: boolean
+    ownershipType?: boolean
+    stockQuantity?: boolean
+    inventoryAgeWarningDays?: boolean
+    totalCostPrice?: boolean
+    peerPrice?: boolean
+    agentPrice?: boolean
+    appraiserEmployeeId?: boolean
+    appraiserName?: boolean
+    recyclingTypeId?: boolean
+    recyclingEmployeeId?: boolean
+    recyclingEmployeeName?: boolean
+    recyclingNotes?: boolean
+    recycledAt?: boolean
+    audience?: boolean
+    warrantyCard?: boolean
+    warrantyCardYear?: boolean
+    uniqueCode?: boolean
+    tags?: boolean
+    accessories?: boolean
+    internalNotes?: boolean
+    stockedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    series?: boolean | ProductIntake$seriesArgs<ExtArgs>
+    model?: boolean | ProductIntake$modelArgs<ExtArgs>
+    appraiser?: boolean | AdminUserDefaultArgs<ExtArgs>
+    recyclingEmployee?: boolean | ProductIntake$recyclingEmployeeArgs<ExtArgs>
+    recyclingType?: boolean | ProductIntake$recyclingTypeArgs<ExtArgs>
+  }, ExtArgs["result"]["productIntake"]>
+
+  export type ProductIntakeSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    productId?: boolean
+    idempotencyKey?: boolean
+    requestFingerprint?: boolean
+    action?: boolean
+    customTips?: boolean
+    condition?: boolean
+    seriesId?: boolean
+    modelId?: boolean
+    officialGuidePrice?: boolean
+    ownershipType?: boolean
+    stockQuantity?: boolean
+    inventoryAgeWarningDays?: boolean
+    totalCostPrice?: boolean
+    peerPrice?: boolean
+    agentPrice?: boolean
+    appraiserEmployeeId?: boolean
+    appraiserName?: boolean
+    recyclingTypeId?: boolean
+    recyclingEmployeeId?: boolean
+    recyclingEmployeeName?: boolean
+    recyclingNotes?: boolean
+    recycledAt?: boolean
+    audience?: boolean
+    warrantyCard?: boolean
+    warrantyCardYear?: boolean
+    uniqueCode?: boolean
+    tags?: boolean
+    accessories?: boolean
+    internalNotes?: boolean
+    stockedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProductIntakeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "productId" | "idempotencyKey" | "requestFingerprint" | "action" | "customTips" | "condition" | "seriesId" | "modelId" | "officialGuidePrice" | "ownershipType" | "stockQuantity" | "inventoryAgeWarningDays" | "totalCostPrice" | "peerPrice" | "agentPrice" | "appraiserEmployeeId" | "appraiserName" | "recyclingTypeId" | "recyclingEmployeeId" | "recyclingEmployeeName" | "recyclingNotes" | "recycledAt" | "audience" | "warrantyCard" | "warrantyCardYear" | "uniqueCode" | "tags" | "accessories" | "internalNotes" | "stockedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["productIntake"]>
+  export type ProductIntakeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    series?: boolean | ProductIntake$seriesArgs<ExtArgs>
+    model?: boolean | ProductIntake$modelArgs<ExtArgs>
+    appraiser?: boolean | AdminUserDefaultArgs<ExtArgs>
+    recyclingEmployee?: boolean | ProductIntake$recyclingEmployeeArgs<ExtArgs>
+    recyclingType?: boolean | ProductIntake$recyclingTypeArgs<ExtArgs>
+    media?: boolean | ProductIntake$mediaArgs<ExtArgs>
+    _count?: boolean | ProductIntakeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProductIntakeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    series?: boolean | ProductIntake$seriesArgs<ExtArgs>
+    model?: boolean | ProductIntake$modelArgs<ExtArgs>
+    appraiser?: boolean | AdminUserDefaultArgs<ExtArgs>
+    recyclingEmployee?: boolean | ProductIntake$recyclingEmployeeArgs<ExtArgs>
+    recyclingType?: boolean | ProductIntake$recyclingTypeArgs<ExtArgs>
+  }
+  export type ProductIntakeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+    series?: boolean | ProductIntake$seriesArgs<ExtArgs>
+    model?: boolean | ProductIntake$modelArgs<ExtArgs>
+    appraiser?: boolean | AdminUserDefaultArgs<ExtArgs>
+    recyclingEmployee?: boolean | ProductIntake$recyclingEmployeeArgs<ExtArgs>
+    recyclingType?: boolean | ProductIntake$recyclingTypeArgs<ExtArgs>
+  }
+
+  export type $ProductIntakePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductIntake"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      product: Prisma.$ProductPayload<ExtArgs>
+      series: Prisma.$BrandSeriesPayload<ExtArgs> | null
+      model: Prisma.$BrandModelPayload<ExtArgs> | null
+      appraiser: Prisma.$AdminUserPayload<ExtArgs>
+      recyclingEmployee: Prisma.$AdminUserPayload<ExtArgs> | null
+      recyclingType: Prisma.$RecyclingTypePayload<ExtArgs> | null
+      media: Prisma.$ProductIntakeMediaPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      productId: string
+      idempotencyKey: string
+      requestFingerprint: string
+      action: string
+      customTips: string | null
+      condition: string
+      seriesId: string | null
+      modelId: string | null
+      officialGuidePrice: Prisma.Decimal
+      ownershipType: string | null
+      stockQuantity: number
+      inventoryAgeWarningDays: number
+      totalCostPrice: Prisma.Decimal
+      peerPrice: Prisma.Decimal
+      agentPrice: Prisma.Decimal
+      appraiserEmployeeId: string
+      appraiserName: string
+      recyclingTypeId: string | null
+      recyclingEmployeeId: string | null
+      recyclingEmployeeName: string | null
+      recyclingNotes: string | null
+      recycledAt: Date
+      audience: string | null
+      warrantyCard: string
+      warrantyCardYear: number | null
+      uniqueCode: string | null
+      tags: Prisma.JsonValue
+      accessories: Prisma.JsonValue
+      internalNotes: string | null
+      stockedAt: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["productIntake"]>
+    composites: {}
+  }
+
+  type ProductIntakeGetPayload<S extends boolean | null | undefined | ProductIntakeDefaultArgs> = $Result.GetResult<Prisma.$ProductIntakePayload, S>
+
+  type ProductIntakeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductIntakeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductIntakeCountAggregateInputType | true
+    }
+
+  export interface ProductIntakeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductIntake'], meta: { name: 'ProductIntake' } }
+    /**
+     * Find zero or one ProductIntake that matches the filter.
+     * @param {ProductIntakeFindUniqueArgs} args - Arguments to find a ProductIntake
+     * @example
+     * // Get one ProductIntake
+     * const productIntake = await prisma.productIntake.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductIntakeFindUniqueArgs>(args: SelectSubset<T, ProductIntakeFindUniqueArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductIntake that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductIntakeFindUniqueOrThrowArgs} args - Arguments to find a ProductIntake
+     * @example
+     * // Get one ProductIntake
+     * const productIntake = await prisma.productIntake.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductIntakeFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductIntakeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductIntake that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeFindFirstArgs} args - Arguments to find a ProductIntake
+     * @example
+     * // Get one ProductIntake
+     * const productIntake = await prisma.productIntake.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductIntakeFindFirstArgs>(args?: SelectSubset<T, ProductIntakeFindFirstArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductIntake that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeFindFirstOrThrowArgs} args - Arguments to find a ProductIntake
+     * @example
+     * // Get one ProductIntake
+     * const productIntake = await prisma.productIntake.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductIntakeFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductIntakeFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductIntakes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductIntakes
+     * const productIntakes = await prisma.productIntake.findMany()
+     * 
+     * // Get first 10 ProductIntakes
+     * const productIntakes = await prisma.productIntake.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productIntakeWithIdOnly = await prisma.productIntake.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductIntakeFindManyArgs>(args?: SelectSubset<T, ProductIntakeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductIntake.
+     * @param {ProductIntakeCreateArgs} args - Arguments to create a ProductIntake.
+     * @example
+     * // Create one ProductIntake
+     * const ProductIntake = await prisma.productIntake.create({
+     *   data: {
+     *     // ... data to create a ProductIntake
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductIntakeCreateArgs>(args: SelectSubset<T, ProductIntakeCreateArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductIntakes.
+     * @param {ProductIntakeCreateManyArgs} args - Arguments to create many ProductIntakes.
+     * @example
+     * // Create many ProductIntakes
+     * const productIntake = await prisma.productIntake.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductIntakeCreateManyArgs>(args?: SelectSubset<T, ProductIntakeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProductIntakes and returns the data saved in the database.
+     * @param {ProductIntakeCreateManyAndReturnArgs} args - Arguments to create many ProductIntakes.
+     * @example
+     * // Create many ProductIntakes
+     * const productIntake = await prisma.productIntake.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProductIntakes and only return the `id`
+     * const productIntakeWithIdOnly = await prisma.productIntake.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductIntakeCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductIntakeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProductIntake.
+     * @param {ProductIntakeDeleteArgs} args - Arguments to delete one ProductIntake.
+     * @example
+     * // Delete one ProductIntake
+     * const ProductIntake = await prisma.productIntake.delete({
+     *   where: {
+     *     // ... filter to delete one ProductIntake
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductIntakeDeleteArgs>(args: SelectSubset<T, ProductIntakeDeleteArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductIntake.
+     * @param {ProductIntakeUpdateArgs} args - Arguments to update one ProductIntake.
+     * @example
+     * // Update one ProductIntake
+     * const productIntake = await prisma.productIntake.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductIntakeUpdateArgs>(args: SelectSubset<T, ProductIntakeUpdateArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductIntakes.
+     * @param {ProductIntakeDeleteManyArgs} args - Arguments to filter ProductIntakes to delete.
+     * @example
+     * // Delete a few ProductIntakes
+     * const { count } = await prisma.productIntake.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductIntakeDeleteManyArgs>(args?: SelectSubset<T, ProductIntakeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductIntakes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductIntakes
+     * const productIntake = await prisma.productIntake.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductIntakeUpdateManyArgs>(args: SelectSubset<T, ProductIntakeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductIntakes and returns the data updated in the database.
+     * @param {ProductIntakeUpdateManyAndReturnArgs} args - Arguments to update many ProductIntakes.
+     * @example
+     * // Update many ProductIntakes
+     * const productIntake = await prisma.productIntake.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProductIntakes and only return the `id`
+     * const productIntakeWithIdOnly = await prisma.productIntake.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductIntakeUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductIntakeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProductIntake.
+     * @param {ProductIntakeUpsertArgs} args - Arguments to update or create a ProductIntake.
+     * @example
+     * // Update or create a ProductIntake
+     * const productIntake = await prisma.productIntake.upsert({
+     *   create: {
+     *     // ... data to create a ProductIntake
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductIntake we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductIntakeUpsertArgs>(args: SelectSubset<T, ProductIntakeUpsertArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductIntakes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeCountArgs} args - Arguments to filter ProductIntakes to count.
+     * @example
+     * // Count the number of ProductIntakes
+     * const count = await prisma.productIntake.count({
+     *   where: {
+     *     // ... the filter for the ProductIntakes we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductIntakeCountArgs>(
+      args?: Subset<T, ProductIntakeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductIntakeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductIntake.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductIntakeAggregateArgs>(args: Subset<T, ProductIntakeAggregateArgs>): Prisma.PrismaPromise<GetProductIntakeAggregateType<T>>
+
+    /**
+     * Group by ProductIntake.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductIntakeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductIntakeGroupByArgs['orderBy'] }
+        : { orderBy?: ProductIntakeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductIntakeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductIntakeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductIntake model
+   */
+  readonly fields: ProductIntakeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductIntake.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductIntakeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    series<T extends ProductIntake$seriesArgs<ExtArgs> = {}>(args?: Subset<T, ProductIntake$seriesArgs<ExtArgs>>): Prisma__BrandSeriesClient<$Result.GetResult<Prisma.$BrandSeriesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    model<T extends ProductIntake$modelArgs<ExtArgs> = {}>(args?: Subset<T, ProductIntake$modelArgs<ExtArgs>>): Prisma__BrandModelClient<$Result.GetResult<Prisma.$BrandModelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    appraiser<T extends AdminUserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminUserDefaultArgs<ExtArgs>>): Prisma__AdminUserClient<$Result.GetResult<Prisma.$AdminUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    recyclingEmployee<T extends ProductIntake$recyclingEmployeeArgs<ExtArgs> = {}>(args?: Subset<T, ProductIntake$recyclingEmployeeArgs<ExtArgs>>): Prisma__AdminUserClient<$Result.GetResult<Prisma.$AdminUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    recyclingType<T extends ProductIntake$recyclingTypeArgs<ExtArgs> = {}>(args?: Subset<T, ProductIntake$recyclingTypeArgs<ExtArgs>>): Prisma__RecyclingTypeClient<$Result.GetResult<Prisma.$RecyclingTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    media<T extends ProductIntake$mediaArgs<ExtArgs> = {}>(args?: Subset<T, ProductIntake$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductIntake model
+   */
+  interface ProductIntakeFieldRefs {
+    readonly id: FieldRef<"ProductIntake", 'String'>
+    readonly tenantId: FieldRef<"ProductIntake", 'String'>
+    readonly productId: FieldRef<"ProductIntake", 'String'>
+    readonly idempotencyKey: FieldRef<"ProductIntake", 'String'>
+    readonly requestFingerprint: FieldRef<"ProductIntake", 'String'>
+    readonly action: FieldRef<"ProductIntake", 'String'>
+    readonly customTips: FieldRef<"ProductIntake", 'String'>
+    readonly condition: FieldRef<"ProductIntake", 'String'>
+    readonly seriesId: FieldRef<"ProductIntake", 'String'>
+    readonly modelId: FieldRef<"ProductIntake", 'String'>
+    readonly officialGuidePrice: FieldRef<"ProductIntake", 'Decimal'>
+    readonly ownershipType: FieldRef<"ProductIntake", 'String'>
+    readonly stockQuantity: FieldRef<"ProductIntake", 'Int'>
+    readonly inventoryAgeWarningDays: FieldRef<"ProductIntake", 'Int'>
+    readonly totalCostPrice: FieldRef<"ProductIntake", 'Decimal'>
+    readonly peerPrice: FieldRef<"ProductIntake", 'Decimal'>
+    readonly agentPrice: FieldRef<"ProductIntake", 'Decimal'>
+    readonly appraiserEmployeeId: FieldRef<"ProductIntake", 'String'>
+    readonly appraiserName: FieldRef<"ProductIntake", 'String'>
+    readonly recyclingTypeId: FieldRef<"ProductIntake", 'String'>
+    readonly recyclingEmployeeId: FieldRef<"ProductIntake", 'String'>
+    readonly recyclingEmployeeName: FieldRef<"ProductIntake", 'String'>
+    readonly recyclingNotes: FieldRef<"ProductIntake", 'String'>
+    readonly recycledAt: FieldRef<"ProductIntake", 'DateTime'>
+    readonly audience: FieldRef<"ProductIntake", 'String'>
+    readonly warrantyCard: FieldRef<"ProductIntake", 'String'>
+    readonly warrantyCardYear: FieldRef<"ProductIntake", 'Int'>
+    readonly uniqueCode: FieldRef<"ProductIntake", 'String'>
+    readonly tags: FieldRef<"ProductIntake", 'Json'>
+    readonly accessories: FieldRef<"ProductIntake", 'Json'>
+    readonly internalNotes: FieldRef<"ProductIntake", 'String'>
+    readonly stockedAt: FieldRef<"ProductIntake", 'DateTime'>
+    readonly createdAt: FieldRef<"ProductIntake", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProductIntake", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductIntake findUnique
+   */
+  export type ProductIntakeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntake to fetch.
+     */
+    where: ProductIntakeWhereUniqueInput
+  }
+
+  /**
+   * ProductIntake findUniqueOrThrow
+   */
+  export type ProductIntakeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntake to fetch.
+     */
+    where: ProductIntakeWhereUniqueInput
+  }
+
+  /**
+   * ProductIntake findFirst
+   */
+  export type ProductIntakeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntake to fetch.
+     */
+    where?: ProductIntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakes to fetch.
+     */
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductIntakes.
+     */
+    cursor?: ProductIntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductIntakes.
+     */
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * ProductIntake findFirstOrThrow
+   */
+  export type ProductIntakeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntake to fetch.
+     */
+    where?: ProductIntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakes to fetch.
+     */
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductIntakes.
+     */
+    cursor?: ProductIntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductIntakes.
+     */
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * ProductIntake findMany
+   */
+  export type ProductIntakeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntakes to fetch.
+     */
+    where?: ProductIntakeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakes to fetch.
+     */
+    orderBy?: ProductIntakeOrderByWithRelationInput | ProductIntakeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductIntakes.
+     */
+    cursor?: ProductIntakeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakes.
+     */
+    skip?: number
+    distinct?: ProductIntakeScalarFieldEnum | ProductIntakeScalarFieldEnum[]
+  }
+
+  /**
+   * ProductIntake create
+   */
+  export type ProductIntakeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductIntake.
+     */
+    data: XOR<ProductIntakeCreateInput, ProductIntakeUncheckedCreateInput>
+  }
+
+  /**
+   * ProductIntake createMany
+   */
+  export type ProductIntakeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductIntakes.
+     */
+    data: ProductIntakeCreateManyInput | ProductIntakeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductIntake createManyAndReturn
+   */
+  export type ProductIntakeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProductIntakes.
+     */
+    data: ProductIntakeCreateManyInput | ProductIntakeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductIntake update
+   */
+  export type ProductIntakeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductIntake.
+     */
+    data: XOR<ProductIntakeUpdateInput, ProductIntakeUncheckedUpdateInput>
+    /**
+     * Choose, which ProductIntake to update.
+     */
+    where: ProductIntakeWhereUniqueInput
+  }
+
+  /**
+   * ProductIntake updateMany
+   */
+  export type ProductIntakeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductIntakes.
+     */
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductIntakes to update
+     */
+    where?: ProductIntakeWhereInput
+    /**
+     * Limit how many ProductIntakes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductIntake updateManyAndReturn
+   */
+  export type ProductIntakeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * The data used to update ProductIntakes.
+     */
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductIntakes to update
+     */
+    where?: ProductIntakeWhereInput
+    /**
+     * Limit how many ProductIntakes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductIntake upsert
+   */
+  export type ProductIntakeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductIntake to update in case it exists.
+     */
+    where: ProductIntakeWhereUniqueInput
+    /**
+     * In case the ProductIntake found by the `where` argument doesn't exist, create a new ProductIntake with this data.
+     */
+    create: XOR<ProductIntakeCreateInput, ProductIntakeUncheckedCreateInput>
+    /**
+     * In case the ProductIntake was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductIntakeUpdateInput, ProductIntakeUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductIntake delete
+   */
+  export type ProductIntakeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+    /**
+     * Filter which ProductIntake to delete.
+     */
+    where: ProductIntakeWhereUniqueInput
+  }
+
+  /**
+   * ProductIntake deleteMany
+   */
+  export type ProductIntakeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductIntakes to delete
+     */
+    where?: ProductIntakeWhereInput
+    /**
+     * Limit how many ProductIntakes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductIntake.series
+   */
+  export type ProductIntake$seriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandSeries
+     */
+    select?: BrandSeriesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandSeries
+     */
+    omit?: BrandSeriesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandSeriesInclude<ExtArgs> | null
+    where?: BrandSeriesWhereInput
+  }
+
+  /**
+   * ProductIntake.model
+   */
+  export type ProductIntake$modelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BrandModel
+     */
+    select?: BrandModelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BrandModel
+     */
+    omit?: BrandModelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BrandModelInclude<ExtArgs> | null
+    where?: BrandModelWhereInput
+  }
+
+  /**
+   * ProductIntake.recyclingEmployee
+   */
+  export type ProductIntake$recyclingEmployeeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminUser
+     */
+    select?: AdminUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminUser
+     */
+    omit?: AdminUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminUserInclude<ExtArgs> | null
+    where?: AdminUserWhereInput
+  }
+
+  /**
+   * ProductIntake.recyclingType
+   */
+  export type ProductIntake$recyclingTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RecyclingType
+     */
+    select?: RecyclingTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RecyclingType
+     */
+    omit?: RecyclingTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RecyclingTypeInclude<ExtArgs> | null
+    where?: RecyclingTypeWhereInput
+  }
+
+  /**
+   * ProductIntake.media
+   */
+  export type ProductIntake$mediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    where?: ProductIntakeMediaWhereInput
+    orderBy?: ProductIntakeMediaOrderByWithRelationInput | ProductIntakeMediaOrderByWithRelationInput[]
+    cursor?: ProductIntakeMediaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductIntakeMediaScalarFieldEnum | ProductIntakeMediaScalarFieldEnum[]
+  }
+
+  /**
+   * ProductIntake without action
+   */
+  export type ProductIntakeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntake
+     */
+    select?: ProductIntakeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntake
+     */
+    omit?: ProductIntakeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProductIntakeMedia
+   */
+
+  export type AggregateProductIntakeMedia = {
+    _count: ProductIntakeMediaCountAggregateOutputType | null
+    _avg: ProductIntakeMediaAvgAggregateOutputType | null
+    _sum: ProductIntakeMediaSumAggregateOutputType | null
+    _min: ProductIntakeMediaMinAggregateOutputType | null
+    _max: ProductIntakeMediaMaxAggregateOutputType | null
+  }
+
+  export type ProductIntakeMediaAvgAggregateOutputType = {
+    sortOrder: number | null
+    durationSeconds: number | null
+  }
+
+  export type ProductIntakeMediaSumAggregateOutputType = {
+    sortOrder: number | null
+    durationSeconds: number | null
+  }
+
+  export type ProductIntakeMediaMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    intakeId: string | null
+    mediaAssetId: string | null
+    group: string | null
+    visibility: string | null
+    sortOrder: number | null
+    durationSeconds: number | null
+    createdAt: Date | null
+  }
+
+  export type ProductIntakeMediaMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    intakeId: string | null
+    mediaAssetId: string | null
+    group: string | null
+    visibility: string | null
+    sortOrder: number | null
+    durationSeconds: number | null
+    createdAt: Date | null
+  }
+
+  export type ProductIntakeMediaCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    intakeId: number
+    mediaAssetId: number
+    group: number
+    visibility: number
+    sortOrder: number
+    durationSeconds: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ProductIntakeMediaAvgAggregateInputType = {
+    sortOrder?: true
+    durationSeconds?: true
+  }
+
+  export type ProductIntakeMediaSumAggregateInputType = {
+    sortOrder?: true
+    durationSeconds?: true
+  }
+
+  export type ProductIntakeMediaMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    intakeId?: true
+    mediaAssetId?: true
+    group?: true
+    visibility?: true
+    sortOrder?: true
+    durationSeconds?: true
+    createdAt?: true
+  }
+
+  export type ProductIntakeMediaMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    intakeId?: true
+    mediaAssetId?: true
+    group?: true
+    visibility?: true
+    sortOrder?: true
+    durationSeconds?: true
+    createdAt?: true
+  }
+
+  export type ProductIntakeMediaCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    intakeId?: true
+    mediaAssetId?: true
+    group?: true
+    visibility?: true
+    sortOrder?: true
+    durationSeconds?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ProductIntakeMediaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductIntakeMedia to aggregate.
+     */
+    where?: ProductIntakeMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakeMedias to fetch.
+     */
+    orderBy?: ProductIntakeMediaOrderByWithRelationInput | ProductIntakeMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductIntakeMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakeMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakeMedias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductIntakeMedias
+    **/
+    _count?: true | ProductIntakeMediaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductIntakeMediaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductIntakeMediaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductIntakeMediaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductIntakeMediaMaxAggregateInputType
+  }
+
+  export type GetProductIntakeMediaAggregateType<T extends ProductIntakeMediaAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductIntakeMedia]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductIntakeMedia[P]>
+      : GetScalarType<T[P], AggregateProductIntakeMedia[P]>
+  }
+
+
+
+
+  export type ProductIntakeMediaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductIntakeMediaWhereInput
+    orderBy?: ProductIntakeMediaOrderByWithAggregationInput | ProductIntakeMediaOrderByWithAggregationInput[]
+    by: ProductIntakeMediaScalarFieldEnum[] | ProductIntakeMediaScalarFieldEnum
+    having?: ProductIntakeMediaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductIntakeMediaCountAggregateInputType | true
+    _avg?: ProductIntakeMediaAvgAggregateInputType
+    _sum?: ProductIntakeMediaSumAggregateInputType
+    _min?: ProductIntakeMediaMinAggregateInputType
+    _max?: ProductIntakeMediaMaxAggregateInputType
+  }
+
+  export type ProductIntakeMediaGroupByOutputType = {
+    id: string
+    tenantId: string
+    intakeId: string
+    mediaAssetId: string
+    group: string
+    visibility: string
+    sortOrder: number
+    durationSeconds: number | null
+    createdAt: Date
+    _count: ProductIntakeMediaCountAggregateOutputType | null
+    _avg: ProductIntakeMediaAvgAggregateOutputType | null
+    _sum: ProductIntakeMediaSumAggregateOutputType | null
+    _min: ProductIntakeMediaMinAggregateOutputType | null
+    _max: ProductIntakeMediaMaxAggregateOutputType | null
+  }
+
+  type GetProductIntakeMediaGroupByPayload<T extends ProductIntakeMediaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductIntakeMediaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductIntakeMediaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductIntakeMediaGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductIntakeMediaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductIntakeMediaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    intakeId?: boolean
+    mediaAssetId?: boolean
+    group?: boolean
+    visibility?: boolean
+    sortOrder?: boolean
+    durationSeconds?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intake?: boolean | ProductIntakeDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | MediaAssetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productIntakeMedia"]>
+
+  export type ProductIntakeMediaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    intakeId?: boolean
+    mediaAssetId?: boolean
+    group?: boolean
+    visibility?: boolean
+    sortOrder?: boolean
+    durationSeconds?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intake?: boolean | ProductIntakeDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | MediaAssetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productIntakeMedia"]>
+
+  export type ProductIntakeMediaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    intakeId?: boolean
+    mediaAssetId?: boolean
+    group?: boolean
+    visibility?: boolean
+    sortOrder?: boolean
+    durationSeconds?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intake?: boolean | ProductIntakeDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | MediaAssetDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productIntakeMedia"]>
+
+  export type ProductIntakeMediaSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    intakeId?: boolean
+    mediaAssetId?: boolean
+    group?: boolean
+    visibility?: boolean
+    sortOrder?: boolean
+    durationSeconds?: boolean
+    createdAt?: boolean
+  }
+
+  export type ProductIntakeMediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "intakeId" | "mediaAssetId" | "group" | "visibility" | "sortOrder" | "durationSeconds" | "createdAt", ExtArgs["result"]["productIntakeMedia"]>
+  export type ProductIntakeMediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intake?: boolean | ProductIntakeDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | MediaAssetDefaultArgs<ExtArgs>
+  }
+  export type ProductIntakeMediaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intake?: boolean | ProductIntakeDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | MediaAssetDefaultArgs<ExtArgs>
+  }
+  export type ProductIntakeMediaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    intake?: boolean | ProductIntakeDefaultArgs<ExtArgs>
+    mediaAsset?: boolean | MediaAssetDefaultArgs<ExtArgs>
+  }
+
+  export type $ProductIntakeMediaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductIntakeMedia"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      intake: Prisma.$ProductIntakePayload<ExtArgs>
+      mediaAsset: Prisma.$MediaAssetPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      intakeId: string
+      mediaAssetId: string
+      group: string
+      visibility: string
+      sortOrder: number
+      durationSeconds: number | null
+      createdAt: Date
+    }, ExtArgs["result"]["productIntakeMedia"]>
+    composites: {}
+  }
+
+  type ProductIntakeMediaGetPayload<S extends boolean | null | undefined | ProductIntakeMediaDefaultArgs> = $Result.GetResult<Prisma.$ProductIntakeMediaPayload, S>
+
+  type ProductIntakeMediaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductIntakeMediaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductIntakeMediaCountAggregateInputType | true
+    }
+
+  export interface ProductIntakeMediaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductIntakeMedia'], meta: { name: 'ProductIntakeMedia' } }
+    /**
+     * Find zero or one ProductIntakeMedia that matches the filter.
+     * @param {ProductIntakeMediaFindUniqueArgs} args - Arguments to find a ProductIntakeMedia
+     * @example
+     * // Get one ProductIntakeMedia
+     * const productIntakeMedia = await prisma.productIntakeMedia.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductIntakeMediaFindUniqueArgs>(args: SelectSubset<T, ProductIntakeMediaFindUniqueArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProductIntakeMedia that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductIntakeMediaFindUniqueOrThrowArgs} args - Arguments to find a ProductIntakeMedia
+     * @example
+     * // Get one ProductIntakeMedia
+     * const productIntakeMedia = await prisma.productIntakeMedia.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductIntakeMediaFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductIntakeMediaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductIntakeMedia that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeMediaFindFirstArgs} args - Arguments to find a ProductIntakeMedia
+     * @example
+     * // Get one ProductIntakeMedia
+     * const productIntakeMedia = await prisma.productIntakeMedia.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductIntakeMediaFindFirstArgs>(args?: SelectSubset<T, ProductIntakeMediaFindFirstArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProductIntakeMedia that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeMediaFindFirstOrThrowArgs} args - Arguments to find a ProductIntakeMedia
+     * @example
+     * // Get one ProductIntakeMedia
+     * const productIntakeMedia = await prisma.productIntakeMedia.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductIntakeMediaFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductIntakeMediaFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProductIntakeMedias that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeMediaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductIntakeMedias
+     * const productIntakeMedias = await prisma.productIntakeMedia.findMany()
+     * 
+     * // Get first 10 ProductIntakeMedias
+     * const productIntakeMedias = await prisma.productIntakeMedia.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productIntakeMediaWithIdOnly = await prisma.productIntakeMedia.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductIntakeMediaFindManyArgs>(args?: SelectSubset<T, ProductIntakeMediaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProductIntakeMedia.
+     * @param {ProductIntakeMediaCreateArgs} args - Arguments to create a ProductIntakeMedia.
+     * @example
+     * // Create one ProductIntakeMedia
+     * const ProductIntakeMedia = await prisma.productIntakeMedia.create({
+     *   data: {
+     *     // ... data to create a ProductIntakeMedia
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductIntakeMediaCreateArgs>(args: SelectSubset<T, ProductIntakeMediaCreateArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProductIntakeMedias.
+     * @param {ProductIntakeMediaCreateManyArgs} args - Arguments to create many ProductIntakeMedias.
+     * @example
+     * // Create many ProductIntakeMedias
+     * const productIntakeMedia = await prisma.productIntakeMedia.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductIntakeMediaCreateManyArgs>(args?: SelectSubset<T, ProductIntakeMediaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ProductIntakeMedias and returns the data saved in the database.
+     * @param {ProductIntakeMediaCreateManyAndReturnArgs} args - Arguments to create many ProductIntakeMedias.
+     * @example
+     * // Create many ProductIntakeMedias
+     * const productIntakeMedia = await prisma.productIntakeMedia.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ProductIntakeMedias and only return the `id`
+     * const productIntakeMediaWithIdOnly = await prisma.productIntakeMedia.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProductIntakeMediaCreateManyAndReturnArgs>(args?: SelectSubset<T, ProductIntakeMediaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ProductIntakeMedia.
+     * @param {ProductIntakeMediaDeleteArgs} args - Arguments to delete one ProductIntakeMedia.
+     * @example
+     * // Delete one ProductIntakeMedia
+     * const ProductIntakeMedia = await prisma.productIntakeMedia.delete({
+     *   where: {
+     *     // ... filter to delete one ProductIntakeMedia
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductIntakeMediaDeleteArgs>(args: SelectSubset<T, ProductIntakeMediaDeleteArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProductIntakeMedia.
+     * @param {ProductIntakeMediaUpdateArgs} args - Arguments to update one ProductIntakeMedia.
+     * @example
+     * // Update one ProductIntakeMedia
+     * const productIntakeMedia = await prisma.productIntakeMedia.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductIntakeMediaUpdateArgs>(args: SelectSubset<T, ProductIntakeMediaUpdateArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProductIntakeMedias.
+     * @param {ProductIntakeMediaDeleteManyArgs} args - Arguments to filter ProductIntakeMedias to delete.
+     * @example
+     * // Delete a few ProductIntakeMedias
+     * const { count } = await prisma.productIntakeMedia.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductIntakeMediaDeleteManyArgs>(args?: SelectSubset<T, ProductIntakeMediaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductIntakeMedias.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeMediaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductIntakeMedias
+     * const productIntakeMedia = await prisma.productIntakeMedia.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductIntakeMediaUpdateManyArgs>(args: SelectSubset<T, ProductIntakeMediaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductIntakeMedias and returns the data updated in the database.
+     * @param {ProductIntakeMediaUpdateManyAndReturnArgs} args - Arguments to update many ProductIntakeMedias.
+     * @example
+     * // Update many ProductIntakeMedias
+     * const productIntakeMedia = await prisma.productIntakeMedia.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ProductIntakeMedias and only return the `id`
+     * const productIntakeMediaWithIdOnly = await prisma.productIntakeMedia.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProductIntakeMediaUpdateManyAndReturnArgs>(args: SelectSubset<T, ProductIntakeMediaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ProductIntakeMedia.
+     * @param {ProductIntakeMediaUpsertArgs} args - Arguments to update or create a ProductIntakeMedia.
+     * @example
+     * // Update or create a ProductIntakeMedia
+     * const productIntakeMedia = await prisma.productIntakeMedia.upsert({
+     *   create: {
+     *     // ... data to create a ProductIntakeMedia
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductIntakeMedia we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductIntakeMediaUpsertArgs>(args: SelectSubset<T, ProductIntakeMediaUpsertArgs<ExtArgs>>): Prisma__ProductIntakeMediaClient<$Result.GetResult<Prisma.$ProductIntakeMediaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProductIntakeMedias.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeMediaCountArgs} args - Arguments to filter ProductIntakeMedias to count.
+     * @example
+     * // Count the number of ProductIntakeMedias
+     * const count = await prisma.productIntakeMedia.count({
+     *   where: {
+     *     // ... the filter for the ProductIntakeMedias we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductIntakeMediaCountArgs>(
+      args?: Subset<T, ProductIntakeMediaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductIntakeMediaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductIntakeMedia.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeMediaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductIntakeMediaAggregateArgs>(args: Subset<T, ProductIntakeMediaAggregateArgs>): Prisma.PrismaPromise<GetProductIntakeMediaAggregateType<T>>
+
+    /**
+     * Group by ProductIntakeMedia.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductIntakeMediaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductIntakeMediaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductIntakeMediaGroupByArgs['orderBy'] }
+        : { orderBy?: ProductIntakeMediaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductIntakeMediaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductIntakeMediaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductIntakeMedia model
+   */
+  readonly fields: ProductIntakeMediaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductIntakeMedia.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductIntakeMediaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    intake<T extends ProductIntakeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductIntakeDefaultArgs<ExtArgs>>): Prisma__ProductIntakeClient<$Result.GetResult<Prisma.$ProductIntakePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    mediaAsset<T extends MediaAssetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MediaAssetDefaultArgs<ExtArgs>>): Prisma__MediaAssetClient<$Result.GetResult<Prisma.$MediaAssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductIntakeMedia model
+   */
+  interface ProductIntakeMediaFieldRefs {
+    readonly id: FieldRef<"ProductIntakeMedia", 'String'>
+    readonly tenantId: FieldRef<"ProductIntakeMedia", 'String'>
+    readonly intakeId: FieldRef<"ProductIntakeMedia", 'String'>
+    readonly mediaAssetId: FieldRef<"ProductIntakeMedia", 'String'>
+    readonly group: FieldRef<"ProductIntakeMedia", 'String'>
+    readonly visibility: FieldRef<"ProductIntakeMedia", 'String'>
+    readonly sortOrder: FieldRef<"ProductIntakeMedia", 'Int'>
+    readonly durationSeconds: FieldRef<"ProductIntakeMedia", 'Int'>
+    readonly createdAt: FieldRef<"ProductIntakeMedia", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductIntakeMedia findUnique
+   */
+  export type ProductIntakeMediaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntakeMedia to fetch.
+     */
+    where: ProductIntakeMediaWhereUniqueInput
+  }
+
+  /**
+   * ProductIntakeMedia findUniqueOrThrow
+   */
+  export type ProductIntakeMediaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntakeMedia to fetch.
+     */
+    where: ProductIntakeMediaWhereUniqueInput
+  }
+
+  /**
+   * ProductIntakeMedia findFirst
+   */
+  export type ProductIntakeMediaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntakeMedia to fetch.
+     */
+    where?: ProductIntakeMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakeMedias to fetch.
+     */
+    orderBy?: ProductIntakeMediaOrderByWithRelationInput | ProductIntakeMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductIntakeMedias.
+     */
+    cursor?: ProductIntakeMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakeMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakeMedias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductIntakeMedias.
+     */
+    distinct?: ProductIntakeMediaScalarFieldEnum | ProductIntakeMediaScalarFieldEnum[]
+  }
+
+  /**
+   * ProductIntakeMedia findFirstOrThrow
+   */
+  export type ProductIntakeMediaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntakeMedia to fetch.
+     */
+    where?: ProductIntakeMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakeMedias to fetch.
+     */
+    orderBy?: ProductIntakeMediaOrderByWithRelationInput | ProductIntakeMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductIntakeMedias.
+     */
+    cursor?: ProductIntakeMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakeMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakeMedias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductIntakeMedias.
+     */
+    distinct?: ProductIntakeMediaScalarFieldEnum | ProductIntakeMediaScalarFieldEnum[]
+  }
+
+  /**
+   * ProductIntakeMedia findMany
+   */
+  export type ProductIntakeMediaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductIntakeMedias to fetch.
+     */
+    where?: ProductIntakeMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductIntakeMedias to fetch.
+     */
+    orderBy?: ProductIntakeMediaOrderByWithRelationInput | ProductIntakeMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductIntakeMedias.
+     */
+    cursor?: ProductIntakeMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductIntakeMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductIntakeMedias.
+     */
+    skip?: number
+    distinct?: ProductIntakeMediaScalarFieldEnum | ProductIntakeMediaScalarFieldEnum[]
+  }
+
+  /**
+   * ProductIntakeMedia create
+   */
+  export type ProductIntakeMediaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductIntakeMedia.
+     */
+    data: XOR<ProductIntakeMediaCreateInput, ProductIntakeMediaUncheckedCreateInput>
+  }
+
+  /**
+   * ProductIntakeMedia createMany
+   */
+  export type ProductIntakeMediaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductIntakeMedias.
+     */
+    data: ProductIntakeMediaCreateManyInput | ProductIntakeMediaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductIntakeMedia createManyAndReturn
+   */
+  export type ProductIntakeMediaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * The data used to create many ProductIntakeMedias.
+     */
+    data: ProductIntakeMediaCreateManyInput | ProductIntakeMediaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductIntakeMedia update
+   */
+  export type ProductIntakeMediaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductIntakeMedia.
+     */
+    data: XOR<ProductIntakeMediaUpdateInput, ProductIntakeMediaUncheckedUpdateInput>
+    /**
+     * Choose, which ProductIntakeMedia to update.
+     */
+    where: ProductIntakeMediaWhereUniqueInput
+  }
+
+  /**
+   * ProductIntakeMedia updateMany
+   */
+  export type ProductIntakeMediaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductIntakeMedias.
+     */
+    data: XOR<ProductIntakeMediaUpdateManyMutationInput, ProductIntakeMediaUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductIntakeMedias to update
+     */
+    where?: ProductIntakeMediaWhereInput
+    /**
+     * Limit how many ProductIntakeMedias to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductIntakeMedia updateManyAndReturn
+   */
+  export type ProductIntakeMediaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * The data used to update ProductIntakeMedias.
+     */
+    data: XOR<ProductIntakeMediaUpdateManyMutationInput, ProductIntakeMediaUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductIntakeMedias to update
+     */
+    where?: ProductIntakeMediaWhereInput
+    /**
+     * Limit how many ProductIntakeMedias to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ProductIntakeMedia upsert
+   */
+  export type ProductIntakeMediaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductIntakeMedia to update in case it exists.
+     */
+    where: ProductIntakeMediaWhereUniqueInput
+    /**
+     * In case the ProductIntakeMedia found by the `where` argument doesn't exist, create a new ProductIntakeMedia with this data.
+     */
+    create: XOR<ProductIntakeMediaCreateInput, ProductIntakeMediaUncheckedCreateInput>
+    /**
+     * In case the ProductIntakeMedia was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductIntakeMediaUpdateInput, ProductIntakeMediaUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductIntakeMedia delete
+   */
+  export type ProductIntakeMediaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
+    /**
+     * Filter which ProductIntakeMedia to delete.
+     */
+    where: ProductIntakeMediaWhereUniqueInput
+  }
+
+  /**
+   * ProductIntakeMedia deleteMany
+   */
+  export type ProductIntakeMediaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductIntakeMedias to delete
+     */
+    where?: ProductIntakeMediaWhereInput
+    /**
+     * Limit how many ProductIntakeMedias to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProductIntakeMedia without action
+   */
+  export type ProductIntakeMediaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductIntakeMedia
+     */
+    select?: ProductIntakeMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductIntakeMedia
+     */
+    omit?: ProductIntakeMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIntakeMediaInclude<ExtArgs> | null
   }
 
 
@@ -48573,6 +57319,8 @@ export namespace Prisma {
     id: 'id',
     tenantId: 'tenantId',
     name: 'name',
+    englishName: 'englishName',
+    initial: 'initial',
     logoUrl: 'logoUrl',
     status: 'status',
     version: 'version',
@@ -48582,6 +57330,63 @@ export namespace Prisma {
   };
 
   export type BrandScalarFieldEnum = (typeof BrandScalarFieldEnum)[keyof typeof BrandScalarFieldEnum]
+
+
+  export const BrandCategoryScalarFieldEnum: {
+    tenantId: 'tenantId',
+    brandId: 'brandId',
+    categoryId: 'categoryId',
+    createdAt: 'createdAt'
+  };
+
+  export type BrandCategoryScalarFieldEnum = (typeof BrandCategoryScalarFieldEnum)[keyof typeof BrandCategoryScalarFieldEnum]
+
+
+  export const BrandSeriesScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    brandId: 'brandId',
+    name: 'name',
+    status: 'status',
+    version: 'version',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BrandSeriesScalarFieldEnum = (typeof BrandSeriesScalarFieldEnum)[keyof typeof BrandSeriesScalarFieldEnum]
+
+
+  export const BrandModelScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    brandId: 'brandId',
+    seriesId: 'seriesId',
+    categoryId: 'categoryId',
+    name: 'name',
+    officialGuidePrice: 'officialGuidePrice',
+    defaultMaterial: 'defaultMaterial',
+    status: 'status',
+    version: 'version',
+    deletedAt: 'deletedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BrandModelScalarFieldEnum = (typeof BrandModelScalarFieldEnum)[keyof typeof BrandModelScalarFieldEnum]
+
+
+  export const RecyclingTypeScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    name: 'name',
+    sortOrder: 'sortOrder',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type RecyclingTypeScalarFieldEnum = (typeof RecyclingTypeScalarFieldEnum)[keyof typeof RecyclingTypeScalarFieldEnum]
 
 
   export const ProductScalarFieldEnum: {
@@ -48605,6 +57410,61 @@ export namespace Prisma {
   };
 
   export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+  export const ProductIntakeScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    productId: 'productId',
+    idempotencyKey: 'idempotencyKey',
+    requestFingerprint: 'requestFingerprint',
+    action: 'action',
+    customTips: 'customTips',
+    condition: 'condition',
+    seriesId: 'seriesId',
+    modelId: 'modelId',
+    officialGuidePrice: 'officialGuidePrice',
+    ownershipType: 'ownershipType',
+    stockQuantity: 'stockQuantity',
+    inventoryAgeWarningDays: 'inventoryAgeWarningDays',
+    totalCostPrice: 'totalCostPrice',
+    peerPrice: 'peerPrice',
+    agentPrice: 'agentPrice',
+    appraiserEmployeeId: 'appraiserEmployeeId',
+    appraiserName: 'appraiserName',
+    recyclingTypeId: 'recyclingTypeId',
+    recyclingEmployeeId: 'recyclingEmployeeId',
+    recyclingEmployeeName: 'recyclingEmployeeName',
+    recyclingNotes: 'recyclingNotes',
+    recycledAt: 'recycledAt',
+    audience: 'audience',
+    warrantyCard: 'warrantyCard',
+    warrantyCardYear: 'warrantyCardYear',
+    uniqueCode: 'uniqueCode',
+    tags: 'tags',
+    accessories: 'accessories',
+    internalNotes: 'internalNotes',
+    stockedAt: 'stockedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductIntakeScalarFieldEnum = (typeof ProductIntakeScalarFieldEnum)[keyof typeof ProductIntakeScalarFieldEnum]
+
+
+  export const ProductIntakeMediaScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    intakeId: 'intakeId',
+    mediaAssetId: 'mediaAssetId',
+    group: 'group',
+    visibility: 'visibility',
+    sortOrder: 'sortOrder',
+    durationSeconds: 'durationSeconds',
+    createdAt: 'createdAt'
+  };
+
+  export type ProductIntakeMediaScalarFieldEnum = (typeof ProductIntakeMediaScalarFieldEnum)[keyof typeof ProductIntakeMediaScalarFieldEnum]
 
 
   export const ProductVariantScalarFieldEnum: {
@@ -49069,6 +57929,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteListRelationFilter
     mediaUploadSessions?: MediaUploadSessionListRelationFilter
     mediaAssets?: MediaAssetListRelationFilter
+    brandSeries?: BrandSeriesListRelationFilter
+    brandModels?: BrandModelListRelationFilter
+    brandCategories?: BrandCategoryListRelationFilter
+    recyclingTypes?: RecyclingTypeListRelationFilter
+    productIntakes?: ProductIntakeListRelationFilter
+    productIntakeMedia?: ProductIntakeMediaListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -49097,6 +57963,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteOrderByRelationAggregateInput
     mediaUploadSessions?: MediaUploadSessionOrderByRelationAggregateInput
     mediaAssets?: MediaAssetOrderByRelationAggregateInput
+    brandSeries?: BrandSeriesOrderByRelationAggregateInput
+    brandModels?: BrandModelOrderByRelationAggregateInput
+    brandCategories?: BrandCategoryOrderByRelationAggregateInput
+    recyclingTypes?: RecyclingTypeOrderByRelationAggregateInput
+    productIntakes?: ProductIntakeOrderByRelationAggregateInput
+    productIntakeMedia?: ProductIntakeMediaOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -49128,6 +58000,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteListRelationFilter
     mediaUploadSessions?: MediaUploadSessionListRelationFilter
     mediaAssets?: MediaAssetListRelationFilter
+    brandSeries?: BrandSeriesListRelationFilter
+    brandModels?: BrandModelListRelationFilter
+    brandCategories?: BrandCategoryListRelationFilter
+    recyclingTypes?: RecyclingTypeListRelationFilter
+    productIntakes?: ProductIntakeListRelationFilter
+    productIntakeMedia?: ProductIntakeMediaListRelationFilter
   }, "id" | "subdomain" | "customDomain" | "schemaName" | "subscriptionId">
 
   export type TenantOrderByWithAggregationInput = {
@@ -49390,6 +58268,8 @@ export namespace Prisma {
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     userRoles?: UserRoleListRelationFilter
     sessions?: RefreshSessionListRelationFilter
+    appraisedIntakes?: ProductIntakeListRelationFilter
+    recycledIntakes?: ProductIntakeListRelationFilter
   }
 
   export type AdminUserOrderByWithRelationInput = {
@@ -49404,6 +58284,8 @@ export namespace Prisma {
     tenant?: TenantOrderByWithRelationInput
     userRoles?: UserRoleOrderByRelationAggregateInput
     sessions?: RefreshSessionOrderByRelationAggregateInput
+    appraisedIntakes?: ProductIntakeOrderByRelationAggregateInput
+    recycledIntakes?: ProductIntakeOrderByRelationAggregateInput
   }
 
   export type AdminUserWhereUniqueInput = Prisma.AtLeast<{
@@ -49422,6 +58304,8 @@ export namespace Prisma {
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     userRoles?: UserRoleListRelationFilter
     sessions?: RefreshSessionListRelationFilter
+    appraisedIntakes?: ProductIntakeListRelationFilter
+    recycledIntakes?: ProductIntakeListRelationFilter
   }, "id" | "tenantId_email">
 
   export type AdminUserOrderByWithAggregationInput = {
@@ -50376,6 +59260,7 @@ export namespace Prisma {
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     uploadSession?: XOR<MediaUploadSessionScalarRelationFilter, MediaUploadSessionWhereInput>
     productImage?: XOR<ProductImageNullableScalarRelationFilter, ProductImageWhereInput> | null
+    productIntakeMedia?: XOR<ProductIntakeMediaNullableScalarRelationFilter, ProductIntakeMediaWhereInput> | null
   }
 
   export type MediaAssetOrderByWithRelationInput = {
@@ -50396,6 +59281,7 @@ export namespace Prisma {
     tenant?: TenantOrderByWithRelationInput
     uploadSession?: MediaUploadSessionOrderByWithRelationInput
     productImage?: ProductImageOrderByWithRelationInput
+    productIntakeMedia?: ProductIntakeMediaOrderByWithRelationInput
   }
 
   export type MediaAssetWhereUniqueInput = Prisma.AtLeast<{
@@ -50419,6 +59305,7 @@ export namespace Prisma {
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     uploadSession?: XOR<MediaUploadSessionScalarRelationFilter, MediaUploadSessionWhereInput>
     productImage?: XOR<ProductImageNullableScalarRelationFilter, ProductImageWhereInput> | null
+    productIntakeMedia?: XOR<ProductIntakeMediaNullableScalarRelationFilter, ProductIntakeMediaWhereInput> | null
   }, "id" | "uploadSessionId" | "objectKey">
 
   export type MediaAssetOrderByWithAggregationInput = {
@@ -50527,6 +59414,8 @@ export namespace Prisma {
     parent?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     children?: CategoryListRelationFilter
     products?: ProductListRelationFilter
+    brandModels?: BrandModelListRelationFilter
+    brands?: BrandCategoryListRelationFilter
   }
 
   export type CategoryOrderByWithRelationInput = {
@@ -50543,6 +59432,8 @@ export namespace Prisma {
     parent?: CategoryOrderByWithRelationInput
     children?: CategoryOrderByRelationAggregateInput
     products?: ProductOrderByRelationAggregateInput
+    brandModels?: BrandModelOrderByRelationAggregateInput
+    brands?: BrandCategoryOrderByRelationAggregateInput
   }
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
@@ -50563,6 +59454,8 @@ export namespace Prisma {
     parent?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     children?: CategoryListRelationFilter
     products?: ProductListRelationFilter
+    brandModels?: BrandModelListRelationFilter
+    brands?: BrandCategoryListRelationFilter
   }, "id" | "tenantId_name">
 
   export type CategoryOrderByWithAggregationInput = {
@@ -50606,6 +59499,8 @@ export namespace Prisma {
     id?: UuidFilter<"Brand"> | string
     tenantId?: UuidFilter<"Brand"> | string
     name?: StringFilter<"Brand"> | string
+    englishName?: StringNullableFilter<"Brand"> | string | null
+    initial?: StringFilter<"Brand"> | string
     logoUrl?: StringNullableFilter<"Brand"> | string | null
     status?: StringFilter<"Brand"> | string
     version?: IntFilter<"Brand"> | number
@@ -50613,12 +59508,17 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
     products?: ProductListRelationFilter
+    series?: BrandSeriesListRelationFilter
+    models?: BrandModelListRelationFilter
+    categories?: BrandCategoryListRelationFilter
   }
 
   export type BrandOrderByWithRelationInput = {
     id?: SortOrder
     tenantId?: SortOrder
     name?: SortOrder
+    englishName?: SortOrderInput | SortOrder
+    initial?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     status?: SortOrder
     version?: SortOrder
@@ -50626,6 +59526,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     products?: ProductOrderByRelationAggregateInput
+    series?: BrandSeriesOrderByRelationAggregateInput
+    models?: BrandModelOrderByRelationAggregateInput
+    categories?: BrandCategoryOrderByRelationAggregateInput
   }
 
   export type BrandWhereUniqueInput = Prisma.AtLeast<{
@@ -50636,6 +59539,8 @@ export namespace Prisma {
     NOT?: BrandWhereInput | BrandWhereInput[]
     tenantId?: UuidFilter<"Brand"> | string
     name?: StringFilter<"Brand"> | string
+    englishName?: StringNullableFilter<"Brand"> | string | null
+    initial?: StringFilter<"Brand"> | string
     logoUrl?: StringNullableFilter<"Brand"> | string | null
     status?: StringFilter<"Brand"> | string
     version?: IntFilter<"Brand"> | number
@@ -50643,12 +59548,17 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Brand"> | Date | string
     updatedAt?: DateTimeFilter<"Brand"> | Date | string
     products?: ProductListRelationFilter
+    series?: BrandSeriesListRelationFilter
+    models?: BrandModelListRelationFilter
+    categories?: BrandCategoryListRelationFilter
   }, "id" | "tenantId_name">
 
   export type BrandOrderByWithAggregationInput = {
     id?: SortOrder
     tenantId?: SortOrder
     name?: SortOrder
+    englishName?: SortOrderInput | SortOrder
+    initial?: SortOrder
     logoUrl?: SortOrderInput | SortOrder
     status?: SortOrder
     version?: SortOrder
@@ -50669,12 +59579,339 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Brand"> | string
     tenantId?: UuidWithAggregatesFilter<"Brand"> | string
     name?: StringWithAggregatesFilter<"Brand"> | string
+    englishName?: StringNullableWithAggregatesFilter<"Brand"> | string | null
+    initial?: StringWithAggregatesFilter<"Brand"> | string
     logoUrl?: StringNullableWithAggregatesFilter<"Brand"> | string | null
     status?: StringWithAggregatesFilter<"Brand"> | string
     version?: IntWithAggregatesFilter<"Brand"> | number
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Brand"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Brand"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Brand"> | Date | string
+  }
+
+  export type BrandCategoryWhereInput = {
+    AND?: BrandCategoryWhereInput | BrandCategoryWhereInput[]
+    OR?: BrandCategoryWhereInput[]
+    NOT?: BrandCategoryWhereInput | BrandCategoryWhereInput[]
+    tenantId?: UuidFilter<"BrandCategory"> | string
+    brandId?: UuidFilter<"BrandCategory"> | string
+    categoryId?: UuidFilter<"BrandCategory"> | string
+    createdAt?: DateTimeFilter<"BrandCategory"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+  }
+
+  export type BrandCategoryOrderByWithRelationInput = {
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    brand?: BrandOrderByWithRelationInput
+    category?: CategoryOrderByWithRelationInput
+  }
+
+  export type BrandCategoryWhereUniqueInput = Prisma.AtLeast<{
+    tenantId_brandId_categoryId?: BrandCategoryTenantIdBrandIdCategoryIdCompoundUniqueInput
+    AND?: BrandCategoryWhereInput | BrandCategoryWhereInput[]
+    OR?: BrandCategoryWhereInput[]
+    NOT?: BrandCategoryWhereInput | BrandCategoryWhereInput[]
+    tenantId?: UuidFilter<"BrandCategory"> | string
+    brandId?: UuidFilter<"BrandCategory"> | string
+    categoryId?: UuidFilter<"BrandCategory"> | string
+    createdAt?: DateTimeFilter<"BrandCategory"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+  }, "tenantId_brandId_categoryId">
+
+  export type BrandCategoryOrderByWithAggregationInput = {
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+    _count?: BrandCategoryCountOrderByAggregateInput
+    _max?: BrandCategoryMaxOrderByAggregateInput
+    _min?: BrandCategoryMinOrderByAggregateInput
+  }
+
+  export type BrandCategoryScalarWhereWithAggregatesInput = {
+    AND?: BrandCategoryScalarWhereWithAggregatesInput | BrandCategoryScalarWhereWithAggregatesInput[]
+    OR?: BrandCategoryScalarWhereWithAggregatesInput[]
+    NOT?: BrandCategoryScalarWhereWithAggregatesInput | BrandCategoryScalarWhereWithAggregatesInput[]
+    tenantId?: UuidWithAggregatesFilter<"BrandCategory"> | string
+    brandId?: UuidWithAggregatesFilter<"BrandCategory"> | string
+    categoryId?: UuidWithAggregatesFilter<"BrandCategory"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"BrandCategory"> | Date | string
+  }
+
+  export type BrandSeriesWhereInput = {
+    AND?: BrandSeriesWhereInput | BrandSeriesWhereInput[]
+    OR?: BrandSeriesWhereInput[]
+    NOT?: BrandSeriesWhereInput | BrandSeriesWhereInput[]
+    id?: UuidFilter<"BrandSeries"> | string
+    tenantId?: UuidFilter<"BrandSeries"> | string
+    brandId?: UuidFilter<"BrandSeries"> | string
+    name?: StringFilter<"BrandSeries"> | string
+    status?: StringFilter<"BrandSeries"> | string
+    version?: IntFilter<"BrandSeries"> | number
+    deletedAt?: DateTimeNullableFilter<"BrandSeries"> | Date | string | null
+    createdAt?: DateTimeFilter<"BrandSeries"> | Date | string
+    updatedAt?: DateTimeFilter<"BrandSeries"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
+    models?: BrandModelListRelationFilter
+    intakes?: ProductIntakeListRelationFilter
+  }
+
+  export type BrandSeriesOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    name?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    brand?: BrandOrderByWithRelationInput
+    models?: BrandModelOrderByRelationAggregateInput
+    intakes?: ProductIntakeOrderByRelationAggregateInput
+  }
+
+  export type BrandSeriesWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_brandId_name?: BrandSeriesTenantIdBrandIdNameCompoundUniqueInput
+    AND?: BrandSeriesWhereInput | BrandSeriesWhereInput[]
+    OR?: BrandSeriesWhereInput[]
+    NOT?: BrandSeriesWhereInput | BrandSeriesWhereInput[]
+    tenantId?: UuidFilter<"BrandSeries"> | string
+    brandId?: UuidFilter<"BrandSeries"> | string
+    name?: StringFilter<"BrandSeries"> | string
+    status?: StringFilter<"BrandSeries"> | string
+    version?: IntFilter<"BrandSeries"> | number
+    deletedAt?: DateTimeNullableFilter<"BrandSeries"> | Date | string | null
+    createdAt?: DateTimeFilter<"BrandSeries"> | Date | string
+    updatedAt?: DateTimeFilter<"BrandSeries"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
+    models?: BrandModelListRelationFilter
+    intakes?: ProductIntakeListRelationFilter
+  }, "id" | "tenantId_brandId_name">
+
+  export type BrandSeriesOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    name?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BrandSeriesCountOrderByAggregateInput
+    _avg?: BrandSeriesAvgOrderByAggregateInput
+    _max?: BrandSeriesMaxOrderByAggregateInput
+    _min?: BrandSeriesMinOrderByAggregateInput
+    _sum?: BrandSeriesSumOrderByAggregateInput
+  }
+
+  export type BrandSeriesScalarWhereWithAggregatesInput = {
+    AND?: BrandSeriesScalarWhereWithAggregatesInput | BrandSeriesScalarWhereWithAggregatesInput[]
+    OR?: BrandSeriesScalarWhereWithAggregatesInput[]
+    NOT?: BrandSeriesScalarWhereWithAggregatesInput | BrandSeriesScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"BrandSeries"> | string
+    tenantId?: UuidWithAggregatesFilter<"BrandSeries"> | string
+    brandId?: UuidWithAggregatesFilter<"BrandSeries"> | string
+    name?: StringWithAggregatesFilter<"BrandSeries"> | string
+    status?: StringWithAggregatesFilter<"BrandSeries"> | string
+    version?: IntWithAggregatesFilter<"BrandSeries"> | number
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"BrandSeries"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BrandSeries"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BrandSeries"> | Date | string
+  }
+
+  export type BrandModelWhereInput = {
+    AND?: BrandModelWhereInput | BrandModelWhereInput[]
+    OR?: BrandModelWhereInput[]
+    NOT?: BrandModelWhereInput | BrandModelWhereInput[]
+    id?: UuidFilter<"BrandModel"> | string
+    tenantId?: UuidFilter<"BrandModel"> | string
+    brandId?: UuidFilter<"BrandModel"> | string
+    seriesId?: UuidNullableFilter<"BrandModel"> | string | null
+    categoryId?: UuidNullableFilter<"BrandModel"> | string | null
+    name?: StringFilter<"BrandModel"> | string
+    officialGuidePrice?: DecimalNullableFilter<"BrandModel"> | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: StringNullableFilter<"BrandModel"> | string | null
+    status?: StringFilter<"BrandModel"> | string
+    version?: IntFilter<"BrandModel"> | number
+    deletedAt?: DateTimeNullableFilter<"BrandModel"> | Date | string | null
+    createdAt?: DateTimeFilter<"BrandModel"> | Date | string
+    updatedAt?: DateTimeFilter<"BrandModel"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
+    series?: XOR<BrandSeriesNullableScalarRelationFilter, BrandSeriesWhereInput> | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    intakes?: ProductIntakeListRelationFilter
+  }
+
+  export type BrandModelOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    seriesId?: SortOrderInput | SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    officialGuidePrice?: SortOrderInput | SortOrder
+    defaultMaterial?: SortOrderInput | SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    brand?: BrandOrderByWithRelationInput
+    series?: BrandSeriesOrderByWithRelationInput
+    category?: CategoryOrderByWithRelationInput
+    intakes?: ProductIntakeOrderByRelationAggregateInput
+  }
+
+  export type BrandModelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_brandId_seriesId_name?: BrandModelTenantIdBrandIdSeriesIdNameCompoundUniqueInput
+    AND?: BrandModelWhereInput | BrandModelWhereInput[]
+    OR?: BrandModelWhereInput[]
+    NOT?: BrandModelWhereInput | BrandModelWhereInput[]
+    tenantId?: UuidFilter<"BrandModel"> | string
+    brandId?: UuidFilter<"BrandModel"> | string
+    seriesId?: UuidNullableFilter<"BrandModel"> | string | null
+    categoryId?: UuidNullableFilter<"BrandModel"> | string | null
+    name?: StringFilter<"BrandModel"> | string
+    officialGuidePrice?: DecimalNullableFilter<"BrandModel"> | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: StringNullableFilter<"BrandModel"> | string | null
+    status?: StringFilter<"BrandModel"> | string
+    version?: IntFilter<"BrandModel"> | number
+    deletedAt?: DateTimeNullableFilter<"BrandModel"> | Date | string | null
+    createdAt?: DateTimeFilter<"BrandModel"> | Date | string
+    updatedAt?: DateTimeFilter<"BrandModel"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    brand?: XOR<BrandScalarRelationFilter, BrandWhereInput>
+    series?: XOR<BrandSeriesNullableScalarRelationFilter, BrandSeriesWhereInput> | null
+    category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    intakes?: ProductIntakeListRelationFilter
+  }, "id" | "tenantId_brandId_seriesId_name">
+
+  export type BrandModelOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    seriesId?: SortOrderInput | SortOrder
+    categoryId?: SortOrderInput | SortOrder
+    name?: SortOrder
+    officialGuidePrice?: SortOrderInput | SortOrder
+    defaultMaterial?: SortOrderInput | SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BrandModelCountOrderByAggregateInput
+    _avg?: BrandModelAvgOrderByAggregateInput
+    _max?: BrandModelMaxOrderByAggregateInput
+    _min?: BrandModelMinOrderByAggregateInput
+    _sum?: BrandModelSumOrderByAggregateInput
+  }
+
+  export type BrandModelScalarWhereWithAggregatesInput = {
+    AND?: BrandModelScalarWhereWithAggregatesInput | BrandModelScalarWhereWithAggregatesInput[]
+    OR?: BrandModelScalarWhereWithAggregatesInput[]
+    NOT?: BrandModelScalarWhereWithAggregatesInput | BrandModelScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"BrandModel"> | string
+    tenantId?: UuidWithAggregatesFilter<"BrandModel"> | string
+    brandId?: UuidWithAggregatesFilter<"BrandModel"> | string
+    seriesId?: UuidNullableWithAggregatesFilter<"BrandModel"> | string | null
+    categoryId?: UuidNullableWithAggregatesFilter<"BrandModel"> | string | null
+    name?: StringWithAggregatesFilter<"BrandModel"> | string
+    officialGuidePrice?: DecimalNullableWithAggregatesFilter<"BrandModel"> | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: StringNullableWithAggregatesFilter<"BrandModel"> | string | null
+    status?: StringWithAggregatesFilter<"BrandModel"> | string
+    version?: IntWithAggregatesFilter<"BrandModel"> | number
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"BrandModel"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BrandModel"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BrandModel"> | Date | string
+  }
+
+  export type RecyclingTypeWhereInput = {
+    AND?: RecyclingTypeWhereInput | RecyclingTypeWhereInput[]
+    OR?: RecyclingTypeWhereInput[]
+    NOT?: RecyclingTypeWhereInput | RecyclingTypeWhereInput[]
+    id?: UuidFilter<"RecyclingType"> | string
+    tenantId?: UuidFilter<"RecyclingType"> | string
+    name?: StringFilter<"RecyclingType"> | string
+    sortOrder?: IntFilter<"RecyclingType"> | number
+    status?: StringFilter<"RecyclingType"> | string
+    createdAt?: DateTimeFilter<"RecyclingType"> | Date | string
+    updatedAt?: DateTimeFilter<"RecyclingType"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    intakes?: ProductIntakeListRelationFilter
+  }
+
+  export type RecyclingTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    intakes?: ProductIntakeOrderByRelationAggregateInput
+  }
+
+  export type RecyclingTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_name?: RecyclingTypeTenantIdNameCompoundUniqueInput
+    AND?: RecyclingTypeWhereInput | RecyclingTypeWhereInput[]
+    OR?: RecyclingTypeWhereInput[]
+    NOT?: RecyclingTypeWhereInput | RecyclingTypeWhereInput[]
+    tenantId?: UuidFilter<"RecyclingType"> | string
+    name?: StringFilter<"RecyclingType"> | string
+    sortOrder?: IntFilter<"RecyclingType"> | number
+    status?: StringFilter<"RecyclingType"> | string
+    createdAt?: DateTimeFilter<"RecyclingType"> | Date | string
+    updatedAt?: DateTimeFilter<"RecyclingType"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    intakes?: ProductIntakeListRelationFilter
+  }, "id" | "tenantId_name">
+
+  export type RecyclingTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: RecyclingTypeCountOrderByAggregateInput
+    _avg?: RecyclingTypeAvgOrderByAggregateInput
+    _max?: RecyclingTypeMaxOrderByAggregateInput
+    _min?: RecyclingTypeMinOrderByAggregateInput
+    _sum?: RecyclingTypeSumOrderByAggregateInput
+  }
+
+  export type RecyclingTypeScalarWhereWithAggregatesInput = {
+    AND?: RecyclingTypeScalarWhereWithAggregatesInput | RecyclingTypeScalarWhereWithAggregatesInput[]
+    OR?: RecyclingTypeScalarWhereWithAggregatesInput[]
+    NOT?: RecyclingTypeScalarWhereWithAggregatesInput | RecyclingTypeScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"RecyclingType"> | string
+    tenantId?: UuidWithAggregatesFilter<"RecyclingType"> | string
+    name?: StringWithAggregatesFilter<"RecyclingType"> | string
+    sortOrder?: IntWithAggregatesFilter<"RecyclingType"> | number
+    status?: StringWithAggregatesFilter<"RecyclingType"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RecyclingType"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"RecyclingType"> | Date | string
   }
 
   export type ProductWhereInput = {
@@ -50702,6 +59939,7 @@ export namespace Prisma {
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
     variants?: ProductVariantListRelationFilter
     images?: ProductImageListRelationFilter
+    intake?: XOR<ProductIntakeNullableScalarRelationFilter, ProductIntakeWhereInput> | null
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -50726,6 +59964,7 @@ export namespace Prisma {
     brand?: BrandOrderByWithRelationInput
     variants?: ProductVariantOrderByRelationAggregateInput
     images?: ProductImageOrderByRelationAggregateInput
+    intake?: ProductIntakeOrderByWithRelationInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -50755,6 +59994,7 @@ export namespace Prisma {
     brand?: XOR<BrandNullableScalarRelationFilter, BrandWhereInput> | null
     variants?: ProductVariantListRelationFilter
     images?: ProductImageListRelationFilter
+    intake?: XOR<ProductIntakeNullableScalarRelationFilter, ProductIntakeWhereInput> | null
   }, "id" | "tenantId_code" | "tenantId_seoSlug">
 
   export type ProductOrderByWithAggregationInput = {
@@ -50803,6 +60043,313 @@ export namespace Prisma {
     updatedBy?: UuidNullableWithAggregatesFilter<"Product"> | string | null
     version?: IntWithAggregatesFilter<"Product"> | number
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Product"> | Date | string | null
+  }
+
+  export type ProductIntakeWhereInput = {
+    AND?: ProductIntakeWhereInput | ProductIntakeWhereInput[]
+    OR?: ProductIntakeWhereInput[]
+    NOT?: ProductIntakeWhereInput | ProductIntakeWhereInput[]
+    id?: UuidFilter<"ProductIntake"> | string
+    tenantId?: UuidFilter<"ProductIntake"> | string
+    productId?: UuidFilter<"ProductIntake"> | string
+    idempotencyKey?: StringFilter<"ProductIntake"> | string
+    requestFingerprint?: StringFilter<"ProductIntake"> | string
+    action?: StringFilter<"ProductIntake"> | string
+    customTips?: StringNullableFilter<"ProductIntake"> | string | null
+    condition?: StringFilter<"ProductIntake"> | string
+    seriesId?: UuidNullableFilter<"ProductIntake"> | string | null
+    modelId?: UuidNullableFilter<"ProductIntake"> | string | null
+    officialGuidePrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    ownershipType?: StringNullableFilter<"ProductIntake"> | string | null
+    stockQuantity?: IntFilter<"ProductIntake"> | number
+    inventoryAgeWarningDays?: IntFilter<"ProductIntake"> | number
+    totalCostPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: UuidFilter<"ProductIntake"> | string
+    appraiserName?: StringFilter<"ProductIntake"> | string
+    recyclingTypeId?: UuidNullableFilter<"ProductIntake"> | string | null
+    recyclingEmployeeId?: UuidNullableFilter<"ProductIntake"> | string | null
+    recyclingEmployeeName?: StringNullableFilter<"ProductIntake"> | string | null
+    recyclingNotes?: StringNullableFilter<"ProductIntake"> | string | null
+    recycledAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    audience?: StringNullableFilter<"ProductIntake"> | string | null
+    warrantyCard?: StringFilter<"ProductIntake"> | string
+    warrantyCardYear?: IntNullableFilter<"ProductIntake"> | number | null
+    uniqueCode?: StringNullableFilter<"ProductIntake"> | string | null
+    tags?: JsonFilter<"ProductIntake">
+    accessories?: JsonFilter<"ProductIntake">
+    internalNotes?: StringNullableFilter<"ProductIntake"> | string | null
+    stockedAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    createdAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    series?: XOR<BrandSeriesNullableScalarRelationFilter, BrandSeriesWhereInput> | null
+    model?: XOR<BrandModelNullableScalarRelationFilter, BrandModelWhereInput> | null
+    appraiser?: XOR<AdminUserScalarRelationFilter, AdminUserWhereInput>
+    recyclingEmployee?: XOR<AdminUserNullableScalarRelationFilter, AdminUserWhereInput> | null
+    recyclingType?: XOR<RecyclingTypeNullableScalarRelationFilter, RecyclingTypeWhereInput> | null
+    media?: ProductIntakeMediaListRelationFilter
+  }
+
+  export type ProductIntakeOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    idempotencyKey?: SortOrder
+    requestFingerprint?: SortOrder
+    action?: SortOrder
+    customTips?: SortOrderInput | SortOrder
+    condition?: SortOrder
+    seriesId?: SortOrderInput | SortOrder
+    modelId?: SortOrderInput | SortOrder
+    officialGuidePrice?: SortOrder
+    ownershipType?: SortOrderInput | SortOrder
+    stockQuantity?: SortOrder
+    inventoryAgeWarningDays?: SortOrder
+    totalCostPrice?: SortOrder
+    peerPrice?: SortOrder
+    agentPrice?: SortOrder
+    appraiserEmployeeId?: SortOrder
+    appraiserName?: SortOrder
+    recyclingTypeId?: SortOrderInput | SortOrder
+    recyclingEmployeeId?: SortOrderInput | SortOrder
+    recyclingEmployeeName?: SortOrderInput | SortOrder
+    recyclingNotes?: SortOrderInput | SortOrder
+    recycledAt?: SortOrder
+    audience?: SortOrderInput | SortOrder
+    warrantyCard?: SortOrder
+    warrantyCardYear?: SortOrderInput | SortOrder
+    uniqueCode?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    accessories?: SortOrder
+    internalNotes?: SortOrderInput | SortOrder
+    stockedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    product?: ProductOrderByWithRelationInput
+    series?: BrandSeriesOrderByWithRelationInput
+    model?: BrandModelOrderByWithRelationInput
+    appraiser?: AdminUserOrderByWithRelationInput
+    recyclingEmployee?: AdminUserOrderByWithRelationInput
+    recyclingType?: RecyclingTypeOrderByWithRelationInput
+    media?: ProductIntakeMediaOrderByRelationAggregateInput
+  }
+
+  export type ProductIntakeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    productId?: string
+    tenantId_idempotencyKey?: ProductIntakeTenantIdIdempotencyKeyCompoundUniqueInput
+    AND?: ProductIntakeWhereInput | ProductIntakeWhereInput[]
+    OR?: ProductIntakeWhereInput[]
+    NOT?: ProductIntakeWhereInput | ProductIntakeWhereInput[]
+    tenantId?: UuidFilter<"ProductIntake"> | string
+    idempotencyKey?: StringFilter<"ProductIntake"> | string
+    requestFingerprint?: StringFilter<"ProductIntake"> | string
+    action?: StringFilter<"ProductIntake"> | string
+    customTips?: StringNullableFilter<"ProductIntake"> | string | null
+    condition?: StringFilter<"ProductIntake"> | string
+    seriesId?: UuidNullableFilter<"ProductIntake"> | string | null
+    modelId?: UuidNullableFilter<"ProductIntake"> | string | null
+    officialGuidePrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    ownershipType?: StringNullableFilter<"ProductIntake"> | string | null
+    stockQuantity?: IntFilter<"ProductIntake"> | number
+    inventoryAgeWarningDays?: IntFilter<"ProductIntake"> | number
+    totalCostPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: UuidFilter<"ProductIntake"> | string
+    appraiserName?: StringFilter<"ProductIntake"> | string
+    recyclingTypeId?: UuidNullableFilter<"ProductIntake"> | string | null
+    recyclingEmployeeId?: UuidNullableFilter<"ProductIntake"> | string | null
+    recyclingEmployeeName?: StringNullableFilter<"ProductIntake"> | string | null
+    recyclingNotes?: StringNullableFilter<"ProductIntake"> | string | null
+    recycledAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    audience?: StringNullableFilter<"ProductIntake"> | string | null
+    warrantyCard?: StringFilter<"ProductIntake"> | string
+    warrantyCardYear?: IntNullableFilter<"ProductIntake"> | number | null
+    uniqueCode?: StringNullableFilter<"ProductIntake"> | string | null
+    tags?: JsonFilter<"ProductIntake">
+    accessories?: JsonFilter<"ProductIntake">
+    internalNotes?: StringNullableFilter<"ProductIntake"> | string | null
+    stockedAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    createdAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    series?: XOR<BrandSeriesNullableScalarRelationFilter, BrandSeriesWhereInput> | null
+    model?: XOR<BrandModelNullableScalarRelationFilter, BrandModelWhereInput> | null
+    appraiser?: XOR<AdminUserScalarRelationFilter, AdminUserWhereInput>
+    recyclingEmployee?: XOR<AdminUserNullableScalarRelationFilter, AdminUserWhereInput> | null
+    recyclingType?: XOR<RecyclingTypeNullableScalarRelationFilter, RecyclingTypeWhereInput> | null
+    media?: ProductIntakeMediaListRelationFilter
+  }, "id" | "productId" | "tenantId_idempotencyKey">
+
+  export type ProductIntakeOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    idempotencyKey?: SortOrder
+    requestFingerprint?: SortOrder
+    action?: SortOrder
+    customTips?: SortOrderInput | SortOrder
+    condition?: SortOrder
+    seriesId?: SortOrderInput | SortOrder
+    modelId?: SortOrderInput | SortOrder
+    officialGuidePrice?: SortOrder
+    ownershipType?: SortOrderInput | SortOrder
+    stockQuantity?: SortOrder
+    inventoryAgeWarningDays?: SortOrder
+    totalCostPrice?: SortOrder
+    peerPrice?: SortOrder
+    agentPrice?: SortOrder
+    appraiserEmployeeId?: SortOrder
+    appraiserName?: SortOrder
+    recyclingTypeId?: SortOrderInput | SortOrder
+    recyclingEmployeeId?: SortOrderInput | SortOrder
+    recyclingEmployeeName?: SortOrderInput | SortOrder
+    recyclingNotes?: SortOrderInput | SortOrder
+    recycledAt?: SortOrder
+    audience?: SortOrderInput | SortOrder
+    warrantyCard?: SortOrder
+    warrantyCardYear?: SortOrderInput | SortOrder
+    uniqueCode?: SortOrderInput | SortOrder
+    tags?: SortOrder
+    accessories?: SortOrder
+    internalNotes?: SortOrderInput | SortOrder
+    stockedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProductIntakeCountOrderByAggregateInput
+    _avg?: ProductIntakeAvgOrderByAggregateInput
+    _max?: ProductIntakeMaxOrderByAggregateInput
+    _min?: ProductIntakeMinOrderByAggregateInput
+    _sum?: ProductIntakeSumOrderByAggregateInput
+  }
+
+  export type ProductIntakeScalarWhereWithAggregatesInput = {
+    AND?: ProductIntakeScalarWhereWithAggregatesInput | ProductIntakeScalarWhereWithAggregatesInput[]
+    OR?: ProductIntakeScalarWhereWithAggregatesInput[]
+    NOT?: ProductIntakeScalarWhereWithAggregatesInput | ProductIntakeScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ProductIntake"> | string
+    tenantId?: UuidWithAggregatesFilter<"ProductIntake"> | string
+    productId?: UuidWithAggregatesFilter<"ProductIntake"> | string
+    idempotencyKey?: StringWithAggregatesFilter<"ProductIntake"> | string
+    requestFingerprint?: StringWithAggregatesFilter<"ProductIntake"> | string
+    action?: StringWithAggregatesFilter<"ProductIntake"> | string
+    customTips?: StringNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    condition?: StringWithAggregatesFilter<"ProductIntake"> | string
+    seriesId?: UuidNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    modelId?: UuidNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    officialGuidePrice?: DecimalWithAggregatesFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    ownershipType?: StringNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    stockQuantity?: IntWithAggregatesFilter<"ProductIntake"> | number
+    inventoryAgeWarningDays?: IntWithAggregatesFilter<"ProductIntake"> | number
+    totalCostPrice?: DecimalWithAggregatesFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalWithAggregatesFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalWithAggregatesFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: UuidWithAggregatesFilter<"ProductIntake"> | string
+    appraiserName?: StringWithAggregatesFilter<"ProductIntake"> | string
+    recyclingTypeId?: UuidNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    recyclingEmployeeId?: UuidNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    recyclingEmployeeName?: StringNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    recyclingNotes?: StringNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    recycledAt?: DateTimeWithAggregatesFilter<"ProductIntake"> | Date | string
+    audience?: StringNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    warrantyCard?: StringWithAggregatesFilter<"ProductIntake"> | string
+    warrantyCardYear?: IntNullableWithAggregatesFilter<"ProductIntake"> | number | null
+    uniqueCode?: StringNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    tags?: JsonWithAggregatesFilter<"ProductIntake">
+    accessories?: JsonWithAggregatesFilter<"ProductIntake">
+    internalNotes?: StringNullableWithAggregatesFilter<"ProductIntake"> | string | null
+    stockedAt?: DateTimeWithAggregatesFilter<"ProductIntake"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"ProductIntake"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProductIntake"> | Date | string
+  }
+
+  export type ProductIntakeMediaWhereInput = {
+    AND?: ProductIntakeMediaWhereInput | ProductIntakeMediaWhereInput[]
+    OR?: ProductIntakeMediaWhereInput[]
+    NOT?: ProductIntakeMediaWhereInput | ProductIntakeMediaWhereInput[]
+    id?: UuidFilter<"ProductIntakeMedia"> | string
+    tenantId?: UuidFilter<"ProductIntakeMedia"> | string
+    intakeId?: UuidFilter<"ProductIntakeMedia"> | string
+    mediaAssetId?: UuidFilter<"ProductIntakeMedia"> | string
+    group?: StringFilter<"ProductIntakeMedia"> | string
+    visibility?: StringFilter<"ProductIntakeMedia"> | string
+    sortOrder?: IntFilter<"ProductIntakeMedia"> | number
+    durationSeconds?: IntNullableFilter<"ProductIntakeMedia"> | number | null
+    createdAt?: DateTimeFilter<"ProductIntakeMedia"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    intake?: XOR<ProductIntakeScalarRelationFilter, ProductIntakeWhereInput>
+    mediaAsset?: XOR<MediaAssetScalarRelationFilter, MediaAssetWhereInput>
+  }
+
+  export type ProductIntakeMediaOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    intakeId?: SortOrder
+    mediaAssetId?: SortOrder
+    group?: SortOrder
+    visibility?: SortOrder
+    sortOrder?: SortOrder
+    durationSeconds?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    intake?: ProductIntakeOrderByWithRelationInput
+    mediaAsset?: MediaAssetOrderByWithRelationInput
+  }
+
+  export type ProductIntakeMediaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    mediaAssetId?: string
+    AND?: ProductIntakeMediaWhereInput | ProductIntakeMediaWhereInput[]
+    OR?: ProductIntakeMediaWhereInput[]
+    NOT?: ProductIntakeMediaWhereInput | ProductIntakeMediaWhereInput[]
+    tenantId?: UuidFilter<"ProductIntakeMedia"> | string
+    intakeId?: UuidFilter<"ProductIntakeMedia"> | string
+    group?: StringFilter<"ProductIntakeMedia"> | string
+    visibility?: StringFilter<"ProductIntakeMedia"> | string
+    sortOrder?: IntFilter<"ProductIntakeMedia"> | number
+    durationSeconds?: IntNullableFilter<"ProductIntakeMedia"> | number | null
+    createdAt?: DateTimeFilter<"ProductIntakeMedia"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    intake?: XOR<ProductIntakeScalarRelationFilter, ProductIntakeWhereInput>
+    mediaAsset?: XOR<MediaAssetScalarRelationFilter, MediaAssetWhereInput>
+  }, "id" | "mediaAssetId">
+
+  export type ProductIntakeMediaOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    intakeId?: SortOrder
+    mediaAssetId?: SortOrder
+    group?: SortOrder
+    visibility?: SortOrder
+    sortOrder?: SortOrder
+    durationSeconds?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: ProductIntakeMediaCountOrderByAggregateInput
+    _avg?: ProductIntakeMediaAvgOrderByAggregateInput
+    _max?: ProductIntakeMediaMaxOrderByAggregateInput
+    _min?: ProductIntakeMediaMinOrderByAggregateInput
+    _sum?: ProductIntakeMediaSumOrderByAggregateInput
+  }
+
+  export type ProductIntakeMediaScalarWhereWithAggregatesInput = {
+    AND?: ProductIntakeMediaScalarWhereWithAggregatesInput | ProductIntakeMediaScalarWhereWithAggregatesInput[]
+    OR?: ProductIntakeMediaScalarWhereWithAggregatesInput[]
+    NOT?: ProductIntakeMediaScalarWhereWithAggregatesInput | ProductIntakeMediaScalarWhereWithAggregatesInput[]
+    id?: UuidWithAggregatesFilter<"ProductIntakeMedia"> | string
+    tenantId?: UuidWithAggregatesFilter<"ProductIntakeMedia"> | string
+    intakeId?: UuidWithAggregatesFilter<"ProductIntakeMedia"> | string
+    mediaAssetId?: UuidWithAggregatesFilter<"ProductIntakeMedia"> | string
+    group?: StringWithAggregatesFilter<"ProductIntakeMedia"> | string
+    visibility?: StringWithAggregatesFilter<"ProductIntakeMedia"> | string
+    sortOrder?: IntWithAggregatesFilter<"ProductIntakeMedia"> | number
+    durationSeconds?: IntNullableWithAggregatesFilter<"ProductIntakeMedia"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"ProductIntakeMedia"> | Date | string
   }
 
   export type ProductVariantWhereInput = {
@@ -52274,6 +61821,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -52300,6 +61853,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -52326,6 +61885,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -52352,6 +61917,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -52632,6 +62203,8 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutAdminUsersInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserUncheckedCreateInput = {
@@ -52645,6 +62218,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserUpdateInput = {
@@ -52658,6 +62233,8 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutAdminUsersNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type AdminUserUncheckedUpdateInput = {
@@ -52671,6 +62248,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUncheckedUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type AdminUserCreateManyInput = {
@@ -53702,6 +63281,7 @@ export namespace Prisma {
     tenant: TenantCreateNestedOneWithoutMediaAssetsInput
     uploadSession: MediaUploadSessionCreateNestedOneWithoutAssetInput
     productImage?: ProductImageCreateNestedOneWithoutMediaAssetInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetUncheckedCreateInput = {
@@ -53720,6 +63300,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     purgedAt?: Date | string | null
     productImage?: ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetUpdateInput = {
@@ -53738,6 +63319,7 @@ export namespace Prisma {
     tenant?: TenantUpdateOneRequiredWithoutMediaAssetsNestedInput
     uploadSession?: MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput
     productImage?: ProductImageUpdateOneWithoutMediaAssetNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type MediaAssetUncheckedUpdateInput = {
@@ -53756,6 +63338,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productImage?: ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type MediaAssetCreateManyInput = {
@@ -53869,6 +63452,8 @@ export namespace Prisma {
     parent?: CategoryCreateNestedOneWithoutChildrenInput
     children?: CategoryCreateNestedManyWithoutParentInput
     products?: ProductCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateInput = {
@@ -53884,6 +63469,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     children?: CategoryUncheckedCreateNestedManyWithoutParentInput
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUpdateInput = {
@@ -53899,6 +63486,8 @@ export namespace Prisma {
     parent?: CategoryUpdateOneWithoutChildrenNestedInput
     children?: CategoryUpdateManyWithoutParentNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateInput = {
@@ -53914,6 +63503,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryCreateManyInput = {
@@ -53958,6 +63549,8 @@ export namespace Prisma {
     id?: string
     tenantId: string
     name: string
+    englishName?: string | null
+    initial?: string
     logoUrl?: string | null
     status?: string
     version?: number
@@ -53965,12 +63558,17 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductCreateNestedManyWithoutBrandInput
+    series?: BrandSeriesCreateNestedManyWithoutBrandInput
+    models?: BrandModelCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateInput = {
     id?: string
     tenantId: string
     name: string
+    englishName?: string | null
+    initial?: string
     logoUrl?: string | null
     status?: string
     version?: number
@@ -53978,12 +63576,17 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutBrandInput
+    series?: BrandSeriesUncheckedCreateNestedManyWithoutBrandInput
+    models?: BrandModelUncheckedCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     version?: IntFieldUpdateOperationsInput | number
@@ -53991,12 +63594,17 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUpdateManyWithoutBrandNestedInput
+    series?: BrandSeriesUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     version?: IntFieldUpdateOperationsInput | number
@@ -54004,12 +63612,17 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
+    series?: BrandSeriesUncheckedUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUncheckedUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandCreateManyInput = {
     id?: string
     tenantId: string
     name: string
+    englishName?: string | null
+    initial?: string
     logoUrl?: string | null
     status?: string
     version?: number
@@ -54022,6 +63635,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     version?: IntFieldUpdateOperationsInput | number
@@ -54034,10 +63649,333 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     version?: IntFieldUpdateOperationsInput | number
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryCreateInput = {
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandCategoriesInput
+    brand: BrandCreateNestedOneWithoutCategoriesInput
+    category: CategoryCreateNestedOneWithoutBrandsInput
+  }
+
+  export type BrandCategoryUncheckedCreateInput = {
+    tenantId: string
+    brandId: string
+    categoryId: string
+    createdAt?: Date | string
+  }
+
+  export type BrandCategoryUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandCategoriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutCategoriesNestedInput
+    category?: CategoryUpdateOneRequiredWithoutBrandsNestedInput
+  }
+
+  export type BrandCategoryUncheckedUpdateInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryCreateManyInput = {
+    tenantId: string
+    brandId: string
+    categoryId: string
+    createdAt?: Date | string
+  }
+
+  export type BrandCategoryUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryUncheckedUpdateManyInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandSeriesCreateInput = {
+    id?: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandSeriesInput
+    brand: BrandCreateNestedOneWithoutSeriesInput
+    models?: BrandModelCreateNestedManyWithoutSeriesInput
+    intakes?: ProductIntakeCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    models?: BrandModelUncheckedCreateNestedManyWithoutSeriesInput
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandSeriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutSeriesNestedInput
+    models?: BrandModelUpdateManyWithoutSeriesNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    models?: BrandModelUncheckedUpdateManyWithoutSeriesNestedInput
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesCreateManyInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandSeriesUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandSeriesUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandModelCreateInput = {
+    id?: string
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandModelsInput
+    brand: BrandCreateNestedOneWithoutModelsInput
+    series?: BrandSeriesCreateNestedOneWithoutModelsInput
+    category?: CategoryCreateNestedOneWithoutBrandModelsInput
+    intakes?: ProductIntakeCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    seriesId?: string | null
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandModelsNestedInput
+    brand?: BrandUpdateOneRequiredWithoutModelsNestedInput
+    series?: BrandSeriesUpdateOneWithoutModelsNestedInput
+    category?: CategoryUpdateOneWithoutBrandModelsNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelCreateManyInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    seriesId?: string | null
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandModelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandModelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecyclingTypeCreateInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutRecyclingTypesInput
+    intakes?: ProductIntakeCreateNestedManyWithoutRecyclingTypeInput
+  }
+
+  export type RecyclingTypeUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutRecyclingTypeInput
+  }
+
+  export type RecyclingTypeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutRecyclingTypesNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutRecyclingTypeNestedInput
+  }
+
+  export type RecyclingTypeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutRecyclingTypeNestedInput
+  }
+
+  export type RecyclingTypeCreateManyInput = {
+    id?: string
+    tenantId: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecyclingTypeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecyclingTypeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -54062,6 +64000,7 @@ export namespace Prisma {
     brand?: BrandCreateNestedOneWithoutProductsInput
     variants?: ProductVariantCreateNestedManyWithoutProductInput
     images?: ProductImageCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -54084,6 +64023,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
     images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductUpdateInput = {
@@ -54106,6 +64046,7 @@ export namespace Prisma {
     brand?: BrandUpdateOneWithoutProductsNestedInput
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
     images?: ProductImageUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -54128,6 +64069,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
     images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -54186,6 +64128,343 @@ export namespace Prisma {
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ProductIntakeCreateInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    product: ProductCreateNestedOneWithoutIntakeInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeCreateManyInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaCreateInput = {
+    id?: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakeMediaInput
+    intake: ProductIntakeCreateNestedOneWithoutMediaInput
+    mediaAsset: MediaAssetCreateNestedOneWithoutProductIntakeMediaInput
+  }
+
+  export type ProductIntakeMediaUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    intakeId: string
+    mediaAssetId: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ProductIntakeMediaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakeMediaNestedInput
+    intake?: ProductIntakeUpdateOneRequiredWithoutMediaNestedInput
+    mediaAsset?: MediaAssetUpdateOneRequiredWithoutProductIntakeMediaNestedInput
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaCreateManyInput = {
+    id?: string
+    tenantId: string
+    intakeId: string
+    mediaAssetId: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ProductIntakeMediaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductVariantCreateInput = {
@@ -55973,6 +66252,42 @@ export namespace Prisma {
     none?: MediaAssetWhereInput
   }
 
+  export type BrandSeriesListRelationFilter = {
+    every?: BrandSeriesWhereInput
+    some?: BrandSeriesWhereInput
+    none?: BrandSeriesWhereInput
+  }
+
+  export type BrandModelListRelationFilter = {
+    every?: BrandModelWhereInput
+    some?: BrandModelWhereInput
+    none?: BrandModelWhereInput
+  }
+
+  export type BrandCategoryListRelationFilter = {
+    every?: BrandCategoryWhereInput
+    some?: BrandCategoryWhereInput
+    none?: BrandCategoryWhereInput
+  }
+
+  export type RecyclingTypeListRelationFilter = {
+    every?: RecyclingTypeWhereInput
+    some?: RecyclingTypeWhereInput
+    none?: RecyclingTypeWhereInput
+  }
+
+  export type ProductIntakeListRelationFilter = {
+    every?: ProductIntakeWhereInput
+    some?: ProductIntakeWhereInput
+    none?: ProductIntakeWhereInput
+  }
+
+  export type ProductIntakeMediaListRelationFilter = {
+    every?: ProductIntakeMediaWhereInput
+    some?: ProductIntakeMediaWhereInput
+    none?: ProductIntakeMediaWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -56011,6 +66326,30 @@ export namespace Prisma {
   }
 
   export type MediaAssetOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BrandSeriesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BrandModelOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BrandCategoryOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RecyclingTypeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductIntakeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductIntakeMediaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -57044,6 +67383,11 @@ export namespace Prisma {
     isNot?: ProductImageWhereInput | null
   }
 
+  export type ProductIntakeMediaNullableScalarRelationFilter = {
+    is?: ProductIntakeMediaWhereInput | null
+    isNot?: ProductIntakeMediaWhereInput | null
+  }
+
   export type MediaAssetCountOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
@@ -57210,6 +67554,8 @@ export namespace Prisma {
     id?: SortOrder
     tenantId?: SortOrder
     name?: SortOrder
+    englishName?: SortOrder
+    initial?: SortOrder
     logoUrl?: SortOrder
     status?: SortOrder
     version?: SortOrder
@@ -57226,6 +67572,8 @@ export namespace Prisma {
     id?: SortOrder
     tenantId?: SortOrder
     name?: SortOrder
+    englishName?: SortOrder
+    initial?: SortOrder
     logoUrl?: SortOrder
     status?: SortOrder
     version?: SortOrder
@@ -57238,6 +67586,8 @@ export namespace Prisma {
     id?: SortOrder
     tenantId?: SortOrder
     name?: SortOrder
+    englishName?: SortOrder
+    initial?: SortOrder
     logoUrl?: SortOrder
     status?: SortOrder
     version?: SortOrder
@@ -57248,6 +67598,233 @@ export namespace Prisma {
 
   export type BrandSumOrderByAggregateInput = {
     version?: SortOrder
+  }
+
+  export type BrandScalarRelationFilter = {
+    is?: BrandWhereInput
+    isNot?: BrandWhereInput
+  }
+
+  export type CategoryScalarRelationFilter = {
+    is?: CategoryWhereInput
+    isNot?: CategoryWhereInput
+  }
+
+  export type BrandCategoryTenantIdBrandIdCategoryIdCompoundUniqueInput = {
+    tenantId: string
+    brandId: string
+    categoryId: string
+  }
+
+  export type BrandCategoryCountOrderByAggregateInput = {
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BrandCategoryMaxOrderByAggregateInput = {
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BrandCategoryMinOrderByAggregateInput = {
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    categoryId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BrandSeriesTenantIdBrandIdNameCompoundUniqueInput = {
+    tenantId: string
+    brandId: string
+    name: string
+  }
+
+  export type BrandSeriesCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    name?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandSeriesAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type BrandSeriesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    name?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandSeriesMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    name?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandSeriesSumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
+  export type BrandSeriesNullableScalarRelationFilter = {
+    is?: BrandSeriesWhereInput | null
+    isNot?: BrandSeriesWhereInput | null
+  }
+
+  export type BrandModelTenantIdBrandIdSeriesIdNameCompoundUniqueInput = {
+    tenantId: string
+    brandId: string
+    seriesId: string
+    name: string
+  }
+
+  export type BrandModelCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    seriesId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    officialGuidePrice?: SortOrder
+    defaultMaterial?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandModelAvgOrderByAggregateInput = {
+    officialGuidePrice?: SortOrder
+    version?: SortOrder
+  }
+
+  export type BrandModelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    seriesId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    officialGuidePrice?: SortOrder
+    defaultMaterial?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandModelMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    brandId?: SortOrder
+    seriesId?: SortOrder
+    categoryId?: SortOrder
+    name?: SortOrder
+    officialGuidePrice?: SortOrder
+    defaultMaterial?: SortOrder
+    status?: SortOrder
+    version?: SortOrder
+    deletedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BrandModelSumOrderByAggregateInput = {
+    officialGuidePrice?: SortOrder
+    version?: SortOrder
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type RecyclingTypeTenantIdNameCompoundUniqueInput = {
+    tenantId: string
+    name: string
+  }
+
+  export type RecyclingTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecyclingTypeAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type RecyclingTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecyclingTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    sortOrder?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type RecyclingTypeSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
   }
 
   export type BrandNullableScalarRelationFilter = {
@@ -57265,6 +67842,11 @@ export namespace Prisma {
     every?: ProductImageWhereInput
     some?: ProductImageWhereInput
     none?: ProductImageWhereInput
+  }
+
+  export type ProductIntakeNullableScalarRelationFilter = {
+    is?: ProductIntakeWhereInput | null
+    isNot?: ProductIntakeWhereInput | null
   }
 
   export type ProductVariantOrderByRelationAggregateInput = {
@@ -57353,20 +67935,239 @@ export namespace Prisma {
     version?: SortOrder
   }
 
-  export type DecimalNullableFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type ProductScalarRelationFilter = {
     is?: ProductWhereInput
     isNot?: ProductWhereInput
+  }
+
+  export type BrandModelNullableScalarRelationFilter = {
+    is?: BrandModelWhereInput | null
+    isNot?: BrandModelWhereInput | null
+  }
+
+  export type AdminUserNullableScalarRelationFilter = {
+    is?: AdminUserWhereInput | null
+    isNot?: AdminUserWhereInput | null
+  }
+
+  export type RecyclingTypeNullableScalarRelationFilter = {
+    is?: RecyclingTypeWhereInput | null
+    isNot?: RecyclingTypeWhereInput | null
+  }
+
+  export type ProductIntakeTenantIdIdempotencyKeyCompoundUniqueInput = {
+    tenantId: string
+    idempotencyKey: string
+  }
+
+  export type ProductIntakeCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    idempotencyKey?: SortOrder
+    requestFingerprint?: SortOrder
+    action?: SortOrder
+    customTips?: SortOrder
+    condition?: SortOrder
+    seriesId?: SortOrder
+    modelId?: SortOrder
+    officialGuidePrice?: SortOrder
+    ownershipType?: SortOrder
+    stockQuantity?: SortOrder
+    inventoryAgeWarningDays?: SortOrder
+    totalCostPrice?: SortOrder
+    peerPrice?: SortOrder
+    agentPrice?: SortOrder
+    appraiserEmployeeId?: SortOrder
+    appraiserName?: SortOrder
+    recyclingTypeId?: SortOrder
+    recyclingEmployeeId?: SortOrder
+    recyclingEmployeeName?: SortOrder
+    recyclingNotes?: SortOrder
+    recycledAt?: SortOrder
+    audience?: SortOrder
+    warrantyCard?: SortOrder
+    warrantyCardYear?: SortOrder
+    uniqueCode?: SortOrder
+    tags?: SortOrder
+    accessories?: SortOrder
+    internalNotes?: SortOrder
+    stockedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductIntakeAvgOrderByAggregateInput = {
+    officialGuidePrice?: SortOrder
+    stockQuantity?: SortOrder
+    inventoryAgeWarningDays?: SortOrder
+    totalCostPrice?: SortOrder
+    peerPrice?: SortOrder
+    agentPrice?: SortOrder
+    warrantyCardYear?: SortOrder
+  }
+
+  export type ProductIntakeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    idempotencyKey?: SortOrder
+    requestFingerprint?: SortOrder
+    action?: SortOrder
+    customTips?: SortOrder
+    condition?: SortOrder
+    seriesId?: SortOrder
+    modelId?: SortOrder
+    officialGuidePrice?: SortOrder
+    ownershipType?: SortOrder
+    stockQuantity?: SortOrder
+    inventoryAgeWarningDays?: SortOrder
+    totalCostPrice?: SortOrder
+    peerPrice?: SortOrder
+    agentPrice?: SortOrder
+    appraiserEmployeeId?: SortOrder
+    appraiserName?: SortOrder
+    recyclingTypeId?: SortOrder
+    recyclingEmployeeId?: SortOrder
+    recyclingEmployeeName?: SortOrder
+    recyclingNotes?: SortOrder
+    recycledAt?: SortOrder
+    audience?: SortOrder
+    warrantyCard?: SortOrder
+    warrantyCardYear?: SortOrder
+    uniqueCode?: SortOrder
+    internalNotes?: SortOrder
+    stockedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductIntakeMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    productId?: SortOrder
+    idempotencyKey?: SortOrder
+    requestFingerprint?: SortOrder
+    action?: SortOrder
+    customTips?: SortOrder
+    condition?: SortOrder
+    seriesId?: SortOrder
+    modelId?: SortOrder
+    officialGuidePrice?: SortOrder
+    ownershipType?: SortOrder
+    stockQuantity?: SortOrder
+    inventoryAgeWarningDays?: SortOrder
+    totalCostPrice?: SortOrder
+    peerPrice?: SortOrder
+    agentPrice?: SortOrder
+    appraiserEmployeeId?: SortOrder
+    appraiserName?: SortOrder
+    recyclingTypeId?: SortOrder
+    recyclingEmployeeId?: SortOrder
+    recyclingEmployeeName?: SortOrder
+    recyclingNotes?: SortOrder
+    recycledAt?: SortOrder
+    audience?: SortOrder
+    warrantyCard?: SortOrder
+    warrantyCardYear?: SortOrder
+    uniqueCode?: SortOrder
+    internalNotes?: SortOrder
+    stockedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductIntakeSumOrderByAggregateInput = {
+    officialGuidePrice?: SortOrder
+    stockQuantity?: SortOrder
+    inventoryAgeWarningDays?: SortOrder
+    totalCostPrice?: SortOrder
+    peerPrice?: SortOrder
+    agentPrice?: SortOrder
+    warrantyCardYear?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type ProductIntakeScalarRelationFilter = {
+    is?: ProductIntakeWhereInput
+    isNot?: ProductIntakeWhereInput
+  }
+
+  export type MediaAssetScalarRelationFilter = {
+    is?: MediaAssetWhereInput
+    isNot?: MediaAssetWhereInput
+  }
+
+  export type ProductIntakeMediaCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    intakeId?: SortOrder
+    mediaAssetId?: SortOrder
+    group?: SortOrder
+    visibility?: SortOrder
+    sortOrder?: SortOrder
+    durationSeconds?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProductIntakeMediaAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+    durationSeconds?: SortOrder
+  }
+
+  export type ProductIntakeMediaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    intakeId?: SortOrder
+    mediaAssetId?: SortOrder
+    group?: SortOrder
+    visibility?: SortOrder
+    sortOrder?: SortOrder
+    durationSeconds?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProductIntakeMediaMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    intakeId?: SortOrder
+    mediaAssetId?: SortOrder
+    group?: SortOrder
+    visibility?: SortOrder
+    sortOrder?: SortOrder
+    durationSeconds?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProductIntakeMediaSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
+    durationSeconds?: SortOrder
   }
 
   export type InventoryTransactionListRelationFilter = {
@@ -57449,22 +68250,6 @@ export namespace Prisma {
     costPrice?: SortOrder
     weightG?: SortOrder
     version?: SortOrder
-  }
-
-  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel> | null
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedDecimalNullableFilter<$PrismaModel>
-    _sum?: NestedDecimalNullableFilter<$PrismaModel>
-    _min?: NestedDecimalNullableFilter<$PrismaModel>
-    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type ProductImageCountOrderByAggregateInput = {
@@ -58513,6 +69298,48 @@ export namespace Prisma {
     connect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
   }
 
+  export type BrandSeriesCreateNestedManyWithoutTenantInput = {
+    create?: XOR<BrandSeriesCreateWithoutTenantInput, BrandSeriesUncheckedCreateWithoutTenantInput> | BrandSeriesCreateWithoutTenantInput[] | BrandSeriesUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutTenantInput | BrandSeriesCreateOrConnectWithoutTenantInput[]
+    createMany?: BrandSeriesCreateManyTenantInputEnvelope
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+  }
+
+  export type BrandModelCreateNestedManyWithoutTenantInput = {
+    create?: XOR<BrandModelCreateWithoutTenantInput, BrandModelUncheckedCreateWithoutTenantInput> | BrandModelCreateWithoutTenantInput[] | BrandModelUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutTenantInput | BrandModelCreateOrConnectWithoutTenantInput[]
+    createMany?: BrandModelCreateManyTenantInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type BrandCategoryCreateNestedManyWithoutTenantInput = {
+    create?: XOR<BrandCategoryCreateWithoutTenantInput, BrandCategoryUncheckedCreateWithoutTenantInput> | BrandCategoryCreateWithoutTenantInput[] | BrandCategoryUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutTenantInput | BrandCategoryCreateOrConnectWithoutTenantInput[]
+    createMany?: BrandCategoryCreateManyTenantInputEnvelope
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+  }
+
+  export type RecyclingTypeCreateNestedManyWithoutTenantInput = {
+    create?: XOR<RecyclingTypeCreateWithoutTenantInput, RecyclingTypeUncheckedCreateWithoutTenantInput> | RecyclingTypeCreateWithoutTenantInput[] | RecyclingTypeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RecyclingTypeCreateOrConnectWithoutTenantInput | RecyclingTypeCreateOrConnectWithoutTenantInput[]
+    createMany?: RecyclingTypeCreateManyTenantInputEnvelope
+    connect?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ProductIntakeCreateWithoutTenantInput, ProductIntakeUncheckedCreateWithoutTenantInput> | ProductIntakeCreateWithoutTenantInput[] | ProductIntakeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutTenantInput | ProductIntakeCreateOrConnectWithoutTenantInput[]
+    createMany?: ProductIntakeCreateManyTenantInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeMediaCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutTenantInput, ProductIntakeMediaUncheckedCreateWithoutTenantInput> | ProductIntakeMediaCreateWithoutTenantInput[] | ProductIntakeMediaUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutTenantInput | ProductIntakeMediaCreateOrConnectWithoutTenantInput[]
+    createMany?: ProductIntakeMediaCreateManyTenantInputEnvelope
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+  }
+
   export type SubscriptionUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<SubscriptionCreateWithoutTenantInput, SubscriptionUncheckedCreateWithoutTenantInput> | SubscriptionCreateWithoutTenantInput[] | SubscriptionUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: SubscriptionCreateOrConnectWithoutTenantInput | SubscriptionCreateOrConnectWithoutTenantInput[]
@@ -58574,6 +69401,48 @@ export namespace Prisma {
     connectOrCreate?: MediaAssetCreateOrConnectWithoutTenantInput | MediaAssetCreateOrConnectWithoutTenantInput[]
     createMany?: MediaAssetCreateManyTenantInputEnvelope
     connect?: MediaAssetWhereUniqueInput | MediaAssetWhereUniqueInput[]
+  }
+
+  export type BrandSeriesUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<BrandSeriesCreateWithoutTenantInput, BrandSeriesUncheckedCreateWithoutTenantInput> | BrandSeriesCreateWithoutTenantInput[] | BrandSeriesUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutTenantInput | BrandSeriesCreateOrConnectWithoutTenantInput[]
+    createMany?: BrandSeriesCreateManyTenantInputEnvelope
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+  }
+
+  export type BrandModelUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<BrandModelCreateWithoutTenantInput, BrandModelUncheckedCreateWithoutTenantInput> | BrandModelCreateWithoutTenantInput[] | BrandModelUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutTenantInput | BrandModelCreateOrConnectWithoutTenantInput[]
+    createMany?: BrandModelCreateManyTenantInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type BrandCategoryUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<BrandCategoryCreateWithoutTenantInput, BrandCategoryUncheckedCreateWithoutTenantInput> | BrandCategoryCreateWithoutTenantInput[] | BrandCategoryUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutTenantInput | BrandCategoryCreateOrConnectWithoutTenantInput[]
+    createMany?: BrandCategoryCreateManyTenantInputEnvelope
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+  }
+
+  export type RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<RecyclingTypeCreateWithoutTenantInput, RecyclingTypeUncheckedCreateWithoutTenantInput> | RecyclingTypeCreateWithoutTenantInput[] | RecyclingTypeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RecyclingTypeCreateOrConnectWithoutTenantInput | RecyclingTypeCreateOrConnectWithoutTenantInput[]
+    createMany?: RecyclingTypeCreateManyTenantInputEnvelope
+    connect?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ProductIntakeCreateWithoutTenantInput, ProductIntakeUncheckedCreateWithoutTenantInput> | ProductIntakeCreateWithoutTenantInput[] | ProductIntakeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutTenantInput | ProductIntakeCreateOrConnectWithoutTenantInput[]
+    createMany?: ProductIntakeCreateManyTenantInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutTenantInput, ProductIntakeMediaUncheckedCreateWithoutTenantInput> | ProductIntakeMediaCreateWithoutTenantInput[] | ProductIntakeMediaUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutTenantInput | ProductIntakeMediaCreateOrConnectWithoutTenantInput[]
+    createMany?: ProductIntakeMediaCreateManyTenantInputEnvelope
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -58738,6 +69607,90 @@ export namespace Prisma {
     deleteMany?: MediaAssetScalarWhereInput | MediaAssetScalarWhereInput[]
   }
 
+  export type BrandSeriesUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<BrandSeriesCreateWithoutTenantInput, BrandSeriesUncheckedCreateWithoutTenantInput> | BrandSeriesCreateWithoutTenantInput[] | BrandSeriesUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutTenantInput | BrandSeriesCreateOrConnectWithoutTenantInput[]
+    upsert?: BrandSeriesUpsertWithWhereUniqueWithoutTenantInput | BrandSeriesUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: BrandSeriesCreateManyTenantInputEnvelope
+    set?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    disconnect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    delete?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    update?: BrandSeriesUpdateWithWhereUniqueWithoutTenantInput | BrandSeriesUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: BrandSeriesUpdateManyWithWhereWithoutTenantInput | BrandSeriesUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: BrandSeriesScalarWhereInput | BrandSeriesScalarWhereInput[]
+  }
+
+  export type BrandModelUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<BrandModelCreateWithoutTenantInput, BrandModelUncheckedCreateWithoutTenantInput> | BrandModelCreateWithoutTenantInput[] | BrandModelUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutTenantInput | BrandModelCreateOrConnectWithoutTenantInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutTenantInput | BrandModelUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: BrandModelCreateManyTenantInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutTenantInput | BrandModelUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutTenantInput | BrandModelUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type BrandCategoryUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<BrandCategoryCreateWithoutTenantInput, BrandCategoryUncheckedCreateWithoutTenantInput> | BrandCategoryCreateWithoutTenantInput[] | BrandCategoryUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutTenantInput | BrandCategoryCreateOrConnectWithoutTenantInput[]
+    upsert?: BrandCategoryUpsertWithWhereUniqueWithoutTenantInput | BrandCategoryUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: BrandCategoryCreateManyTenantInputEnvelope
+    set?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    disconnect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    delete?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    update?: BrandCategoryUpdateWithWhereUniqueWithoutTenantInput | BrandCategoryUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: BrandCategoryUpdateManyWithWhereWithoutTenantInput | BrandCategoryUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+  }
+
+  export type RecyclingTypeUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<RecyclingTypeCreateWithoutTenantInput, RecyclingTypeUncheckedCreateWithoutTenantInput> | RecyclingTypeCreateWithoutTenantInput[] | RecyclingTypeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RecyclingTypeCreateOrConnectWithoutTenantInput | RecyclingTypeCreateOrConnectWithoutTenantInput[]
+    upsert?: RecyclingTypeUpsertWithWhereUniqueWithoutTenantInput | RecyclingTypeUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: RecyclingTypeCreateManyTenantInputEnvelope
+    set?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    disconnect?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    delete?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    connect?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    update?: RecyclingTypeUpdateWithWhereUniqueWithoutTenantInput | RecyclingTypeUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: RecyclingTypeUpdateManyWithWhereWithoutTenantInput | RecyclingTypeUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: RecyclingTypeScalarWhereInput | RecyclingTypeScalarWhereInput[]
+  }
+
+  export type ProductIntakeUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutTenantInput, ProductIntakeUncheckedCreateWithoutTenantInput> | ProductIntakeCreateWithoutTenantInput[] | ProductIntakeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutTenantInput | ProductIntakeCreateOrConnectWithoutTenantInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutTenantInput | ProductIntakeUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ProductIntakeCreateManyTenantInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutTenantInput | ProductIntakeUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutTenantInput | ProductIntakeUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type ProductIntakeMediaUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutTenantInput, ProductIntakeMediaUncheckedCreateWithoutTenantInput> | ProductIntakeMediaCreateWithoutTenantInput[] | ProductIntakeMediaUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutTenantInput | ProductIntakeMediaCreateOrConnectWithoutTenantInput[]
+    upsert?: ProductIntakeMediaUpsertWithWhereUniqueWithoutTenantInput | ProductIntakeMediaUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ProductIntakeMediaCreateManyTenantInputEnvelope
+    set?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    disconnect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    delete?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    update?: ProductIntakeMediaUpdateWithWhereUniqueWithoutTenantInput | ProductIntakeMediaUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ProductIntakeMediaUpdateManyWithWhereWithoutTenantInput | ProductIntakeMediaUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ProductIntakeMediaScalarWhereInput | ProductIntakeMediaScalarWhereInput[]
+  }
+
   export type SubscriptionUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<SubscriptionCreateWithoutTenantInput, SubscriptionUncheckedCreateWithoutTenantInput> | SubscriptionCreateWithoutTenantInput[] | SubscriptionUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: SubscriptionCreateOrConnectWithoutTenantInput | SubscriptionCreateOrConnectWithoutTenantInput[]
@@ -58864,6 +69817,90 @@ export namespace Prisma {
     deleteMany?: MediaAssetScalarWhereInput | MediaAssetScalarWhereInput[]
   }
 
+  export type BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<BrandSeriesCreateWithoutTenantInput, BrandSeriesUncheckedCreateWithoutTenantInput> | BrandSeriesCreateWithoutTenantInput[] | BrandSeriesUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutTenantInput | BrandSeriesCreateOrConnectWithoutTenantInput[]
+    upsert?: BrandSeriesUpsertWithWhereUniqueWithoutTenantInput | BrandSeriesUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: BrandSeriesCreateManyTenantInputEnvelope
+    set?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    disconnect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    delete?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    update?: BrandSeriesUpdateWithWhereUniqueWithoutTenantInput | BrandSeriesUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: BrandSeriesUpdateManyWithWhereWithoutTenantInput | BrandSeriesUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: BrandSeriesScalarWhereInput | BrandSeriesScalarWhereInput[]
+  }
+
+  export type BrandModelUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<BrandModelCreateWithoutTenantInput, BrandModelUncheckedCreateWithoutTenantInput> | BrandModelCreateWithoutTenantInput[] | BrandModelUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutTenantInput | BrandModelCreateOrConnectWithoutTenantInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutTenantInput | BrandModelUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: BrandModelCreateManyTenantInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutTenantInput | BrandModelUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutTenantInput | BrandModelUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<BrandCategoryCreateWithoutTenantInput, BrandCategoryUncheckedCreateWithoutTenantInput> | BrandCategoryCreateWithoutTenantInput[] | BrandCategoryUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutTenantInput | BrandCategoryCreateOrConnectWithoutTenantInput[]
+    upsert?: BrandCategoryUpsertWithWhereUniqueWithoutTenantInput | BrandCategoryUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: BrandCategoryCreateManyTenantInputEnvelope
+    set?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    disconnect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    delete?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    update?: BrandCategoryUpdateWithWhereUniqueWithoutTenantInput | BrandCategoryUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: BrandCategoryUpdateManyWithWhereWithoutTenantInput | BrandCategoryUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+  }
+
+  export type RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<RecyclingTypeCreateWithoutTenantInput, RecyclingTypeUncheckedCreateWithoutTenantInput> | RecyclingTypeCreateWithoutTenantInput[] | RecyclingTypeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: RecyclingTypeCreateOrConnectWithoutTenantInput | RecyclingTypeCreateOrConnectWithoutTenantInput[]
+    upsert?: RecyclingTypeUpsertWithWhereUniqueWithoutTenantInput | RecyclingTypeUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: RecyclingTypeCreateManyTenantInputEnvelope
+    set?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    disconnect?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    delete?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    connect?: RecyclingTypeWhereUniqueInput | RecyclingTypeWhereUniqueInput[]
+    update?: RecyclingTypeUpdateWithWhereUniqueWithoutTenantInput | RecyclingTypeUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: RecyclingTypeUpdateManyWithWhereWithoutTenantInput | RecyclingTypeUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: RecyclingTypeScalarWhereInput | RecyclingTypeScalarWhereInput[]
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutTenantInput, ProductIntakeUncheckedCreateWithoutTenantInput> | ProductIntakeCreateWithoutTenantInput[] | ProductIntakeUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutTenantInput | ProductIntakeCreateOrConnectWithoutTenantInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutTenantInput | ProductIntakeUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ProductIntakeCreateManyTenantInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutTenantInput | ProductIntakeUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutTenantInput | ProductIntakeUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutTenantInput, ProductIntakeMediaUncheckedCreateWithoutTenantInput> | ProductIntakeMediaCreateWithoutTenantInput[] | ProductIntakeMediaUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutTenantInput | ProductIntakeMediaCreateOrConnectWithoutTenantInput[]
+    upsert?: ProductIntakeMediaUpsertWithWhereUniqueWithoutTenantInput | ProductIntakeMediaUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ProductIntakeMediaCreateManyTenantInputEnvelope
+    set?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    disconnect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    delete?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    update?: ProductIntakeMediaUpdateWithWhereUniqueWithoutTenantInput | ProductIntakeMediaUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ProductIntakeMediaUpdateManyWithWhereWithoutTenantInput | ProductIntakeMediaUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ProductIntakeMediaScalarWhereInput | ProductIntakeMediaScalarWhereInput[]
+  }
+
   export type TenantCreateNestedOneWithoutProviderCallbackRoutesInput = {
     create?: XOR<TenantCreateWithoutProviderCallbackRoutesInput, TenantUncheckedCreateWithoutProviderCallbackRoutesInput>
     connectOrCreate?: TenantCreateOrConnectWithoutProviderCallbackRoutesInput
@@ -58968,6 +70005,20 @@ export namespace Prisma {
     connect?: RefreshSessionWhereUniqueInput | RefreshSessionWhereUniqueInput[]
   }
 
+  export type ProductIntakeCreateNestedManyWithoutAppraiserInput = {
+    create?: XOR<ProductIntakeCreateWithoutAppraiserInput, ProductIntakeUncheckedCreateWithoutAppraiserInput> | ProductIntakeCreateWithoutAppraiserInput[] | ProductIntakeUncheckedCreateWithoutAppraiserInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutAppraiserInput | ProductIntakeCreateOrConnectWithoutAppraiserInput[]
+    createMany?: ProductIntakeCreateManyAppraiserInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeCreateNestedManyWithoutRecyclingEmployeeInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput> | ProductIntakeCreateWithoutRecyclingEmployeeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput | ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingEmployeeInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -58980,6 +70031,20 @@ export namespace Prisma {
     connectOrCreate?: RefreshSessionCreateOrConnectWithoutUserInput | RefreshSessionCreateOrConnectWithoutUserInput[]
     createMany?: RefreshSessionCreateManyUserInputEnvelope
     connect?: RefreshSessionWhereUniqueInput | RefreshSessionWhereUniqueInput[]
+  }
+
+  export type ProductIntakeUncheckedCreateNestedManyWithoutAppraiserInput = {
+    create?: XOR<ProductIntakeCreateWithoutAppraiserInput, ProductIntakeUncheckedCreateWithoutAppraiserInput> | ProductIntakeCreateWithoutAppraiserInput[] | ProductIntakeUncheckedCreateWithoutAppraiserInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutAppraiserInput | ProductIntakeCreateOrConnectWithoutAppraiserInput[]
+    createMany?: ProductIntakeCreateManyAppraiserInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeUncheckedCreateNestedManyWithoutRecyclingEmployeeInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput> | ProductIntakeCreateWithoutRecyclingEmployeeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput | ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingEmployeeInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
   }
 
   export type TenantUpdateOneRequiredWithoutAdminUsersNestedInput = {
@@ -59018,6 +70083,34 @@ export namespace Prisma {
     deleteMany?: RefreshSessionScalarWhereInput | RefreshSessionScalarWhereInput[]
   }
 
+  export type ProductIntakeUpdateManyWithoutAppraiserNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutAppraiserInput, ProductIntakeUncheckedCreateWithoutAppraiserInput> | ProductIntakeCreateWithoutAppraiserInput[] | ProductIntakeUncheckedCreateWithoutAppraiserInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutAppraiserInput | ProductIntakeCreateOrConnectWithoutAppraiserInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutAppraiserInput | ProductIntakeUpsertWithWhereUniqueWithoutAppraiserInput[]
+    createMany?: ProductIntakeCreateManyAppraiserInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutAppraiserInput | ProductIntakeUpdateWithWhereUniqueWithoutAppraiserInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutAppraiserInput | ProductIntakeUpdateManyWithWhereWithoutAppraiserInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type ProductIntakeUpdateManyWithoutRecyclingEmployeeNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput> | ProductIntakeCreateWithoutRecyclingEmployeeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput | ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutRecyclingEmployeeInput | ProductIntakeUpsertWithWhereUniqueWithoutRecyclingEmployeeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingEmployeeInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutRecyclingEmployeeInput | ProductIntakeUpdateWithWhereUniqueWithoutRecyclingEmployeeInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutRecyclingEmployeeInput | ProductIntakeUpdateManyWithWhereWithoutRecyclingEmployeeInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -59044,6 +70137,34 @@ export namespace Prisma {
     update?: RefreshSessionUpdateWithWhereUniqueWithoutUserInput | RefreshSessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: RefreshSessionUpdateManyWithWhereWithoutUserInput | RefreshSessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: RefreshSessionScalarWhereInput | RefreshSessionScalarWhereInput[]
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutAppraiserNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutAppraiserInput, ProductIntakeUncheckedCreateWithoutAppraiserInput> | ProductIntakeCreateWithoutAppraiserInput[] | ProductIntakeUncheckedCreateWithoutAppraiserInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutAppraiserInput | ProductIntakeCreateOrConnectWithoutAppraiserInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutAppraiserInput | ProductIntakeUpsertWithWhereUniqueWithoutAppraiserInput[]
+    createMany?: ProductIntakeCreateManyAppraiserInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutAppraiserInput | ProductIntakeUpdateWithWhereUniqueWithoutAppraiserInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutAppraiserInput | ProductIntakeUpdateManyWithWhereWithoutAppraiserInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput> | ProductIntakeCreateWithoutRecyclingEmployeeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput | ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutRecyclingEmployeeInput | ProductIntakeUpsertWithWhereUniqueWithoutRecyclingEmployeeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingEmployeeInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutRecyclingEmployeeInput | ProductIntakeUpdateWithWhereUniqueWithoutRecyclingEmployeeInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutRecyclingEmployeeInput | ProductIntakeUpdateManyWithWhereWithoutRecyclingEmployeeInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
   }
 
   export type AdminUserCreateNestedOneWithoutSessionsInput = {
@@ -59578,10 +70699,22 @@ export namespace Prisma {
     connect?: ProductImageWhereUniqueInput
   }
 
+  export type ProductIntakeMediaCreateNestedOneWithoutMediaAssetInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutMediaAssetInput, ProductIntakeMediaUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutMediaAssetInput
+    connect?: ProductIntakeMediaWhereUniqueInput
+  }
+
   export type ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput = {
     create?: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaAssetInput
     connect?: ProductImageWhereUniqueInput
+  }
+
+  export type ProductIntakeMediaUncheckedCreateNestedOneWithoutMediaAssetInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutMediaAssetInput, ProductIntakeMediaUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutMediaAssetInput
+    connect?: ProductIntakeMediaWhereUniqueInput
   }
 
   export type TenantUpdateOneRequiredWithoutMediaAssetsNestedInput = {
@@ -59610,6 +70743,16 @@ export namespace Prisma {
     update?: XOR<XOR<ProductImageUpdateToOneWithWhereWithoutMediaAssetInput, ProductImageUpdateWithoutMediaAssetInput>, ProductImageUncheckedUpdateWithoutMediaAssetInput>
   }
 
+  export type ProductIntakeMediaUpdateOneWithoutMediaAssetNestedInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutMediaAssetInput, ProductIntakeMediaUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutMediaAssetInput
+    upsert?: ProductIntakeMediaUpsertWithoutMediaAssetInput
+    disconnect?: ProductIntakeMediaWhereInput | boolean
+    delete?: ProductIntakeMediaWhereInput | boolean
+    connect?: ProductIntakeMediaWhereUniqueInput
+    update?: XOR<XOR<ProductIntakeMediaUpdateToOneWithWhereWithoutMediaAssetInput, ProductIntakeMediaUpdateWithoutMediaAssetInput>, ProductIntakeMediaUncheckedUpdateWithoutMediaAssetInput>
+  }
+
   export type ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput = {
     create?: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
     connectOrCreate?: ProductImageCreateOrConnectWithoutMediaAssetInput
@@ -59618,6 +70761,16 @@ export namespace Prisma {
     delete?: ProductImageWhereInput | boolean
     connect?: ProductImageWhereUniqueInput
     update?: XOR<XOR<ProductImageUpdateToOneWithWhereWithoutMediaAssetInput, ProductImageUpdateWithoutMediaAssetInput>, ProductImageUncheckedUpdateWithoutMediaAssetInput>
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateOneWithoutMediaAssetNestedInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutMediaAssetInput, ProductIntakeMediaUncheckedCreateWithoutMediaAssetInput>
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutMediaAssetInput
+    upsert?: ProductIntakeMediaUpsertWithoutMediaAssetInput
+    disconnect?: ProductIntakeMediaWhereInput | boolean
+    delete?: ProductIntakeMediaWhereInput | boolean
+    connect?: ProductIntakeMediaWhereUniqueInput
+    update?: XOR<XOR<ProductIntakeMediaUpdateToOneWithWhereWithoutMediaAssetInput, ProductIntakeMediaUpdateWithoutMediaAssetInput>, ProductIntakeMediaUncheckedUpdateWithoutMediaAssetInput>
   }
 
   export type CategoryCreateNestedOneWithoutChildrenInput = {
@@ -59640,6 +70793,20 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
+  export type BrandModelCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<BrandModelCreateWithoutCategoryInput, BrandModelUncheckedCreateWithoutCategoryInput> | BrandModelCreateWithoutCategoryInput[] | BrandModelUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutCategoryInput | BrandModelCreateOrConnectWithoutCategoryInput[]
+    createMany?: BrandModelCreateManyCategoryInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type BrandCategoryCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<BrandCategoryCreateWithoutCategoryInput, BrandCategoryUncheckedCreateWithoutCategoryInput> | BrandCategoryCreateWithoutCategoryInput[] | BrandCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutCategoryInput | BrandCategoryCreateOrConnectWithoutCategoryInput[]
+    createMany?: BrandCategoryCreateManyCategoryInputEnvelope
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+  }
+
   export type CategoryUncheckedCreateNestedManyWithoutParentInput = {
     create?: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput> | CategoryCreateWithoutParentInput[] | CategoryUncheckedCreateWithoutParentInput[]
     connectOrCreate?: CategoryCreateOrConnectWithoutParentInput | CategoryCreateOrConnectWithoutParentInput[]
@@ -59652,6 +70819,20 @@ export namespace Prisma {
     connectOrCreate?: ProductCreateOrConnectWithoutCategoryInput | ProductCreateOrConnectWithoutCategoryInput[]
     createMany?: ProductCreateManyCategoryInputEnvelope
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type BrandModelUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<BrandModelCreateWithoutCategoryInput, BrandModelUncheckedCreateWithoutCategoryInput> | BrandModelCreateWithoutCategoryInput[] | BrandModelUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutCategoryInput | BrandModelCreateOrConnectWithoutCategoryInput[]
+    createMany?: BrandModelCreateManyCategoryInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type BrandCategoryUncheckedCreateNestedManyWithoutCategoryInput = {
+    create?: XOR<BrandCategoryCreateWithoutCategoryInput, BrandCategoryUncheckedCreateWithoutCategoryInput> | BrandCategoryCreateWithoutCategoryInput[] | BrandCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutCategoryInput | BrandCategoryCreateOrConnectWithoutCategoryInput[]
+    createMany?: BrandCategoryCreateManyCategoryInputEnvelope
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
   }
 
   export type CategoryUpdateOneWithoutChildrenNestedInput = {
@@ -59692,6 +70873,34 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
+  export type BrandModelUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<BrandModelCreateWithoutCategoryInput, BrandModelUncheckedCreateWithoutCategoryInput> | BrandModelCreateWithoutCategoryInput[] | BrandModelUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutCategoryInput | BrandModelCreateOrConnectWithoutCategoryInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutCategoryInput | BrandModelUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: BrandModelCreateManyCategoryInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutCategoryInput | BrandModelUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutCategoryInput | BrandModelUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type BrandCategoryUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<BrandCategoryCreateWithoutCategoryInput, BrandCategoryUncheckedCreateWithoutCategoryInput> | BrandCategoryCreateWithoutCategoryInput[] | BrandCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutCategoryInput | BrandCategoryCreateOrConnectWithoutCategoryInput[]
+    upsert?: BrandCategoryUpsertWithWhereUniqueWithoutCategoryInput | BrandCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: BrandCategoryCreateManyCategoryInputEnvelope
+    set?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    disconnect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    delete?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    update?: BrandCategoryUpdateWithWhereUniqueWithoutCategoryInput | BrandCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: BrandCategoryUpdateManyWithWhereWithoutCategoryInput | BrandCategoryUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+  }
+
   export type CategoryUncheckedUpdateManyWithoutParentNestedInput = {
     create?: XOR<CategoryCreateWithoutParentInput, CategoryUncheckedCreateWithoutParentInput> | CategoryCreateWithoutParentInput[] | CategoryUncheckedCreateWithoutParentInput[]
     connectOrCreate?: CategoryCreateOrConnectWithoutParentInput | CategoryCreateOrConnectWithoutParentInput[]
@@ -59720,6 +70929,34 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
+  export type BrandModelUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<BrandModelCreateWithoutCategoryInput, BrandModelUncheckedCreateWithoutCategoryInput> | BrandModelCreateWithoutCategoryInput[] | BrandModelUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutCategoryInput | BrandModelCreateOrConnectWithoutCategoryInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutCategoryInput | BrandModelUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: BrandModelCreateManyCategoryInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutCategoryInput | BrandModelUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutCategoryInput | BrandModelUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type BrandCategoryUncheckedUpdateManyWithoutCategoryNestedInput = {
+    create?: XOR<BrandCategoryCreateWithoutCategoryInput, BrandCategoryUncheckedCreateWithoutCategoryInput> | BrandCategoryCreateWithoutCategoryInput[] | BrandCategoryUncheckedCreateWithoutCategoryInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutCategoryInput | BrandCategoryCreateOrConnectWithoutCategoryInput[]
+    upsert?: BrandCategoryUpsertWithWhereUniqueWithoutCategoryInput | BrandCategoryUpsertWithWhereUniqueWithoutCategoryInput[]
+    createMany?: BrandCategoryCreateManyCategoryInputEnvelope
+    set?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    disconnect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    delete?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    update?: BrandCategoryUpdateWithWhereUniqueWithoutCategoryInput | BrandCategoryUpdateWithWhereUniqueWithoutCategoryInput[]
+    updateMany?: BrandCategoryUpdateManyWithWhereWithoutCategoryInput | BrandCategoryUpdateManyWithWhereWithoutCategoryInput[]
+    deleteMany?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+  }
+
   export type ProductCreateNestedManyWithoutBrandInput = {
     create?: XOR<ProductCreateWithoutBrandInput, ProductUncheckedCreateWithoutBrandInput> | ProductCreateWithoutBrandInput[] | ProductUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutBrandInput | ProductCreateOrConnectWithoutBrandInput[]
@@ -59727,11 +70964,53 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
+  export type BrandSeriesCreateNestedManyWithoutBrandInput = {
+    create?: XOR<BrandSeriesCreateWithoutBrandInput, BrandSeriesUncheckedCreateWithoutBrandInput> | BrandSeriesCreateWithoutBrandInput[] | BrandSeriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutBrandInput | BrandSeriesCreateOrConnectWithoutBrandInput[]
+    createMany?: BrandSeriesCreateManyBrandInputEnvelope
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+  }
+
+  export type BrandModelCreateNestedManyWithoutBrandInput = {
+    create?: XOR<BrandModelCreateWithoutBrandInput, BrandModelUncheckedCreateWithoutBrandInput> | BrandModelCreateWithoutBrandInput[] | BrandModelUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutBrandInput | BrandModelCreateOrConnectWithoutBrandInput[]
+    createMany?: BrandModelCreateManyBrandInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type BrandCategoryCreateNestedManyWithoutBrandInput = {
+    create?: XOR<BrandCategoryCreateWithoutBrandInput, BrandCategoryUncheckedCreateWithoutBrandInput> | BrandCategoryCreateWithoutBrandInput[] | BrandCategoryUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutBrandInput | BrandCategoryCreateOrConnectWithoutBrandInput[]
+    createMany?: BrandCategoryCreateManyBrandInputEnvelope
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+  }
+
   export type ProductUncheckedCreateNestedManyWithoutBrandInput = {
     create?: XOR<ProductCreateWithoutBrandInput, ProductUncheckedCreateWithoutBrandInput> | ProductCreateWithoutBrandInput[] | ProductUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutBrandInput | ProductCreateOrConnectWithoutBrandInput[]
     createMany?: ProductCreateManyBrandInputEnvelope
     connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type BrandSeriesUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<BrandSeriesCreateWithoutBrandInput, BrandSeriesUncheckedCreateWithoutBrandInput> | BrandSeriesCreateWithoutBrandInput[] | BrandSeriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutBrandInput | BrandSeriesCreateOrConnectWithoutBrandInput[]
+    createMany?: BrandSeriesCreateManyBrandInputEnvelope
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+  }
+
+  export type BrandModelUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<BrandModelCreateWithoutBrandInput, BrandModelUncheckedCreateWithoutBrandInput> | BrandModelCreateWithoutBrandInput[] | BrandModelUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutBrandInput | BrandModelCreateOrConnectWithoutBrandInput[]
+    createMany?: BrandModelCreateManyBrandInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type BrandCategoryUncheckedCreateNestedManyWithoutBrandInput = {
+    create?: XOR<BrandCategoryCreateWithoutBrandInput, BrandCategoryUncheckedCreateWithoutBrandInput> | BrandCategoryCreateWithoutBrandInput[] | BrandCategoryUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutBrandInput | BrandCategoryCreateOrConnectWithoutBrandInput[]
+    createMany?: BrandCategoryCreateManyBrandInputEnvelope
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
   }
 
   export type ProductUpdateManyWithoutBrandNestedInput = {
@@ -59748,6 +71027,48 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
+  export type BrandSeriesUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<BrandSeriesCreateWithoutBrandInput, BrandSeriesUncheckedCreateWithoutBrandInput> | BrandSeriesCreateWithoutBrandInput[] | BrandSeriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutBrandInput | BrandSeriesCreateOrConnectWithoutBrandInput[]
+    upsert?: BrandSeriesUpsertWithWhereUniqueWithoutBrandInput | BrandSeriesUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: BrandSeriesCreateManyBrandInputEnvelope
+    set?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    disconnect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    delete?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    update?: BrandSeriesUpdateWithWhereUniqueWithoutBrandInput | BrandSeriesUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: BrandSeriesUpdateManyWithWhereWithoutBrandInput | BrandSeriesUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: BrandSeriesScalarWhereInput | BrandSeriesScalarWhereInput[]
+  }
+
+  export type BrandModelUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<BrandModelCreateWithoutBrandInput, BrandModelUncheckedCreateWithoutBrandInput> | BrandModelCreateWithoutBrandInput[] | BrandModelUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutBrandInput | BrandModelCreateOrConnectWithoutBrandInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutBrandInput | BrandModelUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: BrandModelCreateManyBrandInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutBrandInput | BrandModelUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutBrandInput | BrandModelUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type BrandCategoryUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<BrandCategoryCreateWithoutBrandInput, BrandCategoryUncheckedCreateWithoutBrandInput> | BrandCategoryCreateWithoutBrandInput[] | BrandCategoryUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutBrandInput | BrandCategoryCreateOrConnectWithoutBrandInput[]
+    upsert?: BrandCategoryUpsertWithWhereUniqueWithoutBrandInput | BrandCategoryUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: BrandCategoryCreateManyBrandInputEnvelope
+    set?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    disconnect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    delete?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    update?: BrandCategoryUpdateWithWhereUniqueWithoutBrandInput | BrandCategoryUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: BrandCategoryUpdateManyWithWhereWithoutBrandInput | BrandCategoryUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+  }
+
   export type ProductUncheckedUpdateManyWithoutBrandNestedInput = {
     create?: XOR<ProductCreateWithoutBrandInput, ProductUncheckedCreateWithoutBrandInput> | ProductCreateWithoutBrandInput[] | ProductUncheckedCreateWithoutBrandInput[]
     connectOrCreate?: ProductCreateOrConnectWithoutBrandInput | ProductCreateOrConnectWithoutBrandInput[]
@@ -59760,6 +71081,368 @@ export namespace Prisma {
     update?: ProductUpdateWithWhereUniqueWithoutBrandInput | ProductUpdateWithWhereUniqueWithoutBrandInput[]
     updateMany?: ProductUpdateManyWithWhereWithoutBrandInput | ProductUpdateManyWithWhereWithoutBrandInput[]
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  }
+
+  export type BrandSeriesUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<BrandSeriesCreateWithoutBrandInput, BrandSeriesUncheckedCreateWithoutBrandInput> | BrandSeriesCreateWithoutBrandInput[] | BrandSeriesUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutBrandInput | BrandSeriesCreateOrConnectWithoutBrandInput[]
+    upsert?: BrandSeriesUpsertWithWhereUniqueWithoutBrandInput | BrandSeriesUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: BrandSeriesCreateManyBrandInputEnvelope
+    set?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    disconnect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    delete?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    connect?: BrandSeriesWhereUniqueInput | BrandSeriesWhereUniqueInput[]
+    update?: BrandSeriesUpdateWithWhereUniqueWithoutBrandInput | BrandSeriesUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: BrandSeriesUpdateManyWithWhereWithoutBrandInput | BrandSeriesUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: BrandSeriesScalarWhereInput | BrandSeriesScalarWhereInput[]
+  }
+
+  export type BrandModelUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<BrandModelCreateWithoutBrandInput, BrandModelUncheckedCreateWithoutBrandInput> | BrandModelCreateWithoutBrandInput[] | BrandModelUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutBrandInput | BrandModelCreateOrConnectWithoutBrandInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutBrandInput | BrandModelUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: BrandModelCreateManyBrandInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutBrandInput | BrandModelUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutBrandInput | BrandModelUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type BrandCategoryUncheckedUpdateManyWithoutBrandNestedInput = {
+    create?: XOR<BrandCategoryCreateWithoutBrandInput, BrandCategoryUncheckedCreateWithoutBrandInput> | BrandCategoryCreateWithoutBrandInput[] | BrandCategoryUncheckedCreateWithoutBrandInput[]
+    connectOrCreate?: BrandCategoryCreateOrConnectWithoutBrandInput | BrandCategoryCreateOrConnectWithoutBrandInput[]
+    upsert?: BrandCategoryUpsertWithWhereUniqueWithoutBrandInput | BrandCategoryUpsertWithWhereUniqueWithoutBrandInput[]
+    createMany?: BrandCategoryCreateManyBrandInputEnvelope
+    set?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    disconnect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    delete?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    connect?: BrandCategoryWhereUniqueInput | BrandCategoryWhereUniqueInput[]
+    update?: BrandCategoryUpdateWithWhereUniqueWithoutBrandInput | BrandCategoryUpdateWithWhereUniqueWithoutBrandInput[]
+    updateMany?: BrandCategoryUpdateManyWithWhereWithoutBrandInput | BrandCategoryUpdateManyWithWhereWithoutBrandInput[]
+    deleteMany?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutBrandCategoriesInput = {
+    create?: XOR<TenantCreateWithoutBrandCategoriesInput, TenantUncheckedCreateWithoutBrandCategoriesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandCategoriesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutCategoriesInput = {
+    create?: XOR<BrandCreateWithoutCategoriesInput, BrandUncheckedCreateWithoutCategoriesInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutCategoriesInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type CategoryCreateNestedOneWithoutBrandsInput = {
+    create?: XOR<CategoryCreateWithoutBrandsInput, CategoryUncheckedCreateWithoutBrandsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutBrandsInput
+    connect?: CategoryWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutBrandCategoriesNestedInput = {
+    create?: XOR<TenantCreateWithoutBrandCategoriesInput, TenantUncheckedCreateWithoutBrandCategoriesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandCategoriesInput
+    upsert?: TenantUpsertWithoutBrandCategoriesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutBrandCategoriesInput, TenantUpdateWithoutBrandCategoriesInput>, TenantUncheckedUpdateWithoutBrandCategoriesInput>
+  }
+
+  export type BrandUpdateOneRequiredWithoutCategoriesNestedInput = {
+    create?: XOR<BrandCreateWithoutCategoriesInput, BrandUncheckedCreateWithoutCategoriesInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutCategoriesInput
+    upsert?: BrandUpsertWithoutCategoriesInput
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutCategoriesInput, BrandUpdateWithoutCategoriesInput>, BrandUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type CategoryUpdateOneRequiredWithoutBrandsNestedInput = {
+    create?: XOR<CategoryCreateWithoutBrandsInput, CategoryUncheckedCreateWithoutBrandsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutBrandsInput
+    upsert?: CategoryUpsertWithoutBrandsInput
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutBrandsInput, CategoryUpdateWithoutBrandsInput>, CategoryUncheckedUpdateWithoutBrandsInput>
+  }
+
+  export type TenantCreateNestedOneWithoutBrandSeriesInput = {
+    create?: XOR<TenantCreateWithoutBrandSeriesInput, TenantUncheckedCreateWithoutBrandSeriesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandSeriesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutSeriesInput = {
+    create?: XOR<BrandCreateWithoutSeriesInput, BrandUncheckedCreateWithoutSeriesInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutSeriesInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type BrandModelCreateNestedManyWithoutSeriesInput = {
+    create?: XOR<BrandModelCreateWithoutSeriesInput, BrandModelUncheckedCreateWithoutSeriesInput> | BrandModelCreateWithoutSeriesInput[] | BrandModelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutSeriesInput | BrandModelCreateOrConnectWithoutSeriesInput[]
+    createMany?: BrandModelCreateManySeriesInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type ProductIntakeCreateNestedManyWithoutSeriesInput = {
+    create?: XOR<ProductIntakeCreateWithoutSeriesInput, ProductIntakeUncheckedCreateWithoutSeriesInput> | ProductIntakeCreateWithoutSeriesInput[] | ProductIntakeUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutSeriesInput | ProductIntakeCreateOrConnectWithoutSeriesInput[]
+    createMany?: ProductIntakeCreateManySeriesInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type BrandModelUncheckedCreateNestedManyWithoutSeriesInput = {
+    create?: XOR<BrandModelCreateWithoutSeriesInput, BrandModelUncheckedCreateWithoutSeriesInput> | BrandModelCreateWithoutSeriesInput[] | BrandModelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutSeriesInput | BrandModelCreateOrConnectWithoutSeriesInput[]
+    createMany?: BrandModelCreateManySeriesInputEnvelope
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+  }
+
+  export type ProductIntakeUncheckedCreateNestedManyWithoutSeriesInput = {
+    create?: XOR<ProductIntakeCreateWithoutSeriesInput, ProductIntakeUncheckedCreateWithoutSeriesInput> | ProductIntakeCreateWithoutSeriesInput[] | ProductIntakeUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutSeriesInput | ProductIntakeCreateOrConnectWithoutSeriesInput[]
+    createMany?: ProductIntakeCreateManySeriesInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type TenantUpdateOneRequiredWithoutBrandSeriesNestedInput = {
+    create?: XOR<TenantCreateWithoutBrandSeriesInput, TenantUncheckedCreateWithoutBrandSeriesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandSeriesInput
+    upsert?: TenantUpsertWithoutBrandSeriesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutBrandSeriesInput, TenantUpdateWithoutBrandSeriesInput>, TenantUncheckedUpdateWithoutBrandSeriesInput>
+  }
+
+  export type BrandUpdateOneRequiredWithoutSeriesNestedInput = {
+    create?: XOR<BrandCreateWithoutSeriesInput, BrandUncheckedCreateWithoutSeriesInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutSeriesInput
+    upsert?: BrandUpsertWithoutSeriesInput
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutSeriesInput, BrandUpdateWithoutSeriesInput>, BrandUncheckedUpdateWithoutSeriesInput>
+  }
+
+  export type BrandModelUpdateManyWithoutSeriesNestedInput = {
+    create?: XOR<BrandModelCreateWithoutSeriesInput, BrandModelUncheckedCreateWithoutSeriesInput> | BrandModelCreateWithoutSeriesInput[] | BrandModelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutSeriesInput | BrandModelCreateOrConnectWithoutSeriesInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutSeriesInput | BrandModelUpsertWithWhereUniqueWithoutSeriesInput[]
+    createMany?: BrandModelCreateManySeriesInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutSeriesInput | BrandModelUpdateWithWhereUniqueWithoutSeriesInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutSeriesInput | BrandModelUpdateManyWithWhereWithoutSeriesInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type ProductIntakeUpdateManyWithoutSeriesNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutSeriesInput, ProductIntakeUncheckedCreateWithoutSeriesInput> | ProductIntakeCreateWithoutSeriesInput[] | ProductIntakeUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutSeriesInput | ProductIntakeCreateOrConnectWithoutSeriesInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutSeriesInput | ProductIntakeUpsertWithWhereUniqueWithoutSeriesInput[]
+    createMany?: ProductIntakeCreateManySeriesInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutSeriesInput | ProductIntakeUpdateWithWhereUniqueWithoutSeriesInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutSeriesInput | ProductIntakeUpdateManyWithWhereWithoutSeriesInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type BrandModelUncheckedUpdateManyWithoutSeriesNestedInput = {
+    create?: XOR<BrandModelCreateWithoutSeriesInput, BrandModelUncheckedCreateWithoutSeriesInput> | BrandModelCreateWithoutSeriesInput[] | BrandModelUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: BrandModelCreateOrConnectWithoutSeriesInput | BrandModelCreateOrConnectWithoutSeriesInput[]
+    upsert?: BrandModelUpsertWithWhereUniqueWithoutSeriesInput | BrandModelUpsertWithWhereUniqueWithoutSeriesInput[]
+    createMany?: BrandModelCreateManySeriesInputEnvelope
+    set?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    disconnect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    delete?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    connect?: BrandModelWhereUniqueInput | BrandModelWhereUniqueInput[]
+    update?: BrandModelUpdateWithWhereUniqueWithoutSeriesInput | BrandModelUpdateWithWhereUniqueWithoutSeriesInput[]
+    updateMany?: BrandModelUpdateManyWithWhereWithoutSeriesInput | BrandModelUpdateManyWithWhereWithoutSeriesInput[]
+    deleteMany?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutSeriesNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutSeriesInput, ProductIntakeUncheckedCreateWithoutSeriesInput> | ProductIntakeCreateWithoutSeriesInput[] | ProductIntakeUncheckedCreateWithoutSeriesInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutSeriesInput | ProductIntakeCreateOrConnectWithoutSeriesInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutSeriesInput | ProductIntakeUpsertWithWhereUniqueWithoutSeriesInput[]
+    createMany?: ProductIntakeCreateManySeriesInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutSeriesInput | ProductIntakeUpdateWithWhereUniqueWithoutSeriesInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutSeriesInput | ProductIntakeUpdateManyWithWhereWithoutSeriesInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutBrandModelsInput = {
+    create?: XOR<TenantCreateWithoutBrandModelsInput, TenantUncheckedCreateWithoutBrandModelsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandModelsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type BrandCreateNestedOneWithoutModelsInput = {
+    create?: XOR<BrandCreateWithoutModelsInput, BrandUncheckedCreateWithoutModelsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutModelsInput
+    connect?: BrandWhereUniqueInput
+  }
+
+  export type BrandSeriesCreateNestedOneWithoutModelsInput = {
+    create?: XOR<BrandSeriesCreateWithoutModelsInput, BrandSeriesUncheckedCreateWithoutModelsInput>
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutModelsInput
+    connect?: BrandSeriesWhereUniqueInput
+  }
+
+  export type CategoryCreateNestedOneWithoutBrandModelsInput = {
+    create?: XOR<CategoryCreateWithoutBrandModelsInput, CategoryUncheckedCreateWithoutBrandModelsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutBrandModelsInput
+    connect?: CategoryWhereUniqueInput
+  }
+
+  export type ProductIntakeCreateNestedManyWithoutModelInput = {
+    create?: XOR<ProductIntakeCreateWithoutModelInput, ProductIntakeUncheckedCreateWithoutModelInput> | ProductIntakeCreateWithoutModelInput[] | ProductIntakeUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutModelInput | ProductIntakeCreateOrConnectWithoutModelInput[]
+    createMany?: ProductIntakeCreateManyModelInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeUncheckedCreateNestedManyWithoutModelInput = {
+    create?: XOR<ProductIntakeCreateWithoutModelInput, ProductIntakeUncheckedCreateWithoutModelInput> | ProductIntakeCreateWithoutModelInput[] | ProductIntakeUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutModelInput | ProductIntakeCreateOrConnectWithoutModelInput[]
+    createMany?: ProductIntakeCreateManyModelInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type TenantUpdateOneRequiredWithoutBrandModelsNestedInput = {
+    create?: XOR<TenantCreateWithoutBrandModelsInput, TenantUncheckedCreateWithoutBrandModelsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutBrandModelsInput
+    upsert?: TenantUpsertWithoutBrandModelsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutBrandModelsInput, TenantUpdateWithoutBrandModelsInput>, TenantUncheckedUpdateWithoutBrandModelsInput>
+  }
+
+  export type BrandUpdateOneRequiredWithoutModelsNestedInput = {
+    create?: XOR<BrandCreateWithoutModelsInput, BrandUncheckedCreateWithoutModelsInput>
+    connectOrCreate?: BrandCreateOrConnectWithoutModelsInput
+    upsert?: BrandUpsertWithoutModelsInput
+    connect?: BrandWhereUniqueInput
+    update?: XOR<XOR<BrandUpdateToOneWithWhereWithoutModelsInput, BrandUpdateWithoutModelsInput>, BrandUncheckedUpdateWithoutModelsInput>
+  }
+
+  export type BrandSeriesUpdateOneWithoutModelsNestedInput = {
+    create?: XOR<BrandSeriesCreateWithoutModelsInput, BrandSeriesUncheckedCreateWithoutModelsInput>
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutModelsInput
+    upsert?: BrandSeriesUpsertWithoutModelsInput
+    disconnect?: BrandSeriesWhereInput | boolean
+    delete?: BrandSeriesWhereInput | boolean
+    connect?: BrandSeriesWhereUniqueInput
+    update?: XOR<XOR<BrandSeriesUpdateToOneWithWhereWithoutModelsInput, BrandSeriesUpdateWithoutModelsInput>, BrandSeriesUncheckedUpdateWithoutModelsInput>
+  }
+
+  export type CategoryUpdateOneWithoutBrandModelsNestedInput = {
+    create?: XOR<CategoryCreateWithoutBrandModelsInput, CategoryUncheckedCreateWithoutBrandModelsInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutBrandModelsInput
+    upsert?: CategoryUpsertWithoutBrandModelsInput
+    disconnect?: CategoryWhereInput | boolean
+    delete?: CategoryWhereInput | boolean
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutBrandModelsInput, CategoryUpdateWithoutBrandModelsInput>, CategoryUncheckedUpdateWithoutBrandModelsInput>
+  }
+
+  export type ProductIntakeUpdateManyWithoutModelNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutModelInput, ProductIntakeUncheckedCreateWithoutModelInput> | ProductIntakeCreateWithoutModelInput[] | ProductIntakeUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutModelInput | ProductIntakeCreateOrConnectWithoutModelInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutModelInput | ProductIntakeUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: ProductIntakeCreateManyModelInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutModelInput | ProductIntakeUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutModelInput | ProductIntakeUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutModelNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutModelInput, ProductIntakeUncheckedCreateWithoutModelInput> | ProductIntakeCreateWithoutModelInput[] | ProductIntakeUncheckedCreateWithoutModelInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutModelInput | ProductIntakeCreateOrConnectWithoutModelInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutModelInput | ProductIntakeUpsertWithWhereUniqueWithoutModelInput[]
+    createMany?: ProductIntakeCreateManyModelInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutModelInput | ProductIntakeUpdateWithWhereUniqueWithoutModelInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutModelInput | ProductIntakeUpdateManyWithWhereWithoutModelInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutRecyclingTypesInput = {
+    create?: XOR<TenantCreateWithoutRecyclingTypesInput, TenantUncheckedCreateWithoutRecyclingTypesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutRecyclingTypesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ProductIntakeCreateNestedManyWithoutRecyclingTypeInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingTypeInput, ProductIntakeUncheckedCreateWithoutRecyclingTypeInput> | ProductIntakeCreateWithoutRecyclingTypeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingTypeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingTypeInput | ProductIntakeCreateOrConnectWithoutRecyclingTypeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingTypeInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type ProductIntakeUncheckedCreateNestedManyWithoutRecyclingTypeInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingTypeInput, ProductIntakeUncheckedCreateWithoutRecyclingTypeInput> | ProductIntakeCreateWithoutRecyclingTypeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingTypeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingTypeInput | ProductIntakeCreateOrConnectWithoutRecyclingTypeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingTypeInputEnvelope
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+  }
+
+  export type TenantUpdateOneRequiredWithoutRecyclingTypesNestedInput = {
+    create?: XOR<TenantCreateWithoutRecyclingTypesInput, TenantUncheckedCreateWithoutRecyclingTypesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutRecyclingTypesInput
+    upsert?: TenantUpsertWithoutRecyclingTypesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutRecyclingTypesInput, TenantUpdateWithoutRecyclingTypesInput>, TenantUncheckedUpdateWithoutRecyclingTypesInput>
+  }
+
+  export type ProductIntakeUpdateManyWithoutRecyclingTypeNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingTypeInput, ProductIntakeUncheckedCreateWithoutRecyclingTypeInput> | ProductIntakeCreateWithoutRecyclingTypeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingTypeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingTypeInput | ProductIntakeCreateOrConnectWithoutRecyclingTypeInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutRecyclingTypeInput | ProductIntakeUpsertWithWhereUniqueWithoutRecyclingTypeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingTypeInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutRecyclingTypeInput | ProductIntakeUpdateWithWhereUniqueWithoutRecyclingTypeInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutRecyclingTypeInput | ProductIntakeUpdateManyWithWhereWithoutRecyclingTypeInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutRecyclingTypeNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutRecyclingTypeInput, ProductIntakeUncheckedCreateWithoutRecyclingTypeInput> | ProductIntakeCreateWithoutRecyclingTypeInput[] | ProductIntakeUncheckedCreateWithoutRecyclingTypeInput[]
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutRecyclingTypeInput | ProductIntakeCreateOrConnectWithoutRecyclingTypeInput[]
+    upsert?: ProductIntakeUpsertWithWhereUniqueWithoutRecyclingTypeInput | ProductIntakeUpsertWithWhereUniqueWithoutRecyclingTypeInput[]
+    createMany?: ProductIntakeCreateManyRecyclingTypeInputEnvelope
+    set?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    disconnect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    delete?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    connect?: ProductIntakeWhereUniqueInput | ProductIntakeWhereUniqueInput[]
+    update?: ProductIntakeUpdateWithWhereUniqueWithoutRecyclingTypeInput | ProductIntakeUpdateWithWhereUniqueWithoutRecyclingTypeInput[]
+    updateMany?: ProductIntakeUpdateManyWithWhereWithoutRecyclingTypeInput | ProductIntakeUpdateManyWithWhereWithoutRecyclingTypeInput[]
+    deleteMany?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
   }
 
   export type CategoryCreateNestedOneWithoutProductsInput = {
@@ -59788,6 +71471,12 @@ export namespace Prisma {
     connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
   }
 
+  export type ProductIntakeCreateNestedOneWithoutProductInput = {
+    create?: XOR<ProductIntakeCreateWithoutProductInput, ProductIntakeUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutProductInput
+    connect?: ProductIntakeWhereUniqueInput
+  }
+
   export type ProductVariantUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput> | ProductVariantCreateWithoutProductInput[] | ProductVariantUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductVariantCreateOrConnectWithoutProductInput | ProductVariantCreateOrConnectWithoutProductInput[]
@@ -59800,6 +71489,12 @@ export namespace Prisma {
     connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
     createMany?: ProductImageCreateManyProductInputEnvelope
     connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+  }
+
+  export type ProductIntakeUncheckedCreateNestedOneWithoutProductInput = {
+    create?: XOR<ProductIntakeCreateWithoutProductInput, ProductIntakeUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutProductInput
+    connect?: ProductIntakeWhereUniqueInput
   }
 
   export type CategoryUpdateOneWithoutProductsNestedInput = {
@@ -59850,6 +71545,16 @@ export namespace Prisma {
     deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
   }
 
+  export type ProductIntakeUpdateOneWithoutProductNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutProductInput, ProductIntakeUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutProductInput
+    upsert?: ProductIntakeUpsertWithoutProductInput
+    disconnect?: ProductIntakeWhereInput | boolean
+    delete?: ProductIntakeWhereInput | boolean
+    connect?: ProductIntakeWhereUniqueInput
+    update?: XOR<XOR<ProductIntakeUpdateToOneWithWhereWithoutProductInput, ProductIntakeUpdateWithoutProductInput>, ProductIntakeUncheckedUpdateWithoutProductInput>
+  }
+
   export type ProductVariantUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<ProductVariantCreateWithoutProductInput, ProductVariantUncheckedCreateWithoutProductInput> | ProductVariantCreateWithoutProductInput[] | ProductVariantUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductVariantCreateOrConnectWithoutProductInput | ProductVariantCreateOrConnectWithoutProductInput[]
@@ -59876,6 +71581,214 @@ export namespace Prisma {
     update?: ProductImageUpdateWithWhereUniqueWithoutProductInput | ProductImageUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: ProductImageUpdateManyWithWhereWithoutProductInput | ProductImageUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
+  }
+
+  export type ProductIntakeUncheckedUpdateOneWithoutProductNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutProductInput, ProductIntakeUncheckedCreateWithoutProductInput>
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutProductInput
+    upsert?: ProductIntakeUpsertWithoutProductInput
+    disconnect?: ProductIntakeWhereInput | boolean
+    delete?: ProductIntakeWhereInput | boolean
+    connect?: ProductIntakeWhereUniqueInput
+    update?: XOR<XOR<ProductIntakeUpdateToOneWithWhereWithoutProductInput, ProductIntakeUpdateWithoutProductInput>, ProductIntakeUncheckedUpdateWithoutProductInput>
+  }
+
+  export type TenantCreateNestedOneWithoutProductIntakesInput = {
+    create?: XOR<TenantCreateWithoutProductIntakesInput, TenantUncheckedCreateWithoutProductIntakesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutProductIntakesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ProductCreateNestedOneWithoutIntakeInput = {
+    create?: XOR<ProductCreateWithoutIntakeInput, ProductUncheckedCreateWithoutIntakeInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutIntakeInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type BrandSeriesCreateNestedOneWithoutIntakesInput = {
+    create?: XOR<BrandSeriesCreateWithoutIntakesInput, BrandSeriesUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutIntakesInput
+    connect?: BrandSeriesWhereUniqueInput
+  }
+
+  export type BrandModelCreateNestedOneWithoutIntakesInput = {
+    create?: XOR<BrandModelCreateWithoutIntakesInput, BrandModelUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: BrandModelCreateOrConnectWithoutIntakesInput
+    connect?: BrandModelWhereUniqueInput
+  }
+
+  export type AdminUserCreateNestedOneWithoutAppraisedIntakesInput = {
+    create?: XOR<AdminUserCreateWithoutAppraisedIntakesInput, AdminUserUncheckedCreateWithoutAppraisedIntakesInput>
+    connectOrCreate?: AdminUserCreateOrConnectWithoutAppraisedIntakesInput
+    connect?: AdminUserWhereUniqueInput
+  }
+
+  export type AdminUserCreateNestedOneWithoutRecycledIntakesInput = {
+    create?: XOR<AdminUserCreateWithoutRecycledIntakesInput, AdminUserUncheckedCreateWithoutRecycledIntakesInput>
+    connectOrCreate?: AdminUserCreateOrConnectWithoutRecycledIntakesInput
+    connect?: AdminUserWhereUniqueInput
+  }
+
+  export type RecyclingTypeCreateNestedOneWithoutIntakesInput = {
+    create?: XOR<RecyclingTypeCreateWithoutIntakesInput, RecyclingTypeUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: RecyclingTypeCreateOrConnectWithoutIntakesInput
+    connect?: RecyclingTypeWhereUniqueInput
+  }
+
+  export type ProductIntakeMediaCreateNestedManyWithoutIntakeInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutIntakeInput, ProductIntakeMediaUncheckedCreateWithoutIntakeInput> | ProductIntakeMediaCreateWithoutIntakeInput[] | ProductIntakeMediaUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutIntakeInput | ProductIntakeMediaCreateOrConnectWithoutIntakeInput[]
+    createMany?: ProductIntakeMediaCreateManyIntakeInputEnvelope
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+  }
+
+  export type ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutIntakeInput, ProductIntakeMediaUncheckedCreateWithoutIntakeInput> | ProductIntakeMediaCreateWithoutIntakeInput[] | ProductIntakeMediaUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutIntakeInput | ProductIntakeMediaCreateOrConnectWithoutIntakeInput[]
+    createMany?: ProductIntakeMediaCreateManyIntakeInputEnvelope
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TenantUpdateOneRequiredWithoutProductIntakesNestedInput = {
+    create?: XOR<TenantCreateWithoutProductIntakesInput, TenantUncheckedCreateWithoutProductIntakesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutProductIntakesInput
+    upsert?: TenantUpsertWithoutProductIntakesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutProductIntakesInput, TenantUpdateWithoutProductIntakesInput>, TenantUncheckedUpdateWithoutProductIntakesInput>
+  }
+
+  export type ProductUpdateOneRequiredWithoutIntakeNestedInput = {
+    create?: XOR<ProductCreateWithoutIntakeInput, ProductUncheckedCreateWithoutIntakeInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutIntakeInput
+    upsert?: ProductUpsertWithoutIntakeInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutIntakeInput, ProductUpdateWithoutIntakeInput>, ProductUncheckedUpdateWithoutIntakeInput>
+  }
+
+  export type BrandSeriesUpdateOneWithoutIntakesNestedInput = {
+    create?: XOR<BrandSeriesCreateWithoutIntakesInput, BrandSeriesUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: BrandSeriesCreateOrConnectWithoutIntakesInput
+    upsert?: BrandSeriesUpsertWithoutIntakesInput
+    disconnect?: BrandSeriesWhereInput | boolean
+    delete?: BrandSeriesWhereInput | boolean
+    connect?: BrandSeriesWhereUniqueInput
+    update?: XOR<XOR<BrandSeriesUpdateToOneWithWhereWithoutIntakesInput, BrandSeriesUpdateWithoutIntakesInput>, BrandSeriesUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type BrandModelUpdateOneWithoutIntakesNestedInput = {
+    create?: XOR<BrandModelCreateWithoutIntakesInput, BrandModelUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: BrandModelCreateOrConnectWithoutIntakesInput
+    upsert?: BrandModelUpsertWithoutIntakesInput
+    disconnect?: BrandModelWhereInput | boolean
+    delete?: BrandModelWhereInput | boolean
+    connect?: BrandModelWhereUniqueInput
+    update?: XOR<XOR<BrandModelUpdateToOneWithWhereWithoutIntakesInput, BrandModelUpdateWithoutIntakesInput>, BrandModelUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput = {
+    create?: XOR<AdminUserCreateWithoutAppraisedIntakesInput, AdminUserUncheckedCreateWithoutAppraisedIntakesInput>
+    connectOrCreate?: AdminUserCreateOrConnectWithoutAppraisedIntakesInput
+    upsert?: AdminUserUpsertWithoutAppraisedIntakesInput
+    connect?: AdminUserWhereUniqueInput
+    update?: XOR<XOR<AdminUserUpdateToOneWithWhereWithoutAppraisedIntakesInput, AdminUserUpdateWithoutAppraisedIntakesInput>, AdminUserUncheckedUpdateWithoutAppraisedIntakesInput>
+  }
+
+  export type AdminUserUpdateOneWithoutRecycledIntakesNestedInput = {
+    create?: XOR<AdminUserCreateWithoutRecycledIntakesInput, AdminUserUncheckedCreateWithoutRecycledIntakesInput>
+    connectOrCreate?: AdminUserCreateOrConnectWithoutRecycledIntakesInput
+    upsert?: AdminUserUpsertWithoutRecycledIntakesInput
+    disconnect?: AdminUserWhereInput | boolean
+    delete?: AdminUserWhereInput | boolean
+    connect?: AdminUserWhereUniqueInput
+    update?: XOR<XOR<AdminUserUpdateToOneWithWhereWithoutRecycledIntakesInput, AdminUserUpdateWithoutRecycledIntakesInput>, AdminUserUncheckedUpdateWithoutRecycledIntakesInput>
+  }
+
+  export type RecyclingTypeUpdateOneWithoutIntakesNestedInput = {
+    create?: XOR<RecyclingTypeCreateWithoutIntakesInput, RecyclingTypeUncheckedCreateWithoutIntakesInput>
+    connectOrCreate?: RecyclingTypeCreateOrConnectWithoutIntakesInput
+    upsert?: RecyclingTypeUpsertWithoutIntakesInput
+    disconnect?: RecyclingTypeWhereInput | boolean
+    delete?: RecyclingTypeWhereInput | boolean
+    connect?: RecyclingTypeWhereUniqueInput
+    update?: XOR<XOR<RecyclingTypeUpdateToOneWithWhereWithoutIntakesInput, RecyclingTypeUpdateWithoutIntakesInput>, RecyclingTypeUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type ProductIntakeMediaUpdateManyWithoutIntakeNestedInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutIntakeInput, ProductIntakeMediaUncheckedCreateWithoutIntakeInput> | ProductIntakeMediaCreateWithoutIntakeInput[] | ProductIntakeMediaUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutIntakeInput | ProductIntakeMediaCreateOrConnectWithoutIntakeInput[]
+    upsert?: ProductIntakeMediaUpsertWithWhereUniqueWithoutIntakeInput | ProductIntakeMediaUpsertWithWhereUniqueWithoutIntakeInput[]
+    createMany?: ProductIntakeMediaCreateManyIntakeInputEnvelope
+    set?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    disconnect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    delete?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    update?: ProductIntakeMediaUpdateWithWhereUniqueWithoutIntakeInput | ProductIntakeMediaUpdateWithWhereUniqueWithoutIntakeInput[]
+    updateMany?: ProductIntakeMediaUpdateManyWithWhereWithoutIntakeInput | ProductIntakeMediaUpdateManyWithWhereWithoutIntakeInput[]
+    deleteMany?: ProductIntakeMediaScalarWhereInput | ProductIntakeMediaScalarWhereInput[]
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput = {
+    create?: XOR<ProductIntakeMediaCreateWithoutIntakeInput, ProductIntakeMediaUncheckedCreateWithoutIntakeInput> | ProductIntakeMediaCreateWithoutIntakeInput[] | ProductIntakeMediaUncheckedCreateWithoutIntakeInput[]
+    connectOrCreate?: ProductIntakeMediaCreateOrConnectWithoutIntakeInput | ProductIntakeMediaCreateOrConnectWithoutIntakeInput[]
+    upsert?: ProductIntakeMediaUpsertWithWhereUniqueWithoutIntakeInput | ProductIntakeMediaUpsertWithWhereUniqueWithoutIntakeInput[]
+    createMany?: ProductIntakeMediaCreateManyIntakeInputEnvelope
+    set?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    disconnect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    delete?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    connect?: ProductIntakeMediaWhereUniqueInput | ProductIntakeMediaWhereUniqueInput[]
+    update?: ProductIntakeMediaUpdateWithWhereUniqueWithoutIntakeInput | ProductIntakeMediaUpdateWithWhereUniqueWithoutIntakeInput[]
+    updateMany?: ProductIntakeMediaUpdateManyWithWhereWithoutIntakeInput | ProductIntakeMediaUpdateManyWithWhereWithoutIntakeInput[]
+    deleteMany?: ProductIntakeMediaScalarWhereInput | ProductIntakeMediaScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutProductIntakeMediaInput = {
+    create?: XOR<TenantCreateWithoutProductIntakeMediaInput, TenantUncheckedCreateWithoutProductIntakeMediaInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutProductIntakeMediaInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ProductIntakeCreateNestedOneWithoutMediaInput = {
+    create?: XOR<ProductIntakeCreateWithoutMediaInput, ProductIntakeUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutMediaInput
+    connect?: ProductIntakeWhereUniqueInput
+  }
+
+  export type MediaAssetCreateNestedOneWithoutProductIntakeMediaInput = {
+    create?: XOR<MediaAssetCreateWithoutProductIntakeMediaInput, MediaAssetUncheckedCreateWithoutProductIntakeMediaInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutProductIntakeMediaInput
+    connect?: MediaAssetWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutProductIntakeMediaNestedInput = {
+    create?: XOR<TenantCreateWithoutProductIntakeMediaInput, TenantUncheckedCreateWithoutProductIntakeMediaInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutProductIntakeMediaInput
+    upsert?: TenantUpsertWithoutProductIntakeMediaInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutProductIntakeMediaInput, TenantUpdateWithoutProductIntakeMediaInput>, TenantUncheckedUpdateWithoutProductIntakeMediaInput>
+  }
+
+  export type ProductIntakeUpdateOneRequiredWithoutMediaNestedInput = {
+    create?: XOR<ProductIntakeCreateWithoutMediaInput, ProductIntakeUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: ProductIntakeCreateOrConnectWithoutMediaInput
+    upsert?: ProductIntakeUpsertWithoutMediaInput
+    connect?: ProductIntakeWhereUniqueInput
+    update?: XOR<XOR<ProductIntakeUpdateToOneWithWhereWithoutMediaInput, ProductIntakeUpdateWithoutMediaInput>, ProductIntakeUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type MediaAssetUpdateOneRequiredWithoutProductIntakeMediaNestedInput = {
+    create?: XOR<MediaAssetCreateWithoutProductIntakeMediaInput, MediaAssetUncheckedCreateWithoutProductIntakeMediaInput>
+    connectOrCreate?: MediaAssetCreateOrConnectWithoutProductIntakeMediaInput
+    upsert?: MediaAssetUpsertWithoutProductIntakeMediaInput
+    connect?: MediaAssetWhereUniqueInput
+    update?: XOR<XOR<MediaAssetUpdateToOneWithWhereWithoutProductIntakeMediaInput, MediaAssetUpdateWithoutProductIntakeMediaInput>, MediaAssetUncheckedUpdateWithoutProductIntakeMediaInput>
   }
 
   export type ProductCreateNestedOneWithoutVariantsInput = {
@@ -59910,14 +71823,6 @@ export namespace Prisma {
     connectOrCreate?: OrderItemCreateOrConnectWithoutVariantInput | OrderItemCreateOrConnectWithoutVariantInput[]
     createMany?: OrderItemCreateManyVariantInputEnvelope
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
-  }
-
-  export type NullableDecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string | null
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type ProductUpdateOneRequiredWithoutVariantsNestedInput = {
@@ -60953,6 +72858,33 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type PlanCreateWithoutTenantsInput = {
     id?: string
     code: string
@@ -61157,6 +73089,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserUncheckedCreateWithoutTenantInput = {
@@ -61169,6 +73103,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserCreateOrConnectWithoutTenantInput = {
@@ -61328,6 +73264,7 @@ export namespace Prisma {
     purgedAt?: Date | string | null
     uploadSession: MediaUploadSessionCreateNestedOneWithoutAssetInput
     productImage?: ProductImageCreateNestedOneWithoutMediaAssetInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetUncheckedCreateWithoutTenantInput = {
@@ -61345,6 +73282,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     purgedAt?: Date | string | null
     productImage?: ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetCreateOrConnectWithoutTenantInput = {
@@ -61354,6 +73292,252 @@ export namespace Prisma {
 
   export type MediaAssetCreateManyTenantInputEnvelope = {
     data: MediaAssetCreateManyTenantInput | MediaAssetCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandSeriesCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    brand: BrandCreateNestedOneWithoutSeriesInput
+    models?: BrandModelCreateNestedManyWithoutSeriesInput
+    intakes?: ProductIntakeCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesUncheckedCreateWithoutTenantInput = {
+    id?: string
+    brandId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    models?: BrandModelUncheckedCreateNestedManyWithoutSeriesInput
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesCreateOrConnectWithoutTenantInput = {
+    where: BrandSeriesWhereUniqueInput
+    create: XOR<BrandSeriesCreateWithoutTenantInput, BrandSeriesUncheckedCreateWithoutTenantInput>
+  }
+
+  export type BrandSeriesCreateManyTenantInputEnvelope = {
+    data: BrandSeriesCreateManyTenantInput | BrandSeriesCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandModelCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    brand: BrandCreateNestedOneWithoutModelsInput
+    series?: BrandSeriesCreateNestedOneWithoutModelsInput
+    category?: CategoryCreateNestedOneWithoutBrandModelsInput
+    intakes?: ProductIntakeCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelUncheckedCreateWithoutTenantInput = {
+    id?: string
+    brandId: string
+    seriesId?: string | null
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelCreateOrConnectWithoutTenantInput = {
+    where: BrandModelWhereUniqueInput
+    create: XOR<BrandModelCreateWithoutTenantInput, BrandModelUncheckedCreateWithoutTenantInput>
+  }
+
+  export type BrandModelCreateManyTenantInputEnvelope = {
+    data: BrandModelCreateManyTenantInput | BrandModelCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandCategoryCreateWithoutTenantInput = {
+    createdAt?: Date | string
+    brand: BrandCreateNestedOneWithoutCategoriesInput
+    category: CategoryCreateNestedOneWithoutBrandsInput
+  }
+
+  export type BrandCategoryUncheckedCreateWithoutTenantInput = {
+    brandId: string
+    categoryId: string
+    createdAt?: Date | string
+  }
+
+  export type BrandCategoryCreateOrConnectWithoutTenantInput = {
+    where: BrandCategoryWhereUniqueInput
+    create: XOR<BrandCategoryCreateWithoutTenantInput, BrandCategoryUncheckedCreateWithoutTenantInput>
+  }
+
+  export type BrandCategoryCreateManyTenantInputEnvelope = {
+    data: BrandCategoryCreateManyTenantInput | BrandCategoryCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RecyclingTypeCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeCreateNestedManyWithoutRecyclingTypeInput
+  }
+
+  export type RecyclingTypeUncheckedCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutRecyclingTypeInput
+  }
+
+  export type RecyclingTypeCreateOrConnectWithoutTenantInput = {
+    where: RecyclingTypeWhereUniqueInput
+    create: XOR<RecyclingTypeCreateWithoutTenantInput, RecyclingTypeUncheckedCreateWithoutTenantInput>
+  }
+
+  export type RecyclingTypeCreateManyTenantInputEnvelope = {
+    data: RecyclingTypeCreateManyTenantInput | RecyclingTypeCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductIntakeCreateWithoutTenantInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    product: ProductCreateNestedOneWithoutIntakeInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutTenantInput = {
+    id?: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutTenantInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutTenantInput, ProductIntakeUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ProductIntakeCreateManyTenantInputEnvelope = {
+    data: ProductIntakeCreateManyTenantInput | ProductIntakeCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductIntakeMediaCreateWithoutTenantInput = {
+    id?: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+    intake: ProductIntakeCreateNestedOneWithoutMediaInput
+    mediaAsset: MediaAssetCreateNestedOneWithoutProductIntakeMediaInput
+  }
+
+  export type ProductIntakeMediaUncheckedCreateWithoutTenantInput = {
+    id?: string
+    intakeId: string
+    mediaAssetId: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ProductIntakeMediaCreateOrConnectWithoutTenantInput = {
+    where: ProductIntakeMediaWhereUniqueInput
+    create: XOR<ProductIntakeMediaCreateWithoutTenantInput, ProductIntakeMediaUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ProductIntakeMediaCreateManyTenantInputEnvelope = {
+    data: ProductIntakeMediaCreateManyTenantInput | ProductIntakeMediaCreateManyTenantInput[]
     skipDuplicates?: boolean
   }
 
@@ -61736,6 +73920,214 @@ export namespace Prisma {
     purgedAt?: DateTimeNullableFilter<"MediaAsset"> | Date | string | null
   }
 
+  export type BrandSeriesUpsertWithWhereUniqueWithoutTenantInput = {
+    where: BrandSeriesWhereUniqueInput
+    update: XOR<BrandSeriesUpdateWithoutTenantInput, BrandSeriesUncheckedUpdateWithoutTenantInput>
+    create: XOR<BrandSeriesCreateWithoutTenantInput, BrandSeriesUncheckedCreateWithoutTenantInput>
+  }
+
+  export type BrandSeriesUpdateWithWhereUniqueWithoutTenantInput = {
+    where: BrandSeriesWhereUniqueInput
+    data: XOR<BrandSeriesUpdateWithoutTenantInput, BrandSeriesUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type BrandSeriesUpdateManyWithWhereWithoutTenantInput = {
+    where: BrandSeriesScalarWhereInput
+    data: XOR<BrandSeriesUpdateManyMutationInput, BrandSeriesUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type BrandSeriesScalarWhereInput = {
+    AND?: BrandSeriesScalarWhereInput | BrandSeriesScalarWhereInput[]
+    OR?: BrandSeriesScalarWhereInput[]
+    NOT?: BrandSeriesScalarWhereInput | BrandSeriesScalarWhereInput[]
+    id?: UuidFilter<"BrandSeries"> | string
+    tenantId?: UuidFilter<"BrandSeries"> | string
+    brandId?: UuidFilter<"BrandSeries"> | string
+    name?: StringFilter<"BrandSeries"> | string
+    status?: StringFilter<"BrandSeries"> | string
+    version?: IntFilter<"BrandSeries"> | number
+    deletedAt?: DateTimeNullableFilter<"BrandSeries"> | Date | string | null
+    createdAt?: DateTimeFilter<"BrandSeries"> | Date | string
+    updatedAt?: DateTimeFilter<"BrandSeries"> | Date | string
+  }
+
+  export type BrandModelUpsertWithWhereUniqueWithoutTenantInput = {
+    where: BrandModelWhereUniqueInput
+    update: XOR<BrandModelUpdateWithoutTenantInput, BrandModelUncheckedUpdateWithoutTenantInput>
+    create: XOR<BrandModelCreateWithoutTenantInput, BrandModelUncheckedCreateWithoutTenantInput>
+  }
+
+  export type BrandModelUpdateWithWhereUniqueWithoutTenantInput = {
+    where: BrandModelWhereUniqueInput
+    data: XOR<BrandModelUpdateWithoutTenantInput, BrandModelUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type BrandModelUpdateManyWithWhereWithoutTenantInput = {
+    where: BrandModelScalarWhereInput
+    data: XOR<BrandModelUpdateManyMutationInput, BrandModelUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type BrandModelScalarWhereInput = {
+    AND?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+    OR?: BrandModelScalarWhereInput[]
+    NOT?: BrandModelScalarWhereInput | BrandModelScalarWhereInput[]
+    id?: UuidFilter<"BrandModel"> | string
+    tenantId?: UuidFilter<"BrandModel"> | string
+    brandId?: UuidFilter<"BrandModel"> | string
+    seriesId?: UuidNullableFilter<"BrandModel"> | string | null
+    categoryId?: UuidNullableFilter<"BrandModel"> | string | null
+    name?: StringFilter<"BrandModel"> | string
+    officialGuidePrice?: DecimalNullableFilter<"BrandModel"> | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: StringNullableFilter<"BrandModel"> | string | null
+    status?: StringFilter<"BrandModel"> | string
+    version?: IntFilter<"BrandModel"> | number
+    deletedAt?: DateTimeNullableFilter<"BrandModel"> | Date | string | null
+    createdAt?: DateTimeFilter<"BrandModel"> | Date | string
+    updatedAt?: DateTimeFilter<"BrandModel"> | Date | string
+  }
+
+  export type BrandCategoryUpsertWithWhereUniqueWithoutTenantInput = {
+    where: BrandCategoryWhereUniqueInput
+    update: XOR<BrandCategoryUpdateWithoutTenantInput, BrandCategoryUncheckedUpdateWithoutTenantInput>
+    create: XOR<BrandCategoryCreateWithoutTenantInput, BrandCategoryUncheckedCreateWithoutTenantInput>
+  }
+
+  export type BrandCategoryUpdateWithWhereUniqueWithoutTenantInput = {
+    where: BrandCategoryWhereUniqueInput
+    data: XOR<BrandCategoryUpdateWithoutTenantInput, BrandCategoryUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type BrandCategoryUpdateManyWithWhereWithoutTenantInput = {
+    where: BrandCategoryScalarWhereInput
+    data: XOR<BrandCategoryUpdateManyMutationInput, BrandCategoryUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type BrandCategoryScalarWhereInput = {
+    AND?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+    OR?: BrandCategoryScalarWhereInput[]
+    NOT?: BrandCategoryScalarWhereInput | BrandCategoryScalarWhereInput[]
+    tenantId?: UuidFilter<"BrandCategory"> | string
+    brandId?: UuidFilter<"BrandCategory"> | string
+    categoryId?: UuidFilter<"BrandCategory"> | string
+    createdAt?: DateTimeFilter<"BrandCategory"> | Date | string
+  }
+
+  export type RecyclingTypeUpsertWithWhereUniqueWithoutTenantInput = {
+    where: RecyclingTypeWhereUniqueInput
+    update: XOR<RecyclingTypeUpdateWithoutTenantInput, RecyclingTypeUncheckedUpdateWithoutTenantInput>
+    create: XOR<RecyclingTypeCreateWithoutTenantInput, RecyclingTypeUncheckedCreateWithoutTenantInput>
+  }
+
+  export type RecyclingTypeUpdateWithWhereUniqueWithoutTenantInput = {
+    where: RecyclingTypeWhereUniqueInput
+    data: XOR<RecyclingTypeUpdateWithoutTenantInput, RecyclingTypeUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type RecyclingTypeUpdateManyWithWhereWithoutTenantInput = {
+    where: RecyclingTypeScalarWhereInput
+    data: XOR<RecyclingTypeUpdateManyMutationInput, RecyclingTypeUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type RecyclingTypeScalarWhereInput = {
+    AND?: RecyclingTypeScalarWhereInput | RecyclingTypeScalarWhereInput[]
+    OR?: RecyclingTypeScalarWhereInput[]
+    NOT?: RecyclingTypeScalarWhereInput | RecyclingTypeScalarWhereInput[]
+    id?: UuidFilter<"RecyclingType"> | string
+    tenantId?: UuidFilter<"RecyclingType"> | string
+    name?: StringFilter<"RecyclingType"> | string
+    sortOrder?: IntFilter<"RecyclingType"> | number
+    status?: StringFilter<"RecyclingType"> | string
+    createdAt?: DateTimeFilter<"RecyclingType"> | Date | string
+    updatedAt?: DateTimeFilter<"RecyclingType"> | Date | string
+  }
+
+  export type ProductIntakeUpsertWithWhereUniqueWithoutTenantInput = {
+    where: ProductIntakeWhereUniqueInput
+    update: XOR<ProductIntakeUpdateWithoutTenantInput, ProductIntakeUncheckedUpdateWithoutTenantInput>
+    create: XOR<ProductIntakeCreateWithoutTenantInput, ProductIntakeUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ProductIntakeUpdateWithWhereUniqueWithoutTenantInput = {
+    where: ProductIntakeWhereUniqueInput
+    data: XOR<ProductIntakeUpdateWithoutTenantInput, ProductIntakeUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type ProductIntakeUpdateManyWithWhereWithoutTenantInput = {
+    where: ProductIntakeScalarWhereInput
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type ProductIntakeScalarWhereInput = {
+    AND?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+    OR?: ProductIntakeScalarWhereInput[]
+    NOT?: ProductIntakeScalarWhereInput | ProductIntakeScalarWhereInput[]
+    id?: UuidFilter<"ProductIntake"> | string
+    tenantId?: UuidFilter<"ProductIntake"> | string
+    productId?: UuidFilter<"ProductIntake"> | string
+    idempotencyKey?: StringFilter<"ProductIntake"> | string
+    requestFingerprint?: StringFilter<"ProductIntake"> | string
+    action?: StringFilter<"ProductIntake"> | string
+    customTips?: StringNullableFilter<"ProductIntake"> | string | null
+    condition?: StringFilter<"ProductIntake"> | string
+    seriesId?: UuidNullableFilter<"ProductIntake"> | string | null
+    modelId?: UuidNullableFilter<"ProductIntake"> | string | null
+    officialGuidePrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    ownershipType?: StringNullableFilter<"ProductIntake"> | string | null
+    stockQuantity?: IntFilter<"ProductIntake"> | number
+    inventoryAgeWarningDays?: IntFilter<"ProductIntake"> | number
+    totalCostPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFilter<"ProductIntake"> | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: UuidFilter<"ProductIntake"> | string
+    appraiserName?: StringFilter<"ProductIntake"> | string
+    recyclingTypeId?: UuidNullableFilter<"ProductIntake"> | string | null
+    recyclingEmployeeId?: UuidNullableFilter<"ProductIntake"> | string | null
+    recyclingEmployeeName?: StringNullableFilter<"ProductIntake"> | string | null
+    recyclingNotes?: StringNullableFilter<"ProductIntake"> | string | null
+    recycledAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    audience?: StringNullableFilter<"ProductIntake"> | string | null
+    warrantyCard?: StringFilter<"ProductIntake"> | string
+    warrantyCardYear?: IntNullableFilter<"ProductIntake"> | number | null
+    uniqueCode?: StringNullableFilter<"ProductIntake"> | string | null
+    tags?: JsonFilter<"ProductIntake">
+    accessories?: JsonFilter<"ProductIntake">
+    internalNotes?: StringNullableFilter<"ProductIntake"> | string | null
+    stockedAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    createdAt?: DateTimeFilter<"ProductIntake"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductIntake"> | Date | string
+  }
+
+  export type ProductIntakeMediaUpsertWithWhereUniqueWithoutTenantInput = {
+    where: ProductIntakeMediaWhereUniqueInput
+    update: XOR<ProductIntakeMediaUpdateWithoutTenantInput, ProductIntakeMediaUncheckedUpdateWithoutTenantInput>
+    create: XOR<ProductIntakeMediaCreateWithoutTenantInput, ProductIntakeMediaUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ProductIntakeMediaUpdateWithWhereUniqueWithoutTenantInput = {
+    where: ProductIntakeMediaWhereUniqueInput
+    data: XOR<ProductIntakeMediaUpdateWithoutTenantInput, ProductIntakeMediaUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type ProductIntakeMediaUpdateManyWithWhereWithoutTenantInput = {
+    where: ProductIntakeMediaScalarWhereInput
+    data: XOR<ProductIntakeMediaUpdateManyMutationInput, ProductIntakeMediaUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type ProductIntakeMediaScalarWhereInput = {
+    AND?: ProductIntakeMediaScalarWhereInput | ProductIntakeMediaScalarWhereInput[]
+    OR?: ProductIntakeMediaScalarWhereInput[]
+    NOT?: ProductIntakeMediaScalarWhereInput | ProductIntakeMediaScalarWhereInput[]
+    id?: UuidFilter<"ProductIntakeMedia"> | string
+    tenantId?: UuidFilter<"ProductIntakeMedia"> | string
+    intakeId?: UuidFilter<"ProductIntakeMedia"> | string
+    mediaAssetId?: UuidFilter<"ProductIntakeMedia"> | string
+    group?: StringFilter<"ProductIntakeMedia"> | string
+    visibility?: StringFilter<"ProductIntakeMedia"> | string
+    sortOrder?: IntFilter<"ProductIntakeMedia"> | number
+    durationSeconds?: IntNullableFilter<"ProductIntakeMedia"> | number | null
+    createdAt?: DateTimeFilter<"ProductIntakeMedia"> | Date | string
+  }
+
   export type TenantCreateWithoutProviderCallbackRoutesInput = {
     id?: string
     name: string
@@ -61759,6 +74151,12 @@ export namespace Prisma {
     roles?: RoleCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutProviderCallbackRoutesInput = {
@@ -61784,6 +74182,12 @@ export namespace Prisma {
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutProviderCallbackRoutesInput = {
@@ -61825,6 +74229,12 @@ export namespace Prisma {
     roles?: RoleUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutProviderCallbackRoutesInput = {
@@ -61850,6 +74260,12 @@ export namespace Prisma {
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutCustomersInput = {
@@ -61875,6 +74291,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutCustomersInput = {
@@ -61900,6 +74322,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutCustomersInput = {
@@ -61967,6 +74395,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutCustomersInput = {
@@ -61992,6 +74426,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type CustomerRefreshSessionUpsertWithWhereUniqueWithoutCustomerInput = {
@@ -62109,6 +74549,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutAdminUsersInput = {
@@ -62134,6 +74580,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutAdminUsersInput = {
@@ -62187,6 +74639,174 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProductIntakeCreateWithoutAppraiserInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    product: ProductCreateNestedOneWithoutIntakeInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutAppraiserInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutAppraiserInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutAppraiserInput, ProductIntakeUncheckedCreateWithoutAppraiserInput>
+  }
+
+  export type ProductIntakeCreateManyAppraiserInputEnvelope = {
+    data: ProductIntakeCreateManyAppraiserInput | ProductIntakeCreateManyAppraiserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductIntakeCreateWithoutRecyclingEmployeeInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    product: ProductCreateNestedOneWithoutIntakeInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutRecyclingEmployeeInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput>
+  }
+
+  export type ProductIntakeCreateManyRecyclingEmployeeInputEnvelope = {
+    data: ProductIntakeCreateManyRecyclingEmployeeInput | ProductIntakeCreateManyRecyclingEmployeeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TenantUpsertWithoutAdminUsersInput = {
     update: XOR<TenantUpdateWithoutAdminUsersInput, TenantUncheckedUpdateWithoutAdminUsersInput>
     create: XOR<TenantCreateWithoutAdminUsersInput, TenantUncheckedCreateWithoutAdminUsersInput>
@@ -62221,6 +74841,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutAdminUsersInput = {
@@ -62246,6 +74872,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
@@ -62301,6 +74933,38 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"RefreshSession"> | Date | string
   }
 
+  export type ProductIntakeUpsertWithWhereUniqueWithoutAppraiserInput = {
+    where: ProductIntakeWhereUniqueInput
+    update: XOR<ProductIntakeUpdateWithoutAppraiserInput, ProductIntakeUncheckedUpdateWithoutAppraiserInput>
+    create: XOR<ProductIntakeCreateWithoutAppraiserInput, ProductIntakeUncheckedCreateWithoutAppraiserInput>
+  }
+
+  export type ProductIntakeUpdateWithWhereUniqueWithoutAppraiserInput = {
+    where: ProductIntakeWhereUniqueInput
+    data: XOR<ProductIntakeUpdateWithoutAppraiserInput, ProductIntakeUncheckedUpdateWithoutAppraiserInput>
+  }
+
+  export type ProductIntakeUpdateManyWithWhereWithoutAppraiserInput = {
+    where: ProductIntakeScalarWhereInput
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyWithoutAppraiserInput>
+  }
+
+  export type ProductIntakeUpsertWithWhereUniqueWithoutRecyclingEmployeeInput = {
+    where: ProductIntakeWhereUniqueInput
+    update: XOR<ProductIntakeUpdateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedUpdateWithoutRecyclingEmployeeInput>
+    create: XOR<ProductIntakeCreateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedCreateWithoutRecyclingEmployeeInput>
+  }
+
+  export type ProductIntakeUpdateWithWhereUniqueWithoutRecyclingEmployeeInput = {
+    where: ProductIntakeWhereUniqueInput
+    data: XOR<ProductIntakeUpdateWithoutRecyclingEmployeeInput, ProductIntakeUncheckedUpdateWithoutRecyclingEmployeeInput>
+  }
+
+  export type ProductIntakeUpdateManyWithWhereWithoutRecyclingEmployeeInput = {
+    where: ProductIntakeScalarWhereInput
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeInput>
+  }
+
   export type AdminUserCreateWithoutSessionsInput = {
     id?: string
     email: string
@@ -62311,6 +74975,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutAdminUsersInput
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserUncheckedCreateWithoutSessionsInput = {
@@ -62323,6 +74989,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserCreateOrConnectWithoutSessionsInput = {
@@ -62351,6 +75019,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutAdminUsersNestedInput
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type AdminUserUncheckedUpdateWithoutSessionsInput = {
@@ -62363,6 +75033,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUncheckedUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type TenantCreateWithoutRolesInput = {
@@ -62388,6 +75060,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutRolesInput = {
@@ -62413,6 +75091,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutRolesInput = {
@@ -62490,6 +75174,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutRolesInput = {
@@ -62515,6 +75205,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type RolePermissionUpsertWithWhereUniqueWithoutRoleInput = {
@@ -62701,6 +75397,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutAdminUsersInput
     sessions?: RefreshSessionCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserUncheckedCreateWithoutUserRolesInput = {
@@ -62713,6 +75411,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutAppraiserInput
+    recycledIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutRecyclingEmployeeInput
   }
 
   export type AdminUserCreateOrConnectWithoutUserRolesInput = {
@@ -62766,6 +75466,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutAdminUsersNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type AdminUserUncheckedUpdateWithoutUserRolesInput = {
@@ -62778,6 +75480,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUncheckedUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type RoleUpsertWithoutUserRolesInput = {
@@ -62834,6 +75538,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPlanInput = {
@@ -62859,6 +75569,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPlanInput = {
@@ -62990,6 +75706,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutSubscriptionsInput = {
@@ -63015,6 +75737,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutSubscriptionsInput = {
@@ -63084,6 +75812,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutCurrentSubscriptionInput = {
@@ -63109,6 +75843,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutCurrentSubscriptionInput = {
@@ -63194,6 +75934,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutSubscriptionsInput = {
@@ -63219,6 +75965,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type PlanUpsertWithoutSubscriptionsInput = {
@@ -63300,6 +76052,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutCurrentSubscriptionInput = {
@@ -63325,6 +76083,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type InvoiceUpsertWithWhereUniqueWithoutSubscriptionInput = {
@@ -63366,6 +76130,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutUsageMetricsInput = {
@@ -63391,6 +76161,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutUsageMetricsInput = {
@@ -63432,6 +76208,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutUsageMetricsInput = {
@@ -63457,6 +76239,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutInvoicesInput = {
@@ -63482,6 +76270,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutInvoicesInput = {
@@ -63507,6 +76301,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutInvoicesInput = {
@@ -63587,6 +76387,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutInvoicesInput = {
@@ -63612,6 +76418,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type SubscriptionUpsertWithoutInvoicesInput = {
@@ -63682,6 +76494,12 @@ export namespace Prisma {
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutMediaUploadSessionsInput = {
@@ -63707,6 +76525,12 @@ export namespace Prisma {
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutMediaUploadSessionsInput = {
@@ -63729,6 +76553,7 @@ export namespace Prisma {
     purgedAt?: Date | string | null
     tenant: TenantCreateNestedOneWithoutMediaAssetsInput
     productImage?: ProductImageCreateNestedOneWithoutMediaAssetInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetUncheckedCreateWithoutUploadSessionInput = {
@@ -63746,6 +76571,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     purgedAt?: Date | string | null
     productImage?: ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetCreateOrConnectWithoutUploadSessionInput = {
@@ -63787,6 +76613,12 @@ export namespace Prisma {
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutMediaUploadSessionsInput = {
@@ -63812,6 +76644,12 @@ export namespace Prisma {
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type MediaAssetUpsertWithoutUploadSessionInput = {
@@ -63840,6 +76678,7 @@ export namespace Prisma {
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenant?: TenantUpdateOneRequiredWithoutMediaAssetsNestedInput
     productImage?: ProductImageUpdateOneWithoutMediaAssetNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type MediaAssetUncheckedUpdateWithoutUploadSessionInput = {
@@ -63857,6 +76696,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productImage?: ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type TenantCreateWithoutMediaAssetsInput = {
@@ -63882,6 +76722,12 @@ export namespace Prisma {
     roles?: RoleCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutMediaAssetsInput = {
@@ -63907,6 +76753,12 @@ export namespace Prisma {
     roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
     mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutMediaAssetsInput = {
@@ -63986,6 +76838,33 @@ export namespace Prisma {
     create: XOR<ProductImageCreateWithoutMediaAssetInput, ProductImageUncheckedCreateWithoutMediaAssetInput>
   }
 
+  export type ProductIntakeMediaCreateWithoutMediaAssetInput = {
+    id?: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakeMediaInput
+    intake: ProductIntakeCreateNestedOneWithoutMediaInput
+  }
+
+  export type ProductIntakeMediaUncheckedCreateWithoutMediaAssetInput = {
+    id?: string
+    tenantId: string
+    intakeId: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ProductIntakeMediaCreateOrConnectWithoutMediaAssetInput = {
+    where: ProductIntakeMediaWhereUniqueInput
+    create: XOR<ProductIntakeMediaCreateWithoutMediaAssetInput, ProductIntakeMediaUncheckedCreateWithoutMediaAssetInput>
+  }
+
   export type TenantUpsertWithoutMediaAssetsInput = {
     update: XOR<TenantUpdateWithoutMediaAssetsInput, TenantUncheckedUpdateWithoutMediaAssetsInput>
     create: XOR<TenantCreateWithoutMediaAssetsInput, TenantUncheckedCreateWithoutMediaAssetsInput>
@@ -64020,6 +76899,12 @@ export namespace Prisma {
     roles?: RoleUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutMediaAssetsInput = {
@@ -64045,6 +76930,12 @@ export namespace Prisma {
     roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type MediaUploadSessionUpsertWithoutAssetInput = {
@@ -64131,6 +77022,39 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProductIntakeMediaUpsertWithoutMediaAssetInput = {
+    update: XOR<ProductIntakeMediaUpdateWithoutMediaAssetInput, ProductIntakeMediaUncheckedUpdateWithoutMediaAssetInput>
+    create: XOR<ProductIntakeMediaCreateWithoutMediaAssetInput, ProductIntakeMediaUncheckedCreateWithoutMediaAssetInput>
+    where?: ProductIntakeMediaWhereInput
+  }
+
+  export type ProductIntakeMediaUpdateToOneWithWhereWithoutMediaAssetInput = {
+    where?: ProductIntakeMediaWhereInput
+    data: XOR<ProductIntakeMediaUpdateWithoutMediaAssetInput, ProductIntakeMediaUncheckedUpdateWithoutMediaAssetInput>
+  }
+
+  export type ProductIntakeMediaUpdateWithoutMediaAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakeMediaNestedInput
+    intake?: ProductIntakeUpdateOneRequiredWithoutMediaNestedInput
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateWithoutMediaAssetInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CategoryCreateWithoutChildrenInput = {
     id?: string
     tenantId: string
@@ -64143,6 +77067,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     parent?: CategoryCreateNestedOneWithoutChildrenInput
     products?: ProductCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateWithoutChildrenInput = {
@@ -64157,6 +77083,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryCreateOrConnectWithoutChildrenInput = {
@@ -64176,6 +77104,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     children?: CategoryCreateNestedManyWithoutParentInput
     products?: ProductCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateWithoutParentInput = {
@@ -64190,6 +77120,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     children?: CategoryUncheckedCreateNestedManyWithoutParentInput
     products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryCreateOrConnectWithoutParentInput = {
@@ -64221,6 +77153,7 @@ export namespace Prisma {
     brand?: BrandCreateNestedOneWithoutProductsInput
     variants?: ProductVariantCreateNestedManyWithoutProductInput
     images?: ProductImageCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -64242,6 +77175,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
     images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -64251,6 +77185,70 @@ export namespace Prisma {
 
   export type ProductCreateManyCategoryInputEnvelope = {
     data: ProductCreateManyCategoryInput | ProductCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandModelCreateWithoutCategoryInput = {
+    id?: string
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandModelsInput
+    brand: BrandCreateNestedOneWithoutModelsInput
+    series?: BrandSeriesCreateNestedOneWithoutModelsInput
+    intakes?: ProductIntakeCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    seriesId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelCreateOrConnectWithoutCategoryInput = {
+    where: BrandModelWhereUniqueInput
+    create: XOR<BrandModelCreateWithoutCategoryInput, BrandModelUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type BrandModelCreateManyCategoryInputEnvelope = {
+    data: BrandModelCreateManyCategoryInput | BrandModelCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandCategoryCreateWithoutCategoryInput = {
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandCategoriesInput
+    brand: BrandCreateNestedOneWithoutCategoriesInput
+  }
+
+  export type BrandCategoryUncheckedCreateWithoutCategoryInput = {
+    tenantId: string
+    brandId: string
+    createdAt?: Date | string
+  }
+
+  export type BrandCategoryCreateOrConnectWithoutCategoryInput = {
+    where: BrandCategoryWhereUniqueInput
+    create: XOR<BrandCategoryCreateWithoutCategoryInput, BrandCategoryUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type BrandCategoryCreateManyCategoryInputEnvelope = {
+    data: BrandCategoryCreateManyCategoryInput | BrandCategoryCreateManyCategoryInput[]
     skipDuplicates?: boolean
   }
 
@@ -64277,6 +77275,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: CategoryUpdateOneWithoutChildrenNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateWithoutChildrenInput = {
@@ -64291,6 +77291,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUpsertWithWhereUniqueWithoutParentInput = {
@@ -64364,6 +77366,38 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"Product"> | Date | string | null
   }
 
+  export type BrandModelUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: BrandModelWhereUniqueInput
+    update: XOR<BrandModelUpdateWithoutCategoryInput, BrandModelUncheckedUpdateWithoutCategoryInput>
+    create: XOR<BrandModelCreateWithoutCategoryInput, BrandModelUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type BrandModelUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: BrandModelWhereUniqueInput
+    data: XOR<BrandModelUpdateWithoutCategoryInput, BrandModelUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type BrandModelUpdateManyWithWhereWithoutCategoryInput = {
+    where: BrandModelScalarWhereInput
+    data: XOR<BrandModelUpdateManyMutationInput, BrandModelUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type BrandCategoryUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: BrandCategoryWhereUniqueInput
+    update: XOR<BrandCategoryUpdateWithoutCategoryInput, BrandCategoryUncheckedUpdateWithoutCategoryInput>
+    create: XOR<BrandCategoryCreateWithoutCategoryInput, BrandCategoryUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type BrandCategoryUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: BrandCategoryWhereUniqueInput
+    data: XOR<BrandCategoryUpdateWithoutCategoryInput, BrandCategoryUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type BrandCategoryUpdateManyWithWhereWithoutCategoryInput = {
+    where: BrandCategoryScalarWhereInput
+    data: XOR<BrandCategoryUpdateManyMutationInput, BrandCategoryUncheckedUpdateManyWithoutCategoryInput>
+  }
+
   export type ProductCreateWithoutBrandInput = {
     id?: string
     tenantId: string
@@ -64383,6 +77417,7 @@ export namespace Prisma {
     category?: CategoryCreateNestedOneWithoutProductsInput
     variants?: ProductVariantCreateNestedManyWithoutProductInput
     images?: ProductImageCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutBrandInput = {
@@ -64404,6 +77439,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
     images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutBrandInput = {
@@ -64413,6 +77449,106 @@ export namespace Prisma {
 
   export type ProductCreateManyBrandInputEnvelope = {
     data: ProductCreateManyBrandInput | ProductCreateManyBrandInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandSeriesCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandSeriesInput
+    models?: BrandModelCreateNestedManyWithoutSeriesInput
+    intakes?: ProductIntakeCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesUncheckedCreateWithoutBrandInput = {
+    id?: string
+    tenantId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    models?: BrandModelUncheckedCreateNestedManyWithoutSeriesInput
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesCreateOrConnectWithoutBrandInput = {
+    where: BrandSeriesWhereUniqueInput
+    create: XOR<BrandSeriesCreateWithoutBrandInput, BrandSeriesUncheckedCreateWithoutBrandInput>
+  }
+
+  export type BrandSeriesCreateManyBrandInputEnvelope = {
+    data: BrandSeriesCreateManyBrandInput | BrandSeriesCreateManyBrandInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandModelCreateWithoutBrandInput = {
+    id?: string
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandModelsInput
+    series?: BrandSeriesCreateNestedOneWithoutModelsInput
+    category?: CategoryCreateNestedOneWithoutBrandModelsInput
+    intakes?: ProductIntakeCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelUncheckedCreateWithoutBrandInput = {
+    id?: string
+    tenantId: string
+    seriesId?: string | null
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelCreateOrConnectWithoutBrandInput = {
+    where: BrandModelWhereUniqueInput
+    create: XOR<BrandModelCreateWithoutBrandInput, BrandModelUncheckedCreateWithoutBrandInput>
+  }
+
+  export type BrandModelCreateManyBrandInputEnvelope = {
+    data: BrandModelCreateManyBrandInput | BrandModelCreateManyBrandInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BrandCategoryCreateWithoutBrandInput = {
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandCategoriesInput
+    category: CategoryCreateNestedOneWithoutBrandsInput
+  }
+
+  export type BrandCategoryUncheckedCreateWithoutBrandInput = {
+    tenantId: string
+    categoryId: string
+    createdAt?: Date | string
+  }
+
+  export type BrandCategoryCreateOrConnectWithoutBrandInput = {
+    where: BrandCategoryWhereUniqueInput
+    create: XOR<BrandCategoryCreateWithoutBrandInput, BrandCategoryUncheckedCreateWithoutBrandInput>
+  }
+
+  export type BrandCategoryCreateManyBrandInputEnvelope = {
+    data: BrandCategoryCreateManyBrandInput | BrandCategoryCreateManyBrandInput[]
     skipDuplicates?: boolean
   }
 
@@ -64432,6 +77568,1452 @@ export namespace Prisma {
     data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutBrandInput>
   }
 
+  export type BrandSeriesUpsertWithWhereUniqueWithoutBrandInput = {
+    where: BrandSeriesWhereUniqueInput
+    update: XOR<BrandSeriesUpdateWithoutBrandInput, BrandSeriesUncheckedUpdateWithoutBrandInput>
+    create: XOR<BrandSeriesCreateWithoutBrandInput, BrandSeriesUncheckedCreateWithoutBrandInput>
+  }
+
+  export type BrandSeriesUpdateWithWhereUniqueWithoutBrandInput = {
+    where: BrandSeriesWhereUniqueInput
+    data: XOR<BrandSeriesUpdateWithoutBrandInput, BrandSeriesUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type BrandSeriesUpdateManyWithWhereWithoutBrandInput = {
+    where: BrandSeriesScalarWhereInput
+    data: XOR<BrandSeriesUpdateManyMutationInput, BrandSeriesUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type BrandModelUpsertWithWhereUniqueWithoutBrandInput = {
+    where: BrandModelWhereUniqueInput
+    update: XOR<BrandModelUpdateWithoutBrandInput, BrandModelUncheckedUpdateWithoutBrandInput>
+    create: XOR<BrandModelCreateWithoutBrandInput, BrandModelUncheckedCreateWithoutBrandInput>
+  }
+
+  export type BrandModelUpdateWithWhereUniqueWithoutBrandInput = {
+    where: BrandModelWhereUniqueInput
+    data: XOR<BrandModelUpdateWithoutBrandInput, BrandModelUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type BrandModelUpdateManyWithWhereWithoutBrandInput = {
+    where: BrandModelScalarWhereInput
+    data: XOR<BrandModelUpdateManyMutationInput, BrandModelUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type BrandCategoryUpsertWithWhereUniqueWithoutBrandInput = {
+    where: BrandCategoryWhereUniqueInput
+    update: XOR<BrandCategoryUpdateWithoutBrandInput, BrandCategoryUncheckedUpdateWithoutBrandInput>
+    create: XOR<BrandCategoryCreateWithoutBrandInput, BrandCategoryUncheckedCreateWithoutBrandInput>
+  }
+
+  export type BrandCategoryUpdateWithWhereUniqueWithoutBrandInput = {
+    where: BrandCategoryWhereUniqueInput
+    data: XOR<BrandCategoryUpdateWithoutBrandInput, BrandCategoryUncheckedUpdateWithoutBrandInput>
+  }
+
+  export type BrandCategoryUpdateManyWithWhereWithoutBrandInput = {
+    where: BrandCategoryScalarWhereInput
+    data: XOR<BrandCategoryUpdateManyMutationInput, BrandCategoryUncheckedUpdateManyWithoutBrandInput>
+  }
+
+  export type TenantCreateWithoutBrandCategoriesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutBrandCategoriesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutBrandCategoriesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutBrandCategoriesInput, TenantUncheckedCreateWithoutBrandCategoriesInput>
+  }
+
+  export type BrandCreateWithoutCategoriesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    englishName?: string | null
+    initial?: string
+    logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductCreateNestedManyWithoutBrandInput
+    series?: BrandSeriesCreateNestedManyWithoutBrandInput
+    models?: BrandModelCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutCategoriesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    englishName?: string | null
+    initial?: string
+    logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductUncheckedCreateNestedManyWithoutBrandInput
+    series?: BrandSeriesUncheckedCreateNestedManyWithoutBrandInput
+    models?: BrandModelUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutCategoriesInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutCategoriesInput, BrandUncheckedCreateWithoutCategoriesInput>
+  }
+
+  export type CategoryCreateWithoutBrandsInput = {
+    id?: string
+    tenantId: string
+    name: string
+    sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: CategoryCreateNestedOneWithoutChildrenInput
+    children?: CategoryCreateNestedManyWithoutParentInput
+    products?: ProductCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateWithoutBrandsInput = {
+    id?: string
+    tenantId: string
+    parentId?: string | null
+    name: string
+    sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: CategoryUncheckedCreateNestedManyWithoutParentInput
+    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryCreateOrConnectWithoutBrandsInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutBrandsInput, CategoryUncheckedCreateWithoutBrandsInput>
+  }
+
+  export type TenantUpsertWithoutBrandCategoriesInput = {
+    update: XOR<TenantUpdateWithoutBrandCategoriesInput, TenantUncheckedUpdateWithoutBrandCategoriesInput>
+    create: XOR<TenantCreateWithoutBrandCategoriesInput, TenantUncheckedCreateWithoutBrandCategoriesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutBrandCategoriesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutBrandCategoriesInput, TenantUncheckedUpdateWithoutBrandCategoriesInput>
+  }
+
+  export type TenantUpdateWithoutBrandCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutBrandCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type BrandUpsertWithoutCategoriesInput = {
+    update: XOR<BrandUpdateWithoutCategoriesInput, BrandUncheckedUpdateWithoutCategoriesInput>
+    create: XOR<BrandCreateWithoutCategoriesInput, BrandUncheckedCreateWithoutCategoriesInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutCategoriesInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutCategoriesInput, BrandUncheckedUpdateWithoutCategoriesInput>
+  }
+
+  export type BrandUpdateWithoutCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUpdateManyWithoutBrandNestedInput
+    series?: BrandSeriesUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutCategoriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
+    series?: BrandSeriesUncheckedUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type CategoryUpsertWithoutBrandsInput = {
+    update: XOR<CategoryUpdateWithoutBrandsInput, CategoryUncheckedUpdateWithoutBrandsInput>
+    create: XOR<CategoryCreateWithoutBrandsInput, CategoryUncheckedCreateWithoutBrandsInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutBrandsInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutBrandsInput, CategoryUncheckedUpdateWithoutBrandsInput>
+  }
+
+  export type CategoryUpdateWithoutBrandsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: CategoryUpdateOneWithoutChildrenNestedInput
+    children?: CategoryUpdateManyWithoutParentNestedInput
+    products?: ProductUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutBrandsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type TenantCreateWithoutBrandSeriesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutBrandSeriesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutBrandSeriesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutBrandSeriesInput, TenantUncheckedCreateWithoutBrandSeriesInput>
+  }
+
+  export type BrandCreateWithoutSeriesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    englishName?: string | null
+    initial?: string
+    logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductCreateNestedManyWithoutBrandInput
+    models?: BrandModelCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutSeriesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    englishName?: string | null
+    initial?: string
+    logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductUncheckedCreateNestedManyWithoutBrandInput
+    models?: BrandModelUncheckedCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutSeriesInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutSeriesInput, BrandUncheckedCreateWithoutSeriesInput>
+  }
+
+  export type BrandModelCreateWithoutSeriesInput = {
+    id?: string
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandModelsInput
+    brand: BrandCreateNestedOneWithoutModelsInput
+    category?: CategoryCreateNestedOneWithoutBrandModelsInput
+    intakes?: ProductIntakeCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelUncheckedCreateWithoutSeriesInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutModelInput
+  }
+
+  export type BrandModelCreateOrConnectWithoutSeriesInput = {
+    where: BrandModelWhereUniqueInput
+    create: XOR<BrandModelCreateWithoutSeriesInput, BrandModelUncheckedCreateWithoutSeriesInput>
+  }
+
+  export type BrandModelCreateManySeriesInputEnvelope = {
+    data: BrandModelCreateManySeriesInput | BrandModelCreateManySeriesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductIntakeCreateWithoutSeriesInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    product: ProductCreateNestedOneWithoutIntakeInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutSeriesInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutSeriesInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutSeriesInput, ProductIntakeUncheckedCreateWithoutSeriesInput>
+  }
+
+  export type ProductIntakeCreateManySeriesInputEnvelope = {
+    data: ProductIntakeCreateManySeriesInput | ProductIntakeCreateManySeriesInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutBrandSeriesInput = {
+    update: XOR<TenantUpdateWithoutBrandSeriesInput, TenantUncheckedUpdateWithoutBrandSeriesInput>
+    create: XOR<TenantCreateWithoutBrandSeriesInput, TenantUncheckedCreateWithoutBrandSeriesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutBrandSeriesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutBrandSeriesInput, TenantUncheckedUpdateWithoutBrandSeriesInput>
+  }
+
+  export type TenantUpdateWithoutBrandSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutBrandSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type BrandUpsertWithoutSeriesInput = {
+    update: XOR<BrandUpdateWithoutSeriesInput, BrandUncheckedUpdateWithoutSeriesInput>
+    create: XOR<BrandCreateWithoutSeriesInput, BrandUncheckedCreateWithoutSeriesInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutSeriesInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutSeriesInput, BrandUncheckedUpdateWithoutSeriesInput>
+  }
+
+  export type BrandUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUncheckedUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandModelUpsertWithWhereUniqueWithoutSeriesInput = {
+    where: BrandModelWhereUniqueInput
+    update: XOR<BrandModelUpdateWithoutSeriesInput, BrandModelUncheckedUpdateWithoutSeriesInput>
+    create: XOR<BrandModelCreateWithoutSeriesInput, BrandModelUncheckedCreateWithoutSeriesInput>
+  }
+
+  export type BrandModelUpdateWithWhereUniqueWithoutSeriesInput = {
+    where: BrandModelWhereUniqueInput
+    data: XOR<BrandModelUpdateWithoutSeriesInput, BrandModelUncheckedUpdateWithoutSeriesInput>
+  }
+
+  export type BrandModelUpdateManyWithWhereWithoutSeriesInput = {
+    where: BrandModelScalarWhereInput
+    data: XOR<BrandModelUpdateManyMutationInput, BrandModelUncheckedUpdateManyWithoutSeriesInput>
+  }
+
+  export type ProductIntakeUpsertWithWhereUniqueWithoutSeriesInput = {
+    where: ProductIntakeWhereUniqueInput
+    update: XOR<ProductIntakeUpdateWithoutSeriesInput, ProductIntakeUncheckedUpdateWithoutSeriesInput>
+    create: XOR<ProductIntakeCreateWithoutSeriesInput, ProductIntakeUncheckedCreateWithoutSeriesInput>
+  }
+
+  export type ProductIntakeUpdateWithWhereUniqueWithoutSeriesInput = {
+    where: ProductIntakeWhereUniqueInput
+    data: XOR<ProductIntakeUpdateWithoutSeriesInput, ProductIntakeUncheckedUpdateWithoutSeriesInput>
+  }
+
+  export type ProductIntakeUpdateManyWithWhereWithoutSeriesInput = {
+    where: ProductIntakeScalarWhereInput
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyWithoutSeriesInput>
+  }
+
+  export type TenantCreateWithoutBrandModelsInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutBrandModelsInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutBrandModelsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutBrandModelsInput, TenantUncheckedCreateWithoutBrandModelsInput>
+  }
+
+  export type BrandCreateWithoutModelsInput = {
+    id?: string
+    tenantId: string
+    name: string
+    englishName?: string | null
+    initial?: string
+    logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductCreateNestedManyWithoutBrandInput
+    series?: BrandSeriesCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandUncheckedCreateWithoutModelsInput = {
+    id?: string
+    tenantId: string
+    name: string
+    englishName?: string | null
+    initial?: string
+    logoUrl?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products?: ProductUncheckedCreateNestedManyWithoutBrandInput
+    series?: BrandSeriesUncheckedCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryUncheckedCreateNestedManyWithoutBrandInput
+  }
+
+  export type BrandCreateOrConnectWithoutModelsInput = {
+    where: BrandWhereUniqueInput
+    create: XOR<BrandCreateWithoutModelsInput, BrandUncheckedCreateWithoutModelsInput>
+  }
+
+  export type BrandSeriesCreateWithoutModelsInput = {
+    id?: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandSeriesInput
+    brand: BrandCreateNestedOneWithoutSeriesInput
+    intakes?: ProductIntakeCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesUncheckedCreateWithoutModelsInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    intakes?: ProductIntakeUncheckedCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesCreateOrConnectWithoutModelsInput = {
+    where: BrandSeriesWhereUniqueInput
+    create: XOR<BrandSeriesCreateWithoutModelsInput, BrandSeriesUncheckedCreateWithoutModelsInput>
+  }
+
+  export type CategoryCreateWithoutBrandModelsInput = {
+    id?: string
+    tenantId: string
+    name: string
+    sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parent?: CategoryCreateNestedOneWithoutChildrenInput
+    children?: CategoryCreateNestedManyWithoutParentInput
+    products?: ProductCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryUncheckedCreateWithoutBrandModelsInput = {
+    id?: string
+    tenantId: string
+    parentId?: string | null
+    name: string
+    sortOrder?: number
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    children?: CategoryUncheckedCreateNestedManyWithoutParentInput
+    products?: ProductUncheckedCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryUncheckedCreateNestedManyWithoutCategoryInput
+  }
+
+  export type CategoryCreateOrConnectWithoutBrandModelsInput = {
+    where: CategoryWhereUniqueInput
+    create: XOR<CategoryCreateWithoutBrandModelsInput, CategoryUncheckedCreateWithoutBrandModelsInput>
+  }
+
+  export type ProductIntakeCreateWithoutModelInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    product: ProductCreateNestedOneWithoutIntakeInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutModelInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutModelInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutModelInput, ProductIntakeUncheckedCreateWithoutModelInput>
+  }
+
+  export type ProductIntakeCreateManyModelInputEnvelope = {
+    data: ProductIntakeCreateManyModelInput | ProductIntakeCreateManyModelInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutBrandModelsInput = {
+    update: XOR<TenantUpdateWithoutBrandModelsInput, TenantUncheckedUpdateWithoutBrandModelsInput>
+    create: XOR<TenantCreateWithoutBrandModelsInput, TenantUncheckedCreateWithoutBrandModelsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutBrandModelsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutBrandModelsInput, TenantUncheckedUpdateWithoutBrandModelsInput>
+  }
+
+  export type TenantUpdateWithoutBrandModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutBrandModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type BrandUpsertWithoutModelsInput = {
+    update: XOR<BrandUpdateWithoutModelsInput, BrandUncheckedUpdateWithoutModelsInput>
+    create: XOR<BrandCreateWithoutModelsInput, BrandUncheckedCreateWithoutModelsInput>
+    where?: BrandWhereInput
+  }
+
+  export type BrandUpdateToOneWithWhereWithoutModelsInput = {
+    where?: BrandWhereInput
+    data: XOR<BrandUpdateWithoutModelsInput, BrandUncheckedUpdateWithoutModelsInput>
+  }
+
+  export type BrandUpdateWithoutModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUpdateManyWithoutBrandNestedInput
+    series?: BrandSeriesUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandUncheckedUpdateWithoutModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
+    logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUncheckedUpdateManyWithoutBrandNestedInput
+    series?: BrandSeriesUncheckedUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUncheckedUpdateManyWithoutBrandNestedInput
+  }
+
+  export type BrandSeriesUpsertWithoutModelsInput = {
+    update: XOR<BrandSeriesUpdateWithoutModelsInput, BrandSeriesUncheckedUpdateWithoutModelsInput>
+    create: XOR<BrandSeriesCreateWithoutModelsInput, BrandSeriesUncheckedCreateWithoutModelsInput>
+    where?: BrandSeriesWhereInput
+  }
+
+  export type BrandSeriesUpdateToOneWithWhereWithoutModelsInput = {
+    where?: BrandSeriesWhereInput
+    data: XOR<BrandSeriesUpdateWithoutModelsInput, BrandSeriesUncheckedUpdateWithoutModelsInput>
+  }
+
+  export type BrandSeriesUpdateWithoutModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandSeriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutSeriesNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesUncheckedUpdateWithoutModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type CategoryUpsertWithoutBrandModelsInput = {
+    update: XOR<CategoryUpdateWithoutBrandModelsInput, CategoryUncheckedUpdateWithoutBrandModelsInput>
+    create: XOR<CategoryCreateWithoutBrandModelsInput, CategoryUncheckedCreateWithoutBrandModelsInput>
+    where?: CategoryWhereInput
+  }
+
+  export type CategoryUpdateToOneWithWhereWithoutBrandModelsInput = {
+    where?: CategoryWhereInput
+    data: XOR<CategoryUpdateWithoutBrandModelsInput, CategoryUncheckedUpdateWithoutBrandModelsInput>
+  }
+
+  export type CategoryUpdateWithoutBrandModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parent?: CategoryUpdateOneWithoutChildrenNestedInput
+    children?: CategoryUpdateManyWithoutParentNestedInput
+    products?: ProductUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type CategoryUncheckedUpdateWithoutBrandModelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUncheckedUpdateManyWithoutCategoryNestedInput
+  }
+
+  export type ProductIntakeUpsertWithWhereUniqueWithoutModelInput = {
+    where: ProductIntakeWhereUniqueInput
+    update: XOR<ProductIntakeUpdateWithoutModelInput, ProductIntakeUncheckedUpdateWithoutModelInput>
+    create: XOR<ProductIntakeCreateWithoutModelInput, ProductIntakeUncheckedCreateWithoutModelInput>
+  }
+
+  export type ProductIntakeUpdateWithWhereUniqueWithoutModelInput = {
+    where: ProductIntakeWhereUniqueInput
+    data: XOR<ProductIntakeUpdateWithoutModelInput, ProductIntakeUncheckedUpdateWithoutModelInput>
+  }
+
+  export type ProductIntakeUpdateManyWithWhereWithoutModelInput = {
+    where: ProductIntakeScalarWhereInput
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyWithoutModelInput>
+  }
+
+  export type TenantCreateWithoutRecyclingTypesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutRecyclingTypesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutRecyclingTypesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutRecyclingTypesInput, TenantUncheckedCreateWithoutRecyclingTypesInput>
+  }
+
+  export type ProductIntakeCreateWithoutRecyclingTypeInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    product: ProductCreateNestedOneWithoutIntakeInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutRecyclingTypeInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutRecyclingTypeInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutRecyclingTypeInput, ProductIntakeUncheckedCreateWithoutRecyclingTypeInput>
+  }
+
+  export type ProductIntakeCreateManyRecyclingTypeInputEnvelope = {
+    data: ProductIntakeCreateManyRecyclingTypeInput | ProductIntakeCreateManyRecyclingTypeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutRecyclingTypesInput = {
+    update: XOR<TenantUpdateWithoutRecyclingTypesInput, TenantUncheckedUpdateWithoutRecyclingTypesInput>
+    create: XOR<TenantCreateWithoutRecyclingTypesInput, TenantUncheckedCreateWithoutRecyclingTypesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutRecyclingTypesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutRecyclingTypesInput, TenantUncheckedUpdateWithoutRecyclingTypesInput>
+  }
+
+  export type TenantUpdateWithoutRecyclingTypesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutRecyclingTypesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ProductIntakeUpsertWithWhereUniqueWithoutRecyclingTypeInput = {
+    where: ProductIntakeWhereUniqueInput
+    update: XOR<ProductIntakeUpdateWithoutRecyclingTypeInput, ProductIntakeUncheckedUpdateWithoutRecyclingTypeInput>
+    create: XOR<ProductIntakeCreateWithoutRecyclingTypeInput, ProductIntakeUncheckedCreateWithoutRecyclingTypeInput>
+  }
+
+  export type ProductIntakeUpdateWithWhereUniqueWithoutRecyclingTypeInput = {
+    where: ProductIntakeWhereUniqueInput
+    data: XOR<ProductIntakeUpdateWithoutRecyclingTypeInput, ProductIntakeUncheckedUpdateWithoutRecyclingTypeInput>
+  }
+
+  export type ProductIntakeUpdateManyWithWhereWithoutRecyclingTypeInput = {
+    where: ProductIntakeScalarWhereInput
+    data: XOR<ProductIntakeUpdateManyMutationInput, ProductIntakeUncheckedUpdateManyWithoutRecyclingTypeInput>
+  }
+
   export type CategoryCreateWithoutProductsInput = {
     id?: string
     tenantId: string
@@ -64444,6 +79026,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     parent?: CategoryCreateNestedOneWithoutChildrenInput
     children?: CategoryCreateNestedManyWithoutParentInput
+    brandModels?: BrandModelCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateWithoutProductsInput = {
@@ -64458,6 +79042,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     children?: CategoryUncheckedCreateNestedManyWithoutParentInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutCategoryInput
+    brands?: BrandCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryCreateOrConnectWithoutProductsInput = {
@@ -64469,24 +79055,34 @@ export namespace Prisma {
     id?: string
     tenantId: string
     name: string
+    englishName?: string | null
+    initial?: string
     logoUrl?: string | null
     status?: string
     version?: number
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    series?: BrandSeriesCreateNestedManyWithoutBrandInput
+    models?: BrandModelCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryCreateNestedManyWithoutBrandInput
   }
 
   export type BrandUncheckedCreateWithoutProductsInput = {
     id?: string
     tenantId: string
     name: string
+    englishName?: string | null
+    initial?: string
     logoUrl?: string | null
     status?: string
     version?: number
     deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    series?: BrandSeriesUncheckedCreateNestedManyWithoutBrandInput
+    models?: BrandModelUncheckedCreateNestedManyWithoutBrandInput
+    categories?: BrandCategoryUncheckedCreateNestedManyWithoutBrandInput
   }
 
   export type BrandCreateOrConnectWithoutProductsInput = {
@@ -64578,6 +79174,85 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProductIntakeCreateWithoutProductInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+    media?: ProductIntakeMediaCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutProductInput = {
+    id?: string
+    tenantId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    media?: ProductIntakeMediaUncheckedCreateNestedManyWithoutIntakeInput
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutProductInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutProductInput, ProductIntakeUncheckedCreateWithoutProductInput>
+  }
+
   export type CategoryUpsertWithoutProductsInput = {
     update: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
     create: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
@@ -64601,6 +79276,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parent?: CategoryUpdateOneWithoutChildrenNestedInput
     children?: CategoryUpdateManyWithoutParentNestedInput
+    brandModels?: BrandModelUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateWithoutProductsInput = {
@@ -64615,6 +79292,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type BrandUpsertWithoutProductsInput = {
@@ -64632,24 +79311,34 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     version?: IntFieldUpdateOperationsInput | number
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    series?: BrandSeriesUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUpdateManyWithoutBrandNestedInput
   }
 
   export type BrandUncheckedUpdateWithoutProductsInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    englishName?: NullableStringFieldUpdateOperationsInput | string | null
+    initial?: StringFieldUpdateOperationsInput | string
     logoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     version?: IntFieldUpdateOperationsInput | number
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    series?: BrandSeriesUncheckedUpdateManyWithoutBrandNestedInput
+    models?: BrandModelUncheckedUpdateManyWithoutBrandNestedInput
+    categories?: BrandCategoryUncheckedUpdateManyWithoutBrandNestedInput
   }
 
   export type ProductVariantUpsertWithWhereUniqueWithoutProductInput = {
@@ -64722,6 +79411,1123 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProductImage"> | Date | string
   }
 
+  export type ProductIntakeUpsertWithoutProductInput = {
+    update: XOR<ProductIntakeUpdateWithoutProductInput, ProductIntakeUncheckedUpdateWithoutProductInput>
+    create: XOR<ProductIntakeCreateWithoutProductInput, ProductIntakeUncheckedCreateWithoutProductInput>
+    where?: ProductIntakeWhereInput
+  }
+
+  export type ProductIntakeUpdateToOneWithWhereWithoutProductInput = {
+    where?: ProductIntakeWhereInput
+    data: XOR<ProductIntakeUpdateWithoutProductInput, ProductIntakeUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ProductIntakeUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type TenantCreateWithoutProductIntakesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutProductIntakesInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutProductIntakesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutProductIntakesInput, TenantUncheckedCreateWithoutProductIntakesInput>
+  }
+
+  export type ProductCreateWithoutIntakeInput = {
+    id?: string
+    tenantId: string
+    code: string
+    name: string
+    description?: string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: string | null
+    status?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    updatedBy?: string | null
+    version?: number
+    deletedAt?: Date | string | null
+    category?: CategoryCreateNestedOneWithoutProductsInput
+    brand?: BrandCreateNestedOneWithoutProductsInput
+    variants?: ProductVariantCreateNestedManyWithoutProductInput
+    images?: ProductImageCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutIntakeInput = {
+    id?: string
+    tenantId: string
+    categoryId?: string | null
+    brandId?: string | null
+    code: string
+    name: string
+    description?: string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: string | null
+    status?: string
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy?: string | null
+    updatedBy?: string | null
+    version?: number
+    deletedAt?: Date | string | null
+    variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutIntakeInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutIntakeInput, ProductUncheckedCreateWithoutIntakeInput>
+  }
+
+  export type BrandSeriesCreateWithoutIntakesInput = {
+    id?: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandSeriesInput
+    brand: BrandCreateNestedOneWithoutSeriesInput
+    models?: BrandModelCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesUncheckedCreateWithoutIntakesInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    models?: BrandModelUncheckedCreateNestedManyWithoutSeriesInput
+  }
+
+  export type BrandSeriesCreateOrConnectWithoutIntakesInput = {
+    where: BrandSeriesWhereUniqueInput
+    create: XOR<BrandSeriesCreateWithoutIntakesInput, BrandSeriesUncheckedCreateWithoutIntakesInput>
+  }
+
+  export type BrandModelCreateWithoutIntakesInput = {
+    id?: string
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutBrandModelsInput
+    brand: BrandCreateNestedOneWithoutModelsInput
+    series?: BrandSeriesCreateNestedOneWithoutModelsInput
+    category?: CategoryCreateNestedOneWithoutBrandModelsInput
+  }
+
+  export type BrandModelUncheckedCreateWithoutIntakesInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    seriesId?: string | null
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandModelCreateOrConnectWithoutIntakesInput = {
+    where: BrandModelWhereUniqueInput
+    create: XOR<BrandModelCreateWithoutIntakesInput, BrandModelUncheckedCreateWithoutIntakesInput>
+  }
+
+  export type AdminUserCreateWithoutAppraisedIntakesInput = {
+    id?: string
+    email: string
+    displayName: string
+    status?: string
+    passwordHash: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutAdminUsersInput
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    sessions?: RefreshSessionCreateNestedManyWithoutUserInput
+    recycledIntakes?: ProductIntakeCreateNestedManyWithoutRecyclingEmployeeInput
+  }
+
+  export type AdminUserUncheckedCreateWithoutAppraisedIntakesInput = {
+    id?: string
+    tenantId: string
+    email: string
+    displayName: string
+    status?: string
+    passwordHash: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+    recycledIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutRecyclingEmployeeInput
+  }
+
+  export type AdminUserCreateOrConnectWithoutAppraisedIntakesInput = {
+    where: AdminUserWhereUniqueInput
+    create: XOR<AdminUserCreateWithoutAppraisedIntakesInput, AdminUserUncheckedCreateWithoutAppraisedIntakesInput>
+  }
+
+  export type AdminUserCreateWithoutRecycledIntakesInput = {
+    id?: string
+    email: string
+    displayName: string
+    status?: string
+    passwordHash: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutAdminUsersInput
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    sessions?: RefreshSessionCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeCreateNestedManyWithoutAppraiserInput
+  }
+
+  export type AdminUserUncheckedCreateWithoutRecycledIntakesInput = {
+    id?: string
+    tenantId: string
+    email: string
+    displayName: string
+    status?: string
+    passwordHash: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    sessions?: RefreshSessionUncheckedCreateNestedManyWithoutUserInput
+    appraisedIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutAppraiserInput
+  }
+
+  export type AdminUserCreateOrConnectWithoutRecycledIntakesInput = {
+    where: AdminUserWhereUniqueInput
+    create: XOR<AdminUserCreateWithoutRecycledIntakesInput, AdminUserUncheckedCreateWithoutRecycledIntakesInput>
+  }
+
+  export type RecyclingTypeCreateWithoutIntakesInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutRecyclingTypesInput
+  }
+
+  export type RecyclingTypeUncheckedCreateWithoutIntakesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type RecyclingTypeCreateOrConnectWithoutIntakesInput = {
+    where: RecyclingTypeWhereUniqueInput
+    create: XOR<RecyclingTypeCreateWithoutIntakesInput, RecyclingTypeUncheckedCreateWithoutIntakesInput>
+  }
+
+  export type ProductIntakeMediaCreateWithoutIntakeInput = {
+    id?: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakeMediaInput
+    mediaAsset: MediaAssetCreateNestedOneWithoutProductIntakeMediaInput
+  }
+
+  export type ProductIntakeMediaUncheckedCreateWithoutIntakeInput = {
+    id?: string
+    tenantId: string
+    mediaAssetId: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ProductIntakeMediaCreateOrConnectWithoutIntakeInput = {
+    where: ProductIntakeMediaWhereUniqueInput
+    create: XOR<ProductIntakeMediaCreateWithoutIntakeInput, ProductIntakeMediaUncheckedCreateWithoutIntakeInput>
+  }
+
+  export type ProductIntakeMediaCreateManyIntakeInputEnvelope = {
+    data: ProductIntakeMediaCreateManyIntakeInput | ProductIntakeMediaCreateManyIntakeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutProductIntakesInput = {
+    update: XOR<TenantUpdateWithoutProductIntakesInput, TenantUncheckedUpdateWithoutProductIntakesInput>
+    create: XOR<TenantCreateWithoutProductIntakesInput, TenantUncheckedCreateWithoutProductIntakesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutProductIntakesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutProductIntakesInput, TenantUncheckedUpdateWithoutProductIntakesInput>
+  }
+
+  export type TenantUpdateWithoutProductIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutProductIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ProductUpsertWithoutIntakeInput = {
+    update: XOR<ProductUpdateWithoutIntakeInput, ProductUncheckedUpdateWithoutIntakeInput>
+    create: XOR<ProductCreateWithoutIntakeInput, ProductUncheckedCreateWithoutIntakeInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutIntakeInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutIntakeInput, ProductUncheckedUpdateWithoutIntakeInput>
+  }
+
+  export type ProductUpdateWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    category?: CategoryUpdateOneWithoutProductsNestedInput
+    brand?: BrandUpdateOneWithoutProductsNestedInput
+    variants?: ProductVariantUpdateManyWithoutProductNestedInput
+    images?: ProductImageUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    brandId?: NullableStringFieldUpdateOperationsInput | string | null
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    attributes?: JsonNullValueInput | InputJsonValue
+    seoSlug?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type BrandSeriesUpsertWithoutIntakesInput = {
+    update: XOR<BrandSeriesUpdateWithoutIntakesInput, BrandSeriesUncheckedUpdateWithoutIntakesInput>
+    create: XOR<BrandSeriesCreateWithoutIntakesInput, BrandSeriesUncheckedCreateWithoutIntakesInput>
+    where?: BrandSeriesWhereInput
+  }
+
+  export type BrandSeriesUpdateToOneWithWhereWithoutIntakesInput = {
+    where?: BrandSeriesWhereInput
+    data: XOR<BrandSeriesUpdateWithoutIntakesInput, BrandSeriesUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type BrandSeriesUpdateWithoutIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandSeriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutSeriesNestedInput
+    models?: BrandModelUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesUncheckedUpdateWithoutIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    models?: BrandModelUncheckedUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandModelUpsertWithoutIntakesInput = {
+    update: XOR<BrandModelUpdateWithoutIntakesInput, BrandModelUncheckedUpdateWithoutIntakesInput>
+    create: XOR<BrandModelCreateWithoutIntakesInput, BrandModelUncheckedCreateWithoutIntakesInput>
+    where?: BrandModelWhereInput
+  }
+
+  export type BrandModelUpdateToOneWithWhereWithoutIntakesInput = {
+    where?: BrandModelWhereInput
+    data: XOR<BrandModelUpdateWithoutIntakesInput, BrandModelUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type BrandModelUpdateWithoutIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandModelsNestedInput
+    brand?: BrandUpdateOneRequiredWithoutModelsNestedInput
+    series?: BrandSeriesUpdateOneWithoutModelsNestedInput
+    category?: CategoryUpdateOneWithoutBrandModelsNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateWithoutIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminUserUpsertWithoutAppraisedIntakesInput = {
+    update: XOR<AdminUserUpdateWithoutAppraisedIntakesInput, AdminUserUncheckedUpdateWithoutAppraisedIntakesInput>
+    create: XOR<AdminUserCreateWithoutAppraisedIntakesInput, AdminUserUncheckedCreateWithoutAppraisedIntakesInput>
+    where?: AdminUserWhereInput
+  }
+
+  export type AdminUserUpdateToOneWithWhereWithoutAppraisedIntakesInput = {
+    where?: AdminUserWhereInput
+    data: XOR<AdminUserUpdateWithoutAppraisedIntakesInput, AdminUserUncheckedUpdateWithoutAppraisedIntakesInput>
+  }
+
+  export type AdminUserUpdateWithoutAppraisedIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutAdminUsersNestedInput
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
+    recycledIntakes?: ProductIntakeUpdateManyWithoutRecyclingEmployeeNestedInput
+  }
+
+  export type AdminUserUncheckedUpdateWithoutAppraisedIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+    recycledIntakes?: ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeNestedInput
+  }
+
+  export type AdminUserUpsertWithoutRecycledIntakesInput = {
+    update: XOR<AdminUserUpdateWithoutRecycledIntakesInput, AdminUserUncheckedUpdateWithoutRecycledIntakesInput>
+    create: XOR<AdminUserCreateWithoutRecycledIntakesInput, AdminUserUncheckedCreateWithoutRecycledIntakesInput>
+    where?: AdminUserWhereInput
+  }
+
+  export type AdminUserUpdateToOneWithWhereWithoutRecycledIntakesInput = {
+    where?: AdminUserWhereInput
+    data: XOR<AdminUserUpdateWithoutRecycledIntakesInput, AdminUserUncheckedUpdateWithoutRecycledIntakesInput>
+  }
+
+  export type AdminUserUpdateWithoutRecycledIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutAdminUsersNestedInput
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUpdateManyWithoutAppraiserNestedInput
+  }
+
+  export type AdminUserUncheckedUpdateWithoutRecycledIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUncheckedUpdateManyWithoutAppraiserNestedInput
+  }
+
+  export type RecyclingTypeUpsertWithoutIntakesInput = {
+    update: XOR<RecyclingTypeUpdateWithoutIntakesInput, RecyclingTypeUncheckedUpdateWithoutIntakesInput>
+    create: XOR<RecyclingTypeCreateWithoutIntakesInput, RecyclingTypeUncheckedCreateWithoutIntakesInput>
+    where?: RecyclingTypeWhereInput
+  }
+
+  export type RecyclingTypeUpdateToOneWithWhereWithoutIntakesInput = {
+    where?: RecyclingTypeWhereInput
+    data: XOR<RecyclingTypeUpdateWithoutIntakesInput, RecyclingTypeUncheckedUpdateWithoutIntakesInput>
+  }
+
+  export type RecyclingTypeUpdateWithoutIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutRecyclingTypesNestedInput
+  }
+
+  export type RecyclingTypeUncheckedUpdateWithoutIntakesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaUpsertWithWhereUniqueWithoutIntakeInput = {
+    where: ProductIntakeMediaWhereUniqueInput
+    update: XOR<ProductIntakeMediaUpdateWithoutIntakeInput, ProductIntakeMediaUncheckedUpdateWithoutIntakeInput>
+    create: XOR<ProductIntakeMediaCreateWithoutIntakeInput, ProductIntakeMediaUncheckedCreateWithoutIntakeInput>
+  }
+
+  export type ProductIntakeMediaUpdateWithWhereUniqueWithoutIntakeInput = {
+    where: ProductIntakeMediaWhereUniqueInput
+    data: XOR<ProductIntakeMediaUpdateWithoutIntakeInput, ProductIntakeMediaUncheckedUpdateWithoutIntakeInput>
+  }
+
+  export type ProductIntakeMediaUpdateManyWithWhereWithoutIntakeInput = {
+    where: ProductIntakeMediaScalarWhereInput
+    data: XOR<ProductIntakeMediaUpdateManyMutationInput, ProductIntakeMediaUncheckedUpdateManyWithoutIntakeInput>
+  }
+
+  export type TenantCreateWithoutProductIntakeMediaInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: PlanCreateNestedOneWithoutTenantsInput
+    currentSubscription?: SubscriptionCreateNestedOneWithoutCurrentForTenantInput
+    subscriptions?: SubscriptionCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserCreateNestedManyWithoutTenantInput
+    customers?: CustomerCreateNestedManyWithoutTenantInput
+    roles?: RoleCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutProductIntakeMediaInput = {
+    id?: string
+    name: string
+    subdomain: string
+    customDomain?: string | null
+    isolationLevel?: string
+    schemaName?: string | null
+    dbConnectionEnc?: string | null
+    status?: string
+    planId?: string | null
+    subscriptionId?: string | null
+    expiredAt?: Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutTenantInput
+    usageMetrics?: UsageMetricUncheckedCreateNestedManyWithoutTenantInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutTenantInput
+    adminUsers?: AdminUserUncheckedCreateNestedManyWithoutTenantInput
+    customers?: CustomerUncheckedCreateNestedManyWithoutTenantInput
+    roles?: RoleUncheckedCreateNestedManyWithoutTenantInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedCreateNestedManyWithoutTenantInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedCreateNestedManyWithoutTenantInput
+    mediaAssets?: MediaAssetUncheckedCreateNestedManyWithoutTenantInput
+    brandSeries?: BrandSeriesUncheckedCreateNestedManyWithoutTenantInput
+    brandModels?: BrandModelUncheckedCreateNestedManyWithoutTenantInput
+    brandCategories?: BrandCategoryUncheckedCreateNestedManyWithoutTenantInput
+    recyclingTypes?: RecyclingTypeUncheckedCreateNestedManyWithoutTenantInput
+    productIntakes?: ProductIntakeUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutProductIntakeMediaInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutProductIntakeMediaInput, TenantUncheckedCreateWithoutProductIntakeMediaInput>
+  }
+
+  export type ProductIntakeCreateWithoutMediaInput = {
+    id?: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutProductIntakesInput
+    product: ProductCreateNestedOneWithoutIntakeInput
+    series?: BrandSeriesCreateNestedOneWithoutIntakesInput
+    model?: BrandModelCreateNestedOneWithoutIntakesInput
+    appraiser: AdminUserCreateNestedOneWithoutAppraisedIntakesInput
+    recyclingEmployee?: AdminUserCreateNestedOneWithoutRecycledIntakesInput
+    recyclingType?: RecyclingTypeCreateNestedOneWithoutIntakesInput
+  }
+
+  export type ProductIntakeUncheckedCreateWithoutMediaInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeCreateOrConnectWithoutMediaInput = {
+    where: ProductIntakeWhereUniqueInput
+    create: XOR<ProductIntakeCreateWithoutMediaInput, ProductIntakeUncheckedCreateWithoutMediaInput>
+  }
+
+  export type MediaAssetCreateWithoutProductIntakeMediaInput = {
+    id?: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    tenant: TenantCreateNestedOneWithoutMediaAssetsInput
+    uploadSession: MediaUploadSessionCreateNestedOneWithoutAssetInput
+    productImage?: ProductImageCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetUncheckedCreateWithoutProductIntakeMediaInput = {
+    id?: string
+    tenantId: string
+    uploadSessionId: string
+    createdBy: string
+    purpose: string
+    objectKey: string
+    mimeType: string
+    sizeBytes: number
+    sha256: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    purgedAt?: Date | string | null
+    productImage?: ProductImageUncheckedCreateNestedOneWithoutMediaAssetInput
+  }
+
+  export type MediaAssetCreateOrConnectWithoutProductIntakeMediaInput = {
+    where: MediaAssetWhereUniqueInput
+    create: XOR<MediaAssetCreateWithoutProductIntakeMediaInput, MediaAssetUncheckedCreateWithoutProductIntakeMediaInput>
+  }
+
+  export type TenantUpsertWithoutProductIntakeMediaInput = {
+    update: XOR<TenantUpdateWithoutProductIntakeMediaInput, TenantUncheckedUpdateWithoutProductIntakeMediaInput>
+    create: XOR<TenantCreateWithoutProductIntakeMediaInput, TenantUncheckedCreateWithoutProductIntakeMediaInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutProductIntakeMediaInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutProductIntakeMediaInput, TenantUncheckedUpdateWithoutProductIntakeMediaInput>
+  }
+
+  export type TenantUpdateWithoutProductIntakeMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: PlanUpdateOneWithoutTenantsNestedInput
+    currentSubscription?: SubscriptionUpdateOneWithoutCurrentForTenantNestedInput
+    subscriptions?: SubscriptionUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUpdateManyWithoutTenantNestedInput
+    roles?: RoleUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutProductIntakeMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    subdomain?: StringFieldUpdateOperationsInput | string
+    customDomain?: NullableStringFieldUpdateOperationsInput | string | null
+    isolationLevel?: StringFieldUpdateOperationsInput | string
+    schemaName?: NullableStringFieldUpdateOperationsInput | string | null
+    dbConnectionEnc?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    planId?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    settings?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscriptions?: SubscriptionUncheckedUpdateManyWithoutTenantNestedInput
+    usageMetrics?: UsageMetricUncheckedUpdateManyWithoutTenantNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutTenantNestedInput
+    adminUsers?: AdminUserUncheckedUpdateManyWithoutTenantNestedInput
+    customers?: CustomerUncheckedUpdateManyWithoutTenantNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutTenantNestedInput
+    providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
+    mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
+    mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ProductIntakeUpsertWithoutMediaInput = {
+    update: XOR<ProductIntakeUpdateWithoutMediaInput, ProductIntakeUncheckedUpdateWithoutMediaInput>
+    create: XOR<ProductIntakeCreateWithoutMediaInput, ProductIntakeUncheckedCreateWithoutMediaInput>
+    where?: ProductIntakeWhereInput
+  }
+
+  export type ProductIntakeUpdateToOneWithWhereWithoutMediaInput = {
+    where?: ProductIntakeWhereInput
+    data: XOR<ProductIntakeUpdateWithoutMediaInput, ProductIntakeUncheckedUpdateWithoutMediaInput>
+  }
+
+  export type ProductIntakeUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MediaAssetUpsertWithoutProductIntakeMediaInput = {
+    update: XOR<MediaAssetUpdateWithoutProductIntakeMediaInput, MediaAssetUncheckedUpdateWithoutProductIntakeMediaInput>
+    create: XOR<MediaAssetCreateWithoutProductIntakeMediaInput, MediaAssetUncheckedCreateWithoutProductIntakeMediaInput>
+    where?: MediaAssetWhereInput
+  }
+
+  export type MediaAssetUpdateToOneWithWhereWithoutProductIntakeMediaInput = {
+    where?: MediaAssetWhereInput
+    data: XOR<MediaAssetUpdateWithoutProductIntakeMediaInput, MediaAssetUncheckedUpdateWithoutProductIntakeMediaInput>
+  }
+
+  export type MediaAssetUpdateWithoutProductIntakeMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tenant?: TenantUpdateOneRequiredWithoutMediaAssetsNestedInput
+    uploadSession?: MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput
+    productImage?: ProductImageUpdateOneWithoutMediaAssetNestedInput
+  }
+
+  export type MediaAssetUncheckedUpdateWithoutProductIntakeMediaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    uploadSessionId?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    objectKey?: StringFieldUpdateOperationsInput | string
+    mimeType?: StringFieldUpdateOperationsInput | string
+    sizeBytes?: IntFieldUpdateOperationsInput | number
+    sha256?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productImage?: ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput
+  }
+
   export type ProductCreateWithoutVariantsInput = {
     id?: string
     tenantId: string
@@ -64741,6 +80547,7 @@ export namespace Prisma {
     category?: CategoryCreateNestedOneWithoutProductsInput
     brand?: BrandCreateNestedOneWithoutProductsInput
     images?: ProductImageCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutVariantsInput = {
@@ -64762,6 +80569,7 @@ export namespace Prisma {
     version?: number
     deletedAt?: Date | string | null
     images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutVariantsInput = {
@@ -64871,6 +80679,7 @@ export namespace Prisma {
     category?: CategoryUpdateOneWithoutProductsNestedInput
     brand?: BrandUpdateOneWithoutProductsNestedInput
     images?: ProductImageUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutVariantsInput = {
@@ -64892,6 +80701,7 @@ export namespace Prisma {
     version?: IntFieldUpdateOperationsInput | number
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type InventoryTransactionUpsertWithWhereUniqueWithoutVariantInput = {
@@ -64977,6 +80787,7 @@ export namespace Prisma {
     category?: CategoryCreateNestedOneWithoutProductsInput
     brand?: BrandCreateNestedOneWithoutProductsInput
     variants?: ProductVariantCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeCreateNestedOneWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutImagesInput = {
@@ -64998,6 +80809,7 @@ export namespace Prisma {
     version?: number
     deletedAt?: Date | string | null
     variants?: ProductVariantUncheckedCreateNestedManyWithoutProductInput
+    intake?: ProductIntakeUncheckedCreateNestedOneWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutImagesInput = {
@@ -65020,6 +80832,7 @@ export namespace Prisma {
     purgedAt?: Date | string | null
     tenant: TenantCreateNestedOneWithoutMediaAssetsInput
     uploadSession: MediaUploadSessionCreateNestedOneWithoutAssetInput
+    productIntakeMedia?: ProductIntakeMediaCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetUncheckedCreateWithoutProductImageInput = {
@@ -65037,6 +80850,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     purgedAt?: Date | string | null
+    productIntakeMedia?: ProductIntakeMediaUncheckedCreateNestedOneWithoutMediaAssetInput
   }
 
   export type MediaAssetCreateOrConnectWithoutProductImageInput = {
@@ -65074,6 +80888,7 @@ export namespace Prisma {
     category?: CategoryUpdateOneWithoutProductsNestedInput
     brand?: BrandUpdateOneWithoutProductsNestedInput
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutImagesInput = {
@@ -65095,6 +80910,7 @@ export namespace Prisma {
     version?: IntFieldUpdateOperationsInput | number
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type MediaAssetUpsertWithoutProductImageInput = {
@@ -65123,6 +80939,7 @@ export namespace Prisma {
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tenant?: TenantUpdateOneRequiredWithoutMediaAssetsNestedInput
     uploadSession?: MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type MediaAssetUncheckedUpdateWithoutProductImageInput = {
@@ -65140,6 +80957,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type OrderItemCreateWithoutOrderInput = {
@@ -67028,6 +82846,94 @@ export namespace Prisma {
     purgedAt?: Date | string | null
   }
 
+  export type BrandSeriesCreateManyTenantInput = {
+    id?: string
+    brandId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandModelCreateManyTenantInput = {
+    id?: string
+    brandId: string
+    seriesId?: string | null
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandCategoryCreateManyTenantInput = {
+    brandId: string
+    categoryId: string
+    createdAt?: Date | string
+  }
+
+  export type RecyclingTypeCreateManyTenantInput = {
+    id?: string
+    name: string
+    sortOrder?: number
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeCreateManyTenantInput = {
+    id?: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeMediaCreateManyTenantInput = {
+    id?: string
+    intakeId: string
+    mediaAssetId: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+  }
+
   export type SubscriptionUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
@@ -67165,6 +83071,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
     sessions?: RefreshSessionUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type AdminUserUncheckedUpdateWithoutTenantInput = {
@@ -67177,6 +83085,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
     sessions?: RefreshSessionUncheckedUpdateManyWithoutUserNestedInput
+    appraisedIntakes?: ProductIntakeUncheckedUpdateManyWithoutAppraiserNestedInput
+    recycledIntakes?: ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeNestedInput
   }
 
   export type AdminUserUncheckedUpdateManyWithoutTenantInput = {
@@ -67338,6 +83248,7 @@ export namespace Prisma {
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     uploadSession?: MediaUploadSessionUpdateOneRequiredWithoutAssetNestedInput
     productImage?: ProductImageUpdateOneWithoutMediaAssetNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type MediaAssetUncheckedUpdateWithoutTenantInput = {
@@ -67355,6 +83266,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     productImage?: ProductImageUncheckedUpdateOneWithoutMediaAssetNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateOneWithoutMediaAssetNestedInput
   }
 
   export type MediaAssetUncheckedUpdateManyWithoutTenantInput = {
@@ -67371,6 +83283,280 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     purgedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type BrandSeriesUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: BrandUpdateOneRequiredWithoutSeriesNestedInput
+    models?: BrandModelUpdateManyWithoutSeriesNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    models?: BrandModelUncheckedUpdateManyWithoutSeriesNestedInput
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandModelUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: BrandUpdateOneRequiredWithoutModelsNestedInput
+    series?: BrandSeriesUpdateOneWithoutModelsNestedInput
+    category?: CategoryUpdateOneWithoutBrandModelsNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryUpdateWithoutTenantInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    brand?: BrandUpdateOneRequiredWithoutCategoriesNestedInput
+    category?: CategoryUpdateOneRequiredWithoutBrandsNestedInput
+  }
+
+  export type BrandCategoryUncheckedUpdateWithoutTenantInput = {
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryUncheckedUpdateManyWithoutTenantInput = {
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RecyclingTypeUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUpdateManyWithoutRecyclingTypeNestedInput
+  }
+
+  export type RecyclingTypeUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutRecyclingTypeNestedInput
+  }
+
+  export type RecyclingTypeUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intake?: ProductIntakeUpdateOneRequiredWithoutMediaNestedInput
+    mediaAsset?: MediaAssetUpdateOneRequiredWithoutProductIntakeMediaNestedInput
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    intakeId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CustomerRefreshSessionCreateManyCustomerInput = {
@@ -67418,6 +83604,78 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ProductIntakeCreateManyAppraiserInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeCreateManyRecyclingEmployeeInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserRoleUpdateWithoutUserInput = {
     role?: RoleUpdateOneRequiredWithoutUserRolesNestedInput
   }
@@ -67455,6 +83713,226 @@ export namespace Prisma {
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeUpdateWithoutAppraiserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutAppraiserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutAppraiserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeUpdateWithoutRecyclingEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutRecyclingEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutRecyclingEmployeeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RolePermissionCreateManyRoleInput = {
@@ -67559,6 +84037,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPlanInput = {
@@ -67584,6 +84068,12 @@ export namespace Prisma {
     providerCallbackRoutes?: ProviderCallbackRouteUncheckedUpdateManyWithoutTenantNestedInput
     mediaUploadSessions?: MediaUploadSessionUncheckedUpdateManyWithoutTenantNestedInput
     mediaAssets?: MediaAssetUncheckedUpdateManyWithoutTenantNestedInput
+    brandSeries?: BrandSeriesUncheckedUpdateManyWithoutTenantNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutTenantNestedInput
+    brandCategories?: BrandCategoryUncheckedUpdateManyWithoutTenantNestedInput
+    recyclingTypes?: RecyclingTypeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakes?: ProductIntakeUncheckedUpdateManyWithoutTenantNestedInput
+    productIntakeMedia?: ProductIntakeMediaUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateManyWithoutPlanInput = {
@@ -67750,6 +84240,27 @@ export namespace Prisma {
     deletedAt?: Date | string | null
   }
 
+  export type BrandModelCreateManyCategoryInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    seriesId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandCategoryCreateManyCategoryInput = {
+    tenantId: string
+    brandId: string
+    createdAt?: Date | string
+  }
+
   export type CategoryUpdateWithoutParentInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
@@ -67762,6 +84273,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUpdateManyWithoutParentNestedInput
     products?: ProductUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateWithoutParentInput = {
@@ -67776,6 +84289,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     children?: CategoryUncheckedUpdateManyWithoutParentNestedInput
     products?: ProductUncheckedUpdateManyWithoutCategoryNestedInput
+    brandModels?: BrandModelUncheckedUpdateManyWithoutCategoryNestedInput
+    brands?: BrandCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateManyWithoutParentInput = {
@@ -67809,6 +84324,7 @@ export namespace Prisma {
     brand?: BrandUpdateOneWithoutProductsNestedInput
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
     images?: ProductImageUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -67830,6 +84346,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
     images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -67851,6 +84368,71 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type BrandModelUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandModelsNestedInput
+    brand?: BrandUpdateOneRequiredWithoutModelsNestedInput
+    series?: BrandSeriesUpdateOneWithoutModelsNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryUpdateWithoutCategoryInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandCategoriesNestedInput
+    brand?: BrandUpdateOneRequiredWithoutCategoriesNestedInput
+  }
+
+  export type BrandCategoryUncheckedUpdateWithoutCategoryInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryUncheckedUpdateManyWithoutCategoryInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ProductCreateManyBrandInput = {
     id?: string
     tenantId: string
@@ -67868,6 +84450,38 @@ export namespace Prisma {
     updatedBy?: string | null
     version?: number
     deletedAt?: Date | string | null
+  }
+
+  export type BrandSeriesCreateManyBrandInput = {
+    id?: string
+    tenantId: string
+    name: string
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandModelCreateManyBrandInput = {
+    id?: string
+    tenantId: string
+    seriesId?: string | null
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandCategoryCreateManyBrandInput = {
+    tenantId: string
+    categoryId: string
+    createdAt?: Date | string
   }
 
   export type ProductUpdateWithoutBrandInput = {
@@ -67889,6 +84503,7 @@ export namespace Prisma {
     category?: CategoryUpdateOneWithoutProductsNestedInput
     variants?: ProductVariantUpdateManyWithoutProductNestedInput
     images?: ProductImageUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutBrandInput = {
@@ -67910,6 +84525,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     variants?: ProductVariantUncheckedUpdateManyWithoutProductNestedInput
     images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
+    intake?: ProductIntakeUncheckedUpdateOneWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutBrandInput = {
@@ -67929,6 +84545,608 @@ export namespace Prisma {
     updatedBy?: NullableStringFieldUpdateOperationsInput | string | null
     version?: IntFieldUpdateOperationsInput | number
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type BrandSeriesUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandSeriesNestedInput
+    models?: BrandModelUpdateManyWithoutSeriesNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesUncheckedUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    models?: BrandModelUncheckedUpdateManyWithoutSeriesNestedInput
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutSeriesNestedInput
+  }
+
+  export type BrandSeriesUncheckedUpdateManyWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandModelUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandModelsNestedInput
+    series?: BrandSeriesUpdateOneWithoutModelsNestedInput
+    category?: CategoryUpdateOneWithoutBrandModelsNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateManyWithoutBrandInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryUpdateWithoutBrandInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandCategoriesNestedInput
+    category?: CategoryUpdateOneRequiredWithoutBrandsNestedInput
+  }
+
+  export type BrandCategoryUncheckedUpdateWithoutBrandInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandCategoryUncheckedUpdateManyWithoutBrandInput = {
+    tenantId?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BrandModelCreateManySeriesInput = {
+    id?: string
+    tenantId: string
+    brandId: string
+    categoryId?: string | null
+    name: string
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: string | null
+    status?: string
+    version?: number
+    deletedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeCreateManySeriesInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BrandModelUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutBrandModelsNestedInput
+    brand?: BrandUpdateOneRequiredWithoutModelsNestedInput
+    category?: CategoryUpdateOneWithoutBrandModelsNestedInput
+    intakes?: ProductIntakeUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    intakes?: ProductIntakeUncheckedUpdateManyWithoutModelNestedInput
+  }
+
+  export type BrandModelUncheckedUpdateManyWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    brandId?: StringFieldUpdateOperationsInput | string
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    defaultMaterial?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutSeriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeCreateManyModelInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingTypeId?: string | null
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeUpdateWithoutModelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    recyclingType?: RecyclingTypeUpdateOneWithoutIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutModelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutModelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingTypeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeCreateManyRecyclingTypeInput = {
+    id?: string
+    tenantId: string
+    productId: string
+    idempotencyKey: string
+    requestFingerprint: string
+    action: string
+    customTips?: string | null
+    condition: string
+    seriesId?: string | null
+    modelId?: string | null
+    officialGuidePrice?: Decimal | DecimalJsLike | number | string
+    ownershipType?: string | null
+    stockQuantity: number
+    inventoryAgeWarningDays?: number
+    totalCostPrice?: Decimal | DecimalJsLike | number | string
+    peerPrice?: Decimal | DecimalJsLike | number | string
+    agentPrice?: Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId: string
+    appraiserName: string
+    recyclingEmployeeId?: string | null
+    recyclingEmployeeName?: string | null
+    recyclingNotes?: string | null
+    recycledAt: Date | string
+    audience?: string | null
+    warrantyCard: string
+    warrantyCardYear?: number | null
+    uniqueCode?: string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: string | null
+    stockedAt?: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductIntakeUpdateWithoutRecyclingTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakesNestedInput
+    product?: ProductUpdateOneRequiredWithoutIntakeNestedInput
+    series?: BrandSeriesUpdateOneWithoutIntakesNestedInput
+    model?: BrandModelUpdateOneWithoutIntakesNestedInput
+    appraiser?: AdminUserUpdateOneRequiredWithoutAppraisedIntakesNestedInput
+    recyclingEmployee?: AdminUserUpdateOneWithoutRecycledIntakesNestedInput
+    media?: ProductIntakeMediaUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateWithoutRecyclingTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProductIntakeMediaUncheckedUpdateManyWithoutIntakeNestedInput
+  }
+
+  export type ProductIntakeUncheckedUpdateManyWithoutRecyclingTypeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    idempotencyKey?: StringFieldUpdateOperationsInput | string
+    requestFingerprint?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    customTips?: NullableStringFieldUpdateOperationsInput | string | null
+    condition?: StringFieldUpdateOperationsInput | string
+    seriesId?: NullableStringFieldUpdateOperationsInput | string | null
+    modelId?: NullableStringFieldUpdateOperationsInput | string | null
+    officialGuidePrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    ownershipType?: NullableStringFieldUpdateOperationsInput | string | null
+    stockQuantity?: IntFieldUpdateOperationsInput | number
+    inventoryAgeWarningDays?: IntFieldUpdateOperationsInput | number
+    totalCostPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    peerPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    agentPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    appraiserEmployeeId?: StringFieldUpdateOperationsInput | string
+    appraiserName?: StringFieldUpdateOperationsInput | string
+    recyclingEmployeeId?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingEmployeeName?: NullableStringFieldUpdateOperationsInput | string | null
+    recyclingNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    recycledAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    audience?: NullableStringFieldUpdateOperationsInput | string | null
+    warrantyCard?: StringFieldUpdateOperationsInput | string
+    warrantyCardYear?: NullableIntFieldUpdateOperationsInput | number | null
+    uniqueCode?: NullableStringFieldUpdateOperationsInput | string | null
+    tags?: JsonNullValueInput | InputJsonValue
+    accessories?: JsonNullValueInput | InputJsonValue
+    internalNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    stockedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductVariantCreateManyProductInput = {
@@ -68053,6 +85271,50 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaCreateManyIntakeInput = {
+    id?: string
+    tenantId: string
+    mediaAssetId: string
+    group: string
+    visibility: string
+    sortOrder?: number
+    durationSeconds?: number | null
+    createdAt?: Date | string
+  }
+
+  export type ProductIntakeMediaUpdateWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutProductIntakeMediaNestedInput
+    mediaAsset?: MediaAssetUpdateOneRequiredWithoutProductIntakeMediaNestedInput
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductIntakeMediaUncheckedUpdateManyWithoutIntakeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    mediaAssetId?: StringFieldUpdateOperationsInput | string
+    group?: StringFieldUpdateOperationsInput | string
+    visibility?: StringFieldUpdateOperationsInput | string
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    durationSeconds?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InventoryTransactionCreateManyVariantInput = {

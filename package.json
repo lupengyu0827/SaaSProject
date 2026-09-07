@@ -11,6 +11,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "node --env-file=.env ./node_modules/turbo/bin/turbo run dev --env-mode=loose",
+    "dev:backend": "node --env-file=.env ./node_modules/turbo/bin/turbo run dev --filter=@saas/core --filter=@saas/gateway --env-mode=loose",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "turbo run lint",

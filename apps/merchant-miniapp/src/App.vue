@@ -3,7 +3,11 @@
 </script>
 
 <style lang="scss">
-@use './styles/tokens.scss' as *;
+/* 统一用 @import：App 级会被注入 uni.scss（含 uview 主题变量），
+   若此处用 @use 会触发 "@use rules must be written before any other rules"。 */
+@import './styles/tokens.scss';
+@import './styles/themes.scss';
+@import 'uview-plus/index.scss';
 
 page {
   min-height: 100%;

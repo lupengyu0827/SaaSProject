@@ -12,9 +12,14 @@ describe('miniapp api client', () => {
     storage.set('saas.accessToken', 'access-1');
   });
 
-  it('injects tenant, token and request id into requests', async () => {
+  it('injects tenant, token and request id and unwraps Gateway envelope', async () => {
     const request = vi.fn((options: UniApp.RequestOptions) => {
-      options.success?.({ data: { ok: true }, statusCode: 200, header: {}, cookies: [] });
+      options.success?.({
+        data: { code: 0, message: 'ok', data: { ok: true }, traceId: 'trace-1' },
+        statusCode: 200,
+        header: {},
+        cookies: [],
+      });
       return {} as UniApp.RequestTask;
     });
     installUniMock(request);
@@ -31,6 +36,33 @@ describe('miniapp api client', () => {
     });
     expect((options?.header as Record<string, string>)['X-Request-Id']).toMatch(/^mini-/);
     expect(options?.data).toEqual({ sku: 'SKU-1' });
+  });
+
+  it('passes through bare payloads without an envelope', async () => {
+    const request = vi.fn((options: UniApp.RequestOptions) => {
+      options.success?.({ data: { list: [] }, statusCode: 200, header: {}, cookies: [] });
+      return {} as UniApp.RequestTask;
+    });
+    installUniMock(request);
+
+    await expect(requestApi<{ list: unknown[] }>({ path: '/products' })).resolves.toEqual({
+      list: [],
+    });
+  });
+
+  it('surfaces backend message from an error envelope', async () => {
+    const request = vi.fn((options: UniApp.RequestOptions) => {
+      options.success?.({
+        data: { code: 40300, message: '无权限', data: null, traceId: 'trace-2' },
+        statusCode: 403,
+        header: {},
+        cookies: [],
+      });
+      return {} as UniApp.RequestTask;
+    });
+    installUniMock(request);
+
+    await expect(requestApi({ path: '/products' })).rejects.toThrow('无权限');
   });
 
   it('maps timeout failures to a page-safe error', async () => {

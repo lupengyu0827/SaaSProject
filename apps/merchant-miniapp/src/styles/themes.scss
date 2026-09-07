@@ -1,0 +1,30 @@
+/** 商家端主题语义 Token：与消费者端 themes.scss 同构，Figma 浅色稿为默认值。 */
+.theme-light {
+  --theme-bg: #faf8f5;
+  --theme-surface: #ffffff;
+  --theme-text: #1c1917;
+  --theme-text-secondary: #706e6b;
+  --theme-text-muted: #9e9a96;
+  --theme-accent: #d4a359;
+  --theme-accent-soft: #f5ece1;
+  --theme-border: #eae4dc;
+  --theme-border-soft: #f5f2ec;
+  --theme-overlay: rgba(28, 25, 23, 0.3);
+  --theme-danger: #be123c;
+  --theme-success: #047857;
+}
+
+.theme-dark {
+  --theme-bg: #080c14;
+  --theme-surface: #111622;
+  --theme-text: #f8fafc;
+  --theme-text-secondary: #94a3b8;
+  --theme-text-muted: #64748b;
+  --theme-accent: #f59e0b;
+  --theme-accent-soft: #2b2111;
+  --theme-border: rgba(245, 158, 11, 0.15);
+  --theme-border-soft: #161d2c;
+  --theme-overlay: rgba(0, 0, 0, 0.45);
+  --theme-danger: #f43f5e;
+  --theme-success: #34d399;
+}

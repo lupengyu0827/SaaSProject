@@ -7,10 +7,12 @@ import { computed, ref, shallowRef } from 'vue';
 import { listActiveProducts } from '../../api/modules/product.api';
 import HomeProductCard from '../../components/product/HomeProductCard.vue';
 import { useAppTheme } from '../../composables/use-app-theme';
-import { formatCurrency, getLowestPrice } from '../../utils/product-view';
+import { useSafeArea } from '../../composables/use-safe-area';
+import { formatCurrency, getLowestPrice, getPrimaryImage } from '../../utils/product-view';
 
 const SEARCH_HISTORY_KEY = 'miniapp.search.history';
 const { themeClass } = useAppTheme();
+const { statusBarHeight } = useSafeArea();
 
 const keyword = ref('');
 const isSearching = ref(false);
@@ -29,7 +31,8 @@ const recommendationProducts = computed(() => searchResults.value.slice(0, 4));
 
 onLoad((query) => {
   searchHistory.value = readHistory();
-  const incoming = typeof query?.keyword === 'string' ? query.keyword : '';
+  const raw = typeof query?.keyword === 'string' ? query.keyword : '';
+  const incoming = raw ? decodeURIComponent(raw) : '';
   if (incoming) {
     keyword.value = incoming;
     void handleSearch();
@@ -119,10 +122,15 @@ function productPrice(product: PublicProductResponse): string {
   const price = getLowestPrice(product);
   return price ? formatCurrency(price) : '价格待询';
 }
+
+function productImage(product: PublicProductResponse): string | null {
+  return getPrimaryImage(product);
+}
 </script>
 
 <template>
   <view class="page" :class="themeClass">
+    <view class="status-bar" :style="{ height: `${statusBarHeight}px` }" />
     <view class="search-header">
       <view class="search-shell">
         <image class="search-icon" src="/static/figma/home-light/search.svg" mode="aspectFit" />
@@ -226,18 +234,18 @@ function productPrice(product: PublicProductResponse): string {
           @click="openProduct(product)"
         >
           <image
-            v-if="product.primaryImage"
+            v-if="productImage(product)"
             class="recommend-image"
-            :src="product.primaryImage"
+            :src="productImage(product) ?? ''"
             mode="aspectFill"
             lazy-load
           />
           <view class="recommend-copy">
             <text class="recommend-series">{{ product.attributes.material ?? '私人藏品' }}</text>
             <text class="recommend-name">{{ product.name }}</text>
-            <view class="recommend-rating">
+            <view v-if="product.rating != null" class="recommend-rating">
               <image class="star-icon" src="/static/figma/home-light/star.svg" mode="aspectFit" />
-              <text class="rating-text">4.9 (124)</text>
+              <text class="rating-text">{{ product.rating.toFixed(1) }}{{ product.reviewCount != null ? ` (${product.reviewCount})` : '' }}</text>
             </view>
             <text class="recommend-price">{{ productPrice(product) }}</text>
           </view>
@@ -251,15 +259,19 @@ function productPrice(product: PublicProductResponse): string {
 @use '../../styles/tokens.scss' as *;
 .page {
   min-height: 100vh;
-  padding: calc(env(safe-area-inset-top) + 88rpx) 0 48rpx;
+  padding: 0 0 calc(48rpx + env(safe-area-inset-bottom));
   color: var(--theme-text);
   background: var(--theme-bg);
+}
+.status-bar {
+  width: 100%;
 }
 .search-header {
   display: flex;
   align-items: center;
   gap: 20rpx;
-  padding: 16rpx 32rpx;
+  height: 88rpx;
+  padding: 0 32rpx;
 }
 .search-shell {
   display: flex;

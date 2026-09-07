@@ -2,7 +2,7 @@
 /** B4 订单运营工作台：筛选、详情时间线、取消、发货与退款申请。 */
 import { computed, onMounted, reactive, shallowRef } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import type { OrderResponse, OrderStatus } from '@saas/contracts';
+import type { OrderResponse, OrderStatus, RefundResponse, RefundStatus } from '@saas/contracts';
 
 import { orderApi } from '../../api/modules/order.api.js';
 import { useOrderOperations } from '../../composables/use-order-operations.js';
@@ -52,6 +52,21 @@ const statusTypes: Record<OrderStatus, 'success' | 'warning' | 'danger' | 'info'
   canceled: 'info',
   expired: 'danger',
 };
+const refundStatusLabels: Record<RefundStatus, string> = {
+  pending_review: '待审核',
+  approved: '已通过',
+  rejected: '已驳回',
+  succeeded: '退款成功',
+  failed: '退款失败',
+};
+const refundStatusTypes: Record<RefundStatus, 'warning' | 'success' | 'danger' | 'info' | 'primary'> = {
+  pending_review: 'warning',
+  approved: 'primary',
+  rejected: 'info',
+  succeeded: 'success',
+  failed: 'danger',
+};
+const refundPendingId = shallowRef<string | null>(null);
 const timeline = computed(() => {
   const order = selectedOrder.value;
   if (!order) return [];
@@ -161,6 +176,50 @@ async function handleRefund(): Promise<void> {
   }
 }
 
+async function handleReviewRefund(refund: RefundResponse, approved: boolean): Promise<void> {
+  const order = selectedOrder.value;
+  if (!order) return;
+  const note = approved
+    ? undefined
+    : (await ElMessageBox.prompt('请输入驳回原因', '驳回退款', {
+        inputPattern: /\S+/,
+        inputErrorMessage: '驳回原因不能为空',
+      })).value;
+  refundPendingId.value = refund.id;
+  try {
+    await orderApi.reviewRefund(refund.id, { approved, note });
+    ElMessage.success(approved ? '退款已通过审核' : '退款已驳回');
+    await openDetail(order);
+  } catch (error: unknown) {
+    ElMessage.error(readMessage(error));
+  } finally {
+    refundPendingId.value = null;
+  }
+}
+
+async function handleExecuteRefund(refund: RefundResponse): Promise<void> {
+  const order = selectedOrder.value;
+  if (!order) return;
+  await ElMessageBox.confirm(`确认执行退款 ¥ ${refund.amount}？此操作将触发渠道退款。`, '执行退款');
+  refundPendingId.value = refund.id;
+  try {
+    await orderApi.executeRefund(refund.id);
+    ElMessage.success('退款已执行');
+    await openDetail(order);
+  } catch (error: unknown) {
+    ElMessage.error(readMessage(error));
+  } finally {
+    refundPendingId.value = null;
+  }
+}
+
+function getRefundStatusLabel(refund: RefundResponse): string {
+  return refundStatusLabels[refund.status];
+}
+function getRefundStatusType(refund: RefundResponse): (typeof refundStatusTypes)[RefundStatus] {
+  return refundStatusTypes[refund.status];
+}
+
 function readMessage(error: unknown): string {
   return error instanceof Error ? error.message : '操作失败';
 }
@@ -180,14 +239,13 @@ onMounted(() => void handleLoad());
   <section aria-labelledby="orders-title" class="space-y-6">
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p class="text-sm font-medium text-accent">ORDER OPERATIONS</p>
-        <h1 id="orders-title" class="mt-2 font-display text-3xl tracking-wide">订单运营工作台</h1>
-        <p class="mt-2 text-sm text-secondary">统一处理订单履约、退款与异常追踪。</p>
+        <h1 id="orders-title" class="text-xl font-medium text-[var(--pc-text-primary)]">订单运营工作台</h1>
+        <p class="mt-2 text-sm text-[var(--pc-text-secondary)]">统一处理订单履约、退款与异常追踪。</p>
       </div>
       <el-button :loading="loading" @click="handleLoad">刷新数据</el-button>
     </div>
 
-    <div class="flex gap-2 overflow-x-auto border-b border-subtle pb-3">
+    <div class="flex flex-wrap gap-2 border-b border-[var(--pc-border)] pb-3">
       <el-button
         v-for="option in statusOptions"
         :key="option.label"
@@ -198,69 +256,57 @@ onMounted(() => void handleLoad());
       >
     </div>
 
-    <div class="overflow-hidden rounded-xl border border-subtle bg-surface shadow-luxury">
+    <el-card shadow="never">
       <el-table
         v-loading="loading"
         :data="orders"
         empty-text="暂无符合条件的订单"
         @row-click="handleOpen"
       >
-        <el-table-column label="订单号" min-width="190"
-          ><template #default="{ row }"
-            ><span class="font-mono text-sm">{{ row.orderNo }}</span></template
-          ></el-table-column
-        >
-        <el-table-column label="状态" width="120"
-          ><template #default="{ row }"
-            ><el-tag class="whitespace-nowrap" :type="getStatusType(row)">{{
-              getStatusLabel(row)
-            }}</el-tag></template
-          ></el-table-column
-        >
+        <el-table-column label="订单号" min-width="190">
+          <template #default="{ row }"><span class="font-mono text-sm">{{ row.orderNo }}</span></template>
+        </el-table-column>
+        <el-table-column label="状态" width="120">
+          <template #default="{ row }">
+            <el-tag class="whitespace-nowrap" :type="getStatusType(row)">{{ getStatusLabel(row) }}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="items.length" label="商品数" width="90" />
-        <el-table-column label="订单金额" width="140"
-          ><template #default="{ row }"
-            ><span class="font-mono font-semibold text-accent">¥ {{ row.total }}</span></template
-          ></el-table-column
-        >
-        <el-table-column label="创建时间" width="190"
-          ><template #default="{ row }">{{ formatTime(row.createdAt) }}</template></el-table-column
-        >
-        <el-table-column label="操作" width="100" fixed="right"
-          ><template #default="{ row }"
+        <el-table-column label="订单金额" width="140">
+          <template #default="{ row }"
+            ><span class="font-mono font-semibold text-[var(--pc-primary)]">¥ {{ row.total }}</span></template
+          >
+        </el-table-column>
+        <el-table-column label="创建时间" width="190">
+          <template #default="{ row }">{{ formatTime(row.createdAt) }}</template>
+        </el-table-column>
+        <el-table-column label="操作" width="100" fixed="right">
+          <template #default="{ row }"
             ><el-button link type="primary" @click.stop="handleOpen(row)">查看</el-button></template
-          ></el-table-column
-        >
+          >
+        </el-table-column>
       </el-table>
-      <div class="flex justify-center border-t border-subtle p-4">
-        <el-button v-if="canLoadMore" :loading="loading" @click="loadMore">加载更多</el-button
-        ><span v-else class="text-sm text-secondary">已加载全部订单</span>
+      <div class="mt-4 flex justify-center border-t border-[var(--pc-border)] pt-4">
+        <el-button v-if="canLoadMore" :loading="loading" @click="loadMore">加载更多</el-button>
+        <span v-else class="text-sm text-[var(--pc-text-secondary)]">已加载全部订单</span>
       </div>
-    </div>
+    </el-card>
 
     <el-drawer v-model="drawerVisible" size="720px" title="订单详情">
       <div v-loading="detailLoading" class="space-y-6">
         <template v-if="selectedOrder">
-          <div
-            class="flex flex-wrap items-center justify-between gap-3 border-b border-subtle pb-4"
-          >
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--pc-border)] pb-4">
             <div>
-              <p class="font-mono text-lg font-semibold">{{ selectedOrder.orderNo }}</p>
-              <p class="mt-1 text-sm text-secondary">
+              <p class="font-mono text-lg font-semibold text-[var(--pc-text-primary)]">{{ selectedOrder.orderNo }}</p>
+              <p class="mt-1 text-sm text-[var(--pc-text-secondary)]">
                 ¥ {{ selectedOrder.total }} · {{ selectedOrder.items.length }} 件商品
               </p>
             </div>
             <div class="flex flex-wrap gap-2">
-              <el-button
-                v-if="selectedOrder.status === 'pending'"
-                :loading="submitting"
-                @click="handleCancel"
+              <el-button v-if="selectedOrder.status === 'pending'" :loading="submitting" @click="handleCancel"
                 >取消订单</el-button
               >
-              <el-button
-                v-if="selectedOrder.status === 'paid'"
-                type="primary"
-                @click="shipmentVisible = true"
+              <el-button v-if="selectedOrder.status === 'paid'" type="primary" @click="shipmentVisible = true"
                 >发货</el-button
               >
               <el-button
@@ -272,28 +318,73 @@ onMounted(() => void handleLoad());
               >
             </div>
           </div>
-          <el-table :data="selectedOrder.items"
-            ><el-table-column prop="productName" label="商品" min-width="180" /><el-table-column
-              prop="sku"
-              label="SKU"
-              width="130"
-            /><el-table-column prop="quantity" label="数量" width="70" /><el-table-column
-              label="小计"
-              width="110"
-              ><template #default="{ row }">¥ {{ row.lineTotal }}</template></el-table-column
-            ></el-table
-          >
+          <el-table :data="selectedOrder.items">
+            <el-table-column prop="productName" label="商品" min-width="180" />
+            <el-table-column prop="sku" label="SKU" width="130" />
+            <el-table-column prop="quantity" label="数量" width="70" />
+            <el-table-column label="小计" width="110">
+              <template #default="{ row }">¥ {{ row.lineTotal }}</template>
+            </el-table-column>
+          </el-table>
+          <div v-if="refunds.length">
+            <h2 class="mb-4 text-base font-medium text-[var(--pc-text-primary)]">退款记录</h2>
+            <el-table :data="refunds" empty-text="暂无退款记录">
+              <el-table-column label="退款单号" min-width="180">
+                <template #default="{ row }"><span class="font-mono text-sm">{{ row.refundNo }}</span></template>
+              </el-table-column>
+              <el-table-column label="金额" width="130">
+                <template #default="{ row }"
+                  ><span class="font-mono font-semibold text-[var(--pc-primary)]">¥ {{ row.amount }}</span></template
+                >
+              </el-table-column>
+              <el-table-column label="状态" width="120">
+                <template #default="{ row }">
+                  <el-tag class="whitespace-nowrap" :type="getRefundStatusType(row)">{{ getRefundStatusLabel(row) }}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="reason" label="原因" min-width="180" show-overflow-tooltip />
+              <el-table-column label="操作" width="180" fixed="right">
+                <template #default="{ row }">
+                  <template v-if="row.status === 'pending_review'">
+                    <el-button
+                      link
+                      type="success"
+                      :loading="refundPendingId === row.id"
+                      @click="handleReviewRefund(row, true)"
+                      >通过</el-button
+                    >
+                    <el-button
+                      link
+                      type="danger"
+                      :loading="refundPendingId === row.id"
+                      @click="handleReviewRefund(row, false)"
+                      >驳回</el-button
+                    >
+                  </template>
+                  <el-button
+                    v-else-if="row.status === 'approved'"
+                    link
+                    type="primary"
+                    :loading="refundPendingId === row.id"
+                    @click="handleExecuteRefund(row)"
+                    >执行退款</el-button
+                  >
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
           <div>
-            <h2 class="mb-4 text-base font-semibold">订单时间线</h2>
-            <el-timeline
-              ><el-timeline-item
+            <h2 class="mb-4 text-base font-medium text-[var(--pc-text-primary)]">订单时间线</h2>
+            <el-timeline>
+              <el-timeline-item
                 v-for="item in timeline"
                 :key="`${item.time}-${item.title}`"
                 :timestamp="formatTime(item.time)"
-                ><p class="font-medium">{{ item.title }}</p>
-                <p class="mt-1 text-sm text-secondary">{{ item.detail }}</p></el-timeline-item
-              ></el-timeline
-            >
+              >
+                <p class="font-medium text-[var(--pc-text-primary)]">{{ item.title }}</p>
+                <p class="mt-1 text-sm text-[var(--pc-text-secondary)]">{{ item.detail }}</p>
+              </el-timeline-item>
+            </el-timeline>
           </div>
         </template>
       </div>
@@ -301,23 +392,18 @@ onMounted(() => void handleLoad());
 
     <el-dialog v-model="shipmentVisible" title="创建物流单" width="520px">
       <el-form label-position="right" label-width="100px">
-        <el-form-item label="物流公司"
-          ><el-select v-model="shipmentDraft.carrierCode" filterable class="w-full"
-            ><el-option label="顺丰速运" value="SF" /></el-select
-        ></el-form-item>
-        <el-form-item label="物流名称"
-          ><el-input v-model="shipmentDraft.carrierName"
-        /></el-form-item>
-        <el-form-item label="物流单号"
-          ><el-input v-model="shipmentDraft.trackingNo" maxlength="100"
-        /></el-form-item>
+        <el-form-item label="物流公司">
+          <el-select v-model="shipmentDraft.carrierCode" filterable class="w-full">
+            <el-option label="顺丰速运" value="SF" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="物流名称"><el-input v-model="shipmentDraft.carrierName" /></el-form-item>
+        <el-form-item label="物流单号"><el-input v-model="shipmentDraft.trackingNo" maxlength="100" /></el-form-item>
       </el-form>
-      <template #footer
-        ><el-button @click="shipmentVisible = false">取消</el-button
-        ><el-button type="primary" :loading="submitting" @click="handleShipment"
-          >确认发货</el-button
-        ></template
-      >
+      <template #footer>
+        <el-button @click="shipmentVisible = false">取消</el-button>
+        <el-button type="primary" :loading="submitting" @click="handleShipment">确认发货</el-button>
+      </template>
     </el-dialog>
   </section>
 </template>

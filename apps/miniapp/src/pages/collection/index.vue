@@ -1,132 +1,118 @@
-<!-- 消费者藏品目录：使用真实公开商品接口完成搜索、分页和弱网重试。 -->
+<!-- 甄选页：按 Figma curated-selection 浅色帧还原，区块化陈列殿堂甄选与限定款式。 -->
 <script setup lang="ts">
-import { onLoad, onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app';
+import { onLoad, onPullDownRefresh } from '@dcloudio/uni-app';
 import type { PublicProductResponse } from '@saas/contracts';
 import { computed, ref, shallowRef } from 'vue';
 
 import { listActiveProducts } from '../../api/modules/product.api';
-import StatePanel from '../../components/common/StatePanel.vue';
-import ProductCard from '../../components/product/ProductCard.vue';
+import HomeProductCard from '../../components/product/HomeProductCard.vue';
+import { useAppTheme } from '../../composables/use-app-theme';
+import { useSafeArea } from '../../composables/use-safe-area';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 20;
+const { themeClass } = useAppTheme();
+const { statusBarHeight } = useSafeArea();
+
 const products = shallowRef<PublicProductResponse[]>([]);
-const keyword = ref('');
-const nextPage = ref(1);
-const total = ref(0);
 const isLoading = ref(false);
 const errorMessage = ref<string | null>(null);
-const hasMore = computed(() => products.value.length < total.value);
-const resultCaption = computed(() =>
-  keyword.value.trim() ? `“${keyword.value.trim()}” 的搜索结果` : `当前在售 ${total.value} 件`,
-);
 
-/** 加载公开商品目录；刷新时替换，翻页时按 ID 去重追加。 */
-async function loadProducts(reset = false): Promise<void> {
+const firstCollection = computed(() => products.value.slice(0, 4));
+const secondCollection = computed(() => products.value.slice(4, 8));
+
+async function loadProducts(): Promise<void> {
   if (isLoading.value) return;
   isLoading.value = true;
   errorMessage.value = null;
-  const targetPage = reset ? 1 : nextPage.value;
   try {
-    const result = await listActiveProducts({
-      page: targetPage,
-      pageSize: PAGE_SIZE,
-      keyword: keyword.value.trim() || undefined,
-      sortBy: 'createdAt',
-      sortOrder: 'desc',
-    });
-    products.value = reset ? result.list : appendUnique(products.value, result.list);
-    total.value = result.total;
-    nextPage.value = targetPage + 1;
+    const page = await listActiveProducts({ pageSize: PAGE_SIZE });
+    products.value = page.list;
   } catch (error: unknown) {
-    errorMessage.value = error instanceof Error ? error.message : '加载藏品失败，请稍后重试';
+    errorMessage.value = error instanceof Error ? error.message : '加载甄选藏品失败，请稍后重试';
   } finally {
     isLoading.value = false;
   }
 }
 
-function handleSearch(): void {
-  void loadProducts(true);
-}
-function handleClearSearch(): void {
-  keyword.value = '';
-  void loadProducts(true);
-}
-function handleRetry(): void {
-  void loadProducts(products.value.length === 0);
-}
-function appendUnique(
-  current: PublicProductResponse[],
-  incoming: PublicProductResponse[],
-): PublicProductResponse[] {
-  const knownIds = new Set(current.map(({ id }) => id));
-  return [...current, ...incoming.filter(({ id }) => !knownIds.has(id))];
+function handleOpenProduct(product: PublicProductResponse): void {
+  void uni.navigateTo({ url: `/pages/product/detail?id=${encodeURIComponent(product.id)}` });
 }
 
-onLoad(() => void loadProducts(true));
+function handleExploreAll(): void {
+  uni.showToast({ title: '全部甄选待接入', icon: 'none' });
+}
+
+function handleRetry(): void {
+  void loadProducts();
+}
+
+onLoad(() => void loadProducts());
 onPullDownRefresh(async () => {
-  await loadProducts(true);
+  await loadProducts();
   uni.stopPullDownRefresh();
-});
-onReachBottom(() => {
-  if (hasMore.value) void loadProducts();
 });
 </script>
 
 <template>
-  <view class="page">
-    <view class="page-header">
-      <text class="header-kicker">THE COLLECTION</text>
-      <text class="header-title">传世典藏</text>
-      <text class="header-copy">仅呈现当前店铺已公开且仍在售的真实藏品。</text>
-      <view class="search-shell">
-        <text class="search-symbol">⌕</text>
-        <input
-          v-model="keyword"
-          class="search-input"
-          confirm-type="search"
-          placeholder="搜索名称、编号或 SKU"
-          placeholder-class="search-placeholder"
-          @confirm="handleSearch"
-        />
-        <text v-if="keyword" class="clear-action" @click="handleClearSearch">清除</text>
+  <view class="page" :class="themeClass">
+    <view class="status-bar" :style="{ height: `${statusBarHeight}px` }" />
+    <view class="curated-header">
+      <text class="brand-name">HARRY WINSTON</text>
+      <text class="header-sub">THE CHOSEN COLLECTION · 殿堂甄选</text>
+    </view>
+
+    <view class="editorial-banner">
+      <image class="banner-image" src="/static/figma/curated/hero-banner.png" mode="aspectFill" />
+      <view class="banner-overlay" />
+      <view class="banner-copy">
+        <text class="banner-title">殿堂甄选 · 匠心之作</text>
+        <text class="banner-desc">精雕细琢，将永恒之爱凝结在方寸之间。</text>
       </view>
     </view>
 
-    <view v-if="products.length" class="catalog-content">
-      <view class="result-heading">
-        <text class="result-caption">{{ resultCaption }}</text>
-        <text class="result-count">{{ products.length }} / {{ total }}</text>
-      </view>
-      <ProductCard v-for="product in products" :key="product.id" :product="product" />
-      <view class="list-footer">
-        <text v-if="isLoading">正在读取更多藏品…</text>
-        <text v-else-if="hasMore">继续上拉浏览</text>
-        <text v-else>已呈现全部在售藏品</text>
-      </view>
+    <view v-if="isLoading" class="state-panel">
+      <text>正在整理殿堂甄选…</text>
+    </view>
+    <view v-else-if="errorMessage" class="state-panel">
+      <text>{{ errorMessage }}</text>
+      <text class="retry-action" @click="handleRetry">重新加载</text>
     </view>
 
-    <StatePanel
-      v-else-if="isLoading"
-      eyebrow="CURATING"
-      title="正在整理典藏目录"
-      description="商品资料正在从店铺安全读取中。"
-    />
-    <StatePanel
-      v-else-if="errorMessage"
-      eyebrow="NETWORK NOTICE"
-      title="暂时无法读取藏品"
-      :description="errorMessage"
-      action-label="重新加载"
-      @action="handleRetry"
-    />
-    <StatePanel
-      v-else
-      eyebrow="COLLECTION UPDATE"
-      title="暂时没有匹配藏品"
-      description="换个关键词，或稍后等待店铺发布新藏品。"
-      action-label="查看全部"
-      @action="handleClearSearch"
-    />
+    <template v-else>
+      <view v-if="firstCollection.length" class="collection-block">
+        <view class="block-head">
+          <text class="block-title">经典标志 · THE LOGO STORY</text>
+          <text class="block-more" @click="handleExploreAll">探索全部 ▾</text>
+        </view>
+        <view class="product-row">
+          <HomeProductCard
+            v-for="product in firstCollection"
+            :key="product.id"
+            :product="product"
+            @click="handleOpenProduct(product)"
+          />
+        </view>
+      </view>
+
+      <view v-if="secondCollection.length" class="collection-block">
+        <view class="block-head">
+          <text class="block-title">限定款式 · EXCLUSIVE EDITIONS</text>
+          <text class="block-more" @click="handleExploreAll">探索全部 ▾</text>
+        </view>
+        <view class="product-row">
+          <HomeProductCard
+            v-for="product in secondCollection"
+            :key="product.id"
+            :product="product"
+            @click="handleOpenProduct(product)"
+          />
+        </view>
+      </view>
+
+      <view v-if="!firstCollection.length && !secondCollection.length" class="state-panel">
+        <text>暂无在售甄选藏品</text>
+      </view>
+    </template>
   </view>
 </template>
 
@@ -134,90 +120,106 @@ onReachBottom(() => {
 @use '../../styles/tokens.scss' as *;
 .page {
   min-height: 100vh;
-  padding-bottom: calc(72rpx + env(safe-area-inset-bottom));
-  background: $bg-dark-base;
+  padding: 0 0 calc(72rpx + env(safe-area-inset-bottom));
+  color: var(--theme-text);
+  background: var(--theme-bg);
 }
-.page-header {
-  padding: calc(env(safe-area-inset-top) + 96rpx) 32rpx 40rpx;
-  border-bottom: 1rpx solid $border-subtle;
+.status-bar {
+  width: 100%;
 }
-.header-kicker,
-.header-title,
-.header-copy,
-.result-caption,
-.result-count {
-  display: block;
-}
-.header-kicker,
-.result-count {
-  color: $accent-gold-light;
-  font-family: $font-mono;
-  font-size: 18rpx;
-  letter-spacing: 3rpx;
-}
-.header-title {
-  margin-top: 12rpx;
-  color: $text-primary;
-  font-family: $font-display;
-  font-size: 48rpx;
-}
-.header-copy {
-  margin-top: 12rpx;
-  color: $text-secondary;
-  font-size: 24rpx;
-  line-height: 1.7;
-}
-.search-shell {
+.curated-header {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  gap: 8rpx;
   height: 88rpx;
-  margin-top: 32rpx;
-  padding: 0 24rpx;
-  border: 1rpx solid $border-subtle;
-  border-radius: $radius-control;
-  background: $bg-surface;
+  padding: 0 32rpx;
 }
-.search-symbol {
-  color: $accent-primary;
-  font-size: 32rpx;
+.brand-name {
+  color: var(--theme-accent);
+  font-family: $font-display;
+  font-size: 36rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
 }
-.search-input {
-  flex: 1;
-  height: 88rpx;
-  margin-left: 16rpx;
-  color: $text-primary;
-  font-size: 26rpx;
+.header-sub {
+  color: var(--theme-text-secondary);
+  font-family: $font-display;
+  font-size: 24rpx;
+  letter-spacing: 2rpx;
 }
-.search-placeholder {
-  color: $text-secondary;
+.editorial-banner {
+  position: relative;
+  height: 440rpx;
+  margin: 0 32rpx 40rpx;
+  overflow: hidden;
+  border-radius: 32rpx;
 }
-.clear-action {
-  padding-left: 24rpx;
-  color: $accent-gold-light;
-  font-size: 22rpx;
-  white-space: nowrap;
+.banner-image,
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
-.catalog-content {
-  padding: 32rpx 24rpx;
+.banner-overlay {
+  background: var(--theme-overlay);
 }
-.result-heading {
+.banner-copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  padding: 40rpx;
+}
+.banner-title {
+  color: #ffffff;
+  font-family: $font-display;
+  font-size: 40rpx;
+  font-weight: 700;
+}
+.banner-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 24rpx;
+}
+.collection-block {
+  padding: 0 32rpx 40rpx;
+}
+.block-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16rpx;
   margin-bottom: 24rpx;
 }
-.result-caption {
-  color: $text-secondary;
-  font-size: 24rpx;
+.block-title {
+  color: var(--theme-text);
+  font-family: $font-display;
+  font-size: 30rpx;
+  font-weight: 700;
 }
-.catalog-content :deep(.product-card) {
-  margin-bottom: 24rpx;
-}
-.list-footer {
-  padding: 24rpx 0 40rpx;
-  color: $text-secondary;
+.block-more {
+  color: var(--theme-accent);
   font-size: 22rpx;
-  text-align: center;
+}
+.product-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24rpx;
+}
+.state-panel {
+  display: flex;
+  min-height: 320rpx;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20rpx;
+  color: var(--theme-text-secondary);
+  font-size: 26rpx;
+}
+.retry-action {
+  color: var(--theme-accent);
+  font-weight: 600;
 }
 </style>

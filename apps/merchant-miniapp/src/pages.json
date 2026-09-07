@@ -4,15 +4,57 @@
       "path": "pages/auth/login",
       "style": {
         "navigationStyle": "custom",
-        "backgroundColor": "#F8F9FA"
+        "backgroundColor": "#FAF8F5"
       }
     },
     {
       "path": "pages/workbench/index",
       "style": {
-        "navigationBarTitleText": "店铺工作台",
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "经营工作台",
         "navigationBarTextStyle": "black",
-        "navigationBarBackgroundColor": "#F8F9FA"
+        "navigationBarBackgroundColor": "#FAF8F5",
+        "backgroundColor": "#FAF8F5",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/warehouse/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "商品入库",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#FAF8F5",
+        "backgroundColor": "#FAF8F5"
+      }
+    },
+    {
+      "path": "pages/intake/form",
+      "style": {
+        "navigationBarTitleText": "商品入库",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#FAF8F5",
+        "backgroundColor": "#FAF8F5"
+      }
+    },
+    {
+      "path": "pages/order/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "开单",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#FAF8F5",
+        "backgroundColor": "#FAF8F5"
+      }
+    },
+    {
+      "path": "pages/profile/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "我的",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#FAF8F5",
+        "backgroundColor": "#FAF8F5"
       }
     },
     {
@@ -20,7 +62,7 @@
       "style": {
         "navigationBarTitleText": "商品图片上传",
         "navigationBarTextStyle": "black",
-        "navigationBarBackgroundColor": "#F8F9FA"
+        "navigationBarBackgroundColor": "#FAF8F5"
       }
     },
     {
@@ -28,8 +70,18 @@
       "style": {
         "navigationBarTitleText": "商品管理",
         "navigationBarTextStyle": "black",
-        "navigationBarBackgroundColor": "#F8F9FA",
+        "navigationBarBackgroundColor": "#FAF8F5",
         "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/products/active",
+      "style": {
+        "navigationBarTitleText": "在售商品",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#FAF8F5",
+        "enablePullDownRefresh": true,
+        "backgroundColor": "#FAF8F5"
       }
     },
     {
@@ -37,14 +89,63 @@
       "style": {
         "navigationBarTitleText": "商品草稿",
         "navigationBarTextStyle": "black",
-        "navigationBarBackgroundColor": "#F8F9FA"
+        "navigationBarBackgroundColor": "#FAF8F5"
+      }
+    },
+    {
+      "path": "pages/products/detail",
+      "style": {
+        "navigationBarTitleText": "商品详情",
+        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#FAF8F5",
+        "backgroundColor": "#FAF8F5"
       }
     }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "店铺工作台",
-    "navigationBarBackgroundColor": "#F8F9FA",
-    "backgroundColor": "#F8F9FA"
+    "navigationBarBackgroundColor": "#FAF8F5",
+    "backgroundColor": "#FAF8F5"
+  },
+  "tabBar": {
+    "color": "#706E6B",
+    "selectedColor": "#D4A359",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/workbench/index",
+        "text": "首页",
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/warehouse/index",
+        "text": "入库",
+        "iconPath": "static/tabbar/inbound.png",
+        "selectedIconPath": "static/tabbar/inbound-active.png"
+      },
+      {
+        "pagePath": "pages/order/index",
+        "text": "开单",
+        "iconPath": "static/tabbar/order.png",
+        "selectedIconPath": "static/tabbar/order-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "static/tabbar/mine.png",
+        "selectedIconPath": "static/tabbar/mine-active.png"
+      }
+    ]
+  },
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^u--(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^up-(.*)": "uview-plus/components/u-$1/u-$1.vue",
+      "^u-([^-].*)": "uview-plus/components/u-$1/u-$1.vue"
+    }
   }
 }

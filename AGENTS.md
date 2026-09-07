@@ -44,7 +44,8 @@
 5. 写操作必须评估 Feature、Quota、租户/对象授权、幂等或乐观锁、事务、审计、用量与领域事件。
 6. Prisma 只能出现在基础设施层；金额使用 Decimal，时间使用带时区类型，业务数据必须具备租户隔离。
 7. 前端禁止直接 `fetch`/`axios`，只能通过 API 层并复用共享契约。
-8. TypeScript 严格模式；禁止新增 `any`、`@ts-ignore`、空操作和伪造成功路径。
+8. 小程序端（merchant-miniapp / miniapp）交互组件优先使用 uView-Plus（easycom 已配、`uni.scss` 已桥接琥珀金主题），品牌色走 `--theme-*` Token，禁止写死色值；商家端视觉遵循 `docs/Merchant-Style.md`。
+9. TypeScript 严格模式；禁止新增 `any`、`@ts-ignore`、空操作和伪造成功路径。
 
 详细规则的权威基线仍为 `docs/codex-ai-development-spec.md`；本文件是日常任务的精简执行入口。
 

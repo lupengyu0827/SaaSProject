@@ -21,6 +21,7 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
   const tenantId = randomUUID();
   const actorId = randomUUID();
   const suffix = tenantId.slice(0, 8);
+  const planCode = `e2e-one-product-${suffix}`;
   let prisma: PrismaService;
 
   beforeAll(async () => {
@@ -53,6 +54,7 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
       await tx.brand.deleteMany({ where: { tenantId } });
       await tx.providerCallbackRoute.deleteMany({ where: { tenantId } });
       await tx.tenant.deleteMany({ where: { id: tenantId } });
+      await tx.plan.deleteMany({ where: { code: planCode } });
     });
     await prisma.$disconnect();
   });
@@ -105,10 +107,54 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
       assetIds: [asset.id],
       primaryAssetId: asset.id,
     });
+    expect(await products.getDraft(tenantId, withMedia.id)).toMatchObject({
+      id: withMedia.id,
+      status: 'draft',
+    });
+    expect((await products.listDrafts(tenantId, { keyword: 'S2 Mobile' })).list).toEqual(
+      expect.arrayContaining([expect.objectContaining({ id: withMedia.id })]),
+    );
+    const duplicate = await products.duplicateDraft(
+      tenantId,
+      actorId,
+      withMedia.id,
+      withMedia.version,
+    );
+    expect(duplicate).toMatchObject({ name: withMedia.name, status: 'draft', images: [] });
+    await expect(
+      products.deleteDraft(tenantId, actorId, duplicate.id, duplicate.version + 1),
+    ).rejects.toMatchObject({ response: { code: 40901 } });
+    await products.deleteDraft(tenantId, actorId, duplicate.id, duplicate.version);
+    await expect(products.getDraft(tenantId, duplicate.id)).rejects.toThrow('商品草稿不存在');
     expect(await products.validateDraftPublish(tenantId, withMedia.id)).toEqual({
       valid: true,
       issues: [],
     });
+
+    const oneProductPlan = await prisma.plan.create({
+      data: {
+        code: planCode,
+        name: 'E2E 单商品套餐',
+        isolationLevel: 'logical',
+        features: ['products.basic'],
+        quotas: { products: 1 },
+      },
+    });
+    await prisma.tenant.update({ where: { id: tenantId }, data: { planId: oneProductPlan.id } });
+
+    await expect(
+      products.publishDraft(tenantId, actorId, withMedia.id, withMedia.version - 1),
+    ).rejects.toMatchObject({
+      response: { code: 40901, data: { currentVersion: withMedia.version } },
+    });
+    expect(
+      await prisma.inventoryTransaction.count({
+        where: { tenantId, variantId: withMedia.variants[0]?.id },
+      }),
+    ).toBe(0);
+    expect(
+      await prisma.usageMetric.findFirst({ where: { tenantId, metricKey: 'products' } }),
+    ).toBeNull();
 
     const published = await products.publishDraft(
       tenantId,
@@ -117,6 +163,120 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
       withMedia.version,
     );
     expect(published.product).toMatchObject({ status: 'active', availableStockQty: 1 });
+    const publishedVariantId = published.product.variants[0]?.id;
+    if (!publishedVariantId) throw new Error('Published draft did not contain its default SKU');
+    const usageAfterPublish = await prisma.usageMetric.findFirst({
+      where: { tenantId, metricKey: 'products' },
+    });
+    const stockRowsAfterPublish = await prisma.inventoryTransaction.count({
+      where: { tenantId, variantId: publishedVariantId },
+    });
+    const retried = await products.publishDraft(tenantId, actorId, withMedia.id, withMedia.version);
+    expect(retried.product).toMatchObject({
+      id: published.product.id,
+      status: 'active',
+      version: published.product.version,
+    });
+    expect(
+      await prisma.usageMetric.findFirst({ where: { tenantId, metricKey: 'products' } }),
+    ).toEqual(usageAfterPublish);
+    expect(
+      await prisma.inventoryTransaction.count({
+        where: { tenantId, variantId: publishedVariantId },
+      }),
+    ).toBe(stockRowsAfterPublish);
+    await prisma.tenant.update({ where: { id: tenantId }, data: { planId: null } });
+
+    const foreignTenantId = randomUUID();
+    await prisma.tenant.create({
+      data: {
+        id: foreignTenantId,
+        name: 'E2E Foreign Store',
+        subdomain: `foreign-${foreignTenantId.slice(0, 8)}`,
+      },
+    });
+    await expect(
+      products.unlist(foreignTenantId, actorId, published.product.id, {
+        version: published.product.version,
+        reason: '跨租户尝试',
+      }),
+    ).rejects.toThrow('商品不存在');
+    await prisma.tenant.delete({ where: { id: foreignTenantId } });
+
+    await expect(
+      products.unlist(tenantId, actorId, published.product.id, {
+        version: published.product.version - 1,
+        reason: '旧版本下架',
+      }),
+    ).rejects.toMatchObject({ response: { code: 40901 } });
+    const unlisted = await products.unlist(tenantId, actorId, published.product.id, {
+      version: published.product.version,
+      reason: '商品资料需要调整',
+    });
+    expect(unlisted.status).toBe('archived');
+    const unlistedRetry = await products.unlist(tenantId, actorId, published.product.id, {
+      version: published.product.version,
+      reason: '商品资料需要调整',
+    });
+    expect(unlistedRetry.version).toBe(unlisted.version);
+    expect(
+      await prisma.domainEventOutbox.count({
+        where: { tenantId, aggregateId: published.product.id, eventType: 'product.unlisted' },
+      }),
+    ).toBe(1);
+    await expect(products.getPublic(tenantId, published.product.id)).rejects.toMatchObject({
+      response: { code: 40401, data: { availability: 'unlisted' } },
+    });
+    await expect(
+      products.update(tenantId, actorId, published.product.id, {
+        version: unlisted.version,
+        status: 'active',
+      }),
+    ).rejects.toMatchObject({ response: { code: 40902 } });
+
+    await prisma.inventoryTransaction.create({
+      data: {
+        tenantId,
+        variantId: publishedVariantId,
+        type: 'outbound',
+        qtyChange: -1,
+        referenceType: 'lifecycle_test',
+        referenceId: `out-${suffix}`,
+        reason: '模拟售罄',
+        operatorId: actorId,
+      },
+    });
+    await expect(
+      products.relist(tenantId, actorId, published.product.id, {
+        version: unlisted.version,
+        reason: '库存不足时尝试上架',
+      }),
+    ).rejects.toMatchObject({ response: { code: 40903 } });
+    await prisma.inventoryTransaction.create({
+      data: {
+        tenantId,
+        variantId: publishedVariantId,
+        type: 'inbound',
+        qtyChange: 1,
+        referenceType: 'lifecycle_test',
+        referenceId: `in-${suffix}`,
+        reason: '恢复库存',
+        operatorId: actorId,
+      },
+    });
+    const relisted = await products.relist(tenantId, actorId, published.product.id, {
+      version: unlisted.version,
+      reason: '资料调整完成',
+    });
+    expect(relisted.status).toBe('active');
+    expect(
+      await products.relist(tenantId, actorId, published.product.id, {
+        version: unlisted.version,
+        reason: '资料调整完成',
+      }),
+    ).toMatchObject({ version: relisted.version });
+    const lifecycleEvents = await products.listLifecycleEvents(tenantId, published.product.id);
+    expect(lifecycleEvents.map(({ type }) => type)).toEqual(['relisted', 'unlisted', 'published']);
     const publicProduct = await products.getPublic(tenantId, withMedia.id);
     expect(publicProduct).toMatchObject({ name: 'S2 Mobile Product', availableStockQty: 1 });
     expect(JSON.stringify(publicProduct)).not.toContain('costPrice');
@@ -144,10 +304,15 @@ describe.runIf(runDatabaseE2e)('commerce database flow', () => {
       name: 'Database E2E Product',
       variants: [{ sku: `SKU-${suffix}`, price: '19.90' }],
     });
-    const product = await products.update(tenantId, actorId, draft.id, {
-      status: 'active',
-      version: draft.version,
+    // 订单链路测试使用数据库夹具激活商品，不调用已封堵的通用状态修改接口。
+    await prisma.$transaction(async (tx) => {
+      await tx.$executeRaw`SELECT set_config('app.current_tenant_id', ${tenantId}, true)`;
+      await tx.product.update({
+        where: { id: draft.id },
+        data: { status: 'active', version: { increment: 1 } },
+      });
     });
+    const product = await products.get(tenantId, draft.id);
     const variantId = product.variants[0]?.id;
     expect(variantId).toBeTruthy();
     if (!variantId) throw new Error('E2E product did not create a SKU');

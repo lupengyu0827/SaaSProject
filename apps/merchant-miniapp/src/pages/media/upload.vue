@@ -1,5 +1,5 @@
+<!-- 手机媒体上传页：持久化队列、进度、取消和失败项重试，视觉与消费者端对齐。 -->
 <script setup lang="ts">
-/** 手机媒体上传页：持久化队列、进度、取消和失败项重试。 */
 import type { MediaMimeType } from '@saas/contracts';
 import { computed, onMounted, ref } from 'vue';
 
@@ -13,7 +13,9 @@ import {
   selectRetryableItems,
   type UploadQueueItem,
 } from '../../composables/media-upload-queue';
+import { useAppTheme } from '../../composables/use-app-theme';
 
+const { themeClass } = useAppTheme();
 const STORAGE_KEY = 'saas.merchant.mediaUploadQueue';
 const MAX_QUEUE_FILES = 20;
 const queue = ref<UploadQueueItem[]>([]);
@@ -150,23 +152,43 @@ function persistQueue(): void {
   uni.setStorageSync(STORAGE_KEY, queue.value);
 }
 
+/** 状态图标路径映射。 */
+function statusIcon(status: UploadQueueItem['status']): string | null {
+  switch (status) {
+    case 'uploaded':
+      return '/static/merchant/check-circle.svg';
+    case 'failed':
+      return '/static/merchant/alert-circle.svg';
+    case 'canceled':
+      return '/static/merchant/x-circle.svg';
+    case 'uploading':
+      return '/static/merchant/upload-cloud.svg';
+    default:
+      return '/static/merchant/image.svg';
+  }
+}
+
 onMounted(() => {
   queue.value = restoreUploadQueue(uni.getStorageSync<unknown>(STORAGE_KEY));
 });
 </script>
 
 <template>
-  <view class="page-shell">
-    <view class="summary">
+  <view class="page" :class="themeClass">
+    <view class="page-header">
+      <text class="eyebrow">MEDIA UPLOAD</text>
       <text class="title">商品图片上传</text>
       <text class="description">支持拍照、相册多选、失败重试与退出后恢复</text>
       <text class="counter">{{ completedCount }} / {{ queue.length }} 已上传</text>
     </view>
 
     <view class="actions">
-      <button class="secondary" :disabled="uploading" @click="handleChoose">拍照或选择图片</button>
+      <button class="btn-secondary" :disabled="uploading" @click="handleChoose">
+        <image class="btn-icon" src="/static/merchant/camera.svg" mode="aspectFit" />
+        <text>拍照或选择图片</text>
+      </button>
       <button
-        class="primary"
+        class="btn-primary"
         :loading="uploading"
         :disabled="uploading || queue.length === 0"
         @click="handleUploadAll"
@@ -175,132 +197,246 @@ onMounted(() => {
       </button>
     </view>
 
-    <view v-if="queue.length === 0" class="empty">尚未选择图片，单批最多 20 张</view>
-    <view v-for="item in queue" :key="item.id" class="queue-row">
-      <image class="preview" :src="item.filePath" mode="aspectFill" />
-      <view class="queue-copy">
-        <text class="file-name">{{ item.fileName }}</text>
-        <text class="status">{{ item.status }} · {{ item.progress }}%</text>
-        <text v-if="item.errorMessage" class="error">{{ item.errorMessage }}</text>
-      </view>
-      <button
-        v-if="item.status === 'failed' || item.status === 'canceled'"
-        class="row-action"
-        @click="handleRetry(item)"
-      >
-        重试
-      </button>
-      <button v-else-if="item.status !== 'uploaded'" class="row-action" @click="handleCancel(item)">
-        取消
-      </button>
+    <view v-if="queue.length === 0" class="empty-state">
+      <image class="empty-icon" src="/static/merchant/upload-cloud.svg" mode="aspectFit" />
+      <text class="empty-text">尚未选择图片，单批最多 20 张</text>
     </view>
 
-    <button v-if="completedCount > 0" class="clear" @click="handleClearCompleted">
+    <view v-for="item in queue" :key="item.id" class="queue-card">
+      <image class="queue-preview" :src="item.filePath" mode="aspectFill" />
+      <view class="queue-copy">
+        <text class="file-name">{{ item.fileName }}</text>
+        <view v-if="item.status === 'uploading'" class="progress-bar">
+          <view class="progress-fill" :style="{ width: `${item.progress}%` }" />
+        </view>
+        <view class="status-row">
+          <image
+            v-if="statusIcon(item.status)"
+            class="status-icon"
+            :src="statusIcon(item.status) ?? ''"
+            mode="aspectFit"
+          />
+          <text class="status-text" :class="{ 'status-error': item.status === 'failed' }">
+            {{ item.status }} · {{ item.progress }}%
+          </text>
+        </view>
+        <text v-if="item.errorMessage" class="error-text">{{ item.errorMessage }}</text>
+      </view>
+      <view class="queue-actions">
+        <view
+          v-if="item.status === 'failed' || item.status === 'canceled'"
+          class="action-btn retry"
+          @click="handleRetry(item)"
+        >
+          <image class="action-icon" src="/static/merchant/refresh-cw.svg" mode="aspectFit" />
+        </view>
+        <view
+          v-else-if="item.status !== 'uploaded'"
+          class="action-btn cancel"
+          @click="handleCancel(item)"
+        >
+          <image class="action-icon" src="/static/merchant/x-circle.svg" mode="aspectFit" />
+        </view>
+      </view>
+    </view>
+
+    <view v-if="completedCount > 0" class="clear-btn" @click="handleClearCompleted">
       清除已完成记录
-    </button>
+    </view>
   </view>
 </template>
 
 <style scoped lang="scss">
-@use '../../styles/tokens.scss' as *;
-
-.page-shell {
+@import '../../styles/tokens.scss';
+.page {
   min-height: 100vh;
-  padding: 40rpx 32rpx;
-  background: $bg-base;
+  padding: 24rpx 32rpx 48rpx;
+  color: var(--theme-text);
+  background: var(--theme-bg);
 }
-.summary,
-.queue-copy {
+.page-header {
   display: flex;
   flex-direction: column;
   gap: 12rpx;
 }
-.title {
-  color: $text-primary;
-  font-size: 42rpx;
-  font-weight: 600;
+.eyebrow {
+  color: var(--theme-accent);
+  font-family: $font-mono;
+  font-size: 20rpx;
+  letter-spacing: 4rpx;
 }
-.description,
-.status,
-.empty {
-  color: $text-secondary;
+.title {
+  color: var(--theme-text);
+  font-family: $font-display;
+  font-size: 42rpx;
+  font-weight: 700;
+}
+.description {
+  color: var(--theme-text-secondary);
   font-size: 26rpx;
   line-height: 1.6;
 }
 .counter {
-  color: $accent-gold;
+  color: var(--theme-accent);
+  font-family: $font-mono;
   font-size: 24rpx;
+  font-weight: 600;
 }
 .actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16rpx;
-  margin: 40rpx 0 24rpx;
+  margin: 32rpx 0 24rpx;
 }
-.primary,
-.secondary,
-.clear,
-.row-action {
-  border-radius: 16rpx;
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  border: 1rpx solid var(--theme-border);
+  border-radius: $radius-control;
+  background: var(--theme-surface);
+  color: var(--theme-text);
   font-size: 26rpx;
+  line-height: 80rpx;
 }
-.primary {
-  background: $accent-gold;
-  color: $bg-surface;
-}
-.secondary,
-.clear,
-.row-action {
-  border: 2rpx solid $border-subtle;
-  background: $bg-surface;
-  color: $text-primary;
-}
-.primary::after,
-.secondary::after,
-.clear::after,
-.row-action::after {
+.btn-secondary::after {
   border: 0;
 }
-.empty {
-  padding: 40rpx 24rpx;
-  text-align: center;
+.btn-icon {
+  width: 28rpx;
+  height: 28rpx;
 }
-.queue-row {
+.btn-primary {
+  border-radius: 999rpx;
+  background: var(--theme-accent);
+  color: #ffffff;
+  font-size: 26rpx;
+  font-weight: 600;
+  line-height: 80rpx;
+}
+.btn-primary::after {
+  border: 0;
+}
+.btn-primary[disabled] {
+  opacity: 0.5;
+}
+.btn-secondary[disabled] {
+  opacity: 0.5;
+}
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  padding: 64rpx 24rpx;
+}
+.empty-icon {
+  width: 64rpx;
+  height: 64rpx;
+  opacity: 0.4;
+}
+.empty-text {
+  color: var(--theme-text-muted);
+  font-size: 26rpx;
+}
+.queue-card {
   display: flex;
   align-items: center;
   gap: 20rpx;
-  padding: 20rpx 0;
-  border-bottom: 2rpx solid $border-subtle;
+  margin-bottom: 16rpx;
+  padding: 20rpx 24rpx;
+  border-radius: $radius-card;
+  background: var(--theme-surface);
+  box-shadow: $shadow-luxury;
 }
-.preview {
+.queue-preview {
   width: 112rpx;
   height: 112rpx;
   flex: 0 0 auto;
-  border-radius: 12rpx;
-  background: $bg-surface;
+  border-radius: $radius-control;
+  background: var(--theme-border-soft);
 }
 .queue-copy {
+  display: flex;
   min-width: 0;
   flex: 1;
+  flex-direction: column;
+  gap: 10rpx;
 }
 .file-name {
   overflow: hidden;
-  color: $text-primary;
+  color: var(--theme-text);
   font-size: 25rpx;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.error {
-  color: #be123c;
+.progress-bar {
+  height: 8rpx;
+  border-radius: 4rpx;
+  background: var(--theme-border-soft);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 4rpx;
+  background: var(--theme-accent);
+  transition: width 0.2s ease;
+}
+.status-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.status-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+.status-text {
+  color: var(--theme-text-secondary);
   font-size: 22rpx;
 }
-.row-action {
-  width: 112rpx;
-  margin: 0;
-  padding: 0;
-  white-space: nowrap;
+.status-error {
+  color: var(--theme-danger);
 }
-.clear {
-  margin-top: 32rpx;
+.error-text {
+  color: var(--theme-danger);
+  font-size: 22rpx;
+}
+.queue-actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8rpx;
+}
+.action-btn {
+  display: flex;
+  width: 64rpx;
+  height: 64rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.retry {
+  background: var(--theme-accent-soft);
+}
+.cancel {
+  background: var(--theme-border-soft);
+}
+.action-icon {
+  width: 28rpx;
+  height: 28rpx;
+}
+.clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24rpx;
+  padding: 20rpx 0;
+  border: 1rpx solid var(--theme-border);
+  border-radius: $radius-control;
+  background: var(--theme-surface);
+  color: var(--theme-text-secondary);
+  font-size: 24rpx;
 }
 </style>

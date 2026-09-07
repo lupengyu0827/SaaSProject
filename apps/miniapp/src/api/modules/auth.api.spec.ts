@@ -1,7 +1,7 @@
 /** 小程序认证 API 单元测试。 */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ensureCustomerAccessToken } from './auth.api';
+import { ensureCustomerAccessToken, refreshCustomerSession } from './auth.api';
 
 const storage = new Map<string, string>();
 
@@ -17,7 +17,12 @@ describe('miniapp auth api', () => {
     });
     const request = vi.fn((options: UniApp.RequestOptions) => {
       options.success?.({
-        data: { accessToken: 'access-1', refreshToken: 'refresh-1', expiresIn: 900 },
+        data: {
+          code: 0,
+          message: 'ok',
+          data: { accessToken: 'access-1', refreshToken: 'refresh-1', expiresIn: 900 },
+          traceId: 'trace-1',
+        },
         statusCode: 200,
         header: {},
         cookies: [],
@@ -39,12 +44,41 @@ describe('miniapp auth api', () => {
       options.success?.({ code: 'wx-code', authResult: '', errMsg: 'login:ok' });
     });
     const request = vi.fn((options: UniApp.RequestOptions) => {
-      options.success?.({ data: {}, statusCode: 200, header: {}, cookies: [] });
+      options.success?.({
+        data: { code: 0, message: 'ok', data: {}, traceId: 'trace-1' },
+        statusCode: 200,
+        header: {},
+        cookies: [],
+      });
       return {} as UniApp.RequestTask;
     });
     vi.stubGlobal('uni', createUniMock(login, request));
 
     await expect(ensureCustomerAccessToken()).rejects.toThrow('登录服务返回了无效会话');
+  });
+
+  it('rotates the refresh token and persists the new session', async () => {
+    storage.set('saas.refreshToken', 'refresh-1');
+    const request = vi.fn((options: UniApp.RequestOptions) => {
+      options.success?.({
+        data: {
+          code: 0,
+          message: 'ok',
+          data: { accessToken: 'access-2', refreshToken: 'refresh-2', expiresIn: 900 },
+          traceId: 'trace-1',
+        },
+        statusCode: 200,
+        header: {},
+        cookies: [],
+      });
+      return {} as UniApp.RequestTask;
+    });
+    vi.stubGlobal('uni', createUniMock(vi.fn(), request));
+
+    const session = await refreshCustomerSession();
+    expect(session.accessToken).toBe('access-2');
+    expect(storage.get('saas.accessToken')).toBe('access-2');
+    expect(storage.get('saas.refreshToken')).toBe('refresh-2');
   });
 });
 

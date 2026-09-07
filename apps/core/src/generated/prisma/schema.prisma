@@ -35,6 +35,12 @@ model Tenant {
   providerCallbackRoutes ProviderCallbackRoute[]
   mediaUploadSessions    MediaUploadSession[]
   mediaAssets            MediaAsset[]
+  brandSeries            BrandSeries[]
+  brandModels            BrandModel[]
+  brandCategories        BrandCategory[]
+  recyclingTypes         RecyclingType[]
+  productIntakes         ProductIntake[]
+  productIntakeMedia     ProductIntakeMedia[]
 
   @@index([status])
   @@map("tenants")
@@ -92,17 +98,19 @@ model CustomerRefreshSession {
 }
 
 model AdminUser {
-  id           String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tenantId     String           @map("tenant_id") @db.Uuid
-  email        String           @db.VarChar(200)
-  displayName  String           @map("display_name") @db.VarChar(100)
-  status       String           @default("active") @db.VarChar(20)
-  passwordHash String           @map("password_hash")
-  createdAt    DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt    DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
-  tenant       Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  userRoles    UserRole[]
-  sessions     RefreshSession[]
+  id               String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId         String           @map("tenant_id") @db.Uuid
+  email            String           @db.VarChar(200)
+  displayName      String           @map("display_name") @db.VarChar(100)
+  status           String           @default("active") @db.VarChar(20)
+  passwordHash     String           @map("password_hash")
+  createdAt        DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime         @updatedAt @map("updated_at") @db.Timestamptz(6)
+  tenant           Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  userRoles        UserRole[]
+  sessions         RefreshSession[]
+  appraisedIntakes ProductIntake[]  @relation("ProductIntakeAppraiser")
+  recycledIntakes  ProductIntake[]  @relation("ProductIntakeRecycler")
 
   @@unique([tenantId, email])
   @@map("admin_users")
@@ -312,23 +320,24 @@ model MediaUploadSession {
 }
 
 model MediaAsset {
-  id              String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tenantId        String             @map("tenant_id") @db.Uuid
-  uploadSessionId String             @unique @map("upload_session_id") @db.Uuid
-  createdBy       String             @map("created_by") @db.Uuid
-  purpose         String             @db.VarChar(30)
-  objectKey       String             @unique @map("object_key") @db.VarChar(300)
-  mimeType        String             @map("mime_type") @db.VarChar(50)
-  sizeBytes       Int                @map("size_bytes")
-  sha256          String             @db.VarChar(64)
-  status          String             @default("temporary") @db.VarChar(20)
-  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
-  deletedAt       DateTime?          @map("deleted_at") @db.Timestamptz(6)
-  purgedAt        DateTime?          @map("purged_at") @db.Timestamptz(6)
-  tenant          Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
-  uploadSession   MediaUploadSession @relation(fields: [uploadSessionId], references: [id], onDelete: Restrict)
-  productImage    ProductImage?
+  id                 String              @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId           String              @map("tenant_id") @db.Uuid
+  uploadSessionId    String              @unique @map("upload_session_id") @db.Uuid
+  createdBy          String              @map("created_by") @db.Uuid
+  purpose            String              @db.VarChar(30)
+  objectKey          String              @unique @map("object_key") @db.VarChar(300)
+  mimeType           String              @map("mime_type") @db.VarChar(50)
+  sizeBytes          Int                 @map("size_bytes")
+  sha256             String              @db.VarChar(64)
+  status             String              @default("temporary") @db.VarChar(20)
+  createdAt          DateTime            @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime            @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt          DateTime?           @map("deleted_at") @db.Timestamptz(6)
+  purgedAt           DateTime?           @map("purged_at") @db.Timestamptz(6)
+  tenant             Tenant              @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  uploadSession      MediaUploadSession  @relation(fields: [uploadSessionId], references: [id], onDelete: Restrict)
+  productImage       ProductImage?
+  productIntakeMedia ProductIntakeMedia?
 
   @@index([tenantId, status, createdAt])
   @@index([status, deletedAt, purgedAt])
@@ -348,19 +357,21 @@ model TenantProbe {
 }
 
 model Category {
-  id        String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tenantId  String     @map("tenant_id") @db.Uuid
-  parentId  String?    @map("parent_id") @db.Uuid
-  name      String     @db.VarChar(100)
-  sortOrder Int        @default(0) @map("sort_order")
-  status    String     @default("active") @db.VarChar(20)
-  version   Int        @default(0)
-  deletedAt DateTime?  @map("deleted_at") @db.Timestamptz(6)
-  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
-  parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id])
-  children  Category[] @relation("CategoryTree")
-  products  Product[]
+  id          String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId    String          @map("tenant_id") @db.Uuid
+  parentId    String?         @map("parent_id") @db.Uuid
+  name        String          @db.VarChar(100)
+  sortOrder   Int             @default(0) @map("sort_order")
+  status      String          @default("active") @db.VarChar(20)
+  version     Int             @default(0)
+  deletedAt   DateTime?       @map("deleted_at") @db.Timestamptz(6)
+  createdAt   DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  parent      Category?       @relation("CategoryTree", fields: [parentId], references: [id])
+  children    Category[]      @relation("CategoryTree")
+  products    Product[]
+  brandModels BrandModel[]
+  brands      BrandCategory[]
 
   @@unique([tenantId, name])
   @@index([tenantId, parentId])
@@ -370,20 +381,104 @@ model Category {
 }
 
 model Brand {
-  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  tenantId  String    @map("tenant_id") @db.Uuid
-  name      String    @db.VarChar(100)
-  logoUrl   String?   @map("logo_url") @db.VarChar(500)
-  status    String    @default("active") @db.VarChar(20)
-  version   Int       @default(0)
-  deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
-  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
-  updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
-  products  Product[]
+  id          String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId    String          @map("tenant_id") @db.Uuid
+  name        String          @db.VarChar(100)
+  englishName String?         @map("english_name") @db.VarChar(120)
+  initial     String          @default("#") @db.VarChar(1)
+  logoUrl     String?         @map("logo_url") @db.VarChar(500)
+  status      String          @default("active") @db.VarChar(20)
+  version     Int             @default(0)
+  deletedAt   DateTime?       @map("deleted_at") @db.Timestamptz(6)
+  createdAt   DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  products    Product[]
+  series      BrandSeries[]
+  models      BrandModel[]
+  categories  BrandCategory[]
 
   @@unique([tenantId, name])
   @@index([tenantId, status, deletedAt])
   @@map("brands")
+  @@schema("commerce")
+}
+
+model BrandCategory {
+  tenantId   String   @map("tenant_id") @db.Uuid
+  brandId    String   @map("brand_id") @db.Uuid
+  categoryId String   @map("category_id") @db.Uuid
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  brand      Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([tenantId, brandId, categoryId])
+  @@index([tenantId, categoryId, brandId])
+  @@map("brand_categories")
+  @@schema("commerce")
+}
+
+model BrandSeries {
+  id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId  String          @map("tenant_id") @db.Uuid
+  brandId   String          @map("brand_id") @db.Uuid
+  name      String          @db.VarChar(100)
+  status    String          @default("active") @db.VarChar(20)
+  version   Int             @default(0)
+  deletedAt DateTime?       @map("deleted_at") @db.Timestamptz(6)
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  tenant    Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  brand     Brand           @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  models    BrandModel[]
+  intakes   ProductIntake[]
+
+  @@unique([tenantId, brandId, name])
+  @@index([tenantId, brandId, status, deletedAt])
+  @@map("brand_series")
+  @@schema("commerce")
+}
+
+model BrandModel {
+  id                 String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId           String          @map("tenant_id") @db.Uuid
+  brandId            String          @map("brand_id") @db.Uuid
+  seriesId           String?         @map("series_id") @db.Uuid
+  categoryId         String?         @map("category_id") @db.Uuid
+  name               String          @db.VarChar(120)
+  officialGuidePrice Decimal?        @map("official_guide_price") @db.Decimal(12, 2)
+  defaultMaterial    String?         @map("default_material") @db.VarChar(100)
+  status             String          @default("active") @db.VarChar(20)
+  version            Int             @default(0)
+  deletedAt          DateTime?       @map("deleted_at") @db.Timestamptz(6)
+  createdAt          DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  tenant             Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  brand              Brand           @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  series             BrandSeries?    @relation(fields: [seriesId], references: [id], onDelete: SetNull)
+  category           Category?       @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  intakes            ProductIntake[]
+
+  @@unique([tenantId, brandId, seriesId, name])
+  @@index([tenantId, brandId, seriesId, status, deletedAt])
+  @@map("brand_models")
+  @@schema("commerce")
+}
+
+model RecyclingType {
+  id        String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId  String          @map("tenant_id") @db.Uuid
+  name      String          @db.VarChar(50)
+  sortOrder Int             @default(0) @map("sort_order")
+  status    String          @default("active") @db.VarChar(20)
+  createdAt DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
+  tenant    Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  intakes   ProductIntake[]
+
+  @@unique([tenantId, name])
+  @@index([tenantId, status, sortOrder])
+  @@map("recycling_types")
   @@schema("commerce")
 }
 
@@ -409,11 +504,81 @@ model Product {
   brand       Brand?           @relation(fields: [brandId], references: [id])
   variants    ProductVariant[]
   images      ProductImage[]
+  intake      ProductIntake?
 
   @@unique([tenantId, code])
   @@unique([tenantId, seoSlug])
   @@index([tenantId, status, deletedAt, createdAt])
   @@map("products")
+  @@schema("commerce")
+}
+
+model ProductIntake {
+  id                      String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId                String               @map("tenant_id") @db.Uuid
+  productId               String               @unique @map("product_id") @db.Uuid
+  idempotencyKey          String               @map("idempotency_key") @db.VarChar(100)
+  requestFingerprint      String               @map("request_fingerprint") @db.VarChar(64)
+  action                  String               @db.VarChar(30)
+  customTips              String?              @map("custom_tips") @db.VarChar(250)
+  condition               String               @db.VarChar(20)
+  seriesId                String?              @map("series_id") @db.Uuid
+  modelId                 String?              @map("model_id") @db.Uuid
+  officialGuidePrice      Decimal              @default(0) @map("official_guide_price") @db.Decimal(12, 2)
+  ownershipType           String?              @map("ownership_type") @db.VarChar(20)
+  stockQuantity           Int                  @map("stock_quantity")
+  inventoryAgeWarningDays Int                  @default(90) @map("inventory_age_warning_days")
+  totalCostPrice          Decimal              @default(0) @map("total_cost_price") @db.Decimal(12, 2)
+  peerPrice               Decimal              @default(0) @map("peer_price") @db.Decimal(12, 2)
+  agentPrice              Decimal              @default(0) @map("agent_price") @db.Decimal(12, 2)
+  appraiserEmployeeId     String               @map("appraiser_employee_id") @db.Uuid
+  appraiserName           String               @map("appraiser_name") @db.VarChar(100)
+  recyclingTypeId         String?              @map("recycling_type_id") @db.Uuid
+  recyclingEmployeeId     String?              @map("recycling_employee_id") @db.Uuid
+  recyclingEmployeeName   String?              @map("recycling_employee_name") @db.VarChar(100)
+  recyclingNotes          String?              @map("recycling_notes") @db.VarChar(250)
+  recycledAt              DateTime             @map("recycled_at") @db.Timestamptz(6)
+  audience                String?              @db.VarChar(100)
+  warrantyCard            String               @map("warranty_card") @db.VarChar(20)
+  warrantyCardYear        Int?                 @map("warranty_card_year")
+  uniqueCode              String?              @map("unique_code") @db.VarChar(100)
+  tags                    Json                 @default("[]")
+  accessories             Json                 @default("[]")
+  internalNotes           String?              @map("internal_notes") @db.VarChar(250)
+  stockedAt               DateTime             @default(now()) @map("stocked_at") @db.Timestamptz(6)
+  createdAt               DateTime             @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt               DateTime             @updatedAt @map("updated_at") @db.Timestamptz(6)
+  tenant                  Tenant               @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  product                 Product              @relation(fields: [productId], references: [id], onDelete: Cascade)
+  series                  BrandSeries?         @relation(fields: [seriesId], references: [id], onDelete: SetNull)
+  model                   BrandModel?          @relation(fields: [modelId], references: [id], onDelete: SetNull)
+  appraiser               AdminUser            @relation("ProductIntakeAppraiser", fields: [appraiserEmployeeId], references: [id])
+  recyclingEmployee       AdminUser?           @relation("ProductIntakeRecycler", fields: [recyclingEmployeeId], references: [id])
+  recyclingType           RecyclingType?       @relation(fields: [recyclingTypeId], references: [id], onDelete: SetNull)
+  media                   ProductIntakeMedia[]
+
+  @@unique([tenantId, idempotencyKey])
+  @@index([tenantId, stockedAt])
+  @@map("product_intakes")
+  @@schema("commerce")
+}
+
+model ProductIntakeMedia {
+  id              String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tenantId        String        @map("tenant_id") @db.Uuid
+  intakeId        String        @map("intake_id") @db.Uuid
+  mediaAssetId    String        @unique @map("media_asset_id") @db.Uuid
+  group           String        @db.VarChar(30)
+  visibility      String        @db.VarChar(20)
+  sortOrder       Int           @default(0) @map("sort_order")
+  durationSeconds Int?          @map("duration_seconds")
+  createdAt       DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  tenant          Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  intake          ProductIntake @relation(fields: [intakeId], references: [id], onDelete: Cascade)
+  mediaAsset      MediaAsset    @relation(fields: [mediaAssetId], references: [id], onDelete: Restrict)
+
+  @@index([tenantId, intakeId, group, sortOrder])
+  @@map("product_intake_media")
   @@schema("commerce")
 }
 

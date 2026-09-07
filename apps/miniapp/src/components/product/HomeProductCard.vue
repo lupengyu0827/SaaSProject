@@ -16,6 +16,13 @@ const priceText = computed(() =>
 );
 const categoryText = computed(() => props.product.attributes.material ?? '私人藏品');
 const conditionText = computed(() => conditionLabel(props.product.attributes.conditionGrade));
+/** 评分文本：契约提供 rating 时展示评分，否则回退到品相标签。 */
+const ratingText = computed(() => {
+  const rating = props.product.rating;
+  if (rating == null) return conditionText.value;
+  const count = props.product.reviewCount;
+  return count != null ? `${rating.toFixed(1)} (${count})` : rating.toFixed(1);
+});
 const starIcon = '/static/figma/home-light/star.svg';
 
 /** 进入藏品详情。 */
@@ -46,7 +53,7 @@ function conditionLabel(grade: PublicProductResponse['attributes']['conditionGra
       <text class="product-name">{{ product.name }}</text>
       <view class="product-condition">
         <image class="condition-star" :src="starIcon" mode="aspectFit" />
-        <text>{{ conditionText }}</text>
+        <text>{{ ratingText }}</text>
       </view>
       <text class="product-price">{{ priceText }}</text>
     </view>

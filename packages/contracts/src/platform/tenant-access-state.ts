@@ -104,6 +104,15 @@ export interface MiniappSessionResponse extends AuthTokensResponse {
   };
 }
 
+/** 小程序消费者当前会话；不返回任何令牌。 */
+export interface MiniappSessionContextResponse {
+  customer: {
+    id: string;
+    displayName: string | null;
+  };
+  tenantId: string;
+}
+
 export interface AccessTokenClaims {
   sub: string;
   tenantId: string;

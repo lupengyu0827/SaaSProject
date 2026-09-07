@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 
 import { DemoController } from './demo/demo.controller.js';
 import { HealthController } from './health/health.controller.js';
@@ -19,6 +19,8 @@ import { MiniappAuthController } from './auth/miniapp-auth.controller.js';
 import { AdminAuthController } from './auth/admin-auth.controller.js';
 import { MerchantAuthController } from './auth/merchant-auth.controller.js';
 import { MediaProxyController } from './media/media-proxy.controller.js';
+import { ApiExceptionFilter } from './http/api-exception.filter.js';
+import { ApiResponseInterceptor } from './http/api-response.interceptor.js';
 
 @Module({
   controllers: [
@@ -40,6 +42,8 @@ import { MediaProxyController } from './media/media-proxy.controller.js';
     AuthTokenVerifier,
     CoreProxyService,
     { provide: APP_GUARD, useClass: SaasPipelineGuard },
+    { provide: APP_FILTER, useClass: ApiExceptionFilter },
+    { provide: APP_INTERCEPTOR, useClass: ApiResponseInterceptor },
     { provide: APP_INTERCEPTOR, useClass: UsageMeteringInterceptor },
     { provide: APP_INTERCEPTOR, useClass: AuditInterceptor },
   ],

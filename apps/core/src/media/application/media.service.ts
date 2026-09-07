@@ -24,8 +24,10 @@ import {
   type MediaUploadSessionRecord,
 } from './ports/media.repository.port.js';
 
-const ALLOWED_MIME_TYPES: MediaMimeType[] = ['image/jpeg', 'image/png', 'image/webp'];
-const MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024;
+const ALLOWED_MIME_TYPES: MediaMimeType[] = ['image/jpeg', 'image/png', 'image/webp', 'video/mp4'];
+const MAX_IMAGE_SIZE_BYTES = 10 * 1024 * 1024;
+const MAX_VIDEO_SIZE_BYTES = 100 * 1024 * 1024;
+const MAX_FILE_SIZE_BYTES = MAX_VIDEO_SIZE_BYTES;
 const MAX_BATCH_FILES = 20;
 const SESSION_TTL_SECONDS = 30 * 60;
 
@@ -150,9 +152,10 @@ export class MediaService {
     if (
       !Number.isSafeInteger(input.sizeBytes) ||
       input.sizeBytes <= 0 ||
-      input.sizeBytes > MAX_FILE_SIZE_BYTES
+      input.sizeBytes >
+        (input.mimeType === 'video/mp4' ? MAX_VIDEO_SIZE_BYTES : MAX_IMAGE_SIZE_BYTES)
     ) {
-      throw mediaConflict(MediaErrorCode.FILE_TOO_LARGE, '单张图片不能超过 10MB');
+      throw mediaConflict(MediaErrorCode.FILE_TOO_LARGE, '图片不能超过 10MB，视频不能超过 100MB');
     }
     if (!input.fileName.trim()) {
       throw mediaConflict(MediaErrorCode.UPLOAD_MISMATCH, '文件名不能为空');
@@ -179,7 +182,8 @@ export class MediaService {
 function extensionFor(mimeType: MediaMimeType): string {
   if (mimeType === 'image/jpeg') return 'jpg';
   if (mimeType === 'image/png') return 'png';
-  return 'webp';
+  if (mimeType === 'image/webp') return 'webp';
+  return 'mp4';
 }
 
 function sessionResponse(

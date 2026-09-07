@@ -2,7 +2,7 @@
 const TENANT_STORAGE_KEY = 'saas.merchant.currentTenantId';
 const ACCESS_TOKEN_STORAGE_KEY = 'saas.merchant.accessToken';
 const REFRESH_TOKEN_STORAGE_KEY = 'saas.merchant.refreshToken';
-const DEFAULT_API_BASE_URL = 'http://127.0.0.1:3000/api';
+const DEFAULT_API_BASE_URL = 'http://127.0.0.1:3100/api';
 
 /** 获取 Gateway 地址。 */
 export function getMerchantApiBaseUrl(): string {

@@ -43,41 +43,35 @@ onMounted(() => void handleLoad());
 
 <template>
   <section aria-labelledby="webhooks-title" class="space-y-6">
-    <div class="flex items-end justify-between gap-4">
+    <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p class="text-sm font-medium text-accent">WEBHOOK INBOX</p>
-        <h1 id="webhooks-title" class="mt-2 font-display text-3xl tracking-wide">回调异常中心</h1>
-        <p class="mt-2 text-sm text-secondary">查看支付与退款死信，并执行可审计的人工重放。</p>
+        <h1 id="webhooks-title" class="text-xl font-medium text-[var(--pc-text-primary)]">回调异常中心</h1>
+        <p class="mt-2 text-sm text-[var(--pc-text-secondary)]">查看支付与退款死信，并执行可审计的人工重放。</p>
       </div>
       <el-button :loading="loading" @click="handleLoad">刷新数据</el-button>
     </div>
-    <div class="overflow-hidden rounded-xl border border-subtle bg-surface shadow-luxury">
+
+    <el-card shadow="never">
       <el-table v-loading="loading" :data="events" empty-text="当前没有死信事件">
-        <el-table-column label="类型" width="100"
-          ><template #default="{ row }"
-            ><el-tag
-              class="whitespace-nowrap"
-              :type="row.kind === 'payment' ? 'success' : 'warning'"
-              >{{ row.kind === 'payment' ? '支付' : '退款' }}</el-tag
-            ></template
-          ></el-table-column
-        >
+        <el-table-column label="类型" width="100">
+          <template #default="{ row }">
+            <el-tag class="whitespace-nowrap" :type="row.kind === 'payment' ? 'success' : 'warning'">{{
+              row.kind === 'payment' ? '支付' : '退款'
+            }}</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="channel" label="渠道" width="130" />
         <el-table-column prop="eventId" label="事件 ID" min-width="220" show-overflow-tooltip />
         <el-table-column prop="attempts" label="重试次数" width="100" />
         <el-table-column prop="lastError" label="最后错误" min-width="260" show-overflow-tooltip />
-        <el-table-column label="操作" width="110" fixed="right"
-          ><template #default="{ row }"
-            ><el-button
-              link
-              type="primary"
-              :loading="replayingId === row.id"
-              @click="handleReplay(row)"
+        <el-table-column label="操作" width="110" fixed="right">
+          <template #default="{ row }">
+            <el-button link type="primary" :loading="replayingId === row.id" @click="handleReplay(row)"
               >人工重放</el-button
-            ></template
-          ></el-table-column
-        >
+            >
+          </template>
+        </el-table-column>
       </el-table>
-    </div>
+    </el-card>
   </section>
 </template>

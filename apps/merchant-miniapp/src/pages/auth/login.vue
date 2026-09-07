@@ -1,9 +1,12 @@
+<!-- 商家登录页：按消费者端浅色帧风格还原，语义 Token + 主题 class。 -->
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 
 import { loginMerchant } from '../../api/modules/auth.api';
+import { useAppTheme } from '../../composables/use-app-theme';
 import { useMerchantSessionStore } from '../../stores/use-merchant-session-store';
 
+const { themeClass } = useAppTheme();
 const sessionStore = useMerchantSessionStore();
 const submitting = ref(false);
 const form = reactive({ email: 'owner@s0-mobile.local', password: 'S0-Mobile-Test-2026!' });
@@ -36,21 +39,25 @@ async function handleLogin(): Promise<void> {
 </script>
 
 <template>
-  <view class="page-shell">
-    <view class="heading">
+  <view class="page" :class="themeClass">
+    <view class="brand-section">
       <text class="eyebrow">MERCHANT ACCESS</text>
       <text class="title">登录店铺工作台</text>
       <text class="description">输入账号和密码，系统会自动识别所属店铺</text>
     </view>
 
-    <view class="form-panel">
+    <view class="form-card">
       <view class="field">
         <text class="label">账号邮箱</text>
-        <input v-model="form.email" class="input" type="text" placeholder="name@example.com" />
+        <view class="input-shell">
+          <input v-model="form.email" class="input" type="text" placeholder="name@example.com" />
+        </view>
       </view>
       <view class="field">
         <text class="label">密码</text>
-        <input v-model="form.password" class="input" password placeholder="请输入密码" />
+        <view class="input-shell">
+          <input v-model="form.password" class="input" password placeholder="请输入密码" />
+        </view>
       </view>
       <button class="submit" :loading="submitting" :disabled="submitting" @click="handleLogin">
         登录工作台
@@ -60,78 +67,79 @@ async function handleLogin(): Promise<void> {
 </template>
 
 <style scoped lang="scss">
-@use '../../styles/tokens.scss' as *;
-
-.page-shell {
+@import '../../styles/tokens.scss';
+.page {
   min-height: 100vh;
-  padding: 120rpx 40rpx 48rpx;
-  background: $bg-base;
+  padding: calc(env(safe-area-inset-top) + 120rpx) 32rpx 48rpx;
+  color: var(--theme-text);
+  background: var(--theme-bg);
 }
-
-.heading,
-.form-panel,
-.field {
+.brand-section {
   display: flex;
   flex-direction: column;
-}
-
-.heading {
   gap: 16rpx;
 }
-
 .eyebrow {
-  color: $accent-gold;
+  color: var(--theme-accent);
+  font-family: $font-mono;
   font-size: 20rpx;
   letter-spacing: 4rpx;
 }
-
 .title {
-  color: $text-primary;
+  color: var(--theme-text);
+  font-family: $font-display;
   font-size: 48rpx;
-  font-weight: 600;
+  font-weight: 700;
 }
-
 .description {
-  color: $text-secondary;
-  font-size: 28rpx;
+  color: var(--theme-text-secondary);
+  font-size: 26rpx;
   line-height: 1.6;
 }
-
-.form-panel {
-  gap: 32rpx;
+.form-card {
   margin-top: 64rpx;
+  padding: 40rpx 32rpx;
+  border-radius: $radius-card;
+  background: var(--theme-surface);
+  box-shadow: $shadow-luxury;
 }
-
 .field {
+  display: flex;
+  flex-direction: column;
   gap: 12rpx;
 }
-
+.field + .field {
+  margin-top: 32rpx;
+}
 .label {
-  color: $text-primary;
+  color: var(--theme-text);
   font-size: 26rpx;
   font-weight: 500;
 }
-
+.input-shell {
+  border: 1rpx solid var(--theme-border);
+  border-radius: $radius-control;
+  background: var(--theme-bg);
+}
 .input {
   height: 88rpx;
   padding: 0 24rpx;
-  border: 2rpx solid $border-subtle;
-  border-radius: 16rpx;
-  background: $bg-surface;
-  color: $text-primary;
+  color: var(--theme-text);
   font-size: 28rpx;
 }
-
 .submit {
-  margin-top: 16rpx;
-  border-radius: 16rpx;
-  background: $accent-gold;
-  color: $bg-surface;
+  margin-top: 40rpx;
+  border-radius: 999rpx;
+  background: var(--theme-accent);
+  color: #ffffff;
   font-size: 30rpx;
   font-weight: 600;
+  line-height: 80rpx;
 }
-
 .submit::after {
   border: 0;
+}
+.submit[disabled] {
+  opacity: 0.6;
 }
 </style>

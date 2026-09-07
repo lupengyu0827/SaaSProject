@@ -7,6 +7,7 @@ import type {
   MerchantLoginRequest,
   MerchantSessionResponse,
   MiniappLoginRequest,
+  MiniappSessionContextResponse,
   MiniappSessionResponse,
   RefreshSessionRequest,
 } from '@saas/contracts';
@@ -30,6 +31,37 @@ export class AuthController {
     @Body() input: MiniappLoginRequest,
   ): Promise<MiniappSessionResponse> {
     return this.customerAuth.login(tenantId, input.code);
+  }
+
+  /** 一次性轮换消费者 Refresh Token。 */
+  @Post('miniapp/refresh')
+  miniappRefresh(
+    @Headers('x-tenant-id') tenantId: string,
+    @Body() input: RefreshSessionRequest,
+    @Headers('x-request-id') requestId?: string,
+    @Headers('user-agent') userAgent?: string,
+  ): Promise<MiniappSessionResponse> {
+    return this.customerAuth.refresh(tenantId, input.refreshToken, { requestId, userAgent });
+  }
+
+  /** 幂等撤销消费者 Refresh Token。 */
+  @Post('miniapp/logout')
+  miniappLogout(
+    @Headers('x-tenant-id') tenantId: string,
+    @Body() input: RefreshSessionRequest,
+    @Headers('x-request-id') requestId?: string,
+    @Headers('user-agent') userAgent?: string,
+  ): Promise<LogoutResponse> {
+    return this.customerAuth.logout(tenantId, input.refreshToken, { requestId, userAgent });
+  }
+
+  /** 查询 Gateway 已校验的消费者会话。 */
+  @Get('miniapp/session')
+  miniappSession(
+    @Headers('x-tenant-id') tenantId: string,
+    @Headers('x-actor-id') actorId: string,
+  ): Promise<MiniappSessionContextResponse> {
+    return this.customerAuth.session(tenantId, actorId);
   }
 
   /** 商家小程序账号密码登录。 */

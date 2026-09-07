@@ -1,38 +1,127 @@
-<!-- 我的页面：展示消费者身份入口与常用服务。 -->
+<!-- 我的页面：按 Figma my-profile 浅色帧还原，用户/积分/订单为动态数据，未接入前用 mock 降级。 -->
 <script setup lang="ts">
-const services = [
-  { title: '我的订单', caption: '查看交易与物流进度' },
-  { title: '收藏清单', caption: '保存感兴趣的私人藏品' },
-  { title: '鉴定服务', caption: '了解平台鉴定与品控流程' },
-  { title: '专属客服', caption: '咨询藏品细节与交付服务' },
+import { computed, ref } from 'vue';
+
+import { useAppTheme } from '../../composables/use-app-theme';
+import { useSafeArea } from '../../composables/use-safe-area';
+
+const { themeClass } = useAppTheme();
+const { statusBarHeight } = useSafeArea();
+
+/** 用户信息：契约接入前用 mock，字段可选以避免硬编码真实用户数据。 */
+interface ProfileUser {
+  nickname: string;
+  vipLabel: string;
+  points: number;
+  avatarUrl: string | null;
+}
+
+const user = ref<ProfileUser>({
+  nickname: '雅雅_Yolanda',
+  vipLabel: '金卡会员 · GOLDEN VIP',
+  points: 24500,
+  avatarUrl: null,
+});
+
+const pointsText = computed(() => user.value.points.toLocaleString('en-US'));
+
+const orderSteps = [
+  { key: 'pending-pay', label: '待付款', icon: '/static/figma/profile/step-card.svg' },
+  { key: 'pending-ship', label: '待发货', icon: '/static/figma/profile/step-box.svg' },
+  { key: 'pending-receive', label: '待收货', icon: '/static/figma/profile/step-truck.svg' },
+  { key: 'after-sale', label: '退换/售后', icon: '/static/figma/profile/step-refresh.svg' },
 ];
+
+const menuItems = [
+  { key: 'favorites', title: '专属收藏夹', caption: '12件宝贝', icon: '/static/figma/profile/menu-heart.svg' },
+  { key: 'coupons', title: '尊享优惠券', caption: '2张未使用', icon: '/static/figma/profile/menu-tag.svg' },
+  { key: 'address', title: '地址管理', caption: '默认：上海国金', icon: '/static/figma/profile/menu-pin.svg' },
+  { key: 'points-mall', title: '积分兑换商城', caption: '新品好礼', icon: '/static/figma/profile/gift.svg' },
+  { key: 'advisor', title: '在线顾问服务', caption: '极速响应', icon: '/static/figma/profile/menu-chat.svg' },
+  { key: 'help', title: '帮助中心', caption: '常见问题答疑', icon: '/static/figma/profile/help.svg' },
+];
+
+function handleRedeem(): void {
+  uni.showToast({ title: '积分兑礼待接入', icon: 'none' });
+}
+
+function handleViewAllOrders(): void {
+  uni.showToast({ title: '订单列表待接入', icon: 'none' });
+}
+
+function handleOrderStep(step: (typeof orderSteps)[number]): void {
+  uni.showToast({ title: `${step.label}待接入`, icon: 'none' });
+}
+
+function handleMenu(item: (typeof menuItems)[number]): void {
+  uni.showToast({ title: `${item.title}待接入`, icon: 'none' });
+}
+
+function handleSettings(): void {
+  uni.showToast({ title: '设置待接入', icon: 'none' });
+}
 </script>
 
 <template>
-  <view class="page">
+  <view class="page" :class="themeClass">
+    <view class="status-bar" :style="{ height: `${statusBarHeight}px` }" />
+    <!-- 用户信息头 -->
     <view class="profile-header">
-      <text class="header-kicker">PRIVATE CLIENT</text>
-      <text class="header-title">我的藏品空间</text>
-      <view class="member-card">
-        <view class="member-mark">L</view>
-        <view class="member-copy">
-          <text class="member-title">访客会员</text>
-          <text class="member-caption">登录后同步订单与收藏记录</text>
-        </view>
-        <text class="member-arrow">→</text>
+      <view class="avatar" :class="{ 'avatar--placeholder': !user.avatarUrl }">
+        <image v-if="user.avatarUrl" class="avatar-img" :src="user.avatarUrl" mode="aspectFill" />
+        <text v-else class="avatar-initial">{{ user.nickname.slice(0, 1) }}</text>
+      </view>
+      <view class="user-info">
+        <text class="nickname">{{ user.nickname }}</text>
+        <view class="vip-badge">{{ user.vipLabel }}</view>
+      </view>
+      <view class="settings-btn" @click="handleSettings">
+        <image class="settings-icon" src="/static/figma/profile/settings.svg" mode="aspectFit" />
       </view>
     </view>
-    <view class="service-list">
-      <view v-for="(service, index) in services" :key="service.title" class="service-row">
-        <text class="service-index">0{{ index + 1 }}</text>
-        <view class="service-copy">
-          <text class="service-title">{{ service.title }}</text>
-          <text class="service-caption">{{ service.caption }}</text>
+
+    <!-- 积分卡 -->
+    <view class="points-card">
+      <view class="points-info">
+        <text class="points-label">当前账户积分</text>
+        <text class="points-value">{{ pointsText }} 积分</text>
+      </view>
+      <view class="redeem-btn" @click="handleRedeem">去兑礼</view>
+    </view>
+
+    <!-- 订单状态卡 -->
+    <view class="order-card">
+      <view class="order-head">
+        <text class="order-title">我的订单</text>
+        <text class="order-more" @click="handleViewAllOrders">查看全部 ▾</text>
+      </view>
+      <view class="order-steps">
+        <view
+          v-for="step in orderSteps"
+          :key="step.key"
+          class="order-step"
+          @click="handleOrderStep(step)"
+        >
+          <image class="step-icon" :src="step.icon" mode="aspectFit" />
+          <text class="step-label">{{ step.label }}</text>
         </view>
-        <text class="service-arrow">→</text>
       </view>
     </view>
-    <text class="footer-note">L'ATELIER · PRIVATE COLLECTION</text>
+
+    <!-- 菜单列表 -->
+    <view class="menu-list">
+      <view
+        v-for="item in menuItems"
+        :key="item.key"
+        class="menu-item"
+        @click="handleMenu(item)"
+      >
+        <image class="menu-icon" :src="item.icon" mode="aspectFit" />
+        <text class="menu-title">{{ item.title }}</text>
+        <text class="menu-caption">{{ item.caption }}</text>
+        <text class="menu-arrow">›</text>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -40,108 +129,178 @@ const services = [
 @use '../../styles/tokens.scss' as *;
 .page {
   min-height: 100vh;
-  padding-bottom: 48rpx;
-  background: #f4f1eb;
+  padding: 0 0 calc(48rpx + env(safe-area-inset-bottom));
+  color: var(--theme-text);
+  background: var(--theme-bg);
+}
+.status-bar {
+  width: 100%;
 }
 .profile-header {
-  padding: calc(env(safe-area-inset-top) + 96rpx) 32rpx 48rpx;
-  background: $bg-dark-base;
-}
-.header-kicker,
-.header-title,
-.member-title,
-.member-caption,
-.service-title,
-.service-caption,
-.footer-note {
-  display: block;
-}
-.header-kicker,
-.service-index {
-  color: #b9854d;
-  font-family: $font-mono;
-  font-size: 16rpx;
-  letter-spacing: 2rpx;
-}
-.header-title {
-  margin-top: 12rpx;
-  color: #f2e6cf;
-  font-family: $font-display;
-  font-size: 46rpx;
-}
-.member-card {
   display: flex;
   align-items: center;
   gap: 20rpx;
-  margin-top: 36rpx;
-  padding: 24rpx;
-  border: 1rpx solid rgba(241, 223, 182, 0.2);
-  border-radius: 8rpx;
-  background: #121720;
+  padding: 16rpx 32rpx 24rpx;
 }
-.member-mark {
+.avatar {
   display: flex;
+  width: 128rpx;
+  height: 128rpx;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 72rpx;
-  height: 72rpx;
-  border: 1rpx solid #9b642e;
+  overflow: hidden;
+  border: 1rpx solid var(--theme-border);
   border-radius: 50%;
-  color: #f1dfb6;
+  background: var(--theme-surface);
+}
+.avatar-img {
+  width: 100%;
+  height: 100%;
+}
+.avatar-initial {
+  color: var(--theme-accent);
   font-family: $font-display;
-  font-size: 34rpx;
+  font-size: 48rpx;
+  font-weight: 700;
 }
-.member-copy,
-.service-copy {
+.user-info {
+  display: flex;
+  min-width: 0;
   flex: 1;
+  flex-direction: column;
+  gap: 12rpx;
 }
-.member-title {
-  color: $text-dark-primary;
-  font-size: 25rpx;
+.nickname {
+  color: var(--theme-text);
+  font-size: 36rpx;
+  font-weight: 700;
 }
-.member-caption {
-  margin-top: 6rpx;
-  color: #8e929b;
-  font-size: 18rpx;
+.vip-badge {
+  align-self: flex-start;
+  padding: 6rpx 16rpx;
+  border-radius: 999rpx;
+  color: var(--theme-accent);
+  background: var(--theme-accent-soft);
+  font-size: 22rpx;
+  font-weight: 600;
 }
-.member-arrow {
-  color: #d9bf88;
-  font-size: 26rpx;
+.settings-btn {
+  display: flex;
+  width: 64rpx;
+  height: 64rpx;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
 }
-.service-list {
-  margin: 24rpx;
-  padding: 0 24rpx;
-  background: $bg-surface;
+.settings-icon {
+  width: 40rpx;
+  height: 40rpx;
 }
-.service-row {
+.points-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16rpx 32rpx 0;
+  padding: 28rpx 32rpx;
+  border-radius: 24rpx;
+  background: var(--theme-surface);
+}
+.points-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.points-label {
+  color: var(--theme-text-secondary);
+  font-size: 22rpx;
+}
+.points-value {
+  color: var(--theme-accent);
+  font-family: $font-mono;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+.redeem-btn {
+  padding: 14rpx 32rpx;
+  border-radius: 999rpx;
+  color: #ffffff;
+  background: var(--theme-accent);
+  font-size: 24rpx;
+  font-weight: 600;
+}
+.order-card {
+  margin: 16rpx 32rpx 0;
+  padding: 28rpx 32rpx;
+  border-radius: 24rpx;
+  background: var(--theme-surface);
+}
+.order-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.order-title {
+  color: var(--theme-text);
+  font-size: 28rpx;
+  font-weight: 700;
+}
+.order-more {
+  color: var(--theme-text-muted);
+  font-size: 22rpx;
+}
+.order-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28rpx;
+}
+.order-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+.step-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+.step-label {
+  color: var(--theme-text);
+  font-size: 22rpx;
+}
+.menu-list {
+  margin: 16rpx 32rpx 0;
+  padding: 8rpx 32rpx;
+  border-radius: 24rpx;
+  background: var(--theme-surface);
+}
+.menu-item {
   display: flex;
   align-items: center;
   gap: 20rpx;
-  padding: 30rpx 0;
-  border-bottom: 1rpx solid #ece6dc;
+  padding: 28rpx 0;
+  border-bottom: 1rpx solid var(--theme-border-soft);
 }
-.service-row:last-child {
+.menu-item:last-child {
   border-bottom: 0;
 }
-.service-title {
-  color: #171b22;
-  font-size: 25rpx;
+.menu-icon {
+  width: 36rpx;
+  height: 36rpx;
+  flex-shrink: 0;
 }
-.service-caption {
-  margin-top: 6rpx;
-  color: #858078;
-  font-size: 18rpx;
+.menu-title {
+  flex: 1;
+  color: var(--theme-text);
+  font-size: 26rpx;
+  font-weight: 500;
 }
-.service-arrow {
-  color: #9b642e;
-  font-size: 24rpx;
+.menu-caption {
+  color: var(--theme-text-muted);
+  font-size: 22rpx;
 }
-.footer-note {
-  margin-top: 64rpx;
-  color: #9a958d;
-  font-family: $font-mono;
-  font-size: 15rpx;
-  letter-spacing: 2rpx;
-  text-align: center;
+.menu-arrow {
+  color: var(--theme-text-muted);
+  font-size: 32rpx;
 }
 </style>

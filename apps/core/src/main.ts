@@ -9,7 +9,7 @@ async function bootstrap(): Promise<void> {
   app.setGlobalPrefix('api');
   app.enableShutdownHooks();
 
-  const port = Number(process.env.CORE_PORT ?? 3001);
+  const port = Number(process.env.CORE_PORT ?? 3101);
   await app.listen(port, '0.0.0.0');
 }
 

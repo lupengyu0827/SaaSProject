@@ -358,10 +358,57 @@ exports.Prisma.BrandScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   name: 'name',
+  englishName: 'englishName',
+  initial: 'initial',
   logoUrl: 'logoUrl',
   status: 'status',
   version: 'version',
   deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BrandCategoryScalarFieldEnum = {
+  tenantId: 'tenantId',
+  brandId: 'brandId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BrandSeriesScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  brandId: 'brandId',
+  name: 'name',
+  status: 'status',
+  version: 'version',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BrandModelScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  brandId: 'brandId',
+  seriesId: 'seriesId',
+  categoryId: 'categoryId',
+  name: 'name',
+  officialGuidePrice: 'officialGuidePrice',
+  defaultMaterial: 'defaultMaterial',
+  status: 'status',
+  version: 'version',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RecyclingTypeScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  sortOrder: 'sortOrder',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -384,6 +431,55 @@ exports.Prisma.ProductScalarFieldEnum = {
   updatedBy: 'updatedBy',
   version: 'version',
   deletedAt: 'deletedAt'
+};
+
+exports.Prisma.ProductIntakeScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  productId: 'productId',
+  idempotencyKey: 'idempotencyKey',
+  requestFingerprint: 'requestFingerprint',
+  action: 'action',
+  customTips: 'customTips',
+  condition: 'condition',
+  seriesId: 'seriesId',
+  modelId: 'modelId',
+  officialGuidePrice: 'officialGuidePrice',
+  ownershipType: 'ownershipType',
+  stockQuantity: 'stockQuantity',
+  inventoryAgeWarningDays: 'inventoryAgeWarningDays',
+  totalCostPrice: 'totalCostPrice',
+  peerPrice: 'peerPrice',
+  agentPrice: 'agentPrice',
+  appraiserEmployeeId: 'appraiserEmployeeId',
+  appraiserName: 'appraiserName',
+  recyclingTypeId: 'recyclingTypeId',
+  recyclingEmployeeId: 'recyclingEmployeeId',
+  recyclingEmployeeName: 'recyclingEmployeeName',
+  recyclingNotes: 'recyclingNotes',
+  recycledAt: 'recycledAt',
+  audience: 'audience',
+  warrantyCard: 'warrantyCard',
+  warrantyCardYear: 'warrantyCardYear',
+  uniqueCode: 'uniqueCode',
+  tags: 'tags',
+  accessories: 'accessories',
+  internalNotes: 'internalNotes',
+  stockedAt: 'stockedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductIntakeMediaScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  intakeId: 'intakeId',
+  mediaAssetId: 'mediaAssetId',
+  group: 'group',
+  visibility: 'visibility',
+  sortOrder: 'sortOrder',
+  durationSeconds: 'durationSeconds',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.ProductVariantScalarFieldEnum = {
@@ -666,7 +762,13 @@ exports.Prisma.ModelName = {
   TenantProbe: 'TenantProbe',
   Category: 'Category',
   Brand: 'Brand',
+  BrandCategory: 'BrandCategory',
+  BrandSeries: 'BrandSeries',
+  BrandModel: 'BrandModel',
+  RecyclingType: 'RecyclingType',
   Product: 'Product',
+  ProductIntake: 'ProductIntake',
+  ProductIntakeMedia: 'ProductIntakeMedia',
   ProductVariant: 'ProductVariant',
   ProductImage: 'ProductImage',
   Order: 'Order',

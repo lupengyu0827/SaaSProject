@@ -77,7 +77,7 @@ export class MediaProxyController {
 
   @Post('upload-sessions/:id/content')
   @RequirePermission('products.write')
-  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 10 * 1024 * 1024, files: 1 } }))
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 100 * 1024 * 1024, files: 1 } }))
   upload(
     @Req() request: SaasRequest,
     @Param('id') id: string,
@@ -173,7 +173,7 @@ export class MediaProxyController {
 }
 
 function coreBaseUrl(): string {
-  return process.env.CORE_BASE_URL ?? 'http://localhost:3001';
+  return process.env.CORE_BASE_URL ?? 'http://localhost:3101';
 }
 
 async function safePayload(response: globalThis.Response): Promise<unknown> {

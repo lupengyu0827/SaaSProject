@@ -41,7 +41,7 @@ export class UsageMeteringInterceptor implements NestInterceptor {
     try {
       await (await this.redis.getClient()).incr(`usage:${tenantId}:${metric}:${period}`);
     } catch {
-      const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3001';
+      const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3101';
       await fetch(`${coreBaseUrl}/api/platform/tenants/${tenantId}/usage/${metric}`, {
         method: 'POST',
       });

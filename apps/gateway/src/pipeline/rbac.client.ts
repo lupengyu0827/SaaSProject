@@ -18,7 +18,7 @@ export class RbacClient {
       // Continue with the source of truth.
     }
     if (!permissions) {
-      const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3001';
+      const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3101';
       const response = await fetch(
         `${coreBaseUrl}/api/platform/tenants/${tenantId}/actors/${actorId}/permissions`,
       );

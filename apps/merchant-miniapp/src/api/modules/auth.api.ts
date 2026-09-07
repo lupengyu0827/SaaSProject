@@ -15,6 +15,7 @@ import {
   saveMerchantSession,
   saveMerchantTenantId,
 } from '../../config/runtime';
+import { isErrorEnvelope, unwrapApiData } from '../envelope';
 import { MerchantApiError } from '../errors';
 
 type MerchantContext = Omit<MerchantSessionResponse, keyof AuthTokensResponse>;
@@ -108,25 +109,16 @@ function handleResponse<T>(
   reject: (error: MerchantApiError) => void,
 ): void {
   if (response.statusCode >= 200 && response.statusCode < 300) {
-    resolve(response.data as T);
+    resolve(unwrapApiData(response.data) as T);
     return;
   }
-  const payload = isErrorPayload(response.data) ? response.data : null;
+  const payload = isErrorEnvelope(response.data) ? response.data : null;
   reject(
     new MerchantApiError(
       payload?.message ?? getHttpMessage(response.statusCode),
       response.statusCode,
       payload?.traceId,
     ),
-  );
-}
-
-function isErrorPayload(value: unknown): value is { message?: string; traceId?: string } {
-  if (typeof value !== 'object' || value === null) return false;
-  const payload = value as Record<string, unknown>;
-  return (
-    (payload.message === undefined || typeof payload.message === 'string') &&
-    (payload.traceId === undefined || typeof payload.traceId === 'string')
   );
 }
 

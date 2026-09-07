@@ -154,7 +154,7 @@ function uploadSession(
     mimeType: 'image/jpeg',
     sizeBytes: 5,
     status: 'initiated',
-    expiresAt: new Date('2026-09-02T00:00:00Z'),
+    expiresAt: new Date(Date.now() + 30 * 60 * 1000),
     ...overrides,
   };
 }

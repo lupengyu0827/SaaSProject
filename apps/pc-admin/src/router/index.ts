@@ -57,6 +57,24 @@ export const router = createRouter({
           component: async (): Promise<Component> =>
             (await import('../views/operations/MediaOperations.vue')).default,
         },
+        {
+          path: 'members',
+          name: 'members',
+          component: async (): Promise<Component> =>
+            (await import('../views/members/MemberManagement.vue')).default,
+        },
+        {
+          path: 'marketing/campaigns/new',
+          name: 'campaign-create',
+          component: async (): Promise<Component> =>
+            (await import('../views/marketing/CampaignCreate.vue')).default,
+        },
+        {
+          path: 'settings/shop',
+          name: 'shop-settings',
+          component: async (): Promise<Component> =>
+            (await import('../views/settings/ShopSettings.vue')).default,
+        },
       ],
     },
   ],

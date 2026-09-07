@@ -18,3 +18,8 @@ plans/
 .workbuddy/
 
 *.md
+
+packages1
+# 构建缓存与 vite 临时文件
+*.tsbuildinfo
+vite.config.ts.timestamp-*.mjs

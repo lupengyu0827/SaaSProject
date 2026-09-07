@@ -35,7 +35,7 @@ export class UsageFlushService implements OnModuleInit, OnModuleDestroy {
       const amount = Number(value ?? 0);
       if (!Number.isSafeInteger(amount) || amount <= 0) continue;
 
-      const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3001';
+      const coreBaseUrl = process.env.CORE_BASE_URL ?? 'http://localhost:3101';
       try {
         const response = await fetch(
           `${coreBaseUrl}/api/platform/tenants/${tenantId}/usage/${metric}`,

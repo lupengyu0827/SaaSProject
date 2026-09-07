@@ -61,7 +61,7 @@ export class MediaController {
   }
 
   @Post('upload-sessions/:id/content')
-  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 10 * 1024 * 1024, files: 1 } }))
+  @UseInterceptors(FileInterceptor('file', { limits: { fileSize: 100 * 1024 * 1024, files: 1 } }))
   upload(
     @Headers('x-tenant-id') tenantId: string,
     @Headers('x-actor-id') actorId: string,

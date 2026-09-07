@@ -1,6 +1,7 @@
 /** 媒体模块：独立于商品领域，可复用于回收、售后和店铺配置。 */
 import { Module } from '@nestjs/common';
 
+import { PrismaModule } from '../shared/infrastructure/prisma/prisma.module.js';
 import { MEDIA_STORAGE_PORT, type MediaStoragePort } from '../shared/ports/media-storage.port.js';
 import { MediaService } from './application/media.service.js';
 import { MediaCleanupService } from './application/media-cleanup.service.js';
@@ -14,6 +15,7 @@ import { S3MediaStorageAdapter } from './infrastructure/s3-media-storage.adapter
 import { MediaController } from './interfaces/media.controller.js';
 
 @Module({
+  imports: [PrismaModule],
   controllers: [MediaController],
   providers: [
     MediaService,

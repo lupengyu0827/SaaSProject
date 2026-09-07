@@ -1,12 +1,14 @@
-/** 小程序统一 API Client：注入租户、令牌、请求 ID 并映射错误。 */
+/** 小程序统一 API Client：注入租户、令牌、请求 ID，解包 Gateway 信封并映射错误。 */
 import {
   clearCustomerSession,
   getAccessToken,
   getApiBaseUrl,
   getCurrentTenantId,
+  getRefreshToken,
 } from '../config/runtime';
 import { ApiClientError } from './errors';
-import { ensureCustomerAccessToken } from './modules/auth.api';
+import { isErrorEnvelope, unwrapApiData } from './envelope';
+import { ensureCustomerAccessToken, refreshCustomerSession } from './modules/auth.api';
 
 type QueryPrimitive = string | number | boolean;
 const REQUEST_TIMEOUT_MS = 15_000;
@@ -27,9 +29,23 @@ export async function requestApi<T>(options: ApiRequestOptions): Promise<T> {
     return await executeRequest<T>(options, tenantId, accessToken);
   } catch (error: unknown) {
     if (!(error instanceof ApiClientError) || error.statusCode !== 401) throw error;
-    clearCustomerSession();
-    return executeRequest<T>(options, tenantId, await ensureCustomerAccessToken());
+    const recoveredToken = await recoverAccessToken();
+    return executeRequest<T>(options, tenantId, recoveredToken);
   }
+}
+
+/** 401 后恢复访问令牌：优先轮换 Refresh Token，失败则重新微信登录。 */
+async function recoverAccessToken(): Promise<string> {
+  if (getRefreshToken()) {
+    try {
+      const session = await refreshCustomerSession();
+      return session.accessToken;
+    } catch {
+      // Refresh Token 已失效（一次性被消费），清空会话后走微信登录。
+    }
+  }
+  clearCustomerSession();
+  return ensureCustomerAccessToken();
 }
 
 function executeRequest<T>(
@@ -73,25 +89,16 @@ function handleResponse<T>(
   reject: (reason: ApiClientError) => void,
 ): void {
   if (response.statusCode >= 200 && response.statusCode < 300) {
-    resolve(response.data as T);
+    resolve(unwrapApiData(response.data) as T);
     return;
   }
-  const payload = isErrorPayload(response.data) ? response.data : null;
+  const payload = isErrorEnvelope(response.data) ? response.data : null;
   reject(
     new ApiClientError(
       payload?.message ?? getHttpErrorMessage(response.statusCode),
       response.statusCode,
       payload?.traceId,
     ),
-  );
-}
-
-function isErrorPayload(value: unknown): value is { message?: string; traceId?: string } {
-  if (typeof value !== 'object' || value === null) return false;
-  const payload = value as Record<string, unknown>;
-  return (
-    (payload.message === undefined || typeof payload.message === 'string') &&
-    (payload.traceId === undefined || typeof payload.traceId === 'string')
   );
 }
 

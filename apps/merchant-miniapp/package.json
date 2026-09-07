@@ -17,6 +17,7 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-4060620250520001",
     "@saas/contracts": "workspace:*",
     "pinia": "^2.3.1",
+    "uview-plus": "^3.8.117",
     "vue": "^3.5.22"
   },
   "devDependencies": {
